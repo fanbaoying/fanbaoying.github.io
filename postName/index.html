@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="git," />
 
 
 
@@ -80,29 +80,30 @@
 
 
 <meta name="description" content="一： 账号连接github - 创建ssh由于本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以要在本地生成一个私钥和一个密钥 1. 终端 显示隐藏文件1defaults write com.apple.finder AppleShowAllFiles -bool true 2. 查看.ssh文件点击桌面顶部菜单 前往&amp;gt;个人 看看自己电脑上有没有个 .ssh 的隐藏文件，有的">
+<meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Git命令-上传项目到GitHub">
 <meta property="og:url" content="http://isfanbaoying.com/postName/index.html">
 <meta property="og:site_name" content="FBY展菲的个人博客">
 <meta property="og:description" content="一： 账号连接github - 创建ssh由于本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以要在本地生成一个私钥和一个密钥 1. 终端 显示隐藏文件1defaults write com.apple.finder AppleShowAllFiles -bool true 2. 查看.ssh文件点击桌面顶部菜单 前往&amp;gt;个人 看看自己电脑上有没有个 .ssh 的隐藏文件，有的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ee8b8ebd3a?w=1240&h=693&f=png&s=68555">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed7d21d588?w=1240&h=425&f=png&s=134987">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed7e9bf310?w=1138&h=282&f=png&s=78441">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed7daad84e?w=1240&h=356&f=png&s=71938">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed7f52319a?w=1240&h=956&f=png&s=233166">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed82d567d0?w=1240&h=760&f=png&s=242922">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1edb3e5f35c?w=1126&h=120&f=png&s=36014">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1edb5f9525a?w=1128&h=234&f=png&s=78699">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1eedfb1fd63?w=1136&h=600&f=png&s=203500">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1edc3b38822?w=1134&h=584&f=png&s=210495">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ef123710b3?w=1240&h=711&f=png&s=212581">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/1/2/160b576d2619263c?w=1136&h=290&f=png&s=152670">
-<meta property="og:updated_time" content="2018-01-23T02:53:45.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-fed0ebf40f7aec14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-27bebddf18562211.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-ee061dcca7bd7adf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-c0143e21c801b7a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-d6f40c7a7cd0bee4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-e0bff6978f5980b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-5165ed03b8adc55d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-d049965315083558.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-37f34ce277366907.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-408125778f27c9ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-940ee8629390ef98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-454a3320f132fdcb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-23T07:24:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Git命令-上传项目到GitHub">
 <meta name="twitter:description" content="一： 账号连接github - 创建ssh由于本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以要在本地生成一个私钥和一个密钥 1. 终端 显示隐藏文件1defaults write com.apple.finder AppleShowAllFiles -bool true 2. 查看.ssh文件点击桌面顶部菜单 前往&amp;gt;个人 看看自己电脑上有没有个 .ssh 的隐藏文件，有的">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ee8b8ebd3a?w=1240&h=693&f=png&s=68555">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2829694-fed0ebf40f7aec14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -315,6 +316,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/终端/" itemprop="url" rel="index">
+                    <span itemprop="name">终端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -351,27 +374,28 @@
 <h4 id="6-查看是否存在-id-rsa-私钥-id-rsa-pub-公钥"><a href="#6-查看是否存在-id-rsa-私钥-id-rsa-pub-公钥" class="headerlink" title="6. 查看是否存在 id_rsa(私钥)  id_rsa.pub(公钥)"></a>6. 查看是否存在 id_rsa(私钥)  id_rsa.pub(公钥)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -la</span><br></pre></td></tr></table></figure>
 <h4 id="7-拷贝公钥"><a href="#7-拷贝公钥" class="headerlink" title="7. 拷贝公钥"></a>7. 拷贝公钥</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pbcopy &lt; ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 <h4 id="8-粘贴公钥"><a href="#8-粘贴公钥" class="headerlink" title="8. 粘贴公钥"></a>8. 粘贴公钥</h4><p>登陆github，选择Account Settings–&gt;SSH Keys 添加ssh</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ee8b8ebd3a?w=1240&amp;h=693&amp;f=png&amp;s=68555" alt="添加"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2829694-fed0ebf40f7aec14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加"></p>
 <p>终端执行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
 <p>新添加到github上的秘钥左边的点一开始是灰色的，终端执行这个命令后，刷新网页会看到灰色点变成了绿色,说明已经添加成功。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed7d21d588?w=1240&amp;h=425&amp;f=png&amp;s=134987" alt="添加成功"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2829694-27bebddf18562211.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加成功"></p>
 <h2 id="二：-创建项目"><a href="#二：-创建项目" class="headerlink" title="二： 创建项目"></a>二： 创建项目</h2><h4 id="1-检测你的帐号跟github是否连上"><a href="#1-检测你的帐号跟github是否连上" class="headerlink" title="1. 检测你的帐号跟github是否连上"></a>1. 检测你的帐号跟github是否连上</h4><p>输入下面命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
 <p>如果出现下图提示，说明已经连上了</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed7e9bf310?w=1138&amp;h=282&amp;f=png&amp;s=78441" alt="命令截图"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2829694-ee061dcca7bd7adf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="命令截图"></p>
 <h4 id="2-开始创建项目"><a href="#2-开始创建项目" class="headerlink" title="2. 开始创建项目"></a>2. 开始创建项目</h4><p>在git创建个人项目</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed7daad84e?w=1240&amp;h=356&amp;f=png&amp;s=71938" alt="创建项目"></p>
-<h4 id="3-创建项目设置"><a href="#3-创建项目设置" class="headerlink" title="3. 创建项目设置"></a>3. 创建项目设置</h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed7f52319a?w=1240&amp;h=956&amp;f=png&amp;s=233166" alt="设置"></p>
-<h4 id="4-创建成功"><a href="#4-创建成功" class="headerlink" title="4. 创建成功"></a>4. 创建成功</h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ed82d567d0?w=1240&amp;h=760&amp;f=png&amp;s=242922" alt="成功"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2829694-c0143e21c801b7a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建项目"></p>
+<h4 id="3-创建项目设置"><a href="#3-创建项目设置" class="headerlink" title="3. 创建项目设置"></a>3. 创建项目设置</h4><p><img src="http://upload-images.jianshu.io/upload_images/2829694-d6f40c7a7cd0bee4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置"></p>
+<h4 id="4-创建成功"><a href="#4-创建成功" class="headerlink" title="4. 创建成功"></a>4. 创建成功</h4><p><img src="http://upload-images.jianshu.io/upload_images/2829694-e0bff6978f5980b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成功"></p>
 <h2 id="三：-上传项目"><a href="#三：-上传项目" class="headerlink" title="三： 上传项目"></a>三： 上传项目</h2><p>整体操作命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">touch README.md //新建一个记录提交操作的文档</span><br><span class="line">git init //初始化本地仓库</span><br><span class="line">git add README.md //添加</span><br><span class="line">git add *  //加入所有项目</span><br><span class="line">git status //检查状态 如果都是绿的 证明成功</span><br><span class="line">git commit -m &quot;first commit&quot;//提交到要地仓库，并写一些注释</span><br><span class="line">git remote add origin git@github.com:youname/Test.git //连接远程仓库并建了一个名叫：origin的别名</span><br><span class="line">git push -u origin master //将本地仓库的东西提交到地址是origin的地址，master分支下</span><br></pre></td></tr></table></figure></p>
 <p>下面做详细分析</p>
-<h4 id="1-在上传项目目录下操作"><a href="#1-在上传项目目录下操作" class="headerlink" title="1. 在上传项目目录下操作"></a>1. 在上传项目目录下操作</h4><p>cd 到需要上传的项目下<br><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1edb3e5f35c?w=1126&amp;h=120&amp;f=png&amp;s=36014" alt="项目路径"></p>
-<h4 id="2-新建一个记录提交操作的文档"><a href="#2-新建一个记录提交操作的文档" class="headerlink" title="2. 新建一个记录提交操作的文档"></a>2. 新建一个记录提交操作的文档</h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1edb5f9525a?w=1128&amp;h=234&amp;f=png&amp;s=78699" alt="创建文档"></p>
+<h4 id="1-在上传项目目录下操作"><a href="#1-在上传项目目录下操作" class="headerlink" title="1. 在上传项目目录下操作"></a>1. 在上传项目目录下操作</h4><p>cd 到需要上传的项目下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2829694-5165ed03b8adc55d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="项目路径"></p>
+<h4 id="2-新建一个记录提交操作的文档"><a href="#2-新建一个记录提交操作的文档" class="headerlink" title="2. 新建一个记录提交操作的文档"></a>2. 新建一个记录提交操作的文档</h4><p><img src="http://upload-images.jianshu.io/upload_images/2829694-d049965315083558.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建文档"></p>
 <h4 id="3-初始化本地仓库"><a href="#3-初始化本地仓库" class="headerlink" title="3. 初始化本地仓库"></a>3. 初始化本地仓库</h4><p>初始化本地仓库，并且提交所有项目</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1eedfb1fd63?w=1136&amp;h=600&amp;f=png&amp;s=203500" alt="初始化"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2829694-37f34ce277366907.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初始化"></p>
 <h4 id="4-上传项目到GitHub"><a href="#4-上传项目到GitHub" class="headerlink" title="4. 上传项目到GitHub"></a>4. 上传项目到GitHub</h4><p>上传之前做备注<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;手机时钟动画第一次更新&quot;</span><br></pre></td></tr></table></figure></p>
 <p>上传到指定库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:fanbaoying/PhoneTime.git</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1edc3b38822?w=1134&amp;h=584&amp;f=png&amp;s=210495" alt="上传"></p>
-<h4 id="5-上传成功"><a href="#5-上传成功" class="headerlink" title="5. 上传成功"></a>5. 上传成功</h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/22/1607c1ef123710b3?w=1240&amp;h=711&amp;f=png&amp;s=212581" alt="上传成功"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2829694-408125778f27c9ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="上传"></p>
+<h4 id="5-上传成功"><a href="#5-上传成功" class="headerlink" title="5. 上传成功"></a>5. 上传成功</h4><p><img src="http://upload-images.jianshu.io/upload_images/2829694-940ee8629390ef98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="上传成功"></p>
 <h2 id="四：错误问题解决"><a href="#四：错误问题解决" class="headerlink" title="四：错误问题解决"></a>四：错误问题解决</h2><h4 id="错误提示一"><a href="#错误提示一" class="headerlink" title="错误提示一"></a>错误提示一</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: remote origin already exists.</span><br></pre></td></tr></table></figure>
 <p>解决办法如下：<br>先输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure></p>
 <p>再输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:djqiang/gitdemo.git</span><br></pre></td></tr></table></figure></p>
@@ -394,13 +418,13 @@
 <h4 id="错误提示五"><a href="#错误提示五" class="headerlink" title="错误提示五"></a>错误提示五</h4><p>对GitHub已有项目进行更新的时候，输入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
 <p>如果遇到下面错误</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/1/2/160b576d2619263c?w=1136&amp;h=290&amp;f=png&amp;s=152670" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2829694-454a3320f132fdcb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="111.jpg"></p>
 <p>出现错误的主要原因是github中的README.md文件不在本地代码目录中。</p>
 <p>可以通过如下命令进行代码合并：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure></p>
 <p>然后在运行下面语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></p>
 <p>就成功了。</p>
 <blockquote>
-<p>希望可以帮助大家</p>
+<p>希望可以帮助大家, 如有问题可加QQ技术交流群: 591625129</p>
 <p>如果哪里有什么不对或者不足的地方，还望读者多多提意见或建议</p>
 <p>如需转载请联系我，经过授权方可转载，谢谢</p>
 </blockquote>
@@ -418,6 +442,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
       
 
       
@@ -437,6 +467,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/快速高效-iOS银行卡识别/" rel="prev" title="快速高效 | iOS银行卡识别">
+                快速高效 | iOS银行卡识别 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -517,14 +551,32 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
