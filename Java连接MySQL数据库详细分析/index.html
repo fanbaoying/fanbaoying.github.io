@@ -99,7 +99,8 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-f88510125881f35e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-6205331e45992d55.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-3cb9446725830fe9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-25T09:46:08.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
+<meta property="og:updated_time" content="2018-01-31T06:20:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java连接MySQL数据库详细分析">
 <meta name="twitter:description" content="一：工具eclipseMySQL5.7MySQL连接驱动：mysql-connector-java-5.1.44-bin.jar下载地址">
@@ -361,7 +362,7 @@
                 
                 -->
                 <span title="字数统计">
-                  数字统计 578字
+                  数字统计 585字
                 </span>
               
 
@@ -416,6 +417,7 @@
 </blockquote>
 <p>2.6 具体代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">package com.agree.sqldemo;</span><br><span class="line"></span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.DriverManager;</span><br><span class="line">import java.sql.ResultSet;</span><br><span class="line">import java.sql.SQLException;</span><br><span class="line">import java.sql.Statement;</span><br><span class="line"></span><br><span class="line">public class main &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//声明Connection对象</span><br><span class="line">		Connection con;</span><br><span class="line">		//驱动程序名</span><br><span class="line">		String driver = &quot;com.mysql.jdbc.Driver&quot;;</span><br><span class="line">		//URL指向要访问的数据库名studb</span><br><span class="line">		String url = &quot;jdbc:mysql://localhost:3306/studb&quot;;</span><br><span class="line">		//MySQL配置时的用户名</span><br><span class="line">		String user = &quot;root&quot;;</span><br><span class="line">		//MySQL配置时的密码</span><br><span class="line">		String password = &quot;12345&quot;;</span><br><span class="line"></span><br><span class="line">		//遍历查询结果集</span><br><span class="line">		try &#123;</span><br><span class="line"></span><br><span class="line">			//加载驱动程序</span><br><span class="line">			Class.forName(driver);</span><br><span class="line">			//1.getConnection()方法，连接MySQL数据库！！</span><br><span class="line">			con = DriverManager.getConnection(url,user,password);</span><br><span class="line"></span><br><span class="line">			if(!con.isClosed())</span><br><span class="line">				System.out.println(&quot;Succeeded connecting to the Database!&quot;);</span><br><span class="line">			//2.创建statement类对象，用来执行SQL语句！！</span><br><span class="line">			Statement statement = con.createStatement();</span><br><span class="line">			//要执行的SQL语句</span><br><span class="line">			String sql = &quot;select * from t_stu&quot;;</span><br><span class="line"></span><br><span class="line">			//3.ResultSet类，用来存放获取的结果集！！</span><br><span class="line">			ResultSet rs = statement.executeQuery(sql);</span><br><span class="line">			System.out.println(&quot;-----------------&quot;);</span><br><span class="line">			System.out.println(&quot;执行结果如下所示:&quot;);</span><br><span class="line">			System.out.println(&quot;-----------------&quot;);</span><br><span class="line">			System.out.println(&quot;姓名&quot; + &quot;\t&quot; + &quot;地址&quot;);</span><br><span class="line">			System.out.println(&quot;-----------------&quot;);  </span><br><span class="line"></span><br><span class="line">			String address = null;</span><br><span class="line"></span><br><span class="line">			String name = null;</span><br><span class="line"></span><br><span class="line">			while(rs.next())&#123;</span><br><span class="line">				//获取sname这列数据</span><br><span class="line">				name = rs.getString(&quot;sname&quot;);</span><br><span class="line">				//获取address这列数据</span><br><span class="line">				address = rs.getString(&quot;address&quot;);</span><br><span class="line">				//输出结果</span><br><span class="line">				System.out.println(name + &quot;\t&quot; + address);</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">			rs.close();</span><br><span class="line">			con.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		&#125;catch(ClassNotFoundException e) &#123;</span><br><span class="line">			//数据库驱动类异常处理</span><br><span class="line">			System.out.println(&quot;Sorry,can`t find the Driver!&quot;);</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(SQLException e) &#123;</span><br><span class="line">			//数据库连接失败异常处理</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch (Exception e) &#123;</span><br><span class="line">			 e.printStackTrace();</span><br><span class="line"></span><br><span class="line">		&#125;finally&#123;</span><br><span class="line">			System.out.println(&quot;数据库数据成功获取！！&quot;);</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>2.7 运行结果如下图所示<br><img src="http://upload-images.jianshu.io/upload_images/2829694-3cb9446725830fe9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行结果"></p>
+<h2 id="公众号：网罗开发"><a href="#公众号：网罗开发" class="headerlink" title="公众号：网罗开发"></a>公众号：网罗开发</h2><p><img src="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt=""></p>
 
       
     </div>
@@ -448,7 +450,7 @@
   <p><span>本文标题:</span><a href="/Java连接MySQL数据库详细分析/">Java连接MySQL数据库详细分析</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 FBY展菲 的个人博客">FBY展菲</a></p>
   <p><span>发布时间:</span>2018年01月25日 - 17:01</p>
-  <p><span>最后更新:</span>2018年01月25日 - 17:01</p>
+  <p><span>最后更新:</span>2018年01月31日 - 14:01</p>
   <p><span>原始链接:</span><a href="/Java连接MySQL数据库详细分析/" title="Java连接MySQL数据库详细分析">https://fanbaoying.github.io/Java连接MySQL数据库详细分析/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/Java连接MySQL数据库详细分析/"  aria-label="复制成功！"></i></span>
   </p>
@@ -617,7 +619,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -729,7 +731,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：工具"><span class="nav-number">1.</span> <span class="nav-text">一：工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：加载驱动"><span class="nav-number">2.</span> <span class="nav-text">二：加载驱动</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：工具"><span class="nav-number">1.</span> <span class="nav-text">一：工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：加载驱动"><span class="nav-number">2.</span> <span class="nav-text">二：加载驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公众号：网罗开发"><span class="nav-number">3.</span> <span class="nav-text">公众号：网罗开发</span></a></li></ol></div>
             
 
           </div>
@@ -786,7 +788,7 @@
 
 <div class="theme-info">
   <i class="fa fa-pencil"></i>
-  <span class="post-count">博客全站共9.2k字</span>
+  <span class="post-count">博客全站共10.1k字</span>
 </div>
 
 
