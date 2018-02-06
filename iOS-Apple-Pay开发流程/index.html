@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。 二：支付流程介绍2.1 Apple Pay 页面演示   买家在手机应用中购买商品或服务，在订单页面中展示 Apple Pay 按钮">
+<meta name="description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS Apple Pay开发流程">
 <meta property="og:url" content="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/index.html">
 <meta property="og:site_name" content="FBY展菲个人博客">
-<meta property="og:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。 二：支付流程介绍2.1 Apple Pay 页面演示   买家在手机应用中购买商品或服务，在订单页面中展示 Apple Pay 按钮">
+<meta property="og:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&h=871&f=png&s=238050">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3f1fee30?w=1240&h=974&f=png&s=216268">
@@ -103,10 +103,10 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db909531af?w=1238&h=376&f=png&s=79656">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db620e1851?w=744&h=1368&f=png&s=163923">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
-<meta property="og:updated_time" content="2018-02-06T08:01:25.000Z">
+<meta property="og:updated_time" content="2018-02-06T08:03:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS Apple Pay开发流程">
-<meta name="twitter:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。 二：支付流程介绍2.1 Apple Pay 页面演示   买家在手机应用中购买商品或服务，在订单页面中展示 Apple Pay 按钮">
+<meta name="twitter:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。">
 <meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&h=871&f=png&s=238050">
 
 
@@ -406,6 +406,7 @@
 
       
         <h2 id="一：介绍"><a href="#一：介绍" class="headerlink" title="一：介绍"></a>一：介绍</h2><p>项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。<br>今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。</p>
+<a id="more"></a>
 <h2 id="二：支付流程介绍"><a href="#二：支付流程介绍" class="headerlink" title="二：支付流程介绍"></a>二：支付流程介绍</h2><h2 id="2-1-Apple-Pay-页面演示"><a href="#2-1-Apple-Pay-页面演示" class="headerlink" title="2.1 Apple Pay 页面演示"></a>2.1 Apple Pay 页面演示</h2><p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&amp;h=871&amp;f=png&amp;s=238050" alt=""></p>
 <p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3f1fee30?w=1240&amp;h=974&amp;f=png&amp;s=216268" alt="Apple Pay 页面演示"></p>
 <ol>
