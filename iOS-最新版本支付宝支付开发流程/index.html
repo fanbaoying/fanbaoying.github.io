@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -86,26 +86,27 @@
 
 
 
-<meta name="description" content="一：简介快捷支付涉及到方方面面，同时安全问题既是用户所关心的，也是制作者不容忽视的重要部分。比如涉及到支付和金钱的app，商户端app等等，都需要进行实名认证，实名认证可以通过银行卡认证和身份证认证。通常办法是通过上传照片，并且手动输入基本信息进行认证，这种方法不仅操作复杂，而且容易出错。网上很多资源，识别率低，速度慢，用户体验很差。今天我就和大家介绍一下我使用的方法，可以快速、高效的识别中国身份">
-<meta name="keywords" content="Android">
+<meta name="description" content="一：介绍最近支付宝，微信，银联支付类sdk均做了更新，其中支付宝sdk变化比较大，由原来需要导入六个文件：  AlipaySDK.framework AlipaySDK.bundle Order.h和Order.m Until文件夹 openssl文件夹 libcrypto.a和libssl.a  在新版之后只需要导入两个文件就可以解决了，文件如下：  AlipaySDK.framework Al">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速高效 | Android身份证识别">
-<meta property="og:url" content="https://fanbaoying.github.io/快速高效-Android身份证识别/index.html">
+<meta property="og:title" content="iOS 最新版本支付宝支付开发流程">
+<meta property="og:url" content="https://fanbaoying.github.io/iOS-最新版本支付宝支付开发流程/index.html">
 <meta property="og:site_name" content="FBY展菲个人博客">
-<meta property="og:description" content="一：简介快捷支付涉及到方方面面，同时安全问题既是用户所关心的，也是制作者不容忽视的重要部分。比如涉及到支付和金钱的app，商户端app等等，都需要进行实名认证，实名认证可以通过银行卡认证和身份证认证。通常办法是通过上传照片，并且手动输入基本信息进行认证，这种方法不仅操作复杂，而且容易出错。网上很多资源，识别率低，速度慢，用户体验很差。今天我就和大家介绍一下我使用的方法，可以快速、高效的识别中国身份">
+<meta property="og:description" content="一：介绍最近支付宝，微信，银联支付类sdk均做了更新，其中支付宝sdk变化比较大，由原来需要导入六个文件：  AlipaySDK.framework AlipaySDK.bundle Order.h和Order.m Until文件夹 openssl文件夹 libcrypto.a和libssl.a  在新版之后只需要导入两个文件就可以解决了，文件如下：  AlipaySDK.framework Al">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-20b78f45be90b3de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-8cd81ffdb6f4daac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-5dc5685f6c54a9df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-856239c3727e49d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-d962a45ac612e492.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-97842b3398dd0700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/26/16090db631c91f4e?w=848&h=456&f=png&s=79224">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/26/16090dbeccf4cb9c?w=885&h=469&f=png&s=93602">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/26/16090ea4e1572b1f?w=778&h=370&f=png&s=46381">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f21ff23afc13?w=800&h=387&f=png&s=161849">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f21ff158304a?w=800&h=63&f=png&s=15152">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f2200ab48e0b?w=910&h=519&f=png&s=274742">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f220218b212e?w=1044&h=348&f=jpeg&s=30900">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
-<meta property="og:updated_time" content="2018-02-06T07:39:59.000Z">
+<meta property="og:updated_time" content="2018-02-06T08:01:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速高效 | Android身份证识别">
-<meta name="twitter:description" content="一：简介快捷支付涉及到方方面面，同时安全问题既是用户所关心的，也是制作者不容忽视的重要部分。比如涉及到支付和金钱的app，商户端app等等，都需要进行实名认证，实名认证可以通过银行卡认证和身份证认证。通常办法是通过上传照片，并且手动输入基本信息进行认证，这种方法不仅操作复杂，而且容易出错。网上很多资源，识别率低，速度慢，用户体验很差。今天我就和大家介绍一下我使用的方法，可以快速、高效的识别中国身份">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2829694-20b78f45be90b3de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="iOS 最新版本支付宝支付开发流程">
+<meta name="twitter:description" content="一：介绍最近支付宝，微信，银联支付类sdk均做了更新，其中支付宝sdk变化比较大，由原来需要导入六个文件：  AlipaySDK.framework AlipaySDK.bundle Order.h和Order.m Until文件夹 openssl文件夹 libcrypto.a和libssl.a  在新版之后只需要导入两个文件就可以解决了，文件如下：  AlipaySDK.framework Al">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/26/16090db631c91f4e?w=848&h=456&f=png&s=79224">
 
 
 
@@ -135,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://fanbaoying.github.io/快速高效-Android身份证识别/"/>
+  <link rel="canonical" href="https://fanbaoying.github.io/iOS-最新版本支付宝支付开发流程/"/>
 
 
 
 
 
-  <title>快速高效 | Android身份证识别 | FBY展菲个人博客</title>
+  <title>iOS 最新版本支付宝支付开发流程 | FBY展菲个人博客</title>
   
 
 
@@ -278,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/快速高效-Android身份证识别/">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/iOS-最新版本支付宝支付开发流程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FBY展菲">
@@ -295,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">快速高效 | Android身份证识别</h1>
+          <h1 class="post-title" itemprop="name headline">iOS 最新版本支付宝支付开发流程</h1>
         
 
         <div class="post-meta">
@@ -307,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T17:20:44+08:00">
-                2018-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T15:58:32+08:00">
+                2018-02-06
               </time>
             
 
@@ -330,8 +331,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-识别集/" itemprop="url" rel="index">
-                    <span itemprop="name">Android 识别集</span>
+                  <a href="/categories/iOS-支付集/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 支付集</span>
                   </a>
                 </span>
 
@@ -363,7 +364,7 @@
                 
                 -->
                 <span title="字数统计">
-                  数字统计 908字
+                  数字统计 1,369字
                 </span>
               
 
@@ -382,7 +383,7 @@
                 --> 
 
                 <span title="阅读时长">
-                  阅读时长 4分钟
+                  阅读时长 5分钟
                 </span>
               
             </div>
@@ -403,52 +404,75 @@
       
 
       
-        <h2 id="一：简介"><a href="#一：简介" class="headerlink" title="一：简介"></a>一：简介</h2><p>快捷支付涉及到方方面面，同时安全问题既是用户所关心的，也是制作者不容忽视的重要部分。<br>比如涉及到支付和金钱的app，商户端app等等，都需要进行实名认证，实名认证可以通过银行卡认证和身份证认证。<br>通常办法是通过上传照片，并且手动输入基本信息进行认证，这种方法不仅操作复杂，而且容易出错。<br>网上很多资源，识别率低，速度慢，用户体验很差。今天我就和大家介绍一下我使用的方法，可以快速、高效的识别中国身份证信息。</p>
+        <h2 id="一：介绍"><a href="#一：介绍" class="headerlink" title="一：介绍"></a>一：介绍</h2><p>最近支付宝，微信，银联支付类sdk均做了更新，其中支付宝sdk变化比较大，由原来需要导入六个文件：</p>
+<ul>
+<li>AlipaySDK.framework</li>
+<li>AlipaySDK.bundle</li>
+<li>Order.h和Order.m</li>
+<li>Until文件夹</li>
+<li>openssl文件夹</li>
+<li>libcrypto.a和libssl.a</li>
+</ul>
+<p>在新版之后只需要导入两个文件就可以解决了，文件如下：</p>
+<ul>
+<li>AlipaySDK.framework</li>
+<li>AlipaySDK.bundle</li>
+</ul>
+<p>下面我在旧版文章的基础上，为大家详细介绍最新版本支付宝支付开发流程。</p>
 <a id="more"></a>
-<h2 id="二：原理"><a href="#二：原理" class="headerlink" title="二：原理"></a>二：原理</h2><p>在拍摄框中右上区域加了一个人像区域提示框，并将该区域设为扫描人脸的区域，只有该区域扫描到身份证上的人脸时（确保用户的确将身份证人像对准了拍摄框中的人像框），才执行读取身份证信息的操作。</p>
-<h2 id="三：项目展示"><a href="#三：项目展示" class="headerlink" title="三：项目展示"></a>三：项目展示</h2><p>扫描身份证面截图</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-20b78f45be90b3de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="头像面扫描"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-8cd81ffdb6f4daac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="国徽面扫描"></p>
-<p>信息展示页面</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-5dc5685f6c54a9df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="头像页信息"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-856239c3727e49d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="国徽页信息"></p>
-<h2 id="四：-使用流程介绍"><a href="#四：-使用流程介绍" class="headerlink" title="四： 使用流程介绍"></a>四： 使用流程介绍</h2><h4 id="4-1-身份验证"><a href="#4-1-身份验证" class="headerlink" title="4.1 身份验证"></a>4.1 身份验证</h4><p>由于使用的是百度云的图像文字识别sdk，首先需要去百度云<a href="https://console.bce.baidu.com/ai/?_=1515636851708&amp;fromai=1#/ai/ocr/app/list" target="_blank" rel="noopener">管理控制台</a>获得API Key / Secret Key。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-d962a45ac612e492.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="管理控制台"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-97842b3398dd0700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="管理控制台"></p>
-<h4 id="4-2-下载demo"><a href="#4-2-下载demo" class="headerlink" title="4.2 下载demo"></a>4.2 下载demo</h4><p><a href="https://github.com/fanbaoying/FBYIDCardRecognition-Android" target="_blank" rel="noopener">GitHub 源码链接</a></p>
+<p>因为工作的需要，我先后总结了iOS支付相关的近五类支付开发文章，分别是支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，做这些总结第一是方便以后的查阅，第二也为大家提供方便， 以免在用到的地方重复踩坑。</p>
+<blockquote>
+<p>注意开始填坑！！！</p>
+</blockquote>
+<h2 id="二：交互流程"><a href="#二：交互流程" class="headerlink" title="二：交互流程"></a>二：交互流程</h2><p>建议先把开发文档仔仔细细看一遍，一定要看，刚开始的时候没有老老实实地看完，结果遇到很多的坑，浪费的挺多的时间的，所以建议一定要好好看看，特别是<a href="https://doc.open.alipay.com/doc2/detail?spm=0.0.0.0.w6njr9&amp;treeId=59&amp;articleId=103658&amp;docType=1" target="_blank" rel="noopener">交互流程</a>这一部分。</p>
+<h3 id="2-1-功能流程"><a href="#2-1-功能流程" class="headerlink" title="2.1 功能流程"></a>2.1 功能流程</h3><p><img src="https://user-gold-cdn.xitu.io/2017/12/26/16090db631c91f4e?w=848&amp;h=456&amp;f=png&amp;s=79224" alt="功能流程图"></p>
+<p>流程说明：</p>
+<ul>
+<li>第4步：调用支付接口</li>
+<li>第5步：支付请求</li>
+<li>第8步：接口返回支付结果</li>
+<li>第12步：异步发送支付通知</li>
+</ul>
+<h3 id="2-2-数据交互"><a href="#2-2-数据交互" class="headerlink" title="2.2 数据交互"></a>2.2 数据交互</h3><p><img src="https://user-gold-cdn.xitu.io/2017/12/26/16090dbeccf4cb9c?w=885&amp;h=469&amp;f=png&amp;s=93602" alt="数据交互图"></p>
+<p>数据交互说明：</p>
 <ol>
-<li>将下载的demo中libs目录下的ocr-sdk.jar文件拷贝到工程libs目录中，并加入工程依赖</li>
-<li>将libs目录下armeabi，arm64-v8a，armeabi-v7a，x86文件夹按需添加到android studio工程src/main/jniLibs目录中， eclipse用户默认为libs目录。</li>
-<li>在Android studio中以模块方式导入下载包中的identify文件夹,模块方式导入流程如下：<br>首先要在顶层工程目录下的settings.gradle文件中include模块名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include &apos;:app&apos;,&apos;:identify&apos;</span><br></pre></td></tr></table></figure>
-</li>
+<li>构造订单数据并签名</li>
+<li>发送请求数据</li>
+<li>手机支付宝支付开发包对请求数据进行处理</li>
+<li>返回处理的结果数据</li>
+<li>商户对获取的返回结果数据进行处理</li>
 </ol>
-<p>然后直接复制粘贴identify文件导入到项目的文件夹中！！！然后Build&gt;Rebuild Project，重新构建项目。</p>
-<h4 id="4-3-权限配置"><a href="#4-3-权限配置" class="headerlink" title="4.3 权限配置"></a>4.3 权限配置</h4><ol>
-<li><p>在工程AndroidManifest.xml文件中添加如下权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</span><br><span class="line">&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;</span><br><span class="line">&lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;</span><br><span class="line">&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在Proguard配置文件中增加, 防止release发布时打包报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-keep class com.baidu.ocr.sdk.**&#123;*;&#125;</span><br><span class="line">-dontwarn com.baidu.ocr.**</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="4-4-核心函数介绍"><a href="#4-4-核心函数介绍" class="headerlink" title="4.4 核心函数介绍"></a>4.4 核心函数介绍</h4><ol>
-<li><p>初始化函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">OCR.getInstance().initAccessTokenWithAkSk(new OnResultListener&lt;AccessToken&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onResult(AccessToken result) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onError(OCRError error) &#123;</span><br><span class="line">                error.printStackTrace();</span><br><span class="line">                Log.d(&quot;onError&quot;, &quot;msg: &quot; + error.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, getApplicationContext(), &quot;你注册的appkey&quot;, &quot;你注册的sk&quot;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>身份证拍照</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent(MainActivity.this, CameraActivity.class);</span><br><span class="line">intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,</span><br><span class="line">    FileUtil.getSaveFile(getApplication()).getAbsolutePath());</span><br><span class="line">intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);</span><br><span class="line">startActivityForResult(intent, REQUEST_CODE_CAMERA);</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>图像回调</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line"></span><br><span class="line">    if (requestCode == REQUEST_CODE_CAMERA &amp;&amp; resultCode == Activity.RESULT_OK) &#123;</span><br><span class="line">        if (data != null) &#123;</span><br><span class="line">            String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);</span><br><span class="line">            String filePath = FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath();</span><br><span class="line">            if (!TextUtils.isEmpty(contentType)) &#123;</span><br><span class="line">                if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) &#123;</span><br><span class="line">                    recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);</span><br><span class="line">                &#125; else if (CameraActivity.CONTENT_TYPE_ID_CARD_BACK.equals(contentType)) &#123;</span><br><span class="line">                    recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数据解析</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private void recIDCard(String idCardSide, String filePath) &#123;</span><br><span class="line">    IDCardParams param = new IDCardParams();</span><br><span class="line">    param.setImageFile(new File(filePath));</span><br><span class="line">    param.setIdCardSide(idCardSide);</span><br><span class="line">    param.setDetectDirection(true);</span><br><span class="line">    OCR.getInstance().recognizeIDCard(param, new OnResultListener&lt;IDCardResult&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onResult(IDCardResult result) &#123;</span><br><span class="line">            if (result != null) &#123;</span><br><span class="line">                Log.d(&quot;onResult&quot;, &quot;result: &quot; + result.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onError(OCRError error) &#123;</span><br><span class="line">            Log.d(&quot;onError&quot;, &quot;error: &quot; + error.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>到此身份证识别接入就结束了！！！</p>
-<p>相同方式均可实现银行卡识别、驾驶证识别、行驶证识别、车牌识别、营业执照识别等等，如有需要demo可联系我。</p>
+<h2 id="三：下载支付宝SDK"><a href="#三：下载支付宝SDK" class="headerlink" title="三：下载支付宝SDK"></a>三：下载支付宝SDK</h2><p>支付宝业务众多，真想找到想要的支付sdk还是要费一番功夫的，这里给出了<a href="https://docs.open.alipay.com/54/104509" target="_blank" rel="noopener">最新的sdk地址</a>（注意的是下载出来的SDK包里面并没有传说中的开发文档，需要其他地方找或者看网页上的）。</p>
+<p>公钥、私钥、PID、sellerID、key这些东西的用途和获取方式在文档上都有详细的说明，这里不再赘述，一定要把概念分清楚再去做，不然一会就乱了。如果遇到问题的话咱们可以再一起探讨。</p>
+<h2 id="四：-导入库集成SDK"><a href="#四：-导入库集成SDK" class="headerlink" title="四： 导入库集成SDK"></a>四： 导入库集成SDK</h2><h3 id="4-1-导入文件和关键库"><a href="#4-1-导入文件和关键库" class="headerlink" title="4.1 导入文件和关键库"></a>4.1 导入文件和关键库</h3><p>官方demo文件</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/26/16090ea4e1572b1f?w=778&amp;h=370&amp;f=png&amp;s=46381" alt=""></p>
+<p>把iOS包中的压缩文件中以下文件拷贝到项目文件夹下，并导入到项目工程中：</p>
+<ul>
+<li>AlipaySDK.framework</li>
+<li>AlipaySDK.bundle</li>
+</ul>
+<p>在Build Phases选项卡的Link Binary With Libraries中，增加以下依赖：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f21ff23afc13?w=800&amp;h=387&amp;f=png&amp;s=161849" alt="配置截图"><br>其中，需要注意的是：</p>
+<ul>
+<li>如果是Xcode 7.0之后的版本，需要添加libc++.tbd、libz.tbd；</li>
+<li>如果是Xcode 7.0之前的版本，需要添加libc++.dylib、libz.dylib（如下图）。</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f21ff158304a?w=800&amp;h=63&amp;f=png&amp;s=15152" alt=""></p>
+<p>此时，假如你启动工程，很大几率上你会发现报error的情况。<br>报错#include <openssl opensslconf.h=""> not find<br>这是一个神奇的大坑，我Google了好久，也不得其解，然后经网友提醒之后想起来#import “”和#import &lt;&gt;的区别。</openssl></p>
+<blockquote>
+<p>解决方法：Targets -&gt; Build Settings 下的 Header Search Paths。添加如下目录 “$(SRCROOT)/项目名称/文件的绝对地址”<br>如图：</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f2200ab48e0b?w=910&amp;h=519&amp;f=png&amp;s=274742" alt="3.png"></p>
+<h3 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h3><p>在需要调用AlipaySDK的文件中，增加头文件引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &lt;AlipaySDK/AlipaySDK.h&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-调用支付接口"><a href="#4-3-调用支付接口" class="headerlink" title="4.3 调用支付接口"></a>4.3 调用支付接口</h3><p>在支付宝的接入文档中，是将生成一个订单这步放在客户端来做了，但这个最好是 放在服务器端来做。<br>后台生成订单然后拼接，签名，然后服务器端直接给客户端传一个加密签名过的参数就可以了，这样比较安全。<br>所有的订单信息，商户信息等都掌握在自己的手中，这样的话APP端就不怕被拦截数据，并且调用起来也就特别简单了，只需要调用支付的接口。<br>如果只需要发送订单和处理支付返回结果，只需要添加AlipaySDK.bundle和AlipaySDK.framework这两个就行了，下载的SDK中很容易发现。<br>快捷支付方法是这个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)payOrder:(NSString *)orderStr fromScheme:(NSString *)schemeStr callback:(CompletionBlock)completionBlock;</span><br></pre></td></tr></table></figure></p>
+<p>在支付的按钮中，使用支付宝这个类，再调用这个方法就行啦！如下如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[[AlipaySDK defaultService] payOrder:credential fromScheme:fromScheme callback:^(NSDictionary* resultDic) &#123;</span><br><span class="line"></span><br><span class="line">    NSLog(@&quot;%@&quot;,resultDic);</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-4-配置支付宝客户端返回url处理方法"><a href="#4-4-配置支付宝客户端返回url处理方法" class="headerlink" title="4.4 配置支付宝客户端返回url处理方法"></a>4.4 配置支付宝客户端返回url处理方法</h3><p>如示例AliSDKDemo\APAppDelegate.m文件中，增加引用代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &lt;AlipaySDK/AlipaySDK.h&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在@implementation  AppDelegate中以下代码中的NSLog改为实际业务处理代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)application:(UIApplication *)application</span><br><span class="line">            openURL:(NSURL *)url</span><br><span class="line">  sourceApplication:(NSString *)sourceApplication</span><br><span class="line">         annotation:(id)annotation &#123;</span><br><span class="line"></span><br><span class="line">    if ([url.host isEqualToString:@&quot;safepay&quot;]) &#123;</span><br><span class="line">        //跳转支付宝钱包进行支付，处理支付结果</span><br><span class="line">        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) &#123;</span><br><span class="line">            NSLog(@&quot;result = %@&quot;,resultDic);</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// NOTE: 9.0以后使用新API接口</span><br><span class="line">- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;NSString*, id&gt; *)options</span><br><span class="line">&#123;</span><br><span class="line">    if ([url.host isEqualToString:@&quot;safepay&quot;]) &#123;</span><br><span class="line">        //跳转支付宝钱包进行支付，处理支付结果</span><br><span class="line">        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) &#123;</span><br><span class="line">            NSLog(@&quot;result = %@&quot;,resultDic);</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-5-项目配置"><a href="#4-5-项目配置" class="headerlink" title="4.5 项目配置"></a>4.5 项目配置</h3><p>最后，不要忘了还要写一个URL Scheme，在Targets -&gt; Info 下最后一个即可找到，<br>点击“Info”选项卡，在“URL Types”选项中，点击“+”。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f220218b212e?w=1044&amp;h=348&amp;f=jpeg&amp;s=30900" alt="项目配置"></p>
+<p>到这里支付宝支付就基本完成了，如果小伙伴们在集成过程中遇到什么问题，可以留言给我或者添加qq，在线帮你解决。</p>
 <h2 id="公众号：网罗开发"><a href="#公众号：网罗开发" class="headerlink" title="公众号：网罗开发"></a>公众号：网罗开发</h2><p><img src="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt=""></p>
 
       
@@ -479,12 +503,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/快速高效-Android身份证识别/">快速高效 | Android身份证识别</a></p>
+  <p><span>本文标题:</span><a href="/iOS-最新版本支付宝支付开发流程/">iOS 最新版本支付宝支付开发流程</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 FBY展菲 的个人博客">FBY展菲</a></p>
-  <p><span>发布时间:</span>2018年01月25日 - 17:01</p>
-  <p><span>最后更新:</span>2018年02月06日 - 15:02</p>
-  <p><span>原始链接:</span><a href="/快速高效-Android身份证识别/" title="快速高效 | Android身份证识别">https://fanbaoying.github.io/快速高效-Android身份证识别/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/快速高效-Android身份证识别/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2018年02月06日 - 15:02</p>
+  <p><span>最后更新:</span>2018年02月06日 - 16:02</p>
+  <p><span>原始链接:</span><a href="/iOS-最新版本支付宝支付开发流程/" title="iOS 最新版本支付宝支付开发流程">https://fanbaoying.github.io/iOS-最新版本支付宝支付开发流程/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/iOS-最新版本支付宝支付开发流程/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -545,7 +569,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
           
         </div>
       
@@ -558,8 +582,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/快速高效-iOS银行卡识别/" rel="next" title="快速高效 | iOS银行卡识别">
-                <i class="fa fa-chevron-left"></i> 快速高效 | iOS银行卡识别
+              <a href="/iOS-微信支付开发流程/" rel="next" title="iOS 微信支付开发流程">
+                <i class="fa fa-chevron-left"></i> iOS 微信支付开发流程
               </a>
             
           </div>
@@ -568,8 +592,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Java连接MySQL数据库详细分析/" rel="prev" title="Java连接MySQL数据库详细分析">
-                Java连接MySQL数据库详细分析 <i class="fa fa-chevron-right"></i>
+              <a href="/iOS-Apple-Pay开发流程/" rel="prev" title="iOS Apple Pay开发流程">
+                iOS Apple Pay开发流程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -763,7 +787,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：简介"><span class="nav-number">1.</span> <span class="nav-text">一：简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：原理"><span class="nav-number">2.</span> <span class="nav-text">二：原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：项目展示"><span class="nav-number">3.</span> <span class="nav-text">三：项目展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：-使用流程介绍"><span class="nav-number">4.</span> <span class="nav-text">四： 使用流程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-身份验证"><span class="nav-number">4.0.1.</span> <span class="nav-text">4.1 身份验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-下载demo"><span class="nav-number">4.0.2.</span> <span class="nav-text">4.2 下载demo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-权限配置"><span class="nav-number">4.0.3.</span> <span class="nav-text">4.3 权限配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-核心函数介绍"><span class="nav-number">4.0.4.</span> <span class="nav-text">4.4 核心函数介绍</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公众号：网罗开发"><span class="nav-number">5.</span> <span class="nav-text">公众号：网罗开发</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：介绍"><span class="nav-number">1.</span> <span class="nav-text">一：介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：交互流程"><span class="nav-number">2.</span> <span class="nav-text">二：交互流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-功能流程"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 功能流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-数据交互"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 数据交互</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：下载支付宝SDK"><span class="nav-number">3.</span> <span class="nav-text">三：下载支付宝SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：-导入库集成SDK"><span class="nav-number">4.</span> <span class="nav-text">四： 导入库集成SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-导入文件和关键库"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 导入文件和关键库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2"><span class="nav-number">4.2.</span> <span class="nav-text">4.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-调用支付接口"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 调用支付接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-配置支付宝客户端返回url处理方法"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 配置支付宝客户端返回url处理方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-项目配置"><span class="nav-number">4.5.</span> <span class="nav-text">4.5 项目配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公众号：网罗开发"><span class="nav-number">5.</span> <span class="nav-text">公众号：网罗开发</span></a></li></ol></div>
             
 
           </div>

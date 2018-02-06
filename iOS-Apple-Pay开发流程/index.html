@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -86,26 +86,28 @@
 
 
 
-<meta name="description" content="一：简介快捷支付涉及到方方面面，同时安全问题既是用户所关心的，也是制作者不容忽视的重要部分。比如涉及到支付和金钱的app，商户端app等等，都需要进行实名认证，实名认证可以通过银行卡认证和身份证认证。通常办法是通过上传照片，并且手动输入基本信息进行认证，这种方法不仅操作复杂，而且容易出错。网上很多资源，识别率低，速度慢，用户体验很差。今天我就和大家介绍一下我使用的方法，可以快速、高效的识别中国身份">
-<meta name="keywords" content="Android">
+<meta name="description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。 二：支付流程介绍2.1 Apple Pay 页面演示   买家在手机应用中购买商品或服务，在订单页面中展示 Apple Pay 按钮">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速高效 | Android身份证识别">
-<meta property="og:url" content="https://fanbaoying.github.io/快速高效-Android身份证识别/index.html">
+<meta property="og:title" content="iOS Apple Pay开发流程">
+<meta property="og:url" content="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/index.html">
 <meta property="og:site_name" content="FBY展菲个人博客">
-<meta property="og:description" content="一：简介快捷支付涉及到方方面面，同时安全问题既是用户所关心的，也是制作者不容忽视的重要部分。比如涉及到支付和金钱的app，商户端app等等，都需要进行实名认证，实名认证可以通过银行卡认证和身份证认证。通常办法是通过上传照片，并且手动输入基本信息进行认证，这种方法不仅操作复杂，而且容易出错。网上很多资源，识别率低，速度慢，用户体验很差。今天我就和大家介绍一下我使用的方法，可以快速、高效的识别中国身份">
+<meta property="og:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。 二：支付流程介绍2.1 Apple Pay 页面演示   买家在手机应用中购买商品或服务，在订单页面中展示 Apple Pay 按钮">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-20b78f45be90b3de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-8cd81ffdb6f4daac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-5dc5685f6c54a9df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-856239c3727e49d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-d962a45ac612e492.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-97842b3398dd0700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&h=871&f=png&s=238050">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3f1fee30?w=1240&h=974&f=png&s=216268">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bcc2b63?w=1240&h=774&f=png&s=76672">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3be01987?w=1069&h=245&f=png&s=55370">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db41f7cd8f?w=873&h=476&f=png&s=47034">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3e704842?w=1136&h=204&f=png&s=49705">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db909531af?w=1238&h=376&f=png&s=79656">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db620e1851?w=744&h=1368&f=png&s=163923">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
-<meta property="og:updated_time" content="2018-02-06T07:39:59.000Z">
+<meta property="og:updated_time" content="2018-02-06T08:01:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速高效 | Android身份证识别">
-<meta name="twitter:description" content="一：简介快捷支付涉及到方方面面，同时安全问题既是用户所关心的，也是制作者不容忽视的重要部分。比如涉及到支付和金钱的app，商户端app等等，都需要进行实名认证，实名认证可以通过银行卡认证和身份证认证。通常办法是通过上传照片，并且手动输入基本信息进行认证，这种方法不仅操作复杂，而且容易出错。网上很多资源，识别率低，速度慢，用户体验很差。今天我就和大家介绍一下我使用的方法，可以快速、高效的识别中国身份">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2829694-20b78f45be90b3de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="iOS Apple Pay开发流程">
+<meta name="twitter:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。 二：支付流程介绍2.1 Apple Pay 页面演示   买家在手机应用中购买商品或服务，在订单页面中展示 Apple Pay 按钮">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&h=871&f=png&s=238050">
 
 
 
@@ -135,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="https://fanbaoying.github.io/快速高效-Android身份证识别/"/>
+  <link rel="canonical" href="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/"/>
 
 
 
 
 
-  <title>快速高效 | Android身份证识别 | FBY展菲个人博客</title>
+  <title>iOS Apple Pay开发流程 | FBY展菲个人博客</title>
   
 
 
@@ -278,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/快速高效-Android身份证识别/">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FBY展菲">
@@ -295,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">快速高效 | Android身份证识别</h1>
+          <h1 class="post-title" itemprop="name headline">iOS Apple Pay开发流程</h1>
         
 
         <div class="post-meta">
@@ -307,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T17:20:44+08:00">
-                2018-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T16:00:31+08:00">
+                2018-02-06
               </time>
             
 
@@ -330,8 +332,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-识别集/" itemprop="url" rel="index">
-                    <span itemprop="name">Android 识别集</span>
+                  <a href="/categories/iOS-支付集/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 支付集</span>
                   </a>
                 </span>
 
@@ -363,7 +365,7 @@
                 
                 -->
                 <span title="字数统计">
-                  数字统计 908字
+                  数字统计 950字
                 </span>
               
 
@@ -403,52 +405,33 @@
       
 
       
-        <h2 id="一：简介"><a href="#一：简介" class="headerlink" title="一：简介"></a>一：简介</h2><p>快捷支付涉及到方方面面，同时安全问题既是用户所关心的，也是制作者不容忽视的重要部分。<br>比如涉及到支付和金钱的app，商户端app等等，都需要进行实名认证，实名认证可以通过银行卡认证和身份证认证。<br>通常办法是通过上传照片，并且手动输入基本信息进行认证，这种方法不仅操作复杂，而且容易出错。<br>网上很多资源，识别率低，速度慢，用户体验很差。今天我就和大家介绍一下我使用的方法，可以快速、高效的识别中国身份证信息。</p>
-<a id="more"></a>
-<h2 id="二：原理"><a href="#二：原理" class="headerlink" title="二：原理"></a>二：原理</h2><p>在拍摄框中右上区域加了一个人像区域提示框，并将该区域设为扫描人脸的区域，只有该区域扫描到身份证上的人脸时（确保用户的确将身份证人像对准了拍摄框中的人像框），才执行读取身份证信息的操作。</p>
-<h2 id="三：项目展示"><a href="#三：项目展示" class="headerlink" title="三：项目展示"></a>三：项目展示</h2><p>扫描身份证面截图</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-20b78f45be90b3de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="头像面扫描"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-8cd81ffdb6f4daac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="国徽面扫描"></p>
-<p>信息展示页面</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-5dc5685f6c54a9df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="头像页信息"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-856239c3727e49d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="国徽页信息"></p>
-<h2 id="四：-使用流程介绍"><a href="#四：-使用流程介绍" class="headerlink" title="四： 使用流程介绍"></a>四： 使用流程介绍</h2><h4 id="4-1-身份验证"><a href="#4-1-身份验证" class="headerlink" title="4.1 身份验证"></a>4.1 身份验证</h4><p>由于使用的是百度云的图像文字识别sdk，首先需要去百度云<a href="https://console.bce.baidu.com/ai/?_=1515636851708&amp;fromai=1#/ai/ocr/app/list" target="_blank" rel="noopener">管理控制台</a>获得API Key / Secret Key。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-d962a45ac612e492.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="管理控制台"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2829694-97842b3398dd0700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="管理控制台"></p>
-<h4 id="4-2-下载demo"><a href="#4-2-下载demo" class="headerlink" title="4.2 下载demo"></a>4.2 下载demo</h4><p><a href="https://github.com/fanbaoying/FBYIDCardRecognition-Android" target="_blank" rel="noopener">GitHub 源码链接</a></p>
+        <h2 id="一：介绍"><a href="#一：介绍" class="headerlink" title="一：介绍"></a>一：介绍</h2><p>项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。<br>今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。</p>
+<h2 id="二：支付流程介绍"><a href="#二：支付流程介绍" class="headerlink" title="二：支付流程介绍"></a>二：支付流程介绍</h2><h2 id="2-1-Apple-Pay-页面演示"><a href="#2-1-Apple-Pay-页面演示" class="headerlink" title="2.1 Apple Pay 页面演示"></a>2.1 Apple Pay 页面演示</h2><p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&amp;h=871&amp;f=png&amp;s=238050" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3f1fee30?w=1240&amp;h=974&amp;f=png&amp;s=216268" alt="Apple Pay 页面演示"></p>
 <ol>
-<li>将下载的demo中libs目录下的ocr-sdk.jar文件拷贝到工程libs目录中，并加入工程依赖</li>
-<li>将libs目录下armeabi，arm64-v8a，armeabi-v7a，x86文件夹按需添加到android studio工程src/main/jniLibs目录中， eclipse用户默认为libs目录。</li>
-<li>在Android studio中以模块方式导入下载包中的identify文件夹,模块方式导入流程如下：<br>首先要在顶层工程目录下的settings.gradle文件中include模块名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include &apos;:app&apos;,&apos;:identify&apos;</span><br></pre></td></tr></table></figure>
-</li>
+<li>买家在手机应用中购买商品或服务，在订单页面中展示 Apple Pay 按钮</li>
+<li>通过银联控件，掉起 Apple Pay 支付页面</li>
+<li>用户通过支付页面验证 Touch ID，输入银行卡密码 是否需要输入银行卡密码取决于交易限额和银行支持情况</li>
+<li>支付成功，商户应用内展示成功页面<br>(1)支付成功页面应参照 UI 示例，展示“银联”标识，“云闪付”标识。<br>(2)银联 SDK 控件支持折扣功能。在折扣活动期间，商户应用内应参照实例 UI 进行原金 额、折扣金额的展示</li>
 </ol>
-<p>然后直接复制粘贴identify文件导入到项目的文件夹中！！！然后Build&gt;Rebuild Project，重新构建项目。</p>
-<h4 id="4-3-权限配置"><a href="#4-3-权限配置" class="headerlink" title="4.3 权限配置"></a>4.3 权限配置</h4><ol>
-<li><p>在工程AndroidManifest.xml文件中添加如下权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</span><br><span class="line">&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;</span><br><span class="line">&lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;</span><br><span class="line">&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在Proguard配置文件中增加, 防止release发布时打包报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-keep class com.baidu.ocr.sdk.**&#123;*;&#125;</span><br><span class="line">-dontwarn com.baidu.ocr.**</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="4-4-核心函数介绍"><a href="#4-4-核心函数介绍" class="headerlink" title="4.4 核心函数介绍"></a>4.4 核心函数介绍</h4><ol>
-<li><p>初始化函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">OCR.getInstance().initAccessTokenWithAkSk(new OnResultListener&lt;AccessToken&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onResult(AccessToken result) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onError(OCRError error) &#123;</span><br><span class="line">                error.printStackTrace();</span><br><span class="line">                Log.d(&quot;onError&quot;, &quot;msg: &quot; + error.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, getApplicationContext(), &quot;你注册的appkey&quot;, &quot;你注册的sk&quot;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>身份证拍照</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent(MainActivity.this, CameraActivity.class);</span><br><span class="line">intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,</span><br><span class="line">    FileUtil.getSaveFile(getApplication()).getAbsolutePath());</span><br><span class="line">intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);</span><br><span class="line">startActivityForResult(intent, REQUEST_CODE_CAMERA);</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>图像回调</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line"></span><br><span class="line">    if (requestCode == REQUEST_CODE_CAMERA &amp;&amp; resultCode == Activity.RESULT_OK) &#123;</span><br><span class="line">        if (data != null) &#123;</span><br><span class="line">            String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);</span><br><span class="line">            String filePath = FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath();</span><br><span class="line">            if (!TextUtils.isEmpty(contentType)) &#123;</span><br><span class="line">                if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) &#123;</span><br><span class="line">                    recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);</span><br><span class="line">                &#125; else if (CameraActivity.CONTENT_TYPE_ID_CARD_BACK.equals(contentType)) &#123;</span><br><span class="line">                    recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数据解析</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private void recIDCard(String idCardSide, String filePath) &#123;</span><br><span class="line">    IDCardParams param = new IDCardParams();</span><br><span class="line">    param.setImageFile(new File(filePath));</span><br><span class="line">    param.setIdCardSide(idCardSide);</span><br><span class="line">    param.setDetectDirection(true);</span><br><span class="line">    OCR.getInstance().recognizeIDCard(param, new OnResultListener&lt;IDCardResult&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onResult(IDCardResult result) &#123;</span><br><span class="line">            if (result != null) &#123;</span><br><span class="line">                Log.d(&quot;onResult&quot;, &quot;result: &quot; + result.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onError(OCRError error) &#123;</span><br><span class="line">            Log.d(&quot;onError&quot;, &quot;error: &quot; + error.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>到此身份证识别接入就结束了！！！</p>
-<p>相同方式均可实现银行卡识别、驾驶证识别、行驶证识别、车牌识别、营业执照识别等等，如有需要demo可联系我。</p>
+<h3 id="2-2-Apple-Pay-支付的实现方式"><a href="#2-2-Apple-Pay-支付的实现方式" class="headerlink" title="2.2 Apple Pay 支付的实现方式"></a>2.2 Apple Pay 支付的实现方式</h3><p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bcc2b63?w=1240&amp;h=774&amp;f=png&amp;s=76672" alt="Apple Pay 支付的实现方式"></p>
+<p>1-2. 商户生成订单，通过商户 SERVER 端将订单信息发送给银联支付网关;<br>3-4. 银联支付网关记录订单信息，返回用来标识订单的 TN 号，经由商户 SERVER 返回至给 商户 APP;<br>5.商户 APP 调用银联 SDK，将 TN 号传递给银联 SDK<br>6.银联 SDK 向 Apple 公司的 PASSKIT FRAMEWORK 发起支付请求;<br>7.接口返回加密的支付 Token 信息;<br>8-9.银联 SDK 将支付 Token 传递给银联支付网关，完成交易认证;<br>10-12.银联将支付结果返回给商户 APP，商户 SERVER，商户 APP 负责提示用户交易结果。</p>
+<h2 id="三：工程配置"><a href="#三：工程配置" class="headerlink" title="三：工程配置"></a>三：工程配置</h2><p>bundleID设置</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3be01987?w=1069&amp;h=245&amp;f=png&amp;s=55370" alt="bundleID设置"></p>
+<p>Capability中启用Apple Pay权限，并选择merchantID，<a href="https://juejin.im/post/5a31e031f265da430a50971e" target="_blank" rel="noopener">merchantID申请流程</a>。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db41f7cd8f?w=873&amp;h=476&amp;f=png&amp;s=47034" alt="启用Apple Pay权限"></p>
+<p>之后项目会多一个Applepay的配置文件ApplePayYasin.entitlements</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3e704842?w=1136&amp;h=204&amp;f=png&amp;s=49705" alt="项目文件"></p>
+<h2 id="四：下载Apple-Pay-SDK"><a href="#四：下载Apple-Pay-SDK" class="headerlink" title="四：下载Apple Pay SDK"></a>四：下载Apple Pay SDK</h2><p><a href="https://open.unionpay.com/ajweb/help/file/techFile?productId=3" target="_blank" rel="noopener">Apple Pay SDK</a></p>
+<p>下载之后，找到.h文件和库文件，使用UPPaymentControl需要将paymentcontrol/inc目录下UPAPayPlugin.h、UPAPayPluginDelegate.h文件和paymentcontrol/libs目录下的libUPAPayPlugin.a文件添加到商户应用的工程中</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db909531af?w=1238&amp;h=376&amp;f=png&amp;s=79656" alt="SDK路径"></p>
+<h2 id="五：调用支付接口"><a href="#五：调用支付接口" class="headerlink" title="五：调用支付接口"></a>五：调用支付接口</h2><p>在调用银联支付类里面，首先增加头文件引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UPAPayPlugin.h&quot;</span><br><span class="line"></span><br><span class="line">// TODO 商户需要换用自己的mertchantID</span><br><span class="line">#define kAppleMerchantID        @&quot;merchant.com.AgreePay.ApplePayAgree&quot;</span><br></pre></td></tr></table></figure>
+<p>在调起支付的方法中代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//当获得的tn不为空时，调用支付接口</span><br><span class="line">if (tn != nil &amp;&amp; tn.length &gt; 0) &#123;</span><br><span class="line">        [UPAPayPlugin startPay:tn</span><br><span class="line">        mode:@&quot;01&quot;</span><br><span class="line">        viewController:ViewController</span><br><span class="line">        delegate:self andAPMechantID:kAppleMerchantID];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法需要的几个参数文档上都写的有，tn是交易流水号，服务器端传回来的，客户端只有凭借这个参数才能调用支付控件 进行支付的。只需要调用一个方法就行啦！！！</p>
+<h2 id="六：支付结果回调"><a href="#六：支付结果回调" class="headerlink" title="六：支付结果回调"></a>六：支付结果回调</h2><p>就在调起支付的ViewController 中写入下面代码即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark -</span><br><span class="line">#pragma mark 响应控件返回的支付结果</span><br><span class="line">#pragma mark -</span><br><span class="line">- (void)UPAPayPluginResult:(UPPayResult *)result</span><br><span class="line">&#123;</span><br><span class="line">    if(result.paymentResultStatus == UPPaymentResultStatusSuccess) &#123;</span><br><span class="line">        NSString *otherInfo = result.otherInfo?result.otherInfo:@&quot;&quot;;</span><br><span class="line">        NSString *successInfo = [NSString stringWithFormat:@&quot;支付成功\n%@&quot;,otherInfo];</span><br><span class="line"></span><br><span class="line">        NSLog(@&quot;%@&quot;,successInfo);</span><br><span class="line"></span><br><span class="line">    &#125;else if(result.paymentResultStatus == UPPaymentResultStatusCancel)&#123;</span><br><span class="line"></span><br><span class="line">        NSLog(@&quot;支付取消&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;else if (result.paymentResultStatus == UPPaymentResultStatusFailure) &#123;</span><br><span class="line"></span><br><span class="line">        NSString *errorInfo = [NSString stringWithFormat:@&quot;%@&quot;,result.errorDescription];</span><br><span class="line">        NSLog(@&quot;支付失败%@&quot;,errorInfo);</span><br><span class="line">    &#125;else if (result.paymentResultStatus == UPPaymentResultStatusUnknownCancel)  &#123;</span><br><span class="line"></span><br><span class="line">        //TODO UPPAymentResultStatusUnknowCancel表示发起支付以后用户取消，导致支付状态不确认，需要查询商户后台确认真实的支付结果</span><br><span class="line">//        NSString *errorInfo = [NSString stringWithFormat:@&quot;支付过程中用户取消了，请查询后台确认订单&quot;];</span><br><span class="line">//        [self showAlertMessage:errorInfo];</span><br><span class="line">        NSLog(@&quot;支付过程中用户取消了，请查询后台确认订单&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db620e1851?w=744&amp;h=1368&amp;f=png&amp;s=163923" alt="支付调起截图"></p>
 <h2 id="公众号：网罗开发"><a href="#公众号：网罗开发" class="headerlink" title="公众号：网罗开发"></a>公众号：网罗开发</h2><p><img src="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt=""></p>
 
       
@@ -479,12 +462,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/快速高效-Android身份证识别/">快速高效 | Android身份证识别</a></p>
+  <p><span>本文标题:</span><a href="/iOS-Apple-Pay开发流程/">iOS Apple Pay开发流程</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 FBY展菲 的个人博客">FBY展菲</a></p>
-  <p><span>发布时间:</span>2018年01月25日 - 17:01</p>
-  <p><span>最后更新:</span>2018年02月06日 - 15:02</p>
-  <p><span>原始链接:</span><a href="/快速高效-Android身份证识别/" title="快速高效 | Android身份证识别">https://fanbaoying.github.io/快速高效-Android身份证识别/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/快速高效-Android身份证识别/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2018年02月06日 - 16:02</p>
+  <p><span>最后更新:</span>2018年02月06日 - 16:02</p>
+  <p><span>原始链接:</span><a href="/iOS-Apple-Pay开发流程/" title="iOS Apple Pay开发流程">https://fanbaoying.github.io/iOS-Apple-Pay开发流程/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -545,7 +528,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
           
         </div>
       
@@ -558,8 +541,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/快速高效-iOS银行卡识别/" rel="next" title="快速高效 | iOS银行卡识别">
-                <i class="fa fa-chevron-left"></i> 快速高效 | iOS银行卡识别
+              <a href="/iOS-最新版本支付宝支付开发流程/" rel="next" title="iOS 最新版本支付宝支付开发流程">
+                <i class="fa fa-chevron-left"></i> iOS 最新版本支付宝支付开发流程
               </a>
             
           </div>
@@ -567,10 +550,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Java连接MySQL数据库详细分析/" rel="prev" title="Java连接MySQL数据库详细分析">
-                Java连接MySQL数据库详细分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -763,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：简介"><span class="nav-number">1.</span> <span class="nav-text">一：简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：原理"><span class="nav-number">2.</span> <span class="nav-text">二：原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：项目展示"><span class="nav-number">3.</span> <span class="nav-text">三：项目展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：-使用流程介绍"><span class="nav-number">4.</span> <span class="nav-text">四： 使用流程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-身份验证"><span class="nav-number">4.0.1.</span> <span class="nav-text">4.1 身份验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-下载demo"><span class="nav-number">4.0.2.</span> <span class="nav-text">4.2 下载demo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-权限配置"><span class="nav-number">4.0.3.</span> <span class="nav-text">4.3 权限配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-核心函数介绍"><span class="nav-number">4.0.4.</span> <span class="nav-text">4.4 核心函数介绍</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公众号：网罗开发"><span class="nav-number">5.</span> <span class="nav-text">公众号：网罗开发</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：介绍"><span class="nav-number">1.</span> <span class="nav-text">一：介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：支付流程介绍"><span class="nav-number">2.</span> <span class="nav-text">二：支付流程介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Apple-Pay-页面演示"><span class="nav-number">3.</span> <span class="nav-text">2.1 Apple Pay 页面演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Apple-Pay-支付的实现方式"><span class="nav-number">3.1.</span> <span class="nav-text">2.2 Apple Pay 支付的实现方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：工程配置"><span class="nav-number">4.</span> <span class="nav-text">三：工程配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：下载Apple-Pay-SDK"><span class="nav-number">5.</span> <span class="nav-text">四：下载Apple Pay SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五：调用支付接口"><span class="nav-number">6.</span> <span class="nav-text">五：调用支付接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六：支付结果回调"><span class="nav-number">7.</span> <span class="nav-text">六：支付结果回调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公众号：网罗开发"><span class="nav-number">8.</span> <span class="nav-text">公众号：网罗开发</span></a></li></ol></div>
             
 
           </div>
