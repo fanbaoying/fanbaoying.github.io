@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://fanbaoying.github.io/"/>
-  <updated>2018-02-06T08:03:30.000Z</updated>
+  <updated>2018-02-07T09:40:59.000Z</updated>
   <id>https://fanbaoying.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS发红包页面</title>
+    <link href="https://fanbaoying.github.io/iOS%E5%8F%91%E7%BA%A2%E5%8C%85%E9%A1%B5%E9%9D%A2/"/>
+    <id>https://fanbaoying.github.io/iOS发红包页面/</id>
+    <published>2018-02-07T09:38:47.000Z</published>
+    <updated>2018-02-07T09:40:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>iOS APP发红包页面制作，可直接参考源码，节约开发时间。<br><a href="https://github.com/fanbaoying/GiveRedEnvelopes" target="_blank" rel="noopener">点击获取GitHub 源码</a></p><p>来源：来自 qq:668562416 “西安 - 梦龙雪糕” 的贡献</p><a id="more"></a><p><img src="http://upload-images.jianshu.io/upload_images/2829694-0086035242f8609e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500" alt="22.png"></p><p>其他干货信息：</p><ul><li><a href="https://github.com/fanbaoying/MsgPlaySound" target="_blank" rel="noopener">获取系统震动和声音</a>(来自”西安 - 梦龙雪糕” 的贡献)</li><li><a href="https://github.com/fanbaoying/AFN-YYCache" target="_blank" rel="noopener">AFN-YYCache二次封装网络请求</a>(来自”MrGoodbye”的贡献)</li><li><a href="https://github.com/fanbaoying/FBYFMDBDemo" target="_blank" rel="noopener">FMDB | 实现数据的增删改查</a>(来自”FBY展菲”的贡献)</li><li><a href="https://github.com/fanbaoying/FBYDataDisplay-iOS" target="_blank" rel="noopener">iOS折线图统计图</a>(来自”FBY展菲”的贡献)</li><li><a href="https://github.com/fanbaoying/FBYIDCardRecognition-Android" target="_blank" rel="noopener">Android 银行卡身份证识别demo</a>(来自”FBY展菲”的贡献)</li><li><a href="https://github.com/fanbaoying/FBYBankCardRecognition-iOS" target="_blank" rel="noopener">iOS 银行卡识别demo</a>(来自”FBY展菲”的贡献)</li><li><a href="https://github.com/fanbaoying/FBYIDCardRecognition-iOS" target="_blank" rel="noopener">iOS 身份证识别demo</a>(来自”FBY展菲”的贡献)</li></ul><p>更多干货信息请到：GitHub: <a href="https://github.com/fanbaoying" target="_blank" rel="noopener">https://github.com/fanbaoying</a> 下载</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;iOS APP发红包页面制作，可直接参考源码，节约开发时间。&lt;br&gt;&lt;a href=&quot;https://github.com/fanbaoying/GiveRedEnvelopes&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;点击获取GitHub 源码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;来源：来自 qq:668562416 “西安 - 梦龙雪糕” 的贡献&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS 贡献集" scheme="https://fanbaoying.github.io/categories/iOS-%E8%B4%A1%E7%8C%AE%E9%9B%86/"/>
+    
+    
+      <category term="iOS" scheme="https://fanbaoying.github.io/tags/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS Apple Pay开发流程</title>
