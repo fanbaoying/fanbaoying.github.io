@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="FBY展菲个人博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一：介绍第三方登录有QQ、微信、微博、支付宝等等，如果现在自己的项目中实现这些登录，即可以使用友盟的sdk，也可以一个一个接入，各有各的有点，这里不做赘述。 今天和大家分享的是，在项目中实现微信登录，虽然微信官网给出了接入文档，但是我在接入的过程中，遇到一些问题，在此做出总结以便大家参考。主要讲微信snsapi_base静默授权与snsapi_userinfo网页授权的实现。">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三方微信登录 | 静默授权与网页授权的实现">
+<meta property="og:url" content="https://fanbaoying.github.io/第三方微信登录-静默授权与网页授权的实现/index.html">
+<meta property="og:site_name" content="FBY展菲个人博客">
+<meta property="og:description" content="一：介绍第三方登录有QQ、微信、微博、支付宝等等，如果现在自己的项目中实现这些登录，即可以使用友盟的sdk，也可以一个一个接入，各有各的有点，这里不做赘述。 今天和大家分享的是，在项目中实现微信登录，虽然微信官网给出了接入文档，但是我在接入的过程中，遇到一些问题，在此做出总结以便大家参考。主要讲微信snsapi_base静默授权与snsapi_userinfo网页授权的实现。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2829694-006de32d62d4a298.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2829694-fa107c90fd2394c5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
+<meta property="og:updated_time" content="2018-04-17T01:26:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三方微信登录 | 静默授权与网页授权的实现">
+<meta name="twitter:description" content="一：介绍第三方登录有QQ、微信、微博、支付宝等等，如果现在自己的项目中实现这些登录，即可以使用友盟的sdk，也可以一个一个接入，各有各的有点，这里不做赘述。 今天和大家分享的是，在项目中实现微信登录，虽然微信官网给出了接入文档，但是我在接入的过程中，遇到一些问题，在此做出总结以便大家参考。主要讲微信snsapi_base静默授权与snsapi_userinfo网页授权的实现。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2829694-006de32d62d4a298.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/第三方微信登录-静默授权与网页授权的实现/"/>
+
+
+
+
+
+  <title>第三方微信登录 | 静默授权与网页授权的实现 | FBY展菲个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FBY展菲个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">『公众号：网罗开发』</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/第三方微信登录-静默授权与网页授权的实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FBY展菲">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/users/upload_avatars/2829694/41838428-8449-43dd-9855-04d6c7cc4436.png?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FBY展菲个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第三方微信登录 | 静默授权与网页授权的实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T09:24:45+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS文集/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS文集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 1,650字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 6分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一：介绍"><a href="#一：介绍" class="headerlink" title="一：介绍"></a>一：介绍</h2><p>第三方登录有QQ、微信、微博、支付宝等等，如果现在自己的项目中实现这些登录，即可以使用友盟的sdk，也可以一个一个接入，各有各的有点，这里不做赘述。</p>
+<p>今天和大家分享的是，在项目中实现微信登录，虽然微信官网给出了接入文档，但是我在接入的过程中，遇到一些问题，在此做出总结以便大家参考。主要讲微信snsapi_base静默授权与snsapi_userinfo网页授权的实现。</p>
+<a id="more"></a>
+<h2 id="二：准备工作"><a href="#二：准备工作" class="headerlink" title="二：准备工作"></a>二：准备工作</h2><p>移动应用微信登录是基于OAuth2.0标准协议构建的微信OAuth2.0授权登录系统。</p>
+<p>在进行微信OAuth2.0授权登录接入之前，需要完成一下工作才可以开始介接入：</p>
+<ol>
+<li>在微信开放平台注册开发者帐号；</li>
+<li>拥有一个已审核通过的移动应用；</li>
+<li>并获得相应的AppID和AppSecret；</li>
+<li>申请微信登录且通过审核。</li>
+</ol>
+<h2 id="三：授权流程"><a href="#三：授权流程" class="headerlink" title="三：授权流程"></a>三：授权流程</h2><p>微信OAuth2.0授权登录目前支持authorization_code模式，适用于拥有server端的应用授权。该模式整体流程为：</p>
+<ol>
+<li>第三方发起微信授权登录请求，微信用户允许授权第三方应用后，微信会拉起应用或重定向到第三方网站，并且带上授权临时票据code参数；</li>
+<li>通过code参数加上AppID和AppSecret等，通过API换取access_token；</li>
+<li>通过access_token进行接口调用，获取用户基本数据资源或帮助用户实现基本操作。</li>
+</ol>
+<p>获取access_token时序图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2829694-006de32d62d4a298.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="h.png"></p>
+<h2 id="四：静默授权与网页授权的实现"><a href="#四：静默授权与网页授权的实现" class="headerlink" title="四：静默授权与网页授权的实现"></a>四：静默授权与网页授权的实现</h2><h4 id="1-静默授权与网页授权的区别"><a href="#1-静默授权与网页授权的区别" class="headerlink" title="1. 静默授权与网页授权的区别"></a>1. 静默授权与网页授权的区别</h4><p>网页授权：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">req.scope = @&quot;snsapi_userinfo&quot;;</span><br></pre></td></tr></table></figure></p>
+<p>静默授权：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">req.scope = @&quot;snsapi_base&quot;;</span><br></pre></td></tr></table></figure></p>
+<p>snsapi_base与snsapi_userinfo属于微信网页授权获取用户信息的两种作用域：</p>
+<p>snsapi_base只能获取access_token和openID</p>
+<p>snsapi_userinfo可以获取更详细的用户资料，比如头像、昵称、性别等</p>
+<h4 id="2-获取CODE"><a href="#2-获取CODE" class="headerlink" title="2. 获取CODE"></a>2. 获取CODE</h4><p>再登录按钮的点击事件中写入一下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//构造SendAuthReq结构体</span><br><span class="line">SendAuthReq* req =[[[SendAuthReq alloc]init]autorelease];</span><br><span class="line">req.scope = @&quot;snsapi_userinfo&quot;;</span><br><span class="line">req.state = @&quot;123&quot;;</span><br><span class="line">//第三方向微信终端发送一个SendAuthReq消息结构</span><br><span class="line">[WXApi sendReq:req];</span><br></pre></td></tr></table></figure>
+<p>在AppDelegate的didFinishLaunchingWithOptions方法中注册：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[WXApi registerApp:@&quot;wx1234567890&quot;];</span><br></pre></td></tr></table></figure>
+<p>“wx1234567890”为appid，请更换为自己项目的appid</p>
+<p>拉起微信打开授权登录页如下图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2829694-fa107c90fd2394c5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>点击确认登陆，授权后回调 WXApiDelegate<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-(void)onResp:(BaseReq *)resp</span><br><span class="line">&#123;</span><br><span class="line">    /*</span><br><span class="line">     ErrCode ERR_OK = 0(用户同意)</span><br><span class="line">     ERR_AUTH_DENIED = -4（用户拒绝授权）</span><br><span class="line">     ERR_USER_CANCEL = -2（用户取消）</span><br><span class="line">     code    用户换取access_token的code，仅在ErrCode为0时有效</span><br><span class="line">     state   第三方程序发送时用来标识其请求的唯一性的标志，由第三方程序调用sendReq时传入，由微信终端回传，state字符串长度不能超过1K</span><br><span class="line">     lang    微信客户端当前语言</span><br><span class="line">     country 微信用户当前国家信息</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    if ([resp isKindOfClass:[SendAuthResp class]]) //判断是否为授权请求，否则与微信支付等功能发生冲突</span><br><span class="line">    &#123;</span><br><span class="line">        SendAuthResp *aresp = (SendAuthResp *)resp;</span><br><span class="line">        if (aresp.errCode== 0)</span><br><span class="line">        &#123;</span><br><span class="line">            NSLog(@&quot;code %@&quot;,aresp.code);</span><br><span class="line">            [[NSNotificationCenter defaultCenter] postNotificationName:@&quot;wechatDidLoginNotification&quot; object:self userInfo:@&#123;@&quot;code&quot;:aresp.code&#125;];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用通知，将aresp.code传递到登录页面</p>
+<h4 id="3-通过code获取access-token"><a href="#3-通过code获取access-token" class="headerlink" title="3. 通过code获取access_token"></a>3. 通过code获取access_token</h4><p>在登录页面通过通知，获取到code之后，请求以下链接获取access_token：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&amp;secret=SECRET&amp;code=CODE&amp;grant_type=authorization_code</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>appid：应用唯一标识，在微信开放平台提交应用审核通过后获得</li>
+<li>secret：应用密钥AppSecret，在微信开放平台提交应用审核通过后获得</li>
+<li>code：填写第一步获取的code参数</li>
+<li>grant_type：填authorization_code</li>
+</ul>
+<p>网络请求返回的参数格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;access_token&quot;:&quot;ACCESS_TOKEN&quot;,</span><br><span class="line">&quot;expires_in&quot;:7200,</span><br><span class="line">&quot;refresh_token&quot;:&quot;REFRESH_TOKEN&quot;,</span><br><span class="line">&quot;openid&quot;:&quot;OPENID&quot;,</span><br><span class="line">&quot;scope&quot;:&quot;SCOPE&quot;,</span><br><span class="line">&quot;unionid&quot;:&quot;o6_bmasdasdsad6_2sgVt7hMZOPfL&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>access_token：接口调用凭证</li>
+<li>expires_in：access_token接口调用凭证超时时间，单位（秒）</li>
+<li>refresh_token：用户刷新access_token</li>
+<li>openid：授权用户唯一标识</li>
+<li>scope：用户授权的作用域，使用逗号（,）分隔</li>
+<li>unionid：当且仅当该移动应用已获得该用户的userinfo授权时，才会出现该字段</li>
+</ul>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><blockquote>
+<p>1、Appsecret 是应用接口使用密钥，泄漏后将可能导致应用数据泄漏、应用的用户数据泄漏等高风险后果；存储在客户端，极有可能被恶意窃取（如反编译获取Appsecret）；<br>2、access_token 为用户授权第三方应用发起接口调用的凭证（相当于用户登录态），存储在客户端，可能出现恶意获取access_token 后导致的用户数据泄漏、用户微信相关接口功能被恶意发起等行为；<br>3、refresh_token 为用户授权第三方应用的长效凭证，仅用于刷新access_token，但泄漏后相当于access_token 泄漏，风险同上。</p>
+<p>还有就是要注意网络授权<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842" target="_blank" rel="noopener">网页授权access_token</a> 与 <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140183" target="_blank" rel="noopener">普通access_token</a>的区别：<br>1、网页授权的access_token在每次获取openID时一起更新，在接口调用频次限制中为“无上限”；<br>2、普通access_token一般限制为2000次/日，需要自己保存起来并定时更新。</p>
+</blockquote>
+<p>到这里同时获得access_token和openid，静默授权与网页授权操作都是一样的。根据官网文档，网页授权还可以进一步操作，获取用户更多详细信息。</p>
+<h4 id="4-获取用户个人信息（UnionID机制）"><a href="#4-获取用户个人信息（UnionID机制）" class="headerlink" title="4. 获取用户个人信息（UnionID机制）"></a>4. 获取用户个人信息（UnionID机制）</h4><p>此接口用于获取用户个人信息，开发者可通过OpenID来获取用户基本信息，接口如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&amp;openid=OPENID</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>access_token：调用凭证</li>
+<li>openid：普通用户的标识，对当前开发者帐号唯一</li>
+</ul>
+<p>正确的Json返回结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;openid&quot;:&quot;OPENID&quot;,</span><br><span class="line">&quot;nickname&quot;:&quot;NICKNAME&quot;,</span><br><span class="line">&quot;sex&quot;:1,</span><br><span class="line">&quot;province&quot;:&quot;PROVINCE&quot;,</span><br><span class="line">&quot;city&quot;:&quot;CITY&quot;,</span><br><span class="line">&quot;country&quot;:&quot;COUNTRY&quot;,</span><br><span class="line">&quot;headimgurl&quot;: &quot;http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0&quot;,</span><br><span class="line">&quot;privilege&quot;:[</span><br><span class="line">&quot;PRIVILEGE1&quot;,</span><br><span class="line">&quot;PRIVILEGE2&quot;</span><br><span class="line">],</span><br><span class="line">&quot;unionid&quot;: &quot; o6_bmasdasdsad6_2sgVt7hMZOPfL&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-静默授权获取到用户详细资料"><a href="#5-静默授权获取到用户详细资料" class="headerlink" title="5. 静默授权获取到用户详细资料"></a>5. 静默授权获取到用户详细资料</h4><p>在第3步通过snsapi_base，同时获得access_token和openid，</p>
+<p>把这里的access_token和openid用于下面接口中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&amp;openid=OPENID&amp;lang=zh_CN</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>access_token：调用凭证</li>
+<li>openid：普通用户的标识，对当前开发者帐号唯一</li>
+<li>lang：国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语，默认为zh-CN</li>
+</ul>
+<p>Json返回结果和snsapi_userinfo下获取的用户详情一样。</p>
+<p>但是这个方法的前提是同一个公众号内，用户关注了，如果是其他公众号，还是需要用户点击授权的。</p>
+<h2 id="公众号：网罗开发"><a href="#公众号：网罗开发" class="headerlink" title="公众号：网罗开发"></a>公众号：网罗开发</h2><p><img src="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/第三方微信登录-静默授权与网页授权的实现/">第三方微信登录 | 静默授权与网页授权的实现</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 FBY展菲 的个人博客">FBY展菲</a></p>
+  <p><span>发布时间:</span>2018年04月17日 - 09:04</p>
+  <p><span>最后更新:</span>2018年04月17日 - 09:04</p>
+  <p><span>原始链接:</span><a href="/第三方微信登录-静默授权与网页授权的实现/" title="第三方微信登录 | 静默授权与网页授权的实现">https://fanbaoying.github.io/第三方微信登录-静默授权与网页授权的实现/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/第三方微信登录-静默授权与网页授权的实现/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="FBY展菲 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="FBY展菲 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/AVFoundation-封装一个好用的视频播放器/" rel="next" title="AVFoundation | 封装一个好用的视频播放器">
+                <i class="fa fa-chevron-left"></i> AVFoundation | 封装一个好用的视频播放器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/users/upload_avatars/2829694/41838428-8449-43dd-9855-04d6c7cc4436.png?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="FBY展菲" />
+            
+              <p class="site-author-name" itemprop="name">FBY展菲</p>
+              <p class="site-description motion-element" itemprop="description">网络天下方法,方便你我开发</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5553214958/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://shenzekun.cn/" title="Moorez" target="_blank">Moorez</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：介绍"><span class="nav-number">1.</span> <span class="nav-text">一：介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：准备工作"><span class="nav-number">2.</span> <span class="nav-text">二：准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：授权流程"><span class="nav-number">3.</span> <span class="nav-text">三：授权流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：静默授权与网页授权的实现"><span class="nav-number">4.</span> <span class="nav-text">四：静默授权与网页授权的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-静默授权与网页授权的区别"><span class="nav-number">4.0.1.</span> <span class="nav-text">1. 静默授权与网页授权的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-获取CODE"><span class="nav-number">4.0.2.</span> <span class="nav-text">2. 获取CODE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-通过code获取access-token"><span class="nav-number">4.0.3.</span> <span class="nav-text">3. 通过code获取access_token</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意："><span class="nav-number">4.0.4.</span> <span class="nav-text">注意：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-获取用户个人信息（UnionID机制）"><span class="nav-number">4.0.5.</span> <span class="nav-text">4. 获取用户个人信息（UnionID机制）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-静默授权获取到用户详细资料"><span class="nav-number">4.0.6.</span> <span class="nav-text">5. 静默授权获取到用户详细资料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公众号：网罗开发"><span class="nav-number">5.</span> <span class="nav-text">公众号：网罗开发</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FBY展菲</span>
+
+  
+</div>
+
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共28.2k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
