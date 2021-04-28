@@ -95,8 +95,8 @@
 <meta property="og:description" content="一：介绍为了节约开发成本，很多Native-H5混合App采用手机网站支付的方式去实现支付模块。但手机网站支付的网络依赖比较严重，也通常需要经过更多的验证，这种种原因导致手机网站支付的成功率比Native支付低，对商户的利益造成影响。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f45ce7a16e86?w=1112&h=538&f=png&s=143033">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
-<meta property="og:updated_time" content="2018-01-31T06:20:46.000Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2829694-d0f9c79727486cae.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2021-04-28T14:05:46.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WKUIDelegate协议 - 手机网站支付转Native支付">
 <meta name="twitter:description" content="一：介绍为了节约开发成本，很多Native-H5混合App采用手机网站支付的方式去实现支付模块。但手机网站支付的网络依赖比较严重，也通常需要经过更多的验证，这种种原因导致手机网站支付的成功率比Native支付低，对商户的利益造成影响。">
@@ -358,7 +358,7 @@
                 
                 -->
                 <span title="字数统计">
-                  数字统计 1,228字
+                  数字统计 1,259字
                 </span>
               
 
@@ -377,7 +377,7 @@
                 --> 
 
                 <span title="阅读时长">
-                  阅读时长 5分钟
+                  阅读时长 6分钟
                 </span>
               
             </div>
@@ -420,7 +420,8 @@
 <p>返回结果不是9000的情况，无需做任何处理。如果returnUrl不为空，建议接入方跳转到该returnUrl。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction*)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler &#123;</span><br><span class="line"></span><br><span class="line">    decisionHandler(WKNavigationActionPolicyAllow);//允许跳转</span><br><span class="line"></span><br><span class="line">    NSLog(@&quot;%@&quot;,navigationAction.request.URL.absoluteString);</span><br><span class="line"></span><br><span class="line">    if ([navigationAction.request.URL.absoluteString hasPrefix:@&quot;alipay://alipayclient/&quot;]) &#123;</span><br><span class="line">        decisionHandler(WKNavigationActionPolicyCancel);</span><br><span class="line"></span><br><span class="line">        if ([[UIApplication sharedApplication] canOpenURL:navigationAction.request.URL]) &#123;</span><br><span class="line">            [[UIApplication sharedApplication] openURL:navigationAction.request.URL options:@&#123;UIApplicationOpenURLOptionUniversalLinksOnly: @NO&#125; completionHandler:^(BOOL success) &#123;</span><br><span class="line"></span><br><span class="line">                __weak APWebViewController* wself = self;</span><br><span class="line">                BOOL isIntercepted = [[AlipaySDK defaultService] payInterceptorWithUrl:[navigationAction.request.URL absoluteString] fromScheme:@&quot;alisdkdemo&quot; callback:^(NSDictionary *result) &#123;</span><br><span class="line">                    // 处理支付结果</span><br><span class="line">                    NSLog(@&quot;%@&quot;, result);</span><br><span class="line">                    // isProcessUrlPay 代表 支付宝已经处理该URL</span><br><span class="line">                    if ([result[@&quot;isProcessUrlPay&quot;] boolValue]) &#123;</span><br><span class="line">                        // returnUrl 代表 第三方App需要跳转的成功页URL</span><br><span class="line">                        NSString* urlStr = result[@&quot;returnUrl&quot;];</span><br><span class="line">                        [wself loadWithUrlStr:urlStr];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;];</span><br><span class="line"></span><br><span class="line">                if (isIntercepted) &#123;</span><br><span class="line"></span><br><span class="line">                    NSLog(@&quot;URL非支付宝支付URL&quot;);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        decisionHandler(WKNavigationActionPolicyAllow);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="4-支付结果回调处理"><a href="#4-支付结果回调处理" class="headerlink" title="4.支付结果回调处理"></a>4.支付结果回调处理</h4><p>支付宝客户端返回url处理方法，在AppDelegate.m文件中，增加头文件引用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;AlipaySDK/AlipaySDK.h&gt;</span><br></pre></td></tr></table></figure></p>
 <p>在@implementation AppDelegate中增加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包</span><br><span class="line">    if ([url.host isEqualToString:@&quot;safepay&quot;]) &#123;</span><br><span class="line">        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) &#123;</span><br><span class="line">    //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】</span><br><span class="line">            NSLog(@&quot;result = %@&quot;,resultDic);</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    if ([url.host isEqualToString:@&quot;platformapi&quot;])&#123;//支付宝钱包快登授权返回authCode</span><br><span class="line"></span><br><span class="line">        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) &#123;</span><br><span class="line">            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】</span><br><span class="line">            NSLog(@&quot;result = %@&quot;,resultDic);</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="公众号：网罗开发"><a href="#公众号：网罗开发" class="headerlink" title="公众号：网罗开发"></a>公众号：网罗开发</h2><p><img src="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt=""></p>
+<h2 id="公众号：网罗开发"><a href="#公众号：网罗开发" class="headerlink" title="公众号：网罗开发"></a>公众号：网罗开发</h2><p>本文已在公众号「<strong>网罗开发</strong>」发布，如果转载长白请加微信：FBY-fan，备注<strong>转载长白</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2829694-d0f9c79727486cae.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
@@ -453,7 +454,7 @@
   <p><span>本文标题:</span><a href="/WKUIDelegate协议-手机网站支付转Native支付/">WKUIDelegate协议 - 手机网站支付转Native支付</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 FBY展菲 的个人博客">FBY展菲</a></p>
   <p><span>发布时间:</span>2018年01月31日 - 14:01</p>
-  <p><span>最后更新:</span>2018年01月31日 - 14:01</p>
+  <p><span>最后更新:</span>2021年04月28日 - 22:04</p>
   <p><span>原始链接:</span><a href="/WKUIDelegate协议-手机网站支付转Native支付/" title="WKUIDelegate协议 - 手机网站支付转Native支付">https://fanbaoying.github.io/WKUIDelegate协议-手机网站支付转Native支付/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/WKUIDelegate协议-手机网站支付转Native支付/"  aria-label="复制成功！"></i></span>
   </p>
@@ -622,7 +623,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -756,7 +757,7 @@
       <div class="footer-inner">
         
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -791,7 +792,7 @@
 
 <div class="theme-info">
   <i class="fa fa-pencil"></i>
-  <span class="post-count">博客全站共40.3k字</span>
+  <span class="post-count">博客全站共42.0k字</span>
 </div>
 
 
