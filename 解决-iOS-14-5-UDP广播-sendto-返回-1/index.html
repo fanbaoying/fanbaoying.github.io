@@ -86,26 +86,18 @@
 
 
 
-<meta name="description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下银联控件支付，其他支付也写了对应教程，并且给出了连接。 集成前首先要看看文档，银联手机控件支付，里面包含需要的库文件和详细的文档。鉴于小伙伴们不容易找到，好事做到底，送上截图方便下载。">
+<meta name="description" content="1. 问题背景 手机系统升级到 iOS 14.5 之后，UDP 广播发送失败 项目中老版本使用到 socket  项目中新版本使用 CocoaAsyncSocket 两种 UDP 发包方式都会报错 No route to host  报错具体内容如下： 123sendto: -1client: sendto fail, but just ignore it: No route to host">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS 银联支付开发流程">
-<meta property="og:url" content="https://fanbaoying.github.io/iOS-银联支付开发流程/index.html">
+<meta property="og:title" content="解决 iOS 14.5 UDP广播 sendto 返回 -1">
+<meta property="og:url" content="https://fanbaoying.github.io/解决-iOS-14-5-UDP广播-sendto-返回-1/index.html">
 <meta property="og:site_name" content="FBY展菲个人博客">
-<meta property="og:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下银联控件支付，其他支付也写了对应教程，并且给出了连接。 集成前首先要看看文档，银联手机控件支付，里面包含需要的库文件和详细的文档。鉴于小伙伴们不容易找到，好事做到底，送上截图方便下载。">
+<meta property="og:description" content="1. 问题背景 手机系统升级到 iOS 14.5 之后，UDP 广播发送失败 项目中老版本使用到 socket  项目中新版本使用 CocoaAsyncSocket 两种 UDP 发包方式都会报错 No route to host  报错具体内容如下： 123sendto: -1client: sendto fail, but just ignore it: No route to host">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b44a1979e7?w=800&h=493&f=png&s=144804">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b44cf785ab?w=800&h=604&f=png&s=80017">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b4488acca3?w=800&h=165&f=png&s=56174">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f2788cdb89fc?w=800&h=606&f=png&s=84310">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f27889fad2d9?w=800&h=443&f=png&s=89206">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b44a6be849?w=1038&h=556&f=png&s=83234">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
-<meta property="og:updated_time" content="2018-02-06T08:04:31.000Z">
+<meta property="og:updated_time" content="2021-06-07T12:45:39.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 银联支付开发流程">
-<meta name="twitter:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下银联控件支付，其他支付也写了对应教程，并且给出了连接。 集成前首先要看看文档，银联手机控件支付，里面包含需要的库文件和详细的文档。鉴于小伙伴们不容易找到，好事做到底，送上截图方便下载。">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b44a1979e7?w=800&h=493&f=png&s=144804">
+<meta name="twitter:title" content="解决 iOS 14.5 UDP广播 sendto 返回 -1">
+<meta name="twitter:description" content="1. 问题背景 手机系统升级到 iOS 14.5 之后，UDP 广播发送失败 项目中老版本使用到 socket  项目中新版本使用 CocoaAsyncSocket 两种 UDP 发包方式都会报错 No route to host  报错具体内容如下： 123sendto: -1client: sendto fail, but just ignore it: No route to host">
 
 
 
@@ -135,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://fanbaoying.github.io/iOS-银联支付开发流程/"/>
+  <link rel="canonical" href="https://fanbaoying.github.io/解决-iOS-14-5-UDP广播-sendto-返回-1/"/>
 
 
 
 
 
-  <title>iOS 银联支付开发流程 | FBY展菲个人博客</title>
+  <title>解决 iOS 14.5 UDP广播 sendto 返回 -1 | FBY展菲个人博客</title>
   
 
 
@@ -280,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/iOS-银联支付开发流程/">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/解决-iOS-14-5-UDP广播-sendto-返回-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FBY展菲">
@@ -297,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS 银联支付开发流程</h1>
+          <h1 class="post-title" itemprop="name headline">解决 iOS 14.5 UDP广播 sendto 返回 -1</h1>
         
 
         <div class="post-meta">
@@ -309,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T15:42:06+08:00">
-                2018-02-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-07T20:37:18+08:00">
+                2021-06-07
               </time>
             
 
@@ -332,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS-支付集/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS 支付集</span>
+                  <a href="/categories/iOS文集/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS文集</span>
                   </a>
                 </span>
 
@@ -365,7 +357,7 @@
                 
                 -->
                 <span title="字数统计">
-                  数字统计 1,452字
+                  数字统计 489字
                 </span>
               
 
@@ -384,7 +376,7 @@
                 --> 
 
                 <span title="阅读时长">
-                  阅读时长 6分钟
+                  阅读时长 2分钟
                 </span>
               
             </div>
@@ -405,40 +397,37 @@
       
 
       
-        <h2 id="一：介绍"><a href="#一：介绍" class="headerlink" title="一：介绍"></a>一：介绍</h2><p>项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。<br>今天我们就主要介绍一下银联控件支付，其他支付也写了对应教程，并且给出了连接。</p>
-<p>集成前首先要看看文档，<a href="https://open.unionpay.com/ajweb/help/file/techFile?productId=3" target="_blank" rel="noopener">银联手机控件支付</a>，里面包含需要的库文件和详细的文档。鉴于小伙伴们不容易找到，好事做到底，送上截图方便下载。</p>
+        <h3 id="1-问题背景"><a href="#1-问题背景" class="headerlink" title="1. 问题背景"></a>1. 问题背景</h3><ol>
+<li>手机系统升级到 iOS 14.5 之后，UDP 广播发送失败</li>
+<li>项目中老版本使用到 socket </li>
+<li>项目中新版本使用 CocoaAsyncSocket</li>
+<li>两种 UDP 发包方式都会报错 No route to host</li>
+</ol>
+<p><strong>报错具体内容如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sendto: -1</span><br><span class="line">client: sendto fail, but just ignore it</span><br><span class="line">: No route to host</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b44a1979e7?w=800&amp;h=493&amp;f=png&amp;s=144804" alt="银联手机控件SDK"></p>
-<h2 id="二：支付流程介绍"><a href="#二：支付流程介绍" class="headerlink" title="二：支付流程介绍"></a>二：支付流程介绍</h2><p>通过支付控件进行交易的流程如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b44cf785ab?w=800&amp;h=604&amp;f=png&amp;s=80017" alt="业务流程图"><br>流程图说明：<br>　　(1)用户在客户端中点击购买商品，客户端发起订单生成请求到商户后台;<br>　　(2)商户后台收到订单生成请求后，按照《手机控件支付产品接口规范》组织并推送订单信息至银联后台;<br>　　(3)银联后台接收订单信息并检查通过后，生成对应交易流水号(即TN)，并回复至商户后台(应答要素：交易流水号等);<br>　　(4)商户后台接收到交易流水号(TN)，将交易流水号返回至客户端;<br>　　(5)客户端通过交易流水号(TN)调用支付控件;<br>　　(6)用户在支付控件中输入相关支付信息后，由支付控件向银联后台发起支付请求;<br>　　(7)支付成功后，银联后台将支付结果通知给商户后台;<br>　　(8)银联后台同时也将支付结果通知支付控件;<br>　　(9)支付控件显示支付结果并将支付结果返回至客户端;<br>　　此处备注：我们是通过后台获取订单，我们可以根据商品id等信息通过后台接口获取订单信息，对订单支付流程的签名加密过程后台完成。</p>
-<h2 id="三：下载银联SDK"><a href="#三：下载银联SDK" class="headerlink" title="三：下载银联SDK"></a>三：下载银联SDK</h2><p><a href="https://open.unionpay.com/ajweb/help/file/techFile?productId=3" target="_blank" rel="noopener">银联手机控件支付SDK</a></p>
-<p>下载之后，找到.h文件和库文件，使用UPPaymentControl需要将paymentcontrol/inc目录下UPPaymentControl.h文件和paymentcontrol/libs目录下的libPaymentControl.a文件添加到商户应用的工程中</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b4488acca3?w=800&amp;h=165&amp;f=png&amp;s=56174" alt="SDK路径"></p>
-<h2 id="四：工程配置"><a href="#四：工程配置" class="headerlink" title="四：工程配置"></a>四：工程配置</h2><h3 id="4-1-导入SDK库"><a href="#4-1-导入SDK库" class="headerlink" title="4.1 导入SDK库"></a>4.1 导入SDK库</h3><p>导入上面那个iOS头文件和库下载下载出来的SDK包的就行，然后需要链接上依赖库，在Target —&gt; BuildPhases —&gt; Link Binary With Libraries— 点击+号 -&gt; 搜索你需要的系统库。</p>
-<ul>
-<li>CFNetwork.framework</li>
-<li>SystemConfiguration.framework</li>
-<li>libz</li>
-<li>libPaymentControl.a</li>
-</ul>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f2788cdb89fc?w=800&amp;h=606&amp;f=png&amp;s=84310" alt="导入SDK库"></p>
-<h3 id="4-2-设置URL-Scheme"><a href="#4-2-设置URL-Scheme" class="headerlink" title="4.2 设置URL Scheme"></a>4.2 设置URL Scheme</h3><p>在工程info.plist设置中添加一个URL Types回调协议(在UPPayDemo工程中使用“UPPayDemo”作为协议)，用于在支付完成后返回商户客户端。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f27889fad2d9?w=800&amp;h=443&amp;f=png&amp;s=89206" alt="URL Scheme"></p>
-<h3 id="4-3-http请求设置"><a href="#4-3-http请求设置" class="headerlink" title="4.3 http请求设置"></a>4.3 http请求设置</h3><p>进行http请求时，需要在工程对应的plist文件中添加NSAppTransportSecurity Dictionary 并同时设置里面NSAllowsArbitraryLoads 属性值为 YES</p>
-<h3 id="4-4-添加协议白名单"><a href="#4-4-添加协议白名单" class="headerlink" title="4.4 添加协议白名单"></a>4.4 添加协议白名单</h3><p>需要在工程对应的plist文件中，添加LSApplicationQueriesSchemes Array并加入uppaysdk、uppaywallet、uppayx1、uppayx2、uppayx3五个item，如下图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f2b44a6be849?w=1038&amp;h=556&amp;f=png&amp;s=83234" alt="添加白名单"></p>
-<h3 id="4-5-调用支付接口"><a href="#4-5-调用支付接口" class="headerlink" title="4.5 调用支付接口"></a>4.5 调用支付接口</h3><p>在调用银联支付类里面，首先增加头文件引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UPPaymentControl.h&quot;</span><br></pre></td></tr></table></figure>
-<p>在调起支付的方法中代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//当获得的tn不为空时，调用支付接口</span><br><span class="line">if (tn != nil &amp;&amp; tn.length &gt; 0) &#123;</span><br><span class="line">        [[UPPaymentControl defaultControl]startPay:tn</span><br><span class="line">        fromScheme:@&quot;URL Scheme&quot;</span><br><span class="line">        mode:tnModel</span><br><span class="line">        viewController:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>方法需要的几个参数文档上都写的有，tn是交易流水号，服务器端传回来的，客户端只有凭借这个参数才能调用支付控件 进行支付的。只需要调用一个方法就行啦！！！</p>
-<h3 id="4-6-支付结果回调"><a href="#4-6-支付结果回调" class="headerlink" title="4.6 支付结果回调"></a>4.6 支付结果回调</h3><p>在支付成功之后，支付结果返回，需要获取url，需要在Appdelegate中完成<br>在Appdelegate里面，首先增加头文件引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UPPaymentControl.h&quot;</span><br></pre></td></tr></table></figure>
-<p>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)application:(UIApplication *)application</span><br><span class="line">            openURL:(NSURL *)url</span><br><span class="line">  sourceApplication:(NSString *)sourceApplication</span><br><span class="line">         annotation:(id)annotation &#123;</span><br><span class="line">    if ([url.host isEqualToString:@&quot;uppayresult&quot;])&#123;</span><br><span class="line">        //银联支付结果</span><br><span class="line">        [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code, NSDictionary *data) &#123;</span><br><span class="line">            //结果code为成功时，先校验签名，校验成功后做后续处理</span><br><span class="line">            if([code isEqualToString:@&quot;success&quot;]) &#123;</span><br><span class="line">                //交易成功</span><br><span class="line">            &#125;else if([code isEqualToString:@&quot;fail&quot;]) &#123;</span><br><span class="line">                //交易失败</span><br><span class="line">            &#125;else if([code isEqualToString:@&quot;cancel&quot;]) &#123;</span><br><span class="line">                //交易取消</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// NOTE: 9.0以后使用新API接口</span><br><span class="line">- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;NSString*, id&gt; *)options</span><br><span class="line">&#123;</span><br><span class="line">    if ([url.host isEqualToString:@&quot;uppayresult&quot;])&#123;</span><br><span class="line">        //银联支付结果</span><br><span class="line">        [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code, NSDictionary *data) &#123;</span><br><span class="line">            //结果code为成功时，先校验签名，校验成功后做后续处理</span><br><span class="line">            if([code isEqualToString:@&quot;success&quot;]) &#123;</span><br><span class="line">                //交易成功</span><br><span class="line">            &#125;else if([code isEqualToString:@&quot;fail&quot;]) &#123;</span><br><span class="line">                //交易失败</span><br><span class="line">            &#125;else if([code isEqualToString:@&quot;cancel&quot;]) &#123;</span><br><span class="line">                //交易取消</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-7-常见问题解决"><a href="#4-7-常见问题解决" class="headerlink" title="4.7 常见问题解决"></a>4.7 常见问题解决</h3><p>1.由于支付控件使用到了C、C++和OC混编的情况，将涉及到引用UPPaymentControl.h的源文件的后缀名都改为.mm;</p>
-<p>2.由于在UPPayDemo工程中添加了自定义的库文件libPaymentControl.a，当编译Demo工程时，应该检查工程设置Search Paths里的Framework Search Paths、Header Search Paths、Library Search Paths的路径设置，看设置路径是否正确，另外还要注意里边是否多余一些不确定的路径。</p>
-<p>3.控件界面无限加载，请参考控件使用指南iOS “添加SDK包“里“添加-ObjC宏”，特别注意大小写不要弄混。(此步骤操作有问题时也可修改为 -force_load+空格+控件路径，如：-force_load (PROJECT_DIR)/ libPaymentControl.a)。</p>
-<p>4.控件闪退异常’NSInvalidArgumentException’, reason: ‘-[__NSCFConstantString newSizeWithFont:详略]’<br>　　出现以上问题是由于添加-ObjC宏的地方没有配置正确，如果配-ObjC实在解决不了的话，可尝试去掉-ObjC，改为-force_load+空格+控件路径，如：-force_load $(PROJECT_DIR)/ libPaymentControl.a。</p>
-<h2 id="公众号：网罗开发"><a href="#公众号：网罗开发" class="headerlink" title="公众号：网罗开发"></a>公众号：网罗开发</h2><p><img src="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt=""></p>
+<h3 id="2-问题分析"><a href="#2-问题分析" class="headerlink" title="2. 问题分析"></a>2. 问题分析</h3><h5 id="2-1-sendto-返回-1-问题排查"><a href="#2-1-sendto-返回-1-问题排查" class="headerlink" title="2.1  sendto 返回 -1 问题排查"></a>2.1  sendto 返回 -1 问题排查</h5><p>我们知道发送广播 sendto 返回 -1，正常情况sendto 返回值大于 0 。<br>首先判断 socket 连接是否建立</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self._sck_fd4 = socket(AF_INET,SOCK_DGRAM,0);</span><br><span class="line">if (DEBUG_ON) &#123;</span><br><span class="line">     NSLog(@&quot;client init() _sck_fd4=%d&quot;,self._sck_fd4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>self._sck_fd4 打印：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server init(): _sck_fd4=12</span><br></pre></td></tr></table></figure>
+<p>socket 连接正常，接下来判断数据发包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendto(self._sck_fd4, bytes, dataLen, 0, (struct sockaddr*)&amp;target_addr, addr_len) = -1</span><br></pre></td></tr></table></figure>
+<p>数据发送失败</p>
+<h5 id="2-2-增加-NSLocalNetworkUsageDescription-权限"><a href="#2-2-增加-NSLocalNetworkUsageDescription-权限" class="headerlink" title="2.2  增加 NSLocalNetworkUsageDescription 权限"></a>2.2  增加 NSLocalNetworkUsageDescription 权限</h5><ol>
+<li><p>Info.plist 添加 <strong>NSLocalNetworkUsageDescription</strong></p>
+</li>
+<li><p>发送一次UDP广播，触发权限弹框，让用户点击好，允许访问本地网络。</p>
+</li>
+</ol>
+<p>发现问题依旧存在</p>
+<h5 id="2-3-发送单播排查"><a href="#2-3-发送单播排查" class="headerlink" title="2.3 发送单播排查"></a>2.3 发送单播排查</h5><p>由于项目中发送广播设置的 hostName 为 255.255.255.255，为了排查决定先发送单播看是否能成功。</p>
+<p>将单播地址改为 192.168.0.101 之后发现是可以发送成功的，然后在新版本 CocoaAsyncSocket 库中发送单播也是可以成功的。</p>
+<p>UDP 广播推荐使用 192.168.0.255 ，将广播地址改了之后，问题解决了，设备可以收到 UDP 广播数据。</p>
+<h3 id="3-问题解决"><a href="#3-问题解决" class="headerlink" title="3. 问题解决"></a>3. 问题解决</h3><p>由于 192.168.0.255 广播地址只是当前本地地址，App 中需要动态改变前三段 192.168.0 本地地址，解决方法如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *localInetAddr4 = [ESP_NetUtil getLocalIPv4];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = [localInetAddr4 componentsSeparatedByString:<span class="string">@"."</span>];</span><br><span class="line"><span class="built_in">NSString</span> *deviceAddress4 = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@.%@.%@.255"</span>,arr[<span class="number">0</span>], arr[<span class="number">1</span>], arr[<span class="number">2</span>]];</span><br></pre></td></tr></table></figure>
+<p>发包过滤，只需要过滤地址最后一段是否为 255</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool isBroadcast = [targetHostName hasSuffix:@&quot;255&quot;];</span><br></pre></td></tr></table></figure>
+<p>本文已在公众号「<strong>网罗开发</strong>」发布，如需转载请加微信：FBY-fan，备注转载开白</p>
 
       
     </div>
@@ -468,12 +457,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/iOS-银联支付开发流程/">iOS 银联支付开发流程</a></p>
+  <p><span>本文标题:</span><a href="/解决-iOS-14-5-UDP广播-sendto-返回-1/">解决 iOS 14.5 UDP广播 sendto 返回 -1</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 FBY展菲 的个人博客">FBY展菲</a></p>
-  <p><span>发布时间:</span>2018年02月06日 - 15:02</p>
-  <p><span>最后更新:</span>2018年02月06日 - 16:02</p>
-  <p><span>原始链接:</span><a href="/iOS-银联支付开发流程/" title="iOS 银联支付开发流程">https://fanbaoying.github.io/iOS-银联支付开发流程/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/iOS-银联支付开发流程/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2021年06月07日 - 20:06</p>
+  <p><span>最后更新:</span>2021年06月07日 - 20:06</p>
+  <p><span>原始链接:</span><a href="/解决-iOS-14-5-UDP广播-sendto-返回-1/" title="解决 iOS 14.5 UDP广播 sendto 返回 -1">https://fanbaoying.github.io/解决-iOS-14-5-UDP广播-sendto-返回-1/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/解决-iOS-14-5-UDP广播-sendto-返回-1/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -547,8 +536,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Android-银联控件支付开发流程/" rel="next" title="Android 银联控件支付开发流程">
-                <i class="fa fa-chevron-left"></i> Android 银联控件支付开发流程
+              <a href="/提升工作效率-Mac-上的必备工具/" rel="next" title="提升工作效率 Mac 上的必备工具">
+                <i class="fa fa-chevron-left"></i> 提升工作效率 Mac 上的必备工具
               </a>
             
           </div>
@@ -557,8 +546,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/iOS-微信支付开发流程/" rel="prev" title="iOS 微信支付开发流程">
-                iOS 微信支付开发流程 <i class="fa fa-chevron-right"></i>
+              <a href="/探索-SwiftUI-基本手势-md/" rel="prev" title="探索 SwiftUI 基本手势.md">
+                探索 SwiftUI 基本手势.md <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -752,7 +741,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：介绍"><span class="nav-number">1.</span> <span class="nav-text">一：介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：支付流程介绍"><span class="nav-number">2.</span> <span class="nav-text">二：支付流程介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：下载银联SDK"><span class="nav-number">3.</span> <span class="nav-text">三：下载银联SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：工程配置"><span class="nav-number">4.</span> <span class="nav-text">四：工程配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-导入SDK库"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 导入SDK库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-设置URL-Scheme"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 设置URL Scheme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-http请求设置"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 http请求设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-添加协议白名单"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 添加协议白名单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-调用支付接口"><span class="nav-number">4.5.</span> <span class="nav-text">4.5 调用支付接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-支付结果回调"><span class="nav-number">4.6.</span> <span class="nav-text">4.6 支付结果回调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-常见问题解决"><span class="nav-number">4.7.</span> <span class="nav-text">4.7 常见问题解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公众号：网罗开发"><span class="nav-number">5.</span> <span class="nav-text">公众号：网罗开发</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-问题背景"><span class="nav-number">1.</span> <span class="nav-text">1. 问题背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-问题分析"><span class="nav-number">2.</span> <span class="nav-text">2. 问题分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-sendto-返回-1-问题排查"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1  sendto 返回 -1 问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-增加-NSLocalNetworkUsageDescription-权限"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2  增加 NSLocalNetworkUsageDescription 权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-发送单播排查"><span class="nav-number">2.0.3.</span> <span class="nav-text">2.3 发送单播排查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-问题解决"><span class="nav-number">3.</span> <span class="nav-text">3. 问题解决</span></a></li></ol></div>
             
 
           </div>
