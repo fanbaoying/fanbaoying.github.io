@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="Swift," />
 
 
 
@@ -86,28 +86,22 @@
 
 
 
-<meta name="description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。">
-<meta name="keywords" content="iOS">
+<meta name="description" content="周报仓库：https://github.com/SwiftCommunityRes 前言Apple 举办了 Unleashed 活动发布了新品，借助超强的 M1 Pro 或 M1 Max 芯片，不管是基于新款的 MacBook Pro 开发应用，还是开发 MacBook Pro 下的应用，新机都将给我们带来突破性的性能和惊人的电池使用时长。 再加上强大的神经引擎，用于增强机器学习和升级的支持 P">
+<meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS Apple Pay开发流程">
-<meta property="og:url" content="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/index.html">
+<meta property="og:title" content="Swift 周报 第五期">
+<meta property="og:url" content="https://fanbaoying.github.io/Swift-周报-第五期/index.html">
 <meta property="og:site_name" content="Swift社区">
-<meta property="og:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。">
+<meta property="og:description" content="周报仓库：https://github.com/SwiftCommunityRes 前言Apple 举办了 Unleashed 活动发布了新品，借助超强的 M1 Pro 或 M1 Max 芯片，不管是基于新款的 MacBook Pro 开发应用，还是开发 MacBook Pro 下的应用，新机都将给我们带来突破性的性能和惊人的电池使用时长。 再加上强大的神经引擎，用于增强机器学习和升级的支持 P">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&h=871&f=png&s=238050">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3f1fee30?w=1240&h=974&f=png&s=216268">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bcc2b63?w=1240&h=774&f=png&s=76672">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3be01987?w=1069&h=245&f=png&s=55370">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db41f7cd8f?w=873&h=476&f=png&s=47034">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3e704842?w=1136&h=204&f=png&s=49705">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db909531af?w=1238&h=376&f=png&s=79656">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db620e1851?w=744&h=1368&f=png&s=163923">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
-<meta property="og:updated_time" content="2018-02-06T08:03:30.000Z">
+<meta property="og:image" content="https://user-images.githubusercontent.com/24238160/138631090-e34763aa-7ed8-4b9a-8e02-4fa56d55b045.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/9a7911bf-75f2-40f5-866b-3171868bb92c.jpg">
+<meta property="og:updated_time" content="2021-10-25T06:33:31.161Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS Apple Pay开发流程">
-<meta name="twitter:description" content="一：介绍项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&h=871&f=png&s=238050">
+<meta name="twitter:title" content="Swift 周报 第五期">
+<meta name="twitter:description" content="周报仓库：https://github.com/SwiftCommunityRes 前言Apple 举办了 Unleashed 活动发布了新品，借助超强的 M1 Pro 或 M1 Max 芯片，不管是基于新款的 MacBook Pro 开发应用，还是开发 MacBook Pro 下的应用，新机都将给我们带来突破性的性能和惊人的电池使用时长。 再加上强大的神经引擎，用于增强机器学习和升级的支持 P">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/24238160/138631090-e34763aa-7ed8-4b9a-8e02-4fa56d55b045.png">
 
 
 
@@ -137,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/"/>
+  <link rel="canonical" href="https://fanbaoying.github.io/Swift-周报-第五期/"/>
 
 
 
 
 
-  <title>iOS Apple Pay开发流程 | Swift社区</title>
+  <title>Swift 周报 第五期 | Swift社区</title>
   
 
 
@@ -282,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/Swift-周报-第五期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Swift社区">
@@ -299,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS Apple Pay开发流程</h1>
+          <h1 class="post-title" itemprop="name headline">Swift 周报 第五期</h1>
         
 
         <div class="post-meta">
@@ -311,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T16:00:31+08:00">
-                2018-02-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-25T11:27:35+08:00">
+                2021-10-25
               </time>
             
 
@@ -334,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS-支付集/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS 支付集</span>
+                  <a href="/categories/Swift-周报/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift 周报</span>
                   </a>
                 </span>
 
@@ -367,7 +361,7 @@
                 
                 -->
                 <span title="字数统计">
-                  数字统计 950字
+                  数字统计 1,872字
                 </span>
               
 
@@ -386,7 +380,7 @@
                 --> 
 
                 <span title="阅读时长">
-                  阅读时长 4分钟
+                  阅读时长 7分钟
                 </span>
               
             </div>
@@ -407,35 +401,61 @@
       
 
       
-        <h2 id="一：介绍"><a href="#一：介绍" class="headerlink" title="一：介绍"></a>一：介绍</h2><p>项目中要用到支付功能，需要支付宝支付、支付宝网页支付转客户端、微信支付、银联支付、Apple_pay，所以打算总结一下，方便以后的查阅，也方便大家， 用到的地方避免再次被坑。<br>今天我们就主要介绍一下Apple_pay，其他支付也写了对应教程，并且给出了连接。</p>
-<a id="more"></a>
-<h2 id="二：支付流程介绍"><a href="#二：支付流程介绍" class="headerlink" title="二：支付流程介绍"></a>二：支付流程介绍</h2><h2 id="2-1-Apple-Pay-页面演示"><a href="#2-1-Apple-Pay-页面演示" class="headerlink" title="2.1 Apple Pay 页面演示"></a>2.1 Apple Pay 页面演示</h2><p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bdb0c80?w=1240&amp;h=871&amp;f=png&amp;s=238050" alt=""></p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3f1fee30?w=1240&amp;h=974&amp;f=png&amp;s=216268" alt="Apple Pay 页面演示"></p>
+        <p><img src="https://user-images.githubusercontent.com/24238160/138631090-e34763aa-7ed8-4b9a-8e02-4fa56d55b045.png" alt=""></p>
+<p>周报仓库：<a href="https://github.com/SwiftCommunityRes" target="_blank" rel="noopener">https://github.com/SwiftCommunityRes</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Apple 举办了 <code>Unleashed</code> 活动发布了新品，借助超强的 <code>M1 Pro</code> 或 <code>M1 Max</code> 芯片，不管是基于新款的 <code>MacBook Pro</code> 开发应用，还是开发 <code>MacBook Pro</code> 下的应用，新机都将给我们带来突破性的性能和惊人的电池使用时长。</p>
+<p>再加上强大的神经引擎，用于增强机器学习和升级的支持 <code>ProRes</code> 的媒体引擎，新款 <code>MacBook Pro</code> 能让我们的 App 做前所未有的事情。</p>
+<blockquote>
+<p>为了 Swift 社区周报持续稳定的发布更新，我们希望邀请 Swift 爱好者参与<strong>周报编辑</strong>，同时邀请赞助商对我们平台赞助支持。</p>
+</blockquote>
+<h2 id="入门任务"><a href="#入门任务" class="headerlink" title="入门任务"></a>入门任务</h2><p><strong>SR-15312</strong> [Swift-DocC] <a href="https://bugs.swift.org/browse/SR-15312" title="Add &#39;version&#39; command to docc command line tool" target="_blank" rel="noopener">添加 “version” 命令到 docc 命令行工具中</a> </p>
+<p><strong>SR-15312</strong> [Swift-DocC] <a href="https://bugs.swift.org/browse/SR-15313" title="Primary tutorial navigation dropdown fails to bold the current tutorial when browser URL is not lowercased" target="_blank" rel="noopener">当浏览器 URL 不是小写时，主教程导航下拉菜单无法将当前教程字体加粗</a> </p>
+<h2 id="新闻和社区"><a href="#新闻和社区" class="headerlink" title="新闻和社区"></a>新闻和社区</h2><p><strong>Franklin Schrans</strong> 宣布 <a href="https://swift.org/blog/swift-docc/" title="Swift-DocC is Now Open Source" target="_blank" rel="noopener">Swift-DocC</a> 将要开源.</p>
+<p><strong>Marin Todorov</strong> 终于披露了他关于 <a href="https://github.com/apple/swift-markdown" title="Swift Markdown" target="_blank" rel="noopener"><code>Swift Markdown</code></a> 的工作.</p>
+<p><strong>Federico Zanetello</strong> 写了一篇<a href="https://www.fivestars.blog/articles/warn_unqualified_access/" title="warn_unqualified_access" target="_blank" rel="noopener">文章</a>来说明 <code>@warn_unqualified_access</code> 的使用.</p>
+<p><strong>Dave DeLong</strong> 解释了如何<a href="https://davedelong.com/blog/2021/10/09/simplifying-backwards-compatibility-in-swift/" title="Simplifying Backwards Compatibility in Swift" target="_blank" rel="noopener">简化 Swift 中的向后兼容性</a>。</p>
+<p><code>Swift-DocC</code> 的文档现在已经发布在 <a href="https://swift.org/documentation/docc/" title="Docc" target="_blank" rel="noopener">Swift.org</a> (使用 <a href="https://forums.swift.org/t/documentation-for-swift-docc-is-now-on-swift-org/52914" title="Documentation for Swift-DocC is now on Swift.org" target="_blank" rel="noopener">Swift-DocC!</a>).</p>
+<h2 id="正在审查的提案"><a href="#正在审查的提案" class="headerlink" title="正在审查的提案"></a>正在审查的提案</h2><p><strong>SE-0325</strong> <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0325-swiftpm-additional-plugin-apis.md" title="Additional Package Plugin APIs" target="_blank" rel="noopener">附加包插件 API</a> 正在审查中。</p>
+<p><strong>SE-0303</strong> 在 <code>SwiftPM</code> 中引入了定义构建工具插件的能力, 允许自定义工具在构建打包时被调用。为了支持该特性， <strong>SE-0303</strong> 引入了最小初始 API，插件能够通过该接口获取那些被唤起构建的 Target 的相关信息。</p>
+<p>该提案扩展了插件 API 以提供更多上下文，包括更丰富的包图表示。 这是为将来支持新类型的插件做准备。</p>
+<h2 id="Swift-论坛"><a href="#Swift-论坛" class="headerlink" title="Swift 论坛"></a>Swift 论坛</h2><p><strong>1. Nuri Amari</strong> 提出了<a href="https://forums.swift.org/t/pitch-improved-clangimporter-diagnostics/52687" title="Improved ClangImporter Diagnostics" target="_blank" rel="noopener">改进 ClangImporter</a> 的建议。</p>
+<p>提出对 <code>ClangImporter</code> 的改进建议，当导入 <code>C</code> 或 <code>Objective-C</code> 实体发生错误时提供更详细的反馈。 就目前而言，当 <code>ClangImporter</code> 无法完全或部分导入实体（函数、类型、宏等）时，出现错误是不会提示的。当前的 Swift 编译错误大部分情况下会提示<strong>从未定义过实体</strong>。</p>
+<p><strong>2. Frederick Kellison-Linn</strong> 提出了<a href="https://forums.swift.org/t/pitch-generalize-keypath-to-function-conversions/52681" title="Generalize keypath-to-function conversions" target="_blank" rel="noopener">关键路径到函数转换</a>的想法。</p>
+<p>该提案介绍了在允许 <code>(Root) -&gt; Value</code> 函数的情况下使用键路径表达式 <code>\Root.value</code> 的能力。</p>
+<p><code>Swift-evolution</code> 线程：<a href="https://forums.swift.org/t/key-path-expressions-as-functions/19587" title="Key Path Expressions as Functions" target="_blank" rel="noopener">关键路径表达式作为函数</a></p>
+<p><strong>3. Patrick Pijnappel</strong> 提出了为 <a href="https://forums.swift.org/t/pitch-exhaustive-pattern-matching-for-non-open-classes/52718" title="Exhaustive pattern matching for non-open classes" target="_blank" rel="noopener">non-open 类实现详尽模式匹配</a>的建议。</p>
+<p>由于现在区分了开放类和非开放类，非开放类层次结构应该能够完全匹配。对于添加新子类，不需要添加任何语法就可以完成。</p>
+<p><strong>4. Guillaume Lessard</strong> 提出了对<a href="https://forums.swift.org/t/pitch-pointer-usability-improvements/52736" title="Pointer Usability Improvements" target="_blank" rel="noopener">指针可用性</a>的改进。</p>
+<p>该提案为 <code>UnsafePointer</code>、<code>Mutable</code> 和 <code>Raw</code> 引入了一些 quality-of-life 改进。</p>
 <ol>
-<li>买家在手机应用中购买商品或服务，在订单页面中展示 Apple Pay 按钮</li>
-<li>通过银联控件，掉起 Apple Pay 支付页面</li>
-<li>用户通过支付页面验证 Touch ID，输入银行卡密码 是否需要输入银行卡密码取决于交易限额和银行支持情况</li>
-<li>支付成功，商户应用内展示成功页面<br>(1)支付成功页面应参照 UI 示例，展示“银联”标识，“云闪付”标识。<br>(2)银联 SDK 控件支持折扣功能。在折扣活动期间，商户应用内应参照实例 UI 进行原金 额、折扣金额的展示</li>
+<li>添加 API 获取一个 <code>UnsafeRawPointer</code> 实例，这是一个从起点推进到给定对齐的实例</li>
+<li>在给定 <code>UnsafePointer&lt;T&gt;</code> 的情况下，添加一个 API 获取指向聚合的存储属性的指针 T</li>
+<li>将<code>Unsafe[Mutable]Pointer</code> 未选中的下标重命名为包含 <code>unchecked</code> 标签</li>
+<li>添加比较任意两种类型的指针的能力</li>
 </ol>
-<h3 id="2-2-Apple-Pay-支付的实现方式"><a href="#2-2-Apple-Pay-支付的实现方式" class="headerlink" title="2.2 Apple Pay 支付的实现方式"></a>2.2 Apple Pay 支付的实现方式</h3><p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3bcc2b63?w=1240&amp;h=774&amp;f=png&amp;s=76672" alt="Apple Pay 支付的实现方式"></p>
-<p>1-2. 商户生成订单，通过商户 SERVER 端将订单信息发送给银联支付网关;<br>3-4. 银联支付网关记录订单信息，返回用来标识订单的 TN 号，经由商户 SERVER 返回至给 商户 APP;<br>5.商户 APP 调用银联 SDK，将 TN 号传递给银联 SDK<br>6.银联 SDK 向 Apple 公司的 PASSKIT FRAMEWORK 发起支付请求;<br>7.接口返回加密的支付 Token 信息;<br>8-9.银联 SDK 将支付 Token 传递给银联支付网关，完成交易认证;<br>10-12.银联将支付结果返回给商户 APP，商户 SERVER，商户 APP 负责提示用户交易结果。</p>
-<h2 id="三：工程配置"><a href="#三：工程配置" class="headerlink" title="三：工程配置"></a>三：工程配置</h2><p>bundleID设置</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3be01987?w=1069&amp;h=245&amp;f=png&amp;s=55370" alt="bundleID设置"></p>
-<p>Capability中启用Apple Pay权限，并选择merchantID，<a href="https://juejin.im/post/5a31e031f265da430a50971e" target="_blank" rel="noopener">merchantID申请流程</a>。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db41f7cd8f?w=873&amp;h=476&amp;f=png&amp;s=47034" alt="启用Apple Pay权限"></p>
-<p>之后项目会多一个Applepay的配置文件ApplePayYasin.entitlements</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db3e704842?w=1136&amp;h=204&amp;f=png&amp;s=49705" alt="项目文件"></p>
-<h2 id="四：下载Apple-Pay-SDK"><a href="#四：下载Apple-Pay-SDK" class="headerlink" title="四：下载Apple Pay SDK"></a>四：下载Apple Pay SDK</h2><p><a href="https://open.unionpay.com/ajweb/help/file/techFile?productId=3" target="_blank" rel="noopener">Apple Pay SDK</a></p>
-<p>下载之后，找到.h文件和库文件，使用UPPaymentControl需要将paymentcontrol/inc目录下UPAPayPlugin.h、UPAPayPluginDelegate.h文件和paymentcontrol/libs目录下的libUPAPayPlugin.a文件添加到商户应用的工程中</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db909531af?w=1238&amp;h=376&amp;f=png&amp;s=79656" alt="SDK路径"></p>
-<h2 id="五：调用支付接口"><a href="#五：调用支付接口" class="headerlink" title="五：调用支付接口"></a>五：调用支付接口</h2><p>在调用银联支付类里面，首先增加头文件引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UPAPayPlugin.h&quot;</span><br><span class="line"></span><br><span class="line">// TODO 商户需要换用自己的mertchantID</span><br><span class="line">#define kAppleMerchantID        @&quot;merchant.com.AgreePay.ApplePayAgree&quot;</span><br></pre></td></tr></table></figure>
-<p>在调起支付的方法中代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//当获得的tn不为空时，调用支付接口</span><br><span class="line">if (tn != nil &amp;&amp; tn.length &gt; 0) &#123;</span><br><span class="line">        [UPAPayPlugin startPay:tn</span><br><span class="line">        mode:@&quot;01&quot;</span><br><span class="line">        viewController:ViewController</span><br><span class="line">        delegate:self andAPMechantID:kAppleMerchantID];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>方法需要的几个参数文档上都写的有，tn是交易流水号，服务器端传回来的，客户端只有凭借这个参数才能调用支付控件 进行支付的。只需要调用一个方法就行啦！！！</p>
-<h2 id="六：支付结果回调"><a href="#六：支付结果回调" class="headerlink" title="六：支付结果回调"></a>六：支付结果回调</h2><p>就在调起支付的ViewController 中写入下面代码即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark -</span><br><span class="line">#pragma mark 响应控件返回的支付结果</span><br><span class="line">#pragma mark -</span><br><span class="line">- (void)UPAPayPluginResult:(UPPayResult *)result</span><br><span class="line">&#123;</span><br><span class="line">    if(result.paymentResultStatus == UPPaymentResultStatusSuccess) &#123;</span><br><span class="line">        NSString *otherInfo = result.otherInfo?result.otherInfo:@&quot;&quot;;</span><br><span class="line">        NSString *successInfo = [NSString stringWithFormat:@&quot;支付成功\n%@&quot;,otherInfo];</span><br><span class="line"></span><br><span class="line">        NSLog(@&quot;%@&quot;,successInfo);</span><br><span class="line"></span><br><span class="line">    &#125;else if(result.paymentResultStatus == UPPaymentResultStatusCancel)&#123;</span><br><span class="line"></span><br><span class="line">        NSLog(@&quot;支付取消&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;else if (result.paymentResultStatus == UPPaymentResultStatusFailure) &#123;</span><br><span class="line"></span><br><span class="line">        NSString *errorInfo = [NSString stringWithFormat:@&quot;%@&quot;,result.errorDescription];</span><br><span class="line">        NSLog(@&quot;支付失败%@&quot;,errorInfo);</span><br><span class="line">    &#125;else if (result.paymentResultStatus == UPPaymentResultStatusUnknownCancel)  &#123;</span><br><span class="line"></span><br><span class="line">        //TODO UPPAymentResultStatusUnknowCancel表示发起支付以后用户取消，导致支付状态不确认，需要查询商户后台确认真实的支付结果</span><br><span class="line">//        NSString *errorInfo = [NSString stringWithFormat:@&quot;支付过程中用户取消了，请查询后台确认订单&quot;];</span><br><span class="line">//        [self showAlertMessage:errorInfo];</span><br><span class="line">        NSLog(@&quot;支付过程中用户取消了，请查询后台确认订单&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604f3db620e1851?w=744&amp;h=1368&amp;f=png&amp;s=163923" alt="支付调起截图"></p>
-<h2 id="公众号：网罗开发"><a href="#公众号：网罗开发" class="headerlink" title="公众号：网罗开发"></a>公众号：网罗开发</h2><p><img src="http://upload-images.jianshu.io/upload_images/2829694-48307b4d71bc5800.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt=""></p>
+<p><strong>5. Pavel Yaskevich</strong> 提出了改进<a href="https://forums.swift.org/t/pitch-light-weight-same-type-constraint-syntax/52889" title="Light-weight same-type constraint syntax" target="_blank" rel="noopener">相同类型约束语法</a>的建议。</p>
+<p>为了实现改进泛型 UI 的目标，我们提出几项改进措施，为了解决协议和泛型类型之间的语法差距，在<strong>关联类型</strong>和<strong>泛型类型</strong>参数相同类型的约束上，隐藏了一些复杂性（视觉上和认知上）。</p>
+<p><strong>6. Holly Borla</strong> 开始讨论如何<a href="https://forums.swift.org/t/discussion-easing-the-learning-curve-for-introducing-generic-parameters/52891" title="Easing the learning curve for introducing generic parameters" target="_blank" rel="noopener">简化引入泛型参数的学习曲线</a>。</p>
+<p>Swift 的泛型系统具有很强的表达能力，但是要理解具有相关类型的协议、带有 where 子句的泛型签名以及其他泛型特性的完整通用性，是将泛型引入 Swift 项目的一个重大障碍。泛型系统的主要目标是通过改进在 Swift 中编写泛型代码的人体工程学，将具体API抽象为泛型API的学习曲线。本次讨论目的是就实现这一目标的可能方向征求意见，并收集在社区中提出的其他想法。欢迎在文末留言提出问题、评论和想法！</p>
+<p>本帖中的许多想法都是由 <strong>@Joe_Groff</strong> 在<a href="https://forums.swift.org/t/improving-the-ui-of-generics/22814" title="Improving the UI of generics" target="_blank" rel="noopener">改进泛型 UI</a> 中提出的。</p>
+<p><strong>7. Nate Cook</strong> 提出了一个<a href="https://forums.swift.org/t/pitch-character-classes-for-string-processing/52920" title="Character Classes for String Processing" target="_blank" rel="noopener">用于字符串处理的字符类</a>的想法。</p>
+<p><a href="https://forums.swift.org/t/declarative-string-processing-overview/52459" title="Declarative String Processing Overview" target="_blank" rel="noopener">声明性字符串处理概述</a>讲述了正则表达式支持的匹配，但没有关于语法和语义的详细信息，将澄清留给后续介绍。</p>
+<p><a href="https://forums.swift.org/t/pitch-regular-expression-literals/52820" title="Regular Expression Literals" target="_blank" rel="noopener">正则表达式的文本</a>提供了关于正则表达式语法的更多细节，例如分隔符和 <code>PCRE-syntax</code> 内部结构，省略了对正则表达式语义的讨论。本帖的目的旨在解决正则表达式语义的目标子集：<strong>字符类的定义</strong>。我们建议直接在现有的 <code>Character</code> 和 <code>Unicode.Scalar</code> 上和新提出的 API 背景下来处理。</p>
+<p>正则表达式中的字符类包括元字符，例如匹配数字的 <code>\d</code>、匹配空格的 <code>\s</code> 和 匹配任何字符的 <code>.</code>。单个文字字符也可以被认为是字符类，因为它们至少与自己匹配，并且在不区分大小写的匹配中，与大小写切换的对应字符匹配。因此，将字符类视为正则表达式字面量的任何部分，该部分可以匹配字符串的实际组件。</p>
+<h2 id="推荐博文"><a href="#推荐博文" class="headerlink" title="推荐博文"></a>推荐博文</h2><p><a href="https://mp.weixin.qq.com/s/vjC45D5249397bfUCXfhLg" target="_blank" rel="noopener">Swift 5 从零到精通 iOS 开发训练营</a></p>
+<p>《Swift 5 从零到精通 iOS 开发训练营》是一本从基础到 iOS 项目开发的实战教程，由资深 iOS 开发程序员珲少亲自操刀编撰而成。<code>文末有送书抽奖，抽奖为 Swift社区 额外福利</code></p>
+<p><a href="**https://mp.weixin.qq.com/s/qM4O-wBCZgvn0oFCR7kIbA**">iOS UI 自动化测试原理以及在 Trip.com 的应用实践</a></p>
+<p>来自携程 IBU 公共无线倪瑶的实战分享： iOS UI 自动化测试实战以及原理总结。</p>
+<p><a href="https://mp.weixin.qq.com/s/7-QlpcfhTaw4D_SmQYbmfA" target="_blank" rel="noopener">一文带你读懂 Swift 社区最新开源的算法库</a></p>
+<p>最近 Swift 社区动作频频，又是登陆 Windows，又是推出底层基础库。现在又推出了 Swift 算法库，现在让我们看看里面到底有什么内容，是否值得现在在生产中应用，面对内容丰富的 <code>raywenderlich/swift-algorithm-club</code> 是否有足够的竞争力呢。</p>
+<p><a href="https://mp.weixin.qq.com/s/aoQuDd58LQRSbJty5Tyjfw" target="_blank" rel="noopener">多角度体会 Swift 方法派发</a></p>
+<p>我们知道 Swift 有三种方法派发方式：静态派发（直接派发）、VTable 派发（函数表派发）、消息派发。下面我们分别从 SIL 中间语言，以及汇编的角度体会 Swift 的方法派发方式。</p>
+<h2 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h2><p>公众号是由 Swift 爱好者共同维护，我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术内容，也整理收集优秀的学习资料。欢迎关注公众号：<strong>Swift社区</strong>，后台点击进群，联系我们获取更多内容。</p>
+<p><img width="500" alt="Swift社区" src="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png"></p>
+<p>感谢 SwiftWeekly 与我们的合作，开启 Swift 周报中文版发布之旅。周报仓库：<a href="https://github.com/SwiftCommunityRes" target="_blank" rel="noopener">https://github.com/SwiftCommunityRes</a></p>
+<p>后续还会翻译大量资料到我们公众号，有感兴趣的朋友，可以加入我们，扫码添加微信</p>
+<div align="center"><br><img width="300" alt="fzhanfei" src="https://files.mdnice.com/user/17787/9a7911bf-75f2-40f5-866b-3171868bb92c.jpg"><br></div>
+
 
       
     </div>
@@ -465,12 +485,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/iOS-Apple-Pay开发流程/">iOS Apple Pay开发流程</a></p>
+  <p><span>本文标题:</span><a href="/Swift-周报-第五期/">Swift 周报 第五期</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
-  <p><span>发布时间:</span>2018年02月06日 - 16:02</p>
-  <p><span>最后更新:</span>2018年02月06日 - 16:02</p>
-  <p><span>原始链接:</span><a href="/iOS-Apple-Pay开发流程/" title="iOS Apple Pay开发流程">https://fanbaoying.github.io/iOS-Apple-Pay开发流程/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/iOS-Apple-Pay开发流程/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2021年10月25日 - 11:10</p>
+  <p><span>最后更新:</span>2021年10月25日 - 14:10</p>
+  <p><span>原始链接:</span><a href="/Swift-周报-第五期/" title="Swift 周报 第五期">https://fanbaoying.github.io/Swift-周报-第五期/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/Swift-周报-第五期/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -531,7 +551,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
           
         </div>
       
@@ -544,8 +564,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/iOS-最新版本支付宝支付开发流程/" rel="next" title="iOS 最新版本支付宝支付开发流程">
-                <i class="fa fa-chevron-left"></i> iOS 最新版本支付宝支付开发流程
+              <a href="/Swift-周报-第四期/" rel="next" title="Swift 周报 第四期">
+                <i class="fa fa-chevron-left"></i> Swift 周报 第四期
               </a>
             
           </div>
@@ -553,10 +573,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/iOS发红包页面/" rel="prev" title="iOS发红包页面">
-                iOS发红包页面 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -749,7 +765,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：介绍"><span class="nav-number">1.</span> <span class="nav-text">一：介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：支付流程介绍"><span class="nav-number">2.</span> <span class="nav-text">二：支付流程介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Apple-Pay-页面演示"><span class="nav-number">3.</span> <span class="nav-text">2.1 Apple Pay 页面演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Apple-Pay-支付的实现方式"><span class="nav-number">3.1.</span> <span class="nav-text">2.2 Apple Pay 支付的实现方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：工程配置"><span class="nav-number">4.</span> <span class="nav-text">三：工程配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：下载Apple-Pay-SDK"><span class="nav-number">5.</span> <span class="nav-text">四：下载Apple Pay SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五：调用支付接口"><span class="nav-number">6.</span> <span class="nav-text">五：调用支付接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六：支付结果回调"><span class="nav-number">7.</span> <span class="nav-text">六：支付结果回调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公众号：网罗开发"><span class="nav-number">8.</span> <span class="nav-text">公众号：网罗开发</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#入门任务"><span class="nav-number">2.</span> <span class="nav-text">入门任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新闻和社区"><span class="nav-number">3.</span> <span class="nav-text">新闻和社区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正在审查的提案"><span class="nav-number">4.</span> <span class="nav-text">正在审查的提案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-论坛"><span class="nav-number">5.</span> <span class="nav-text">Swift 论坛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐博文"><span class="nav-number">6.</span> <span class="nav-text">推荐博文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我们"><span class="nav-number">7.</span> <span class="nav-text">关于我们</span></a></li></ol></div>
             
 
           </div>
