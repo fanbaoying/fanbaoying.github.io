@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="Swift," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -86,21 +86,25 @@
 
 
 
-<meta name="description" content="周报仓库：https://github.com/SwiftCommunityRes 前言从本周开始，我们 Swift 社区公众号将开始与 SwiftWeekly 合作更新关于 Swift 社区最新的进展与动向。让我们乘着社区的风帆，一起荡起双桨，让 Swift 成为世界上最好的语言。">
-<meta name="keywords" content="Swift">
+<meta name="description" content="在 iOS 15 公开推出后， 我们开始从用户端收到反馈报告：在打开我们的应用程序(Cookpad) 时他们被莫名其妙的反复退出到登录页。非常令人惊讶的是，这并不是我们在测试 iOS 15 beta 版的时候发现的问题。 如果你是来找修复方法的，那就直接向下滚动到结论，但如果你想了解更多关于我们如何调试这个特定问题，那就开始吧。">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift 周报 第一期">
-<meta property="og:url" content="https://fanbaoying.github.io/Swift-周报-第一期/index.html">
+<meta property="og:title" content="[译]解决 iOS 15 上 APP 莫名其妙地退出登录">
+<meta property="og:url" content="https://fanbaoying.github.io/译-解决-iOS-15-上-APP-莫名其妙地退出登录/index.html">
 <meta property="og:site_name" content="Swift社区">
-<meta property="og:description" content="周报仓库：https://github.com/SwiftCommunityRes 前言从本周开始，我们 Swift 社区公众号将开始与 SwiftWeekly 合作更新关于 Swift 社区最新的进展与动向。让我们乘着社区的风帆，一起荡起双桨，让 Swift 成为世界上最好的语言。">
+<meta property="og:description" content="在 iOS 15 公开推出后， 我们开始从用户端收到反馈报告：在打开我们的应用程序(Cookpad) 时他们被莫名其妙的反复退出到登录页。非常令人惊讶的是，这并不是我们在测试 iOS 15 beta 版的时候发现的问题。 如果你是来找修复方法的，那就直接向下滚动到结论，但如果你想了解更多关于我们如何调试这个特定问题，那就开始吧。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png">
-<meta property="og:image" content="https://files.mdnice.com/user/17787/9a7911bf-75f2-40f5-866b-3171868bb92c.jpg">
-<meta property="og:updated_time" content="2021-10-22T07:17:18.773Z">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2021/c0ee348b4710dabb70eb5ab6bb45064a.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2021/64e699daa0417f6a10ae4e9fa861008b.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2021/8af9cb1ce53fdb1ab4cda921451c34cc.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2021/d58d7a078b6141c722ff3efe698953d3.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2021/ffa4e4a3730d3fd5ed1891fa73539f24.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2021/6ea72a16b7326fe97fcdfd33c4758f6d.png">
+<meta property="og:updated_time" content="2021-12-08T11:46:19.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift 周报 第一期">
-<meta name="twitter:description" content="周报仓库：https://github.com/SwiftCommunityRes 前言从本周开始，我们 Swift 社区公众号将开始与 SwiftWeekly 合作更新关于 Swift 社区最新的进展与动向。让我们乘着社区的风帆，一起荡起双桨，让 Swift 成为世界上最好的语言。">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png">
+<meta name="twitter:title" content="[译]解决 iOS 15 上 APP 莫名其妙地退出登录">
+<meta name="twitter:description" content="在 iOS 15 公开推出后， 我们开始从用户端收到反馈报告：在打开我们的应用程序(Cookpad) 时他们被莫名其妙的反复退出到登录页。非常令人惊讶的是，这并不是我们在测试 iOS 15 beta 版的时候发现的问题。 如果你是来找修复方法的，那就直接向下滚动到结论，但如果你想了解更多关于我们如何调试这个特定问题，那就开始吧。">
+<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2021/c0ee348b4710dabb70eb5ab6bb45064a.png">
 
 
 
@@ -130,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://fanbaoying.github.io/Swift-周报-第一期/"/>
+  <link rel="canonical" href="https://fanbaoying.github.io/译-解决-iOS-15-上-APP-莫名其妙地退出登录/"/>
 
 
 
 
 
-  <title>Swift 周报 第一期 | Swift社区</title>
+  <title>[译]解决 iOS 15 上 APP 莫名其妙地退出登录 | Swift社区</title>
   
 
 
@@ -275,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/Swift-周报-第一期/">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/译-解决-iOS-15-上-APP-莫名其妙地退出登录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Swift社区">
@@ -292,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Swift 周报 第一期</h1>
+          <h1 class="post-title" itemprop="name headline">[译]解决 iOS 15 上 APP 莫名其妙地退出登录</h1>
         
 
         <div class="post-meta">
@@ -304,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-22T15:14:13+08:00">
-                2021-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-08T19:45:38+08:00">
+                2021-12-08
               </time>
             
 
@@ -327,8 +331,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift-周报/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift 周报</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -360,7 +364,7 @@
                 
                 -->
                 <span title="字数统计">
-                  数字统计 1,357字
+                  数字统计 2,664字
                 </span>
               
 
@@ -379,7 +383,7 @@
                 --> 
 
                 <span title="阅读时长">
-                  阅读时长 5分钟
+                  阅读时长 9分钟
                 </span>
               
             </div>
@@ -400,55 +404,92 @@
       
 
       
-        <p>周报仓库：<a href="https://github.com/SwiftCommunityRes" target="_blank" rel="noopener">https://github.com/SwiftCommunityRes</a></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从本周开始，我们 Swift 社区公众号将开始与 SwiftWeekly 合作更新关于 Swift 社区最新的进展与动向。让我们乘着社区的风帆，一起荡起双桨，让 Swift 成为世界上最好的语言。</p>
+        <p><img src="https://images.xiaozhuanlan.com/photo/2021/c0ee348b4710dabb70eb5ab6bb45064a.png" alt=""></p>
+<p>在 iOS 15 公开推出后， 我们开始从用户端收到反馈报告：在打开我们的应用程序(Cookpad) 时他们被莫名其妙的反复退出到登录页。非常令人惊讶的是，这并不是我们在测试 iOS 15 beta 版的时候发现的问题。</p>
+<p>如果你是来找修复方法的，那就直接向下滚动到结论，但如果你想了解更多关于我们如何调试这个特定问题，那就开始吧。</p>
 <a id="more"></a>
-<h2 id="播客"><a href="#播客" class="headerlink" title="播客"></a>播客</h2><p>在 Swift by Sundell 播客的<a href="https://www.swiftbysundell.com/podcast/103/" title="Swift by Sundell 第 103 期" target="_blank" rel="noopener">第 103 期</a>中，SwiftLee 的创建者 <a href="https://twitter.com/twannl" title="Antoine van der Lee" target="_blank" rel="noopener">Antoine van der Lee</a> 加入了 <a href="https://twitter.com/johnsundell" title="John Sundell" target="_blank" rel="noopener">John Sundell</a>。</p>
-<p>他们从新的 concurrency 系统到 convenience 特性以及各种改进等方向讨论了 Swift 5.5 新引入的一部分功能。</p>
-<h2 id="新闻和社区"><a href="#新闻和社区" class="headerlink" title="新闻和社区"></a>新闻和社区</h2><p>Xcode 各版本的 <a href="https://developer.apple.com/cn/support/xcode/" title="最低要求和支持的 SDK" target="_blank" rel="noopener">最低要求和支持的 SDK</a></p>
-<p><a href="https://twitter.com/twannl" title="Antoine van der Lee" target="_blank" rel="noopener">Antoine van der Lee</a> 写了一篇博文，<a href="https://www.avanderlee.com/swift/unwrap-or-throw/" title="Unwrap or throw: Exploring solutions in Swift" target="_blank" rel="noopener">探讨在 Swift 中解包或 throw 的解决方案</a>。</p>
-<p><a href="https://twitter.com/Leo_Pugliese" title="Leonardo Maia Pugliese" target="_blank" rel="noopener">Leonardo Maia Pugliese</a> 写了一篇关于<a href="https://holyswift.app/how-to-do-apis-constraints-with-available-in-swift" title="How to do APIs constraints with @Available in Swift" target="_blank" rel="noopener">如何在 Swift 中使用 @available 进行 API 约束</a>的博客文章。</p>
-<p><a href="https://twitter.com/johnsundell" title="John Sundell" target="_blank" rel="noopener">John Sundell</a> 写了一篇文章解释了如何<a href="https://www.swiftbysundell.com/articles/using-an-unknown-default-case-within-a-switch-statement/" title="Using ‘@unknown default’ within switch statements" target="_blank" rel="noopener">在 switch 语句中使用 @unknown default</a>。</p>
-<p><a href="https://twitter.com/basthomas" title="Bas Broek" target="_blank" rel="noopener">Bas Broek</a> 写了一篇博文，探讨如何在 Swift 中<a href="https://www.basbroek.nl/deprecating-workarounds" title="Deprecating Workarounds" target="_blank" rel="noopener">弃用 Workarounds</a>。</p>
-<h2 id="正在审查的提案"><a href="#正在审查的提案" class="headerlink" title="正在审查的提案"></a>正在审查的提案</h2><p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0321-package-registry-publish.md" title="SE-0321" target="_blank" rel="noopener">SE-0321</a>: Package Registry Service - Publish Endpoint 正在<a href="https://forums.swift.org/t/se-0321-package-registry-service-publish-endpoint/51286" title="Package Registry Service - Publish Endpoint" target="_blank" rel="noopener">审查中</a></p>
-<p>软件包注册表负责确定哪些软件包版本可提供给消费者使用。</p>
-<p>目前，软件包版本的可用性由 <code>out-of-band</code> 流程决定。例如，注册表可以查询公共 Swift 软件包的索引，并为每个标签提供具有有效版本号的版本。</p>
-<p>拥有发布新版本到软件包注册表的标准端点将增强维护者分发其软件的能力，并促进服务提供商之间的互操作性。</p>
-<h2 id="Swift-论坛"><a href="#Swift-论坛" class="headerlink" title="Swift 论坛"></a>Swift 论坛</h2><p><a href="https://forums.swift.org/categories" title="Dimitri Racordon" target="_blank" rel="noopener">Dimitri Racordon</a> 提出了一个<a href="https://forums.swift.org/t/pitch-protocols-with-private-fields/51209" title="Protocols with private fields" target="_blank" rel="noopener">用私有字段实现协议的想法</a>。</p>
-<p>在协议中，所有字段（<code>properties</code> 和 <code>methods</code>）都将获得符合条件类型的访问可见性。例如，符合具有公共类型的协议将提示其所有要求都是公共的。</p>
-<p><a href="https://forums.swift.org/categories" title="Evan Wilde" target="_blank" rel="noopener">Evan Wilde</a> 提出了一项<a href="https://forums.swift.org/t/pitch-revisit-the-semantics-of-async-main/51254" title="Revisit the semantics of async main" target="_blank" rel="noopener">重新审视 async main 语义</a>的提案。</p>
+<h2 id="复现反馈的问题"><a href="#复现反馈的问题" class="headerlink" title="复现反馈的问题"></a>复现反馈的问题</h2><p>用户报告中的具体信息有限，我们唯一知道的是：从 iOS 15 开始，用户打开程序后会发现自己已经退出登录。</p>
+<p>我们没有视频，也没有具体的步骤来重现这个问题，所以我努力尝试以各种方式启动应用程序，希望能亲眼看到它。我试着重新安装应用程序，我试着在有网络连接和没有网络连接的情况下启动，我试着强制退出，经过30分钟的努力，我放弃了，我开始回复用户说我没找到具体问题。</p>
+<p>直到我再次解锁手机，没有做任何操作，就启动了 Cookpad，我发现APP就像我们的用户所反馈的那样，直接退出到了登录界面!</p>
+<p>在那之后，我无法准确的复现该问题，但似乎与暂停使用手机一段时间后再次使用它有关。</p>
+<h2 id="缩小问题范围"><a href="#缩小问题范围" class="headerlink" title="缩小问题范围"></a>缩小问题范围</h2><p>我担心从 Xcode 重新安装应用程序可能会影响问题的复现，所以在这样做之前，是时候查看代码并试图缩小问题的范围。根据我们的实现，我想出了三个潜在的原因。</p>
 <ul>
-<li>main 函数应该同步运行到第一个暂停点</li>
-<li>main 函数应该在 <code>main actor</code> 上运行</li>
-<li>MainActor 应该为默认的 <code>runloop</code> 行为提供用户指定的替代方案。</li>
-<li>main 任务应该从 <code>getCurrentThreadPriority</code> 拉取优先级，而不是 <code>hard-coded</code> 默认优先级</li>
+<li>1、<code>UserDefaults</code> 中的数据被清除。</li>
+<li>2、一个意外的API调用返回HTTP 401并触发退出登录。</li>
+<li>3、<code>Keychain</code> 抛出了一个错误。</li>
 </ul>
-<p><a href="https://forums.swift.org/u/abertelrud" title="Anders Bertelrud" target="_blank" rel="noopener">Anders Bertelrud</a> 提议修改 SE-0303：插件 API，使用 @main 作为插件入口点。</p>
-<p>我想提议修改 <code>SE-0303</code>，<code>SwiftPM</code> 插件使用 <code>@main</code> 作为入口点，而不是 <code>top-level</code> 作为入口点。 虽然这样做有点冗长，但是可以为每种插件定制入口点，并且还可以更加清楚地说明每个插件的输入和预期输出是什么。</p>
-<p><a href="https://forums.swift.org/u/saklad5" title="Jeremy Saklad" target="_blank" rel="noopener">Jeremy Saklad</a> 提出了一项提案，该提案将<a href="https://forums.swift.org/t/allow-use-of-concrete-associated-type-of-protocols/51277" title="Allow use of concrete associated type of protocols" target="_blank" rel="noopener">允许使用具体的相关协议类型</a>。</p>
-<p><a href="https://twitter.com/lorentey" title="Karoy Lorentey" target="_blank" rel="noopener">Karoy Lorentey</a> 发布了 <a href="https://forums.swift.org/t/announcement-planning-for-swift-collections-v1-0/51321" title="Planning for Swift Collections v1.0" target="_blank" rel="noopener">Swift Collections 1.0 版</a>。</p>
-<p><a href="https://forums.swift.org/u/ktoso" title="Konrad ktoso Malawski" target="_blank" rel="noopener">Konrad ktoso Malawski</a> 发布了 Swift Server Workgroup <a href="https://forums.swift.org/t/august-4th-2021/51315" title="August 4th 2021" target="_blank" rel="noopener">2021 年 8 月 4 日的会议记录</a>。</p>
-<p><a href="https://twitter.com/dgregor79" title="Doug Gregor" target="_blank" rel="noopener">Doug Gregor</a> 提出了 <a href="https://forums.swift.org/t/pitch-staging-in-sendable-checking/51341" title="Staging in Sendable checking" target="_blank" rel="noopener">在 Sendable 检查中实施 Staging</a> 的提案。</p>
-<p><code>SE-0302</code> 引入了 Sendable 协议，该协议明确地指出哪些类型的值可以安全地跨过 <code>actors</code> 进行复制。通俗的讲，就是拷贝的值和原始值可以同时在上下文使用。</p>
-<p>Sendable 检查在所有 Swift 代码中应用，消除了由 <code>shared mutable state</code> 引起的大量数据竞争。Swift 5.5 没有完全实现 Sendable 检查，因为这样做会导致太多的编译器 <code>errors</code> 和 <code>diagnostics</code>，从而导致该功能不可用。</p>
-<p>我认为可以逐步采用 Sendable 检查来提高数据竞争的安全性。我们提出了两个想法分段完成 Sendable 检查:</p>
+<p>我能够排除前两个潜在的原因，这要归功于我在自己重现该问题后观察到的一些微妙行为。</p>
 <ul>
-<li>增量采用并发并且引入更多的 Sendable 检查。</li>
-<li>不能让用户模块之外的 Sendable 问题阻挡进度，防止过度的注释</li>
+<li>登录界面没有要求我选择地区——这表明<code>UserDefaults</code>中的数据没有问题，因为我们的 “已显示地区选择 “偏好设置仍然生效。</li>
+<li>主用户界面没有显示，即使是短暂的也没有——这表明没有尝试进行网络请求，所以 API 是问题原因可能还为时过早。</li>
 </ul>
-<p><a href="https://forums.swift.org/categories" title="Aura Lily Vulcano" target="_blank" rel="noopener">Aura Lily Vulcano</a> 推荐了一个 <a href="https://forums.swift.org/t/pitch-the-cstdlib-module/51373" title="The CStdlib module" target="_blank" rel="noopener">Swift 默认提供的新模块</a>。</p>
-<p>该模块将重新导出包含当前平台的 <code>POSIX</code> 或类似 <code>POSIX</code> 的 C 标准库的正确模块（如果有的话）。</p>
-<p>默认情况该模块不会被导入，但是允许 “reasonably cross-platform” 代码，以避免使用冗长的 <code>#if canImport(…)</code> 链来访问所有的标准库，因为它们在不同的操作系统上有不同的名称。</p>
-<p>例如，模块可以命名为 CStdlib。</p>
-<p>Robert Widmann（<a href="https://twitter.com/CodaFi_" title="CodaFi_" target="_blank" rel="noopener">@CodaFi_</a>）提出了一个关于<a href="https://forums.swift.org/t/pitching-the-start-of-variadic-generics/51467" title="The Start of Variadic Generics" target="_blank" rel="noopener">开始可变参数泛型</a>的想法。</p>
-<p>作为改进泛型系统的人体工程学的一部分，以及为使用 tuples 抽象提供更好的支持，我想用 surface syntax 和 preliminary semantics 来实现这个想法。 由于这是一个很大的主题领域，对语言和后续提案的方向都有很大影响，因此你的反馈在此阶段对于塑造此功能集的方向至关重要。</p>
-<p>我要感谢 <strong>Alejandro Alonso</strong>, <strong>Doug Gregor</strong> 和 <strong>Slava Pestov</strong>，感谢他们为我在这个问题上的思考奠定了基础。</p>
-<p>可以在这里看到原文的链接 <a href="https://gist.github.com/CodaFi/a461aca155b16cd4d05a2635e7d7a361" title="TypeSequences.md · GitHub" target="_blank" rel="noopener">TypeSequences.md · GitHub</a></p>
-<h2 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h2><p>公众号是由 Swift 爱好者共同维护，我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术内容，也整理收集优秀的学习资料。欢迎关注公众号：<strong>Swift社区</strong>，后台点击进群，联系我们获取更多内容。</p>
-<p><img width="500" alt="Swift社区" src="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png"></p>
-<p>感谢 SwiftWeekly 与我们的合作，开启 Swift 周报中文版发布之旅。</p>
-<p>后续还会翻译大量资料到我们公众号，有感兴趣的朋友，可以加入我们，扫码添加微信</p>
-<p><img width="300" alt="fzhanfei" src="https://files.mdnice.com/user/17787/9a7911bf-75f2-40f5-866b-3171868bb92c.jpg"></p>
+<p>这就把<code>Keychain</code>留给了我们，指引我进入下一个问题。是什么发生了改变以及为什么它如此难以复现？</p>
+<h2 id="是什么发生了改变以及为什么它如此难以复现？"><a href="#是什么发生了改变以及为什么它如此难以复现？" class="headerlink" title="是什么发生了改变以及为什么它如此难以复现？"></a>是什么发生了改变以及为什么它如此难以复现？</h2><p>我粗略地看了一下发布说明，在谷歌上快速搜索了一下，我找不到任何东西，所以我不得不继续挖掘以更好地了解这个问题。</p>
+<p>对<code>Keychain</code>数据的访问是通过 <a href="https://developer.apple.com/documentation/security" title="Security" target="_blank" rel="noopener">Security</a> 框架提供的，这是一个众所周知的棘手的问题。虽然有很多第三方库来包装这个框架以使事情变得更容易，但我们还是基于一些苹果的示例代码来维护我们自己的简单封装。</p>
+<p>看一下这段代码，我们调用 <a href="https://developer.apple.com/documentation/security/1398306-secitemcopymatching?language=objc" title="SecItemCopyMatching" target="_blank" rel="noopener">SecItemCopyMatching</a> 方法来加载我们的访问令牌，它返回数据以及描述结果的 <a href="https://osstatus.com/" target="_blank" rel="noopener"><em>OSStatus</em></a> 代码。然而，不幸的是，虽然我们的封装器会将不成功的结果与状态代码一起抛出，用于调试，但我们在下一层中却抛弃了这些信息，只是将错误视为 <code>nil</code>。</p>
+<p>我们实行了每周一次的发布计划，多亏了大量的自动化。此时，我们即将发布的下一个截止点（代码冻结）是在第二天。因为我们还没有完全了解这个问题有多普遍，而且我们也不确定是否能够在代码冻结前发布一个修复程序，所以我利用这个机会通过使用Crashlytics(崩溃日志记录工具) 增加一些额外的非致命性日志来解决缺乏可观察性的问题。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2021/64e699daa0417f6a10ae4e9fa861008b.png" alt="虽然我们无法改变加载会话的行为，但我们能够开始记录错误并更好地记录我们实现的当前行为。"></p>
+<p>这个结果给了我们一些很好的观察点，然后我们可以在接下来的几周内观察。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2021/8af9cb1ce53fdb1ab4cda921451c34cc.png" alt="在10.58.0和10.59.0版本中，受影响的用户数量慢慢减少，这是由于我们在努力确定根本原因时引入了一项缓解措施，该措施在10.60.0中得到了修复。"></p>
+<p>此时，我能够捕捉到返回的确切错误代码。罪魁祸首是<a href="https://developer.apple.com/documentation/security/errsecinteractionnotallowed?changes=_3" title="errSecInteractionNotAllowed" target="_blank" rel="noopener">errSecInteractionNotAllowed</a>：</p>
+<blockquote>
+<p>不允许与 <em>Security Server</em> 交互。</p>
+</blockquote>
+<p>这个错误告诉我们，我们正试图在数据不可用的时间点上从<code>Keychain</code>中读取数据。这通常会发生在你试图读取已存储的数据，并将其可访问性设置为<a href="https://developer.apple.com/documentation/security/ksecattraccessiblewhenunlocked" title="kSecAttrAccessibleWhenUnlocked" target="_blank" rel="noopener">kSecAttrAccessibleWhenUnlocked</a>，而设备仍处于锁定状态。</p>
+<p>现在这完全说得通了，但唯一的问题是，在 Cookpad 中，我们只在应用启动时从<code>Keychain</code>中读取信息，而我的假设是，用户一定是点击了应用图标来启动应用，因此设备在这时应该总是解锁的，对吗？</p>
+<p>那么，究竟发生了什么变化呢？即使我能够重现这个问题，我也100%确定我的手机在我点击应用图标的时候是解锁的，所以我不明白为什么会出现这个<code>Keychain</code>错误。</p>
+<p>我决心找到原因，用一个调试工具替换了我们的应用程序的实现，该工具将尝试并记录其生命周期中不同节点的<code>Keychain</code>读取。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2021/d58d7a078b6141c722ff3efe698953d3.png" alt=""></p>
+<p>在能够复现问题的场景中，我观察到以下结果：</p>
+<ul>
+<li><code>main.swift</code> — 失败 (<a href="https://developer.apple.com/documentation/security/errsecinteractionnotallowed?changes=_3" target="_blank" rel="noopener"><em>errSecInteractionNotAllowed</em></a>)</li>
+<li><code>AppDelegate.init()</code> — 失败 (<a href="https://developer.apple.com/documentation/security/errsecinteractionnotallowed?changes=_3" target="_blank" rel="noopener"><em>errSecInteractionNotAllowed</em></a>)</li>
+<li><code>AppDelegate.applicationProtectedDataDidBecomeAvailable(_:)</code><br>— 成功</li>
+<li><code>AppDelegate.application(_:didFinishLaunchingWithOptions:)</code> — 成功</li>
+<li><code>ViewController.viewDidAppear(_:)</code> — 成功</li>
+</ul>
+<p>所以这（一半）解释了它。为了避免在我们的AppDelegate上持有一些隐式解包的可选属性，我们在<code>init()</code>方法中进行了一些设置，其中一部分涉及从<code>Keychain</code>中读取访问令牌。这就是为什么读取会失败，以及最终为什么一些用户会发现自己被登出了。</p>
+<p>我在这里学到了重要的一课，即我不应该假设受保护的数据在<code>AppDelegate</code>初始化时是可用的，但说实话，我还是不高兴，因为我不明白为什么它不可用。毕竟，我们已经很多年没有改变过这部分代码了，而且它在iOS 12、13和14系统中一直运行良好，那么是什么原因呢？</p>
+<h2 id="寻找根本原因"><a href="#寻找根本原因" class="headerlink" title="寻找根本原因"></a>寻找根本原因</h2><p>我的调试界面很有用，但它缺少了一些有助于回答所有问题的重要信息：<strong>时间</strong>。</p>
+<p>我知道在<code>AppDelegate.application(_:didFinishLaunchingWithOptions:)</code>之前，“受保护的数据” 是不可用的，但它仍然没有意义，因为为了重现这个问题，我正在执行以下操作：</p>
+<p>1、启动应用程序<br>2、简单使用<br>3、强制退出应用<br>4、锁定我的设备并将其放置约 30 分钟<br>5、解锁设备<br>6、再次启动应用</p>
+<p>每当我在第 6 步中再次启动应用程序时，我 100% 确定设备已解锁，因此我坚信我应该能够从 <code>AppDelegate.init()</code>中的<code>Keychain</code>读取数据。</p>
+<p>直到我看了所有这些步骤的时间，事情才开始变得有点意义。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2021/ffa4e4a3730d3fd5ed1891fa73539f24.png" alt=""></p>
+<p>再次仔细查看时间戳：</p>
+<ul>
+<li><code>main.swift</code> — 11:38:47</li>
+<li><code>AppDelegate.init()</code> — 11:38:47</li>
+<li><code>AppDelegate.application(_:didFinishLaunchingWithOptions:)</code> — 12:03:04</li>
+<li><code>ViewController.viewDidAppear(_:)</code> — 12:03:04</li>
+</ul>
+<p>在我真正解锁手机并点击应用图标之前的25分钟，应用程序本身就已经启动了!</p>
+<p>现在，我实际上从未想过有这么大的延迟，实际上是<a href="https://twitter.com/_saagarjha" target="_blank" rel="noopener">@_saagarjha</a>建议我检查时间戳，之后，他指给我看这条推特。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2021/6ea72a16b7326fe97fcdfd33c4758f6d.png" alt="Twitter：Apple开发人员文档的首页"></p>
+<blockquote>
+<p>推特翻译：<br>有趣的iOS 15优化。Duet 现在试图先发制人地 “预热” 第三方应用程序，在你点击一个应用程序图标前几分钟，通过dyld和预主静态初始化器运行它们。然后，该应用程序被暂停，随后的 “启动”似乎更快。</p>
+</blockquote>
+<p>现在一切都说得通了。我们最初没有测试到它，因为我们很可能没有给 iOS 15 beta 版足够的时间来 “学习” 我们的使用习惯，所以这个问题只在现实世界的场景中再现，即设备认为我很快就要启动应用程序。我仍然不知道这种预测是如何形成的，但我只想把它归结为 “Siri智能”，然后就到此为止了。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>从iOS 15开始，系统可能决定在用户实际尝试打开你的应用程序之前对其进行 “预热”，这可能会增加受保护的数据在你认为应该无法使用的时候的被访问概率。</p>
+<p>通过等待<code>application(_:didFinishLaunchingWithOptions:)</code>委托回调来保护自己，如果可能的话，留意<code>UIApplication.isProtectedDataAvailable</code>（或对应委托的回调/通知）并相应处理。</p>
+<p>我们仍然发现了非常少的非致命问题，在<code>application(_:didFinishLaunchingWithOptions:)</code>中报告<code>isProtectedDataAvailable</code>为<code>false</code>，在我们可以推迟从钥匙串阅读的访问令牌之外，这将是一个大规模的任务，现在它不值得进行进一步调查。</p>
+<p>这是一个相当难调试的bug，而且行为的变化似乎完全没有记录，这对我来说真的没有帮助。如果你也被这个问题所困扰，请考虑复制<a href="https://openradar.appspot.com/FB9780579" title="FB9780579" target="_blank" rel="noopener">FB9780579</a>。</p>
+<p>我从中学到了很多东西，我希望你也一样！</p>
+<p><strong>更新：</strong> 自从发表这篇文章以来，实际上很多人都向我指出了<a href="https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence#3894431" title="苹果公司关于预热行为的相对完善的文档" target="_blank" rel="noopener">苹果公司关于预热行为的相对完善的文档</a>。然而，其他人也告诉我，他们仍然观察到与某些场景中记录的行为不同的行为，因此请谨慎行事。</p>
+<blockquote>
+<p>译自：<a href="https://sourcediving.com/solving-mysterious-logout-issues-on-ios-15-8b818c089466" title="Solving Mysterious Logout Issues on iOS 15" target="_blank" rel="noopener">Solving Mysterious Logout Issues on iOS 15</a></p>
+</blockquote>
+<h2 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h2><p><strong>Swift社区</strong>是由 Swift 爱好者共同维护的公益组织，我们在国内以微信公众号的运营为主，我们会分享以 <strong>Swift实战</strong>、<strong>SwiftUl</strong>、<strong>Swift基础</strong>为核心的技术内容，也整理收集优秀的学习资料。</p>
+<p>欢迎关注公众号:Swift社区，后台点击进群，可以进入我们社区的各种交流讨论群。希望我们Swift社区是大家在网络空间中的另一份共同的归属。</p>
+<p>特别感谢 Swift社区 编辑部的每一位编辑，感谢大家的辛苦付出，为 Swift社区 提供优质内容，为 Swift 语言的发展贡献自己的力量，排名不分先后：</p>
+<ul>
+<li><a href="https://blog.csdn.net/mobanchengshuang" title="张安宇" target="_blank" rel="noopener">张安宇@微软</a></li>
+<li><a href="https://github.com/niyaoyao" title="倪瑶" target="_blank" rel="noopener">倪瑶@Trip.com</a></li>
+<li><a href="https://ming1016.github.io" title="戴铭" target="_blank" rel="noopener">戴铭@快手</a></li>
+<li><a href="https://github.com/fanbaoying" title="展菲" target="_blank" rel="noopener">展菲@ESP</a></li>
+<li><a href="https://weibo.com/u/3878455011" title="杜鑫瑶" target="_blank" rel="noopener">杜鑫瑶@新浪</a></li>
+<li><a href="https://www.jianshu.com/u/855d6ea2b3d1" title="韦弦" target="_blank" rel="noopener">韦弦@Gwell</a></li>
+</ul>
 
       
     </div>
@@ -478,12 +519,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/Swift-周报-第一期/">Swift 周报 第一期</a></p>
+  <p><span>本文标题:</span><a href="/译-解决-iOS-15-上-APP-莫名其妙地退出登录/">[译]解决 iOS 15 上 APP 莫名其妙地退出登录</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
-  <p><span>发布时间:</span>2021年10月22日 - 15:10</p>
-  <p><span>最后更新:</span>2021年10月22日 - 15:10</p>
-  <p><span>原始链接:</span><a href="/Swift-周报-第一期/" title="Swift 周报 第一期">https://fanbaoying.github.io/Swift-周报-第一期/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/Swift-周报-第一期/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2021年12月08日 - 19:12</p>
+  <p><span>最后更新:</span>2021年12月08日 - 19:12</p>
+  <p><span>原始链接:</span><a href="/译-解决-iOS-15-上-APP-莫名其妙地退出登录/" title="[译]解决 iOS 15 上 APP 莫名其妙地退出登录">https://fanbaoying.github.io/译-解决-iOS-15-上-APP-莫名其妙地退出登录/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/译-解决-iOS-15-上-APP-莫名其妙地退出登录/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -544,7 +585,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
           
         </div>
       
@@ -557,8 +598,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/如何将-Swift-代码添加为自定义-LLDB-命令/" rel="next" title="如何将 Swift 代码添加为自定义 LLDB 命令">
-                <i class="fa fa-chevron-left"></i> 如何将 Swift 代码添加为自定义 LLDB 命令
+              <a href="/LeetCode - 4 求两个有序数组的中间值/" rel="next" title="LeetCode - 4 求两个有序数组的中间值">
+                <i class="fa fa-chevron-left"></i> LeetCode - 4 求两个有序数组的中间值
               </a>
             
           </div>
@@ -566,10 +607,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Swift-周报-第二期/" rel="prev" title="Swift 周报 第二期">
-                Swift 周报 第二期 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -788,7 +825,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播客"><span class="nav-number">2.</span> <span class="nav-text">播客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新闻和社区"><span class="nav-number">3.</span> <span class="nav-text">新闻和社区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正在审查的提案"><span class="nav-number">4.</span> <span class="nav-text">正在审查的提案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-论坛"><span class="nav-number">5.</span> <span class="nav-text">Swift 论坛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我们"><span class="nav-number">6.</span> <span class="nav-text">关于我们</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#复现反馈的问题"><span class="nav-number">1.</span> <span class="nav-text">复现反馈的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩小问题范围"><span class="nav-number">2.</span> <span class="nav-text">缩小问题范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么发生了改变以及为什么它如此难以复现？"><span class="nav-number">3.</span> <span class="nav-text">是什么发生了改变以及为什么它如此难以复现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找根本原因"><span class="nav-number">4.</span> <span class="nav-text">寻找根本原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我们"><span class="nav-number">6.</span> <span class="nav-text">关于我们</span></a></li></ol></div>
             
 
           </div>
