@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="面试资源库如有帮助请点个 Star。 1. 二进制重排1.1 clang 插桩具体如何做的1.2 c++ 方法 clang 插桩能否取到？不能可以取到 c 函数，oc 方法，block，swift 方法但是可以用 -finstrument-functions 在编译期插桩 “hook”，或者使用并不完美但成本最低的静态扫描方案。 1.3 除了二进制重排，还有哪些启动优化的方法">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度一面总结">
+<meta property="og:url" content="https://fanbaoying.github.io/百度一面总结/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="面试资源库如有帮助请点个 Star。 1. 二进制重排1.1 clang 插桩具体如何做的1.2 c++ 方法 clang 插桩能否取到？不能可以取到 c 函数，oc 方法，block，swift 方法但是可以用 -finstrument-functions 在编译期插桩 “hook”，或者使用并不完美但成本最低的静态扫描方案。 1.3 除了二进制重排，还有哪些启动优化的方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-01-19T09:57:09.761Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度一面总结">
+<meta name="twitter:description" content="面试资源库如有帮助请点个 Star。 1. 二进制重排1.1 clang 插桩具体如何做的1.2 c++ 方法 clang 插桩能否取到？不能可以取到 c 函数，oc 方法，block，swift 方法但是可以用 -finstrument-functions 在编译期插桩 “hook”，或者使用并不完美但成本最低的静态扫描方案。 1.3 除了二进制重排，还有哪些启动优化的方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/百度一面总结/"/>
+
+
+
+
+
+  <title>百度一面总结 | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/百度一面总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">百度一面总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-19T17:54:58+08:00">
+                2022-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 1,937字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 7分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://github.com/fanbaoying/FBYInterview-iOS" target="_blank" rel="noopener">面试资源库</a><br>如有帮助请点个 Star。</p>
+<h2 id="1-二进制重排"><a href="#1-二进制重排" class="headerlink" title="1. 二进制重排"></a>1. 二进制重排</h2><h3 id="1-1-clang-插桩具体如何做的"><a href="#1-1-clang-插桩具体如何做的" class="headerlink" title="1.1 clang 插桩具体如何做的"></a>1.1 clang 插桩具体如何做的</h3><h3 id="1-2-c-方法-clang-插桩能否取到？"><a href="#1-2-c-方法-clang-插桩能否取到？" class="headerlink" title="1.2 c++ 方法 clang 插桩能否取到？"></a>1.2 c++ 方法 clang 插桩能否取到？</h3><p>不能<br>可以取到 <code>c</code> 函数，<code>oc</code> 方法，<code>block</code>，<code>swift</code> 方法<br>但是可以用 <code>-finstrument-functions</code> 在编译期插桩 “<strong>hook</strong>”，或者使用并不完美但成本最低的静态扫描方案。</p>
+<h3 id="1-3-除了二进制重排，还有哪些启动优化的方法"><a href="#1-3-除了二进制重排，还有哪些启动优化的方法" class="headerlink" title="1.3 除了二进制重排，还有哪些启动优化的方法"></a>1.3 除了二进制重排，还有哪些启动优化的方法</h3><a id="more"></a>
+<h4 id="1-3-1-pre-main-阶段"><a href="#1-3-1-pre-main-阶段" class="headerlink" title="1.3.1 pre main 阶段"></a>1.3.1 pre main 阶段</h4><ol>
+<li>Load dylibs </li>
+</ol>
+<ul>
+<li>尽量不使用内嵌（<code>embedded</code>）的 <code>dylib</code>，加载内嵌 <code>dylib</code> 性能开销较大</li>
+<li>合并已有的 <code>dylib</code> 和使用静态库（<code>static archives</code>），减少 <code>dylib</code> 的使用个数</li>
+<li>懒加载 <code>dylib</code>，但是要注意 <code>dlopen()</code> 可能造成一些问题，且实际上懒加载做的工作会更多</li>
+</ul>
+<ol>
+<li>Rebase/Bind</li>
+</ol>
+<p>在 <code>dylib</code> 的加载过程中，系统为了安全考虑，引入了 <code>ASLR</code>（Address Space Layout Randomization）技术和代码签名。由于ASLR的存在，镜像（<code>Image</code>，包括可执行文件、<code>dylib</code> 和 <code>bundle</code>）会在随机的地址上加载，和之前指针指向的地址（<code>preferred_address</code>）会有一个偏差（<code>slide</code>），<code>dyld</code>需要修正这个偏差，来指向正确的地址。 </p>
+<ul>
+<li>减少 ObjC 类（<code>clas</code>s）、方法（<code>selector</code>）、分类（<code>category</code>）的数量</li>
+<li>减少 <code>C++</code> 虚函数的数量（创建虚函数表有开销）</li>
+<li>使用 <code>swiftStructs</code> (内部有优化，符号数量更少)</li>
+</ul>
+<ol>
+<li><code>Objc setUp</code> </li>
+<li><code>Initializers</code></li>
+</ol>
+<ul>
+<li>少在类的 <code>+load</code>方法里做事情，尽量把这些事情推迟到 <code>+initiailize</code></li>
+<li>减少构造器函数个数，在构造器函数里少做些事情</li>
+<li>减少 <code>C++</code> 静态全局变量的个数</li>
+</ul>
+<h4 id="1-3-2-main-阶段"><a href="#1-3-2-main-阶段" class="headerlink" title="1.3.2 main 阶段"></a>1.3.2 main 阶段</h4><ol>
+<li>梳理各个二方/三方库，找到可以延迟加载的库，做延迟加载处理，比如放到首页控制器或 <code>tabBar</code> 控制器的 <code>viewDidAppear</code> 方法里，并且保证只执行一次（按项目结构，放在合适的地方）</li>
+<li>梳理业务逻辑，把可以延迟执行的逻辑，做延迟执行处理。比如检查新版本、注册推送通知等逻辑。</li>
+<li>避免复杂/多余的计算。</li>
+<li>避免在用户看到的第一个界面（首页控制器或注册登录页面）的 <code>viewDidLoad</code> 和 <code>viewWillAppear</code> 做太多事情，这 2 个方法执行完，第一个页面才能显示，部分可以延迟创建的视图应做延迟创建/懒加载处理</li>
+<li>首页控制器或注册登录页面用纯代码方式来构建</li>
+</ol>
+<h3 id="1-4-link-map数据结构"><a href="#1-4-link-map数据结构" class="headerlink" title="1.4 link map数据结构"></a>1.4 link map数据结构</h3><p><code>Link Map File</code> 中文直译为链接映射文件，它是在 Xcode 生成可执行文件的同时生成的链接信息文件，用于描述可执行文件的构造部分，包括了代码段和数据段的分布情况</p>
+<h4 id="1-4-1-linkMapfile-的组成"><a href="#1-4-1-linkMapfile-的组成" class="headerlink" title="1.4.1 linkMapfile 的组成"></a>1.4.1 linkMapfile 的组成</h4><ol>
+<li><strong>Path</strong>：<code>Path</code> 是生成可执行文件的路径。 </li>
+<li><strong>Arch</strong>：<code>Arch</code> 指代架构类型。 </li>
+<li><strong>Object files</strong>：<code>Object Files</code> 列举了可执行文件里所有的 <code>obj</code> 以及 <code>tbd</code>。每一行代表对文件的编号。 </li>
+<li><strong>Sections</strong>： 每个 <code>Section</code> 包含了 <code>Address</code>、<code>Size</code>、<code>Segment</code> 以及 <code>Section</code>。<code>Mach-O</code> 文件中的虚拟地址最终会被映射到物理地址上，这些地址会被分为不同的段类型：  <code>TEXT</code>、  <code>DATA</code> 以及 <code>LINKEDIT</code> 等。各个段的含义如下：  <blockquote>
+<p><code>TEXT</code> 包含了被执行的代码。这些代码是只读、可执行<br><code>DATA</code> 包含了包含了将会被更改的数据，例如全局变量、静态变量等，可读写，但是不可执行<br><code>LINKEDIT</code> 包含了加载程序的元数据，比如函数名称和地址，只读。<br><code>Segment</code> 又被划分成了不同的 <code>Section</code>，不同的 <code>Section</code> 存储了不同的信息，例如 <code>objc _ methname</code> 为方法的名称</p>
+</blockquote>
+</li>
+<li><strong>Symbols</strong> ：Symbols包含的信息有：</li>
+</ol>
+<ul>
+<li><strong>Address</strong>：起始地址</li>
+<li><strong>Size</strong>：所占内存大小，这里使用16进制表示。</li>
+<li><strong>File</strong>：该Name所在的文件编号，也就是Object files部分的中括号的数字。 </li>
+</ul>
+<ol>
+<li><code>Dead Stripped Symbols</code></li>
+</ol>
+<h3 id="1-5-具体的优化时间获取？有没有看过实际线上优化多少？"><a href="#1-5-具体的优化时间获取？有没有看过实际线上优化多少？" class="headerlink" title="1.5 具体的优化时间获取？有没有看过实际线上优化多少？"></a>1.5 具体的优化时间获取？有没有看过实际线上优化多少？</h3><ol>
+<li><strong>pre-main阶段测量</strong>：<code>DYLD_PRINT_STATISTICS</code></li>
+<li><strong>main()阶段测量</strong>：先在 <code>main()</code> 函数里用变量 <code>StartTime  didFinishLaunchingWithOptions</code> 再获取一下当前时间</li>
+</ol>
+<h2 id="2-VC生命周期"><a href="#2-VC生命周期" class="headerlink" title="2. VC生命周期"></a>2. VC生命周期</h2><ol>
+<li><code>+load</code>: 程序启动后，在系统的 <code>main</code> 函数调用之前，系统就会加载所有的 <code>load</code> 方法，提前进行一些资源包的配置或者 <code>hook</code>，(可以打断点看看结果，本人亲测过) </li>
+<li><code>+initialize</code>: 当前类或者其子类未被初始化过时会首次调用，若以后当前类或者子类再多次初始化时不会再调用，一般提前为初始化做一些工作 </li>
+<li><code>+alloc</code>: 系统为当前类分配内存时调用，在C语言中就是 <code>malloc</code> 这一步 </li>
+<li><code>-initWithCoder</code>: 通过 <code>storyBoard</code> 方式实例化的 vc，需要经过反序列化，这个方法会被调用 </li>
+<li><code>-initWithNibName:bundle</code>: 通过 <code>xib</code> 文件或者 <code>init</code> 方法实例化的 vc，这个方法都会被调用，其实 <code>init</code> 方法最终都会走该方法 </li>
+<li><code>-init</code>: 通过纯代码实例化Vc会调用，其最终会调用 <code>initWithNibName:bundle:</code> 方法 </li>
+<li><code>-loadView</code>: 实例化Vc后，可以加载一些系统常规的View </li>
+<li><code>-viewDidLoad</code>: 一般加载自定义的view或者初始化属性，视图加载完毕后会调用 </li>
+<li><code>-viewWillAppear</code>: 视图即将出现会调用 </li>
+<li><code>-viewWillDisappear</code>: 视图即将消失会调用 </li>
+<li><code>-viewWillLayoutSubviews</code>: 视图加载完毕后即将要布局 </li>
+<li><code>-viewDidLayoutSubviews</code>: 视图加载完毕后布局也完成了 </li>
+<li><code>-didReceiveMemoryWarning</code>: 加载视图时，内存消耗太大，出现内存警告，会调用 </li>
+<li><code>-dealloc</code>: 实例化被销毁，进行内存的回收会调用 </li>
+</ol>
+<h2 id="3-copy-mutableCopy"><a href="#3-copy-mutableCopy" class="headerlink" title="3. copy / mutableCopy"></a>3. copy / mutableCopy</h2><p><strong>可变对象复制：</strong></p>
+<p>都是深拷贝，但是 <code>copy</code> 返回的对象是不可变的。</p>
+<p>对于容器而言，其元素对象始终是指针复制。如果需要元素对象也是对象复制，就需要实现深拷贝。</p>
+<h2 id="4-NSUserDefault存储位置"><a href="#4-NSUserDefault存储位置" class="headerlink" title="4. NSUserDefault存储位置"></a>4. NSUserDefault存储位置</h2><p><code>~/Library/Preferences</code> 下，用 <code>plist</code> 文件存储</p>
+<h2 id="5-Https如何保证数据安全"><a href="#5-Https如何保证数据安全" class="headerlink" title="5. Https如何保证数据安全"></a>5. Https如何保证数据安全</h2><p>是由 <code>SSL+HTTP</code> 协议构建的可进行加密传输、身份认证的网络协议</p>
+<h3 id="公私钥加密之后是否还有加密"><a href="#公私钥加密之后是否还有加密" class="headerlink" title="公私钥加密之后是否还有加密"></a>公私钥加密之后是否还有加密</h3><p>对称加密+非对称加密这两种方式，我们可以用非对称加密的方式来传输对称加密过程中的密钥，之后我们就可以采取对称加密的方式来传输数据</p>
+<h2 id="6-git-reset"><a href="#6-git-reset" class="headerlink" title="6. git reset"></a>6. git reset</h2><p>可以让 <code>HEAD</code> 这个指针指向其他的地方<br>它有三种模式，<code>soft</code>, <code>mixed</code>, <code>hard</code></p>
+<h3 id="6-1-reset-soft"><a href="#6-1-reset-soft" class="headerlink" title="6.1 reset soft"></a>6.1 reset soft</h3><p>保留工作目录，并把重置 <code>HEAD</code> 所带来的新的差异放进暂存区<br><code>reset --soft</code> 会在重置 <code>HEAD</code> 和 <code>branch</code> 时，保留工作目录和暂存区中的内容，并把重置 <code>HEAD</code> 所带来的新的差异放进暂存区。</p>
+<h3 id="6-2-reset-mixed"><a href="#6-2-reset-mixed" class="headerlink" title="6.2 reset mixed"></a>6.2 reset mixed</h3><p><code>reset</code> 不加参数(<code>mixed</code>)：保留工作目录，并清空暂存区<br><code>reset</code> 如果不加参数，那么默认使用 <code>--mixed</code>参数。它的行为是：保留工作目录，并且清空暂存区。也就是说，工作目录的修改、暂存区的内容以及由 <code>reset</code> 所导致的新的文件差异，都会被放进工作目录。简而言之，就是「把所有差异都混合（<code>mixed</code>）放在工作目录中」。</p>
+<h3 id="6-3-reset-hard"><a href="#6-3-reset-hard" class="headerlink" title="6.3 reset hard"></a>6.3 reset hard</h3><p>重置 <code>stage</code> 区和工作目录<br><code>reset --hard</code> 会在重置 <code>HEAD</code> 和 <code>branch</code> 的同时，重置 <code>stage</code> 区和工作目录里的内容。当你在 <code>reset</code> 后面加了 <code>--hard</code> 参数时，你的 <code>stage</code> 区和工作目录里的内容会被完全重置为和 <code>HEAD</code> 的新位置相同的内容。换句话说，就是你的没有 <code>commit</code> 的修改会被全部擦掉。</p>
+<p>学无止境。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/百度一面总结/">百度一面总结</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2022年01月19日 - 17:01</p>
+  <p><span>最后更新:</span>2022年01月19日 - 17:01</p>
+  <p><span>原始链接:</span><a href="/百度一面总结/" title="百度一面总结">https://fanbaoying.github.io/百度一面总结/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/百度一面总结/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/译-解决-iOS-15-上-APP-莫名其妙地退出登录/" rel="next" title="[译]解决 iOS 15 上 APP 莫名其妙地退出登录">
+                <i class="fa fa-chevron-left"></i> [译]解决 iOS 15 上 APP 莫名其妙地退出登录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/京东七鲜一面总结/" rel="prev" title="京东七鲜一面总结">
+                京东七鲜一面总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-二进制重排"><span class="nav-number">1.</span> <span class="nav-text">1. 二进制重排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-clang-插桩具体如何做的"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 clang 插桩具体如何做的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-c-方法-clang-插桩能否取到？"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 c++ 方法 clang 插桩能否取到？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-除了二进制重排，还有哪些启动优化的方法"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 除了二进制重排，还有哪些启动优化的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-pre-main-阶段"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 pre main 阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-main-阶段"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 main 阶段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-link-map数据结构"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 link map数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-linkMapfile-的组成"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 linkMapfile 的组成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-具体的优化时间获取？有没有看过实际线上优化多少？"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 具体的优化时间获取？有没有看过实际线上优化多少？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-VC生命周期"><span class="nav-number">2.</span> <span class="nav-text">2. VC生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-copy-mutableCopy"><span class="nav-number">3.</span> <span class="nav-text">3. copy / mutableCopy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-NSUserDefault存储位置"><span class="nav-number">4.</span> <span class="nav-text">4. NSUserDefault存储位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Https如何保证数据安全"><span class="nav-number">5.</span> <span class="nav-text">5. Https如何保证数据安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#公私钥加密之后是否还有加密"><span class="nav-number">5.1.</span> <span class="nav-text">公私钥加密之后是否还有加密</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-git-reset"><span class="nav-number">6.</span> <span class="nav-text">6. git reset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-reset-soft"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 reset soft</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-reset-mixed"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 reset mixed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-reset-hard"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 reset hard</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共70.4k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
