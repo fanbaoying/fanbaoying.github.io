@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="SwiftUI," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="在本系列的第一部分，我介绍了Animatable协议，以及我们如何使用它来为路径制作动画。接下来，我们将使用一个新的工具: GeometryEffect，用同样的协议对变换矩阵进行动画处理。如果你没有读过第一部分，也不知道Animatable协议是什么，你应该先读一下。或者如果你只是对GeometryEffect感兴趣，不关心动画，你可以跳过第一部分，继续阅读本文。">
+<meta name="keywords" content="SwiftUI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高级 SwiftUI 动画 — Part 2：GeometryEffect">
+<meta property="og:url" content="https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-2：GeometryEffect/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="在本系列的第一部分，我介绍了Animatable协议，以及我们如何使用它来为路径制作动画。接下来，我们将使用一个新的工具: GeometryEffect，用同样的协议对变换矩阵进行动画处理。如果你没有读过第一部分，也不知道Animatable协议是什么，你应该先读一下。或者如果你只是对GeometryEffect感兴趣，不关心动画，你可以跳过第一部分，继续阅读本文。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/c5eea293e62e03a91b514d2b1cea765f.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/8a7e081311517626f17a879214256f9c.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/fb395e91688d2044f116e7d2993b814d.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/cd77c096eb465b1fe95c16a56c9bdb9b.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/c88e7be22086f5a0341777430c31a874.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/d463cca79f4a1dea31de5d7567b9855a.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/6227090f80410efbd2de83afea234609.gif">
+<meta property="og:updated_time" content="2022-04-06T02:38:03.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高级 SwiftUI 动画 — Part 2：GeometryEffect">
+<meta name="twitter:description" content="在本系列的第一部分，我介绍了Animatable协议，以及我们如何使用它来为路径制作动画。接下来，我们将使用一个新的工具: GeometryEffect，用同样的协议对变换矩阵进行动画处理。如果你没有读过第一部分，也不知道Animatable协议是什么，你应该先读一下。或者如果你只是对GeometryEffect感兴趣，不关心动画，你可以跳过第一部分，继续阅读本文。">
+<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2022/c5eea293e62e03a91b514d2b1cea765f.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-2：GeometryEffect/"/>
+
+
+
+
+
+  <title>高级 SwiftUI 动画 — Part 2：GeometryEffect | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-2：GeometryEffect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高级 SwiftUI 动画 — Part 2：GeometryEffect</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-06T10:31:01+08:00">
+                2022-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SwiftUI-动画/" itemprop="url" rel="index">
+                    <span itemprop="name">SwiftUI 动画</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 3,526字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 16分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://images.xiaozhuanlan.com/photo/2022/c5eea293e62e03a91b514d2b1cea765f.png" alt=""></p>
+<p>在本系列的第一部分，我介绍了<code>Animatable</code>协议，以及我们如何使用它来为路径制作动画。接下来，我们将使用一个新的工具: <code>GeometryEffect</code>，用同样的协议对变换矩阵进行动画处理。如果你没有读过第一部分，也不知道<code>Animatable</code>协议是什么，你应该先读一下。或者如果你只是对<code>GeometryEffect</code>感兴趣，不关心动画，你可以跳过第一部分，继续阅读本文。</p>
+<a id="more"></a>
+<h1 id="GeometryEffect"><a href="#GeometryEffect" class="headerlink" title="GeometryEffect"></a>GeometryEffect</h1><p><code>GeometryEffect</code>是一个符合<code>Animatable</code>和<code>ViewModifier</code>的协议。为了符合<code>GeometryEffect</code>协议，你需要实现以下方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">effectValue</span><span class="params">(size: CGSize)</span></span> -&gt; <span class="type">ProjectionTransform</span></span><br></pre></td></tr></table></figure>
+<p>假设你的方法叫<code>SkewEffect</code>，为了把它应用到一个视图上，你会这样使用它：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">"Hello"</span>).modifier(<span class="type">SkewEfect</span>(skewValue: <span class="number">0.5</span>))</span><br></pre></td></tr></table></figure>
+<p><code>Text(&quot;Hello&quot;)</code>将被转换为由<code>SkewEfect.effectValue()</code>方法创建的矩阵。就这么简单。请注意，这些变化将影响视图，但不会影响其祖先或后代的布局。</p>
+<p>因为<code>GeometryEffect</code>也符合<code>Animatable</code>，你可以添加一个<code>animatableData</code>属性，然后你就有了一个可动的效果。</p>
+<p>你可能没有意识到，你可能一直在使用<code>GeometryEffect</code>。如果你曾经使用过<code>.offset()</code>，你实际上是在使用<code>GeometryEffect</code>。让我告诉你它是如何实现的：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">extension</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">offset</span><span class="params">(x: CGFloat, y: CGFloat)</span></span> -&gt; some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> modifier(_OffsetEffect(offset: <span class="type">CGSize</span>(width: x, height: y)))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">offset</span><span class="params">(<span class="number">_</span> offset: CGSize)</span></span> -&gt; some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> modifier(_OffsetEffect(offset: offset))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">_OffsetEffect</span>: <span class="title">GeometryEffect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> offset: <span class="type">CGSize</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">CGSize</span>.<span class="type">AnimatableData</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="type">CGSize</span>.<span class="type">AnimatableData</span>(offset.width, offset.height) &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; offset = <span class="type">CGSize</span>(width: newValue.first, height: newValue.second) &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">effectValue</span><span class="params">(size: CGSize)</span></span> -&gt; <span class="type">ProjectionTransform</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">ProjectionTransform</span>(<span class="type">CGAffineTransform</span>(translationX: offset.width, y: offset.height))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Animation-Keyframes"><a href="#Animation-Keyframes" class="headerlink" title="Animation Keyframes"></a>Animation Keyframes</h1><p>大多数动画框架都有关键帧的概念。它是一种告诉动画引擎将动画分成若干块的方式。虽然 SwiftUI 没有这些功能，但我们可以模拟它。在下面的例子中，我们将创建一个水平移动视图的效果，但它也会在开始时倾斜，在结束时取消倾斜：</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/8a7e081311517626f17a879214256f9c.gif" alt=""></p>
+<p>倾斜效果需要在动画的第一个和最后一个20%期间增加和减少。在中间，倾斜效果将保持稳定。好了，现在我们有一个挑战，让我们看看如何解决这个问题。</p>
+<p>我们将首先创建一个使我们的视图倾斜和移动的效果，而不必太注意20%的要求。如果你对变换矩阵了解不多，那也没关系。只需要知道：<code>CGAffineTransform</code> <code>c</code> 参数驱动倾斜，而 <code>tx</code> 则驱动 <code>x</code> 偏移。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/fb395e91688d2044f116e7d2993b814d.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SkewedOffset</span>: <span class="title">GeometryEffect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> offset: <span class="type">CGFloat</span></span><br><span class="line">    <span class="keyword">var</span> skew: <span class="type">CGFloat</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">AnimatablePair</span>&lt;<span class="type">CGFloat</span>, <span class="type">CGFloat</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="type">AnimatablePair</span>(offset, skew) &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            offset = newValue.first</span><br><span class="line">            skew = newValue.second</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">effectValue</span><span class="params">(size: CGSize)</span></span> -&gt; <span class="type">ProjectionTransform</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">ProjectionTransform</span>(<span class="type">CGAffineTransform</span>(a: <span class="number">1</span>, b: <span class="number">0</span>, <span class="built_in">c</span>: skew, d: <span class="number">1</span>, tx: offset, ty: <span class="number">0</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h2><p>好了，现在是有趣的部分。为了模拟关键帧，我们将定义一个可动画的参数，我们将其从 0 到 1 改变。当该参数为 0.2 时，我们达到了动画的前 20%。当该参数为 0.8 或更大时，我们就进入了动画的最后 20%。我们的代码应该利用这一点来改变相应的效果。最重要的是，我们还要告诉效果，我们是向右还是向左移动视图，所以它可以向一边倾斜，或者向另一边倾斜：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SkewedOffset</span>: <span class="title">GeometryEffect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> offset: <span class="type">CGFloat</span></span><br><span class="line">    <span class="keyword">var</span> pct: <span class="type">CGFloat</span></span><br><span class="line">    <span class="keyword">let</span> goingRight: <span class="type">Bool</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(offset: <span class="type">CGFloat</span>, pct: <span class="type">CGFloat</span>, goingRight: <span class="type">Bool</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.offset = offset</span><br><span class="line">        <span class="keyword">self</span>.pct = pct</span><br><span class="line">        <span class="keyword">self</span>.goingRight = goingRight</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">AnimatablePair</span>&lt;<span class="type">CGFloat</span>, <span class="type">CGFloat</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> <span class="type">AnimatablePair</span>&lt;<span class="type">CGFloat</span>, <span class="type">CGFloat</span>&gt;(offset, pct) &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            offset = newValue.first</span><br><span class="line">            pct = newValue.second</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">effectValue</span><span class="params">(size: CGSize)</span></span> -&gt; <span class="type">ProjectionTransform</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> skew: <span class="type">CGFloat</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> pct &lt; <span class="number">0.2</span> &#123;</span><br><span class="line">            skew = (pct * <span class="number">5</span>) * <span class="number">0.5</span> * (goingRight ? -<span class="number">1</span> : <span class="number">1</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> pct &gt; <span class="number">0.8</span> &#123;</span><br><span class="line">            skew = ((<span class="number">1</span> - pct) * <span class="number">5</span>) * <span class="number">0.5</span> * (goingRight ? -<span class="number">1</span> : <span class="number">1</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            skew = <span class="number">0.5</span> * (goingRight ? -<span class="number">1</span> : <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="type">ProjectionTransform</span>(<span class="type">CGAffineTransform</span>(a: <span class="number">1</span>, b: <span class="number">0</span>, <span class="built_in">c</span>: skew, d: <span class="number">1</span>, tx: offset, ty: <span class="number">0</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，只是为了好玩，我们将把这个效果应用于多个视图，但它们的动画将交错进行，使用<code>.delay()</code>动画修饰符。完整的代码可在本页面顶部链接的gist文件中 <strong>实例6</strong> 获得。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/cd77c096eb465b1fe95c16a56c9bdb9b.gif" alt=""></p>
+<h1 id="动画反馈"><a href="#动画反馈" class="headerlink" title="动画反馈"></a>动画反馈</h1><p>在下一个例子中，我将向你展示一个简单的技术，它将使我们的视图对效果动画的进展做出反应。</p>
+<p>我们将创建一个效果，让我们进行三维旋转。虽然SwiftUI已经有了一个修饰符，即<code>.rotrotation3DEffect()</code>，但这个修饰符将是特别的。每当我们的视图旋转到足以向我们展示另一面时，一个布尔绑定将被更新。</p>
+<p>通过对绑定变量的变化做出反应，我们将能够替换正在旋转动画的过程中的视图。这将创造一种错觉，即视图有两个面。下面是一个例子：</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/c88e7be22086f5a0341777430c31a874.gif" alt=""></p>
+<h2 id="落实我们的效果"><a href="#落实我们的效果" class="headerlink" title="落实我们的效果"></a>落实我们的效果</h2><p>让我们开始创建我们的效果。你会注意到，三维旋转变换可能与你在核心动画中的习惯略有不同。在SwiftUI中，默认的锚点是在视图的前角，而在Core Animation中是在中心。虽然现有的<code>.rotrotingg3DEffect()</code>修饰符可以让你指定一个锚点，但我们正在建立我们自己的效果。这意味着我们必须自己处理它。由于我们不能改变锚点，我们需要在组合中加入一些转换效果：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FlipEffect</span>: <span class="title">GeometryEffect</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">Double</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; angle &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; angle = newValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @<span class="type">Binding</span> <span class="keyword">var</span> flipped: <span class="type">Bool</span></span><br><span class="line">    <span class="keyword">var</span> angle: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> axis: (x: <span class="type">CGFloat</span>, y: <span class="type">CGFloat</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">effectValue</span><span class="params">(size: CGSize)</span></span> -&gt; <span class="type">ProjectionTransform</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 我们把修改安排在视图绘制完成后进行。</span></span><br><span class="line">        <span class="comment">// 否则，我们会收到一个运行时错误，表明我们正在改变</span></span><br><span class="line">        <span class="comment">// 视图正在绘制时改变状态。</span></span><br><span class="line">        <span class="type">DispatchQueue</span>.main.async &#123;</span><br><span class="line">            <span class="keyword">self</span>.flipped = <span class="keyword">self</span>.angle &gt;= <span class="number">90</span> &amp;&amp; <span class="keyword">self</span>.angle &lt; <span class="number">270</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> a = <span class="type">CGFloat</span>(<span class="type">Angle</span>(degrees: angle).radians)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> transform3d = <span class="type">CATransform3DIdentity</span>;</span><br><span class="line">        transform3d.m34 = -<span class="number">1</span>/<span class="built_in">max</span>(size.width, size.height)</span><br><span class="line">        </span><br><span class="line">        transform3d = <span class="type">CATransform3DRotate</span>(transform3d, a, axis.x, axis.y, <span class="number">0</span>)</span><br><span class="line">        transform3d = <span class="type">CATransform3DTranslate</span>(transform3d, -size.width/<span class="number">2.0</span>, -size.height/<span class="number">2.0</span>, <span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> affineTransform = <span class="type">ProjectionTransform</span>(<span class="type">CGAffineTransform</span>(translationX: size.width/<span class="number">2.0</span>, y: size.height / <span class="number">2.0</span>))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="type">ProjectionTransform</span>(transform3d).concatenating(affineTransform)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过查看几何效果代码，有一个有趣的事实。我们用<code>@Bindingd</code>属性<code>flipped</code>来向视图报告，哪一面是面向用户的。</p>
+<p>在我们的视图中，我们将使用<code>flipped</code>的值来有条件地显示两个视图中的一个。然而，在这个具体的例子中，我们将使用一个更多的技巧。如果你仔细观察视频，你会发现这张牌一直在变化。背面总是一样的，但正面却每次都在变化。因此，这不是简单的为一面展示一个视图，为另一面展示另一个视图。我们不是基于<code>flipped</code>的值，而是要监测<code>flipped</code>的值的变化。然后每一个完整的回合，我们将使用不同的牌。</p>
+<p>我们有一个图像名称的数组，我们想逐一查看。为了做到这一点，我们将使用一个自定义绑定变量。这个技巧最好用代码来解释：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RotatingCard</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> flipped = <span class="literal">false</span></span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> animate3d = <span class="literal">false</span></span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> rotate = <span class="literal">false</span></span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> imgIndex = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> images = [<span class="string">"diamonds-7"</span>, <span class="string">"clubs-8"</span>, <span class="string">"diamonds-6"</span>, <span class="string">"clubs-b"</span>, <span class="string">"hearts-2"</span>, <span class="string">"diamonds-b"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> binding = <span class="type">Binding</span>&lt;<span class="type">Bool</span>&gt;(<span class="keyword">get</span>: &#123; <span class="keyword">self</span>.flipped &#125;, <span class="keyword">set</span>: &#123; <span class="keyword">self</span>.updateBinding($<span class="number">0</span>) &#125;)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="type">VStack</span> &#123;</span><br><span class="line">            <span class="type">Spacer</span>()</span><br><span class="line">            <span class="type">Image</span>(flipped ? <span class="string">"back"</span> : images[imgIndex]).resizable()</span><br><span class="line">                .frame(width: <span class="number">265</span>, height: <span class="number">400</span>)</span><br><span class="line">                .modifier(<span class="type">FlipEffect</span>(flipped: binding, angle: animate3d ? <span class="number">360</span> : <span class="number">0</span>, axis: (x: <span class="number">1</span>, y: <span class="number">5</span>)))</span><br><span class="line">                .rotationEffect(<span class="type">Angle</span>(degrees: rotate ? <span class="number">0</span> : <span class="number">360</span>))</span><br><span class="line">                .onAppear &#123;</span><br><span class="line">                    withAnimation(<span class="type">Animation</span>.linear(duration: <span class="number">4.0</span>).repeatForever(autoreverses: <span class="literal">false</span>)) &#123;</span><br><span class="line">                        <span class="keyword">self</span>.animate3d = <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    </span><br><span class="line">                    withAnimation(<span class="type">Animation</span>.linear(duration: <span class="number">8.0</span>).repeatForever(autoreverses: <span class="literal">false</span>)) &#123;</span><br><span class="line">                        <span class="keyword">self</span>.rotate = <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">Spacer</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">updateBinding</span><span class="params">(<span class="number">_</span> value: Bool)</span></span> &#123;</span><br><span class="line">        <span class="comment">// If card was just flipped and at front, change the card</span></span><br><span class="line">        <span class="keyword">if</span> flipped != value &amp;&amp; !flipped &#123;</span><br><span class="line">            <span class="keyword">self</span>.imgIndex = <span class="keyword">self</span>.imgIndex+<span class="number">1</span> &lt; <span class="keyword">self</span>.images.<span class="built_in">count</span> ? <span class="keyword">self</span>.imgIndex+<span class="number">1</span> : <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        flipped = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整的代码可在本页顶部链接的gist文件中的 <strong>实例7</strong> 中找到。</p>
+<p>=============================================================</p>
+<p>如前所述，我们可能想使用两个完全不同的视图，而不是改变图像名称。这也是可以的，这里有一个例子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Color</span>.clear.overlay(<span class="type">ViewSwapper</span>(showFront: flipped))</span><br><span class="line">    .frame(width: <span class="number">265</span>, height: <span class="number">400</span>)</span><br><span class="line">    .modifier(<span class="type">FlipEffect</span>(flipped: $flipped, angle: animate3d ? <span class="number">360</span> : <span class="number">0</span>, axis: (x: <span class="number">1</span>, y: <span class="number">5</span>)))</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ViewSwapper</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> showFront: <span class="type">Bool</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Group</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> showFront &#123;</span><br><span class="line">                <span class="type">FrontView</span>()</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="type">BackView</span>()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="让视图遵循一个路径"><a href="#让视图遵循一个路径" class="headerlink" title="让视图遵循一个路径"></a>让视图遵循一个路径</h1><p>接下来，我们将建立一个完全不同的<code>GeometryEffect</code>。在这个例子中，我们的效果将通过一个任意的路径移动一个视图。这个问题有两个主要挑战:</p>
+<p>1.如何获取路径中特定点的坐标。</p>
+<p>2.如何在通过路径移动时确定视图的方向。在这个特定的案例中，我们如何知道飞机的机头指向哪里（扰流板警告，一点三角函数就可以了）。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/d463cca79f4a1dea31de5d7567b9855a.gif" alt=""></p>
+<p>这个效果的可动画参数将是 pct。它代表飞机在路径中的位置。如果我们想让飞机执行一个完整的转弯，我们将使用0到1的值。对于一个0.25的值，它意味着飞机已经前进了1/4的路径。</p>
+<h2 id="寻找路径中的x、y位置"><a href="#寻找路径中的x、y位置" class="headerlink" title="寻找路径中的x、y位置"></a>寻找路径中的x、y位置</h2><p>为了获得飞机在给定的pct值下的x和y位置，我们将使用<code>Path</code>结构体的 <a href="">.trimmedPath()</a> 修饰符。给定一个起点和终点百分比，该方法返回一个<code>CGRect</code>。它包含了该段路径的边界。根据我们的需求，我们只需用使用非常接近的起点和终点来调用它。它将返回一个非常小的矩形，我们将使用其中心作为我们的X和Y位置。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">percentPoint</span><span class="params">(<span class="number">_</span> percent: CGFloat)</span></span> -&gt; <span class="type">CGPoint</span> &#123;</span><br><span class="line">    <span class="comment">// percent difference between points</span></span><br><span class="line">    <span class="keyword">let</span> diff: <span class="type">CGFloat</span> = <span class="number">0.001</span></span><br><span class="line">    <span class="keyword">let</span> comp: <span class="type">CGFloat</span> = <span class="number">1</span> - diff</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// handle limits</span></span><br><span class="line">    <span class="keyword">let</span> pct = percent &gt; <span class="number">1</span> ? <span class="number">0</span> : (percent &lt; <span class="number">0</span> ? <span class="number">1</span> : percent)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> f = pct &gt; comp ? comp : pct</span><br><span class="line">    <span class="keyword">let</span> t = pct &gt; comp ? <span class="number">1</span> : pct + diff</span><br><span class="line">    <span class="keyword">let</span> tp = path.trimmedPath(from: f, to: t)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="type">CGPoint</span>(x: tp.boundingRect.midX, y: tp.boundingRect.midY)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="寻找方向"><a href="#寻找方向" class="headerlink" title="寻找方向"></a>寻找方向</h2><p>为了获得我们平面的旋转角度，我们将使用一点三角函数。使用上面描述的技术，我们将得到两点的X和Y的位置：当前位置和刚才的位置。通过创建一条假想线，我们可以计算出它的角度，这就是飞机的方向了。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">calculateDirection</span><span class="params">(<span class="number">_</span> pt1: CGPoint,<span class="number">_</span> pt2: CGPoint)</span></span> -&gt; <span class="type">CGFloat</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> a = pt2.x - pt1.x</span><br><span class="line">    <span class="keyword">let</span> b = pt2.y - pt1.y</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> angle = a &lt; <span class="number">0</span> ? atan(<span class="type">Double</span>(b / a)) : atan(<span class="type">Double</span>(b / a)) - <span class="type">Double</span>.pi</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="type">CGFloat</span>(angle)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="把所有的内容结合在一起"><a href="#把所有的内容结合在一起" class="headerlink" title="把所有的内容结合在一起"></a>把所有的内容结合在一起</h2><p>现在，我们知道了实现目标所需的工具，我们将实现这种效果：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FollowEffect</span>: <span class="title">GeometryEffect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pct: <span class="type">CGFloat</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> path: <span class="type">Path</span></span><br><span class="line">    <span class="keyword">var</span> rotate = <span class="literal">true</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> pct &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; pct = newValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">effectValue</span><span class="params">(size: CGSize)</span></span> -&gt; <span class="type">ProjectionTransform</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> !rotate &#123; <span class="comment">// Skip rotation login</span></span><br><span class="line">            <span class="keyword">let</span> pt = percentPoint(pct)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> <span class="type">ProjectionTransform</span>(<span class="type">CGAffineTransform</span>(translationX: pt.x, y: pt.y))</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> pt1 = percentPoint(pct)</span><br><span class="line">            <span class="keyword">let</span> pt2 = percentPoint(pct - <span class="number">0.01</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> angle = calculateDirection(pt1, pt2)</span><br><span class="line">            <span class="keyword">let</span> transform = <span class="type">CGAffineTransform</span>(translationX: pt1.x, y: pt1.y).rotated(by: angle)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> <span class="type">ProjectionTransform</span>(transform)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">percentPoint</span><span class="params">(<span class="number">_</span> percent: CGFloat)</span></span> -&gt; <span class="type">CGPoint</span> &#123;</span><br><span class="line">        <span class="comment">// percent difference between points</span></span><br><span class="line">        <span class="keyword">let</span> diff: <span class="type">CGFloat</span> = <span class="number">0.001</span></span><br><span class="line">        <span class="keyword">let</span> comp: <span class="type">CGFloat</span> = <span class="number">1</span> - diff</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// handle limits</span></span><br><span class="line">        <span class="keyword">let</span> pct = percent &gt; <span class="number">1</span> ? <span class="number">0</span> : (percent &lt; <span class="number">0</span> ? <span class="number">1</span> : percent)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> f = pct &gt; comp ? comp : pct</span><br><span class="line">        <span class="keyword">let</span> t = pct &gt; comp ? <span class="number">1</span> : pct + diff</span><br><span class="line">        <span class="keyword">let</span> tp = path.trimmedPath(from: f, to: t)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="type">CGPoint</span>(x: tp.boundingRect.midX, y: tp.boundingRect.midY)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">calculateDirection</span><span class="params">(<span class="number">_</span> pt1: CGPoint,<span class="number">_</span> pt2: CGPoint)</span></span> -&gt; <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> a = pt2.x - pt1.x</span><br><span class="line">        <span class="keyword">let</span> b = pt2.y - pt1.y</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> angle = a &lt; <span class="number">0</span> ? atan(<span class="type">Double</span>(b / a)) : atan(<span class="type">Double</span>(b / a)) - <span class="type">Double</span>.pi</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="type">CGFloat</span>(angle)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整的代码可在本页面顶部链接的gist文件中以 <strong>Example8</strong> 的形式提供。</p>
+<h2 id="Ignored-By-Layout"><a href="#Ignored-By-Layout" class="headerlink" title="Ignored By Layout"></a>Ignored By Layout</h2><p>我们对<code>GeometryEffect</code>的最后技巧是方 <a href="https://developer.apple.com/documentation/swiftui/geometryeffect/ignoredbylayout(" target="_blank" rel="noopener">.ignoredByLayout()</a>/) 。让我们看看文档中是怎么说的：</p>
+<blockquote>
+<p>Returns an effect that produces the same geometry transform as this effect, but only applies the transform while rendering its view.</p>
+<p>返回一个产生与此效果相同的几何变换的效果，但只在渲染其视图时应用该变换。</p>
+<p>Use this method to disable layout changes during transitions. The view ignores the transform returned by this method while the view is performing its layout calculations.</p>
+<p>使用此方法可以在转换期间禁用布局更改。在视图执行布局计算时，视图将忽略此方法返回的变换。</p>
+</blockquote>
+<p>我很快就会介绍过渡的内容。同时，让我介绍一个例子，使用<code>.ignoredByLayout()</code>有一些明显的效果。我们将看到<code>GeometryReader</code>是如何报告不同的位置的，这取决于效果是如何被添加的（即，有或没有<code>.ignoredByLayout()</code>）。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/6227090f80410efbd2de83afea234609.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> animate = <span class="literal">false</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">VStack</span> &#123;</span><br><span class="line">            <span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">5</span>)</span><br><span class="line">                .foregroundColor(.green)</span><br><span class="line">                .frame(width: <span class="number">300</span>, height: <span class="number">50</span>)</span><br><span class="line">                .overlay(<span class="type">ShowSize</span>())</span><br><span class="line">                .modifier(<span class="type">MyEffect</span>(x: animate ? -<span class="number">10</span> : <span class="number">10</span>))</span><br><span class="line">            </span><br><span class="line">            <span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">5</span>)</span><br><span class="line">                .foregroundColor(.blue)</span><br><span class="line">                .frame(width: <span class="number">300</span>, height: <span class="number">50</span>)</span><br><span class="line">                .overlay(<span class="type">ShowSize</span>())</span><br><span class="line">                .modifier(<span class="type">MyEffect</span>(x: animate ? <span class="number">10</span> : -<span class="number">10</span>).ignoredByLayout())</span><br><span class="line">            </span><br><span class="line">        &#125;.onAppear &#123;</span><br><span class="line">            withAnimation(<span class="type">Animation</span>.easeInOut(duration: <span class="number">1.0</span>).repeatForever()) &#123;</span><br><span class="line">                <span class="keyword">self</span>.animate = <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyEffect</span>: <span class="title">GeometryEffect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x: <span class="type">CGFloat</span> = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; x &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; x = newValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">effectValue</span><span class="params">(size: CGSize)</span></span> -&gt; <span class="type">ProjectionTransform</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">ProjectionTransform</span>(<span class="type">CGAffineTransform</span>(translationX: x, y: <span class="number">0</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ShowSize</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">GeometryReader</span> &#123; proxy <span class="keyword">in</span></span><br><span class="line">            <span class="type">Text</span>(<span class="string">"x = <span class="subst">\(Int(proxy.frame(<span class="keyword">in</span>: .global)</span>.minX))"</span>)</span><br><span class="line">                .foregroundColor(.white)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="接下来有什么内容？"><a href="#接下来有什么内容？" class="headerlink" title="接下来有什么内容？"></a>接下来有什么内容？</h1><p>我们今天所做的三个例子，几乎没有什么共同点，只是它们都使用相同的协议来实现其目标。<code>GeometryEffect</code>很简单：它只有一个方法需要实现，然而，它的可能性是无穷的，我们只需要运用一点想象力。</p>
+<p>接下来，我们将介绍本系列的最后一个协议: <code>AnimatableModifier</code>。如果<code>GeometryEffect</code>很强大，那就等着看你能用<code>AnimatableModifier</code>做的所有精彩事情吧。下面是整个系列的一个快速预览:</p>
+<p><a href="https://swiftui-lab.com/wp-content/uploads/2019/08/animations.mp4" target="_blank" rel="noopener">https://swiftui-lab.com/wp-content/uploads/2019/08/animations.mp4</a></p>
+<blockquote>
+<p>译自 <a href="https://swiftui-lab.com/" target="_blank" rel="noopener">The SwiftUI Lab</a> 的 <a href="https://swiftui-lab.com/swiftui-animations-part2/" target="_blank" rel="noopener">Advanced SwiftUI Animations – Part 2: GeometryEffect</a></p>
+<p>本文的完整示例代码可在以下位置找到：</p>
+<p><a href="https://gist.github.com/swiftui-lab/e5901123101ffad6d39020cc7a810798" target="_blank" rel="noopener">https://gist.github.com/swiftui-lab/e5901123101ffad6d39020cc7a810798</a></p>
+<p>示例8 需要的图片资源。从这里下载：</p>
+<p><a href="https://swiftui-lab.com/?smd_process_download=1&amp;download_id=916" target="_blank" rel="noopener">https://swiftui-lab.com/?smd_process_download=1&amp;download_id=916</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/高级-SwiftUI-动画-—-Part-2：GeometryEffect/">高级 SwiftUI 动画 — Part 2：GeometryEffect</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2022年04月06日 - 10:04</p>
+  <p><span>最后更新:</span>2022年04月06日 - 10:04</p>
+  <p><span>原始链接:</span><a href="/高级-SwiftUI-动画-—-Part-2：GeometryEffect/" title="高级 SwiftUI 动画 — Part 2：GeometryEffect">https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-2：GeometryEffect/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-2：GeometryEffect/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SwiftUI/" rel="tag"><i class="fa fa-tag"></i> SwiftUI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/高级-SwiftUI-动画-—-Part-1：Paths/" rel="next" title="高级 SwiftUI 动画 — Part 1：Paths">
+                <i class="fa fa-chevron-left"></i> 高级 SwiftUI 动画 — Part 1：Paths
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/" rel="prev" title="高级 SwiftUI 动画 — Part 3：AnimatableModifier">
+                高级 SwiftUI 动画 — Part 3：AnimatableModifier <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GeometryEffect"><span class="nav-number">1.</span> <span class="nav-text">GeometryEffect</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Animation-Keyframes"><span class="nav-number">2.</span> <span class="nav-text">Animation Keyframes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟"><span class="nav-number">2.1.</span> <span class="nav-text">模拟</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画反馈"><span class="nav-number">3.</span> <span class="nav-text">动画反馈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#落实我们的效果"><span class="nav-number">3.1.</span> <span class="nav-text">落实我们的效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让视图遵循一个路径"><span class="nav-number">4.</span> <span class="nav-text">让视图遵循一个路径</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找路径中的x、y位置"><span class="nav-number">4.1.</span> <span class="nav-text">寻找路径中的x、y位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找方向"><span class="nav-number">4.2.</span> <span class="nav-text">寻找方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把所有的内容结合在一起"><span class="nav-number">4.3.</span> <span class="nav-text">把所有的内容结合在一起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ignored-By-Layout"><span class="nav-number">4.4.</span> <span class="nav-text">Ignored By Layout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接下来有什么内容？"><span class="nav-number">5.</span> <span class="nav-text">接下来有什么内容？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共117.9k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
