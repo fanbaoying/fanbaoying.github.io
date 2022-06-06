@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="SwiftUI," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言前三篇高级 SwiftUI 动画系列是作者在 WWDC 2021 之前实战总结的内容。对 2021 年 WWDC 介绍的 TimelineView 和 Canvas 感到激动。这开启了一个全新的可能性，笔者将试图在这一部分和下一部分的系列中阐释这些可能性。  在这篇文章中，我们将详细地探索 TimelineView 。我们将从最常见的用途缓慢开始。然而笔者认为，最大的可能性来自于 Timeli">
+<meta name="keywords" content="SwiftUI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高级 SwiftUI 动画进阶 —— Part4：TimelineView">
+<meta property="og:url" content="https://fanbaoying.github.io/高级-SwiftUI-动画进阶-——-Part4：TimelineView/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言前三篇高级 SwiftUI 动画系列是作者在 WWDC 2021 之前实战总结的内容。对 2021 年 WWDC 介绍的 TimelineView 和 Canvas 感到激动。这开启了一个全新的可能性，笔者将试图在这一部分和下一部分的系列中阐释这些可能性。  在这篇文章中，我们将详细地探索 TimelineView 。我们将从最常见的用途缓慢开始。然而笔者认为，最大的可能性来自于 Timeli">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://swiftui-lab.com/wp-content/uploads/2021/06/hello-there-25.gif">
+<meta property="og:image" content="https://swiftui-lab.com/wp-content/uploads/2021/06/emojis-changing-one.gif">
+<meta property="og:image" content="https://swiftui-lab.com/wp-content/uploads/2021/06/emojis-changing-two.gif">
+<meta property="og:image" content="https://swiftui-lab.com/wp-content/uploads/2021/06/anim-part4-example-3.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/d4c8ee7e28437fd6880043228b366cf7.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/603741f728ab66e0171c89ebe7ff95d0.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/305e84985d4d239e6ae75c508a025062.gif">
+<meta property="og:updated_time" content="2022-04-06T02:33:46.416Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高级 SwiftUI 动画进阶 —— Part4：TimelineView">
+<meta name="twitter:description" content="前言前三篇高级 SwiftUI 动画系列是作者在 WWDC 2021 之前实战总结的内容。对 2021 年 WWDC 介绍的 TimelineView 和 Canvas 感到激动。这开启了一个全新的可能性，笔者将试图在这一部分和下一部分的系列中阐释这些可能性。  在这篇文章中，我们将详细地探索 TimelineView 。我们将从最常见的用途缓慢开始。然而笔者认为，最大的可能性来自于 Timeli">
+<meta name="twitter:image" content="https://swiftui-lab.com/wp-content/uploads/2021/06/hello-there-25.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/高级-SwiftUI-动画进阶-——-Part4：TimelineView/"/>
+
+
+
+
+
+  <title>高级 SwiftUI 动画进阶 —— Part4：TimelineView | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/高级-SwiftUI-动画进阶-——-Part4：TimelineView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高级 SwiftUI 动画进阶 —— Part4：TimelineView</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-06T10:31:24+08:00">
+                2022-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SwiftUI-动画/" itemprop="url" rel="index">
+                    <span itemprop="name">SwiftUI 动画</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 6,338字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 27分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前三篇<a href="https://xiaozhuanlan.com/topic/6089153247" target="_blank" rel="noopener">高级 SwiftUI 动画系列</a>是作者在 WWDC 2021 之前实战总结的内容。对 2021 年 WWDC 介绍的 <code>TimelineView</code> 和 <code>Canvas</code> 感到激动。这开启了一个全新的可能性，笔者将试图在这一部分和下一部分的系列中阐释这些可能性。</p>
+<p><img src="https://swiftui-lab.com/wp-content/uploads/2021/06/hello-there-25.gif" alt="" title="Hello There"></p>
+<p>在这篇文章中，我们将详细地探索 <code>TimelineView</code> 。我们将从最常见的用途缓慢开始。然而笔者认为，最大的可能性来自于 <code>TimelineView</code> 和我们已知现有的动画相结合。在其他事物中，通过一点创意，这样的组合将让我们最终实现“关键帧类似”的动画。</p>
+<p>在第 5 部分，我们将探索 <code>Canvas</code> 视图，以及它和我们的新朋友 <code>TimelineView</code> 相结合是如此的优秀。</p>
+<p>上文中展示的动画，是使用本文中介绍的技术创建的。该动画的完整代码可在此 <a href="https://gist.github.com/swiftui-lab/c1d089207d6f7b365729b1af2e695cc4" target="_blank" rel="noopener">gist</a> 中找到。</p>
+<a id="more"></a>
+<h2 id="TimelineView-的组件"><a href="#TimelineView-的组件" class="headerlink" title="TimelineView 的组件"></a>TimelineView 的组件</h2><p><code>TimelineView</code> 是一个容器视图，它以相关调度程序确定的频率重新评估其内容：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">TimelineView</span>(.periodic(from: .now, by: <span class="number">0.5</span>)) &#123; timeline <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">    <span class="type">ViewToEvaluatePeriodically</span>()</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>TimelineView</code> 接收调度程序作为参数。 稍后我们将详细认识它们，现在，上述示例使用每半秒触发一次的调度程序。</p>
+<p>另一个参数是一个内容闭包，它接收一个看起来像这样的 <code>TimelineView.Context</code> 参数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> cadence: <span class="type">Cadence</span></span><br><span class="line">    <span class="keyword">let</span> date: <span class="type">Date</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Cadence</span>: <span class="title">Comparable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">case</span> live</span><br><span class="line">        <span class="keyword">case</span> seconds</span><br><span class="line">        <span class="keyword">case</span> minutes</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Cadence</code> 是一个枚举类型，我们可以使用它来决定在我们的视图中显示什么。 可能的值是：live、seconds 和 minutes。 以此为提示，避免显示与 <code>Cadence</code> 无关的信息。 典型的例子，是避免在具有秒或分钟节奏的调度程序的时钟上显示毫秒。</p>
+<p>请注意，<code>Cadence</code> 不是你可以更改的东西，而是反映设备状态的东西。文档仅提供了一个例子。 在 watchOS 上，降低手腕时 <code>Cadence</code> 会减慢。 如果你发现了 <code>Cadence</code> 发生变化的其他情况，笔者非常想知道。 请在下方发表评论。</p>
+<p>好吧，这一切看起来都很棒，但是我们应该注意许多微妙之处。 让我们开始构建我们的第一个 <code>TimelineView</code> 动画，看看它们是什么。</p>
+<h2 id="理解-TimelineView-如何工作"><a href="#理解-TimelineView-如何工作" class="headerlink" title="理解 TimelineView 如何工作"></a>理解 TimelineView 如何工作</h2><p>观察下面的代码。 我们有两个随机变化的表情符号。 两者之间的唯一区别是，一个写在内容闭包中，而另一个被放在单独的视图中以提高可读性。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ManyFaces</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> emoji = [<span class="string">"😀"</span>, <span class="string">"😬"</span>, <span class="string">"😄"</span>, <span class="string">"🙂"</span>, <span class="string">"😗"</span>, <span class="string">"🤓"</span>, <span class="string">"😏"</span>, <span class="string">"😕"</span>, <span class="string">"😟"</span>, <span class="string">"😎"</span>, <span class="string">"😜"</span>, <span class="string">"😍"</span>, <span class="string">"🤪"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">TimelineView</span>(.periodic(from: .now, by: <span class="number">0.2</span>)) &#123; timeline <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">            <span class="type">HStack</span>(spacing: <span class="number">120</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">let</span> randomEmoji = <span class="type">ManyFaces</span>.emoji.randomElement() ?? <span class="string">""</span></span><br><span class="line">            </span><br><span class="line">                <span class="type">Text</span>(randomEmoji)</span><br><span class="line">                    .font(.largeTitle)</span><br><span class="line">                    .scaleEffect(<span class="number">4.0</span>)</span><br><span class="line">                </span><br><span class="line">                <span class="type">SubView</span>()</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SubView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> randomEmoji = <span class="type">ManyFaces</span>.emoji.randomElement() ?? <span class="string">""</span></span><br><span class="line"></span><br><span class="line">            <span class="type">Text</span>(randomEmoji)</span><br><span class="line">                .font(.largeTitle)</span><br><span class="line">                .scaleEffect(<span class="number">4.0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，让我们看下运行代码会发生什么：</p>
+<p><img src="https://swiftui-lab.com/wp-content/uploads/2021/06/emojis-changing-one.gif" alt="" title="Emoji"></p>
+<p>惊了？ 为什么左边的 emoji 会变，而另一个总是悲伤？ 事实证明， <code>SubView</code> 没有接收到任何变化的参数，这意味着它没有依赖关系。 <code>SwiftUI</code> 没有理由重新计算视图的主体。 2021 年 WWDC 的一个精彩演讲是 <code>Demystify SwiftUI</code>。 它解释了视图标识、生命周期和依赖关系。 所有这些主题对于理解时间线为何如此运行都非常重要。</p>
+<p>为了解决这个问题，我们更改了 <code>SubView</code> 视图以添加一个参数，该参数将随着时间轴的每次更新而改变。 请注意，我们不需要使用参数，它只需要在那里。 尽管如此，我们将看到这个未使用的值稍后会非常有用。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SubView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> date: <span class="type">Date</span> <span class="comment">// just by declaring it, the view will now be recomputed apropriately.</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> randomEmoji = <span class="type">ManyFaces</span>.emoji.randomElement() ?? <span class="string">""</span></span><br><span class="line"></span><br><span class="line">        <span class="type">Text</span>(randomEmoji)</span><br><span class="line">            .font(.largeTitle)</span><br><span class="line">            .scaleEffect(<span class="number">4.0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在 <code>SubView</code> 是这样创建的：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SubView</span>(date: timeline.date)</span><br></pre></td></tr></table></figure>
+<p>最后，我们的两个表情都可以体验到情绪的狂飙：</p>
+<p><img src="https://swiftui-lab.com/wp-content/uploads/2021/06/emojis-changing-two.gif" alt="" title="Emoji"></p>
+<h2 id="按照时间线执行"><a href="#按照时间线执行" class="headerlink" title="按照时间线执行"></a>按照时间线执行</h2><p>大多数关于 <code>TimelineView</code> 的示例（截至编写本文）通常是关于绘制时钟的。 这就说得通了。 时间线提供的数据毕竟是一个日期类型实例。</p>
+<p>有史以来最简单的 <code>TimelineView</code> 时钟：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">TimelineView</span>(.periodic(from: .now, by: <span class="number">1.0</span>)) &#123; timeline <span class="keyword">in</span></span><br><span class="line">            </span><br><span class="line">    <span class="type">Text</span>(<span class="string">"<span class="subst">\(timeline.date)</span>"</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时钟可能会变得更加精致。 例如，使用带有形状的模拟时钟，或使用新的 <code>Canvas</code> 视图绘制时钟。</p>
+<p>但是，<code>TimelineView</code> 不仅仅用于时钟。 在许多情况下，我们希望每次时间线更新我们的视图时，视图处理一些事情。 放置此代码的最佳位置是 <code>onChange(of:perform)</code> 闭包。</p>
+<p>在以下示例中，我们使用此技术每 3 秒更新一次模型。</p>
+<p><img src="https://swiftui-lab.com/wp-content/uploads/2021/06/anim-part4-example-3.gif" alt="" title="Animation"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ExampleView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">TimelineView</span>(.periodic(from: .now, by: <span class="number">3.0</span>)) &#123; timeline <span class="keyword">in</span></span><br><span class="line">            <span class="type">QuipView</span>(date: timeline.date)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">QuipView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">        @<span class="type">StateObject</span> <span class="keyword">var</span> quips = <span class="type">QuipDatabase</span>()</span><br><span class="line">        <span class="keyword">let</span> date: <span class="type">Date</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">"_<span class="subst">\(quips.sentence)</span>_"</span>)</span><br><span class="line">                .onChange(of: date) &#123; <span class="number">_</span> <span class="keyword">in</span></span><br><span class="line">                    quips.<span class="built_in">advance</span>()</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuipDatabase</span>: <span class="title">ObservableObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> sentences = [</span><br><span class="line">        <span class="string">"There are two types of people, those who can extrapolate from incomplete data"</span>,</span><br><span class="line">        <span class="string">"After all is said and done, more is said than done."</span>,</span><br><span class="line">        <span class="string">"Haikus are easy. But sometimes they don't make sense. Refrigerator."</span>,</span><br><span class="line">        <span class="string">"Confidence is the feeling you have before you really understand the problem."</span></span><br><span class="line">    ]</span><br><span class="line">    </span><br><span class="line">    @<span class="type">Published</span> <span class="keyword">var</span> sentence: <span class="type">String</span> = <span class="type">QuipDatabase</span>.sentences[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> idx = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">advance</span><span class="params">()</span></span> &#123;</span><br><span class="line">        idx = (idx + <span class="number">1</span>) % <span class="type">QuipDatabase</span>.sentences.<span class="built_in">count</span></span><br><span class="line">        </span><br><span class="line">        sentence = <span class="type">QuipDatabase</span>.sentences[idx]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，每次时间线更新，我们的 <code>QuipView</code> 都会刷新两次。 也就是说，在时间线更新时一次，然后在之后立即再次，因为通过调用 <code>quips.advance()</code> 导致 <code>quips.sentence</code> 的 <code>@Published</code> 值发生变化并触发视图更新。 这很好，但需要注意，因为稍后它会变得更加重要。</p>
+<blockquote>
+<p>我们从中得出的一个重要概念是，尽管时间线可能会产生一定数量的更新，但视图的内容很可能会更新更多次。</p>
+</blockquote>
+<h2 id="TimelineView-与传统动画相结合"><a href="#TimelineView-与传统动画相结合" class="headerlink" title="TimelineView 与传统动画相结合"></a>TimelineView 与传统动画相结合</h2><p>新的 <code>TimelineView</code> 带来了很多新的机会。 正如我们将在以后的文章中看到的那样，将它与 <code>Canvas</code> 结合起来是一个很好的补充。 但为动画的每一帧编写所有代码给了我们带来了很多负担。 笔者将在本节中介绍的技术，使用我们已熟知的动画并且热衷于视图动画从一个时间线更新到下一个时间线。 这最终将让我们在纯 <code>SwiftUI</code> 中创建我们自己的类似关键帧的动画。</p>
+<p>但是让我们慢慢开始，从我们的小项目开始：如下所示的节拍器。 调高音量播放视频，欣赏节拍声如何与钟摆同步。 此外，就像节拍器一样，每隔几拍就会响起一次铃声：</p>
+<p><a href="https://swiftui-lab.com/wp-content/uploads/2021/06/metronome.mp4" target="_blank" rel="noopener">https://swiftui-lab.com/wp-content/uploads/2021/06/metronome.mp4</a></p>
+<p>首先，让我们看看我们的时间线是什么样的：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Metronome</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> bpm: <span class="type">Double</span> = <span class="number">60</span> <span class="comment">// beats per minute</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">TimelineView</span>(.periodic(from: .now, by: <span class="number">60</span> / bpm)) &#123; timeline <span class="keyword">in</span></span><br><span class="line">            <span class="type">MetronomeBack</span>()</span><br><span class="line">                .overlay(<span class="type">MetronomePendulum</span>(bpm: bpm, date: timeline.date))</span><br><span class="line">                .overlay(<span class="type">MetronomeFront</span>(), alignment: .bottom)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>节拍器速度通常以 bpm（每分钟节拍数）指定。 该示例使用周期性调度程序，每 60/bpm 秒重复一次。 对于我们的例子，<code>bpm = 60</code>，所以调度程序每 1 秒触发一次。 即每分钟 60 次。</p>
+<p><code>Metronome</code> 视图由三层组成：<code>MetronomeBack</code>、<code>MetronomePendulum</code> 和 <code>MetronomeFront</code>。 它们按此顺序叠加。 每次时间线更新都必须刷新的唯一视图是 <code>MetronomePendulum</code>，它可以左右摆动。 其他视图不会刷新，因为它们没有依赖关系。</p>
+<p>MetronomeBack 和 Metronome Front 的代码非常简单，它们使用了一种称为圆形梯形的自定义形状。 为避免使此页面过长，自定义形状的代码在此 <a href="https://gist.github.com/swiftui-lab/62c3a7512644271e7881985f0b4f7357" target="_blank" rel="noopener">gist</a> 。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MetronomeBack</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> c1 = <span class="type">Color</span>(red: <span class="number">0</span>, green: <span class="number">0.3</span>, blue: <span class="number">0.5</span>, opacity: <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">let</span> c2 = <span class="type">Color</span>(red: <span class="number">0</span>, green: <span class="number">0.46</span>, blue: <span class="number">0.73</span>, opacity: <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> gradient = <span class="type">LinearGradient</span>(colors: [c1, c2],</span><br><span class="line">                                      startPoint: .topLeading,</span><br><span class="line">                                      endPoint: .bottomTrailing)</span><br><span class="line">        </span><br><span class="line">        <span class="type">RoundedTrapezoid</span>(pct: <span class="number">0.5</span>, cornerSizes: [<span class="type">CGSize</span>(width: <span class="number">15</span>, height: <span class="number">15</span>)])</span><br><span class="line">            .foregroundStyle(gradient)</span><br><span class="line">            .frame(width: <span class="number">200</span>, height: <span class="number">350</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MetronomeFront</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">RoundedTrapezoid</span>(pct: <span class="number">0.85</span>, cornerSizes: [.zero, <span class="type">CGSize</span>(width: <span class="number">10</span>, height: <span class="number">10</span>)])</span><br><span class="line">            .foregroundStyle(<span class="type">Color</span>(red: <span class="number">0</span>, green: <span class="number">0.46</span>, blue: <span class="number">0.73</span>, opacity: <span class="number">1</span>))</span><br><span class="line">            .frame(width: <span class="number">180</span>, height: <span class="number">100</span>).padding(<span class="number">10</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然而，<code>MetronomePendulum</code> 视图是事情开始变得有趣的地方：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MetronomePendulum</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    @<span class="type">State</span> <span class="keyword">var</span> pendulumOnLeft: <span class="type">Bool</span> = <span class="literal">false</span></span><br><span class="line">    @<span class="type">State</span> <span class="keyword">var</span> bellCounter = <span class="number">0</span> <span class="comment">// sound bell every 4 beats</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> bpm: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> date: <span class="type">Date</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Pendulum</span>(angle: pendulumOnLeft ? -<span class="number">30</span> : <span class="number">30</span>)</span><br><span class="line">            .animation(.easeInOut(duration: <span class="number">60</span> / bpm), value: pendulumOnLeft)</span><br><span class="line">            .onChange(of: date) &#123; <span class="number">_</span> <span class="keyword">in</span> beat() &#125;</span><br><span class="line">            .onAppear &#123; beat() &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">beat</span><span class="params">()</span></span> &#123;</span><br><span class="line">        pendulumOnLeft.toggle() <span class="comment">// triggers the animation</span></span><br><span class="line">        bellCounter = (bellCounter + <span class="number">1</span>) % <span class="number">4</span> <span class="comment">// keeps count of beats, to sound bell every 4th</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// sound bell or beat?</span></span><br><span class="line">        <span class="keyword">if</span> bellCounter == <span class="number">0</span> &#123;</span><br><span class="line">            bellSound?.play()</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            beatSound?.play()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Pendulum</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> angle: <span class="type">Double</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="type">Capsule</span>()</span><br><span class="line">                .fill(.red)</span><br><span class="line">                .frame(width: <span class="number">10</span>, height: <span class="number">320</span>)</span><br><span class="line">                .overlay(weight)</span><br><span class="line">                .rotationEffect(<span class="type">Angle</span>.degrees(angle), anchor: .bottom)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> weight: some <span class="type">View</span> &#123;</span><br><span class="line">            <span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">10</span>)</span><br><span class="line">                .fill(.orange)</span><br><span class="line">                .frame(width: <span class="number">35</span>, height: <span class="number">35</span>)</span><br><span class="line">                .padding(.bottom, <span class="number">200</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们的视图需要跟踪我们在动画中的位置。 我称之为动画阶段。 由于我们需要跟踪这些阶段，我们将使用 <code>@State</code> 变量：</p>
+<ol>
+<li><code>pendulumOnLeft</code>: 跟踪钟摆 <code>Pendulum</code> 摆动的方向。</li>
+<li><code>bellCounter</code>: 记录节拍的数量，以确定是否应该听到节拍或铃声。</li>
+</ol>
+<p>该示例使用 <code>.animation(_:value:)</code> 修饰语。 此版本的修改器，在指定值更改时应用动画。 请注意，也可以使用显式动画。 无需调用 <code>.animation()</code>，只需在 <code>withAnimation</code> 闭包内切换 <code>pendulumOnLeft</code> 变量。</p>
+<p>为了使我们的视图在动画阶段前进，我们使用 <code>onChange(of:perform)</code> 修饰符监视日期的变化，就像我们在前面的 quip 示例中所做的那样。</p>
+<p>除了在每次日期值更改时推进动画阶段，我们还在 <code>onAppear</code> 闭包中执行此操作。 否则，一开始就会有停顿。</p>
+<p>最后一段与 <code>SwiftUI</code> 无关的代码是创建 <code>NSSound</code> 实例。 为了避免使示例过于复杂，笔者创建了几个全局变量：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> bellSound: <span class="type">NSSound</span>? = &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> url = <span class="type">Bundle</span>.main.url(forResource: <span class="string">"bell"</span>, withExtension: <span class="string">"mp3"</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="literal">nil</span> &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">NSSound</span>(contentsOf: url, byReference: <span class="literal">true</span>)</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> beatSound: <span class="type">NSSound</span>? = &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> url = <span class="type">Bundle</span>.main.url(forResource: <span class="string">"beat"</span>, withExtension: <span class="string">"mp3"</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="literal">nil</span> &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">NSSound</span>(contentsOf: url, byReference: <span class="literal">true</span>)</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p>如果你需要声音文件，可以到 freesound 下载：<a href="https://freesound.org/" target="_blank" rel="noopener">https://freesound.org/</a></p>
+<p>示例代码中的声音为：</p>
+<ul>
+<li><p>钟声: <a href="https://freesound.org/people/m1rk0/sounds/50071/" target="_blank" rel="noopener">metronome_pling</a> 根据许可证 CC BY 3.0 (m1rk0)</p>
+</li>
+<li><p>节拍声: <a href="https://freesound.org/people/Druminfected/sounds/250552/" target="_blank" rel="noopener">metronome.wav</a> 根据 CC0 1.0 </p>
+</li>
+</ul>
+<h2 id="TimelineScheduler"><a href="#TimelineScheduler" class="headerlink" title="TimelineScheduler"></a>TimelineScheduler</h2><p>正如我们已经看到的，<code>TimelineView</code> 需要一个 <code>TimelineScheduler</code> 来确定何时更新其内容。 <code>SwiftUI</code> 提供了一些预定义的调度器，比如我们使用的那些。 但是，我们也可以创建自己的自定义调度程序。 笔者将在下一节中详细说明。 但让我们从已有的调度器开始。</p>
+<p>时间线调度器基本上是一个采用 <code>TimelineScheduler</code> 协议的结构。 现有的类型有：</p>
+<ul>
+<li><code>AnimationTimelineSchedule</code>： 尽可能快地更新，给你绘制动画每一帧的机会。 它具有让你限制更新频率和暂停更新的参数。 在 <code>TimelineView</code> 与新的 <code>Canvas</code> 视图结合使用时，这将非常有用。</li>
+<li><code>EveryMinuteTimelineSchedule</code>： 顾名思义，它每分钟更新一次，在每分钟开始时更新。</li>
+<li><code>ExplicitTimelineSchedule</code>： 可以提供一个数组，其中包含你希望时间线更新的所有时间。</li>
+<li><code>PeriodicTimelineSchedule</code>： 可以提供开始时间和发生更新的频率。</li>
+</ul>
+<p>尽管你可以以这种方式创建 <code>Timeline</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Timeline</span>(<span class="type">EveryMinuteTimelineSchedule</span>()) &#123; timeline <span class="keyword">in</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自 Swift 5.5 和 <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0299-extend-generic-static-member-lookup.md" target="_blank" rel="noopener">SE-0299</a> 的引入以来，我们现在已经支持类枚举语法。 这使代码更具可读性并改进了自动完成功能。 建议我们改用这种语法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">TimelineView</span>(.everyMinute) &#123; timeline <span class="keyword">in</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>注意：你可能听说过，但今年也引入了样式。 更好的是，对于样式，只要你使用的是 Swift 5.5，你就可以使用以前的版本进行反向部署。</em></p>
+<p>对于每个现有的调度程序，可能有多个类似枚举的选项。 例如，这两行代码创建了 <code>AnimationTimelineSchedule</code> 类型的调度程序：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">TimelineView</span>(.animation) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="type">TimelineView</span>(.animation(minimumInterval: <span class="number">0.3</span>, paused: <span class="literal">false</span>)) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>你甚至可以创建属于自己的调度程序（不要忘记 <code>static</code> 关键字）：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">TimelineSchedule</span> <span class="title">where</span> <span class="title">Self</span> == <span class="title">PeriodicTimelineSchedule</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> everyFiveSeconds: <span class="type">PeriodicTimelineSchedule</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; .<span class="keyword">init</span>(from: .now, by: <span class="number">5.0</span>) &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">TimelineView</span>(.everyFiveSeconds) &#123; timeline <span class="keyword">in</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义-TimelineScheduler"><a href="#自定义-TimelineScheduler" class="headerlink" title="自定义 TimelineScheduler"></a>自定义 TimelineScheduler</h2><p>如果现有调度程序都不符合你的需求，可以创建自己的调度程序。 思考以下动画： </p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/d4c8ee7e28437fd6880043228b366cf7.gif" alt=""></p>
+<p>在这个动画中，我们有一个心形表情符号，它会以不规则的间隔和不规则的幅度改变其比例。<br>它以 1.0 的比例开始，0.2 秒后增长到 1.6，0.2 秒后增长到 2.0，然后缩小到 1.0 并保持 0.4 秒，然后重新开始。 换一种说法：</p>
+<p>尺度变化：1.0 → 1.6 → 2.0 → 重新开始</p>
+<p>变化之间的时间：0.2 → 0.2 → 0.4 → 重新开始</p>
+<p>我们可以创建一个 <code>HeartTimelineSchedule</code>，它完全按照心脏的需要进行更新。 但是以可重用性的名义，让我们做一些更通用的东西，将来可以重用。</p>
+<p>我们新调度程序将被称为：<code>CyclicTimelineSchedule</code>，并将接收一组时间偏移量。 每个偏移值都将相对于数组中的前一个值。 当调度程序用尽偏移量时，它将循环回到数组的开头并重新开始。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CyclicTimelineSchedule</span>: <span class="title">TimelineSchedule</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timeOffsets: [<span class="type">TimeInterval</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">entries</span><span class="params">(from startDate: Date, mode: TimelineScheduleMode)</span></span> -&gt; <span class="type">Entries</span> &#123;</span><br><span class="line">        <span class="type">Entries</span>(last: startDate, offsets: timeOffsets)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Entries</span>: <span class="title">Sequence</span>, <span class="title">IteratorProtocol</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> last: <span class="type">Date</span></span><br><span class="line">        <span class="keyword">let</span> offsets: [<span class="type">TimeInterval</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> idx: <span class="type">Int</span> = -<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">next</span><span class="params">()</span></span> -&gt; <span class="type">Date</span>? &#123;</span><br><span class="line">            idx = (idx + <span class="number">1</span>) % offsets.<span class="built_in">count</span></span><br><span class="line">            </span><br><span class="line">            last = last.addingTimeInterval(offsets[idx])</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> last</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现 <code>TimelineSchedule</code> 有几个要求：</p>
+<ul>
+<li>提供 <code>entry(from:mode:)</code> 函数。</li>
+<li>我们 <code>Entries</code> 的类型必须符合 <code>Sequence where Entries.Element == Date</code></li>
+</ul>
+<p>有几种方法可以符合 <code>Sequence</code>。 此示例实现 <code>IteratorProtocol</code> 并声明符合 <code>Sequence</code> 和 <code>IteratorProtocol</code>。 你可以在<a href="https://developer.apple.com/documentation/swift/sequence" target="_blank" rel="noopener">此处</a>阅读有关序列一致性的更多信息。</p>
+<p>对于实现 <code>IteratorProtocol</code> 的 <code>Entries</code>，我们必须编写 <code>next()</code> 函数，该函数在时间线中生成日期。 我们的调度程序会记住最后日期并添加适当的偏移量。 当没有更多的偏移量时，它会循环回到数组中的第一个。</p>
+<p>最后，锦上添花的是，为我们的调度器创建一个类似枚举的初始化器：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">TimelineSchedule</span> <span class="title">where</span> <span class="title">Self</span> == <span class="title">CyclicTimelineSchedule</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">cyclic</span><span class="params">(timeOffsets: [TimeInterval])</span></span> -&gt; <span class="type">CyclicTimelineSchedule</span> &#123;</span><br><span class="line">            .<span class="keyword">init</span>(timeOffsets: timeOffsets)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们已经准备好 <code>TimelineSchedue</code> 类型了，让我们为我们的心脏注入一些活力：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BeatingHeart</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">TimelineView</span>(.cyclic(timeOffsets: [<span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.4</span>])) &#123; timeline <span class="keyword">in</span></span><br><span class="line">            <span class="type">Heart</span>(date: timeline.date)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Heart</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> phase = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> scales: [<span class="type">CGFloat</span>] = [<span class="number">1.0</span>, <span class="number">1.6</span>, <span class="number">2.0</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> date: <span class="type">Date</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">HStack</span> &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">"❤️"</span>)</span><br><span class="line">                .font(.largeTitle)</span><br><span class="line">                .scaleEffect(scales[phase])</span><br><span class="line">                .animation(.spring(response: <span class="number">0.10</span>,</span><br><span class="line">                                   dampingFraction: <span class="number">0.24</span>,</span><br><span class="line">                                   blendDuration: <span class="number">0.2</span>),</span><br><span class="line">                           value: phase)</span><br><span class="line">                .onChange(of: date) &#123; <span class="number">_</span> <span class="keyword">in</span></span><br><span class="line">                    advanceAnimationPhase()</span><br><span class="line">                &#125;</span><br><span class="line">                .onAppear &#123;</span><br><span class="line">                    advanceAnimationPhase()</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">advanceAnimationPhase</span><span class="params">()</span></span> &#123;</span><br><span class="line">        phase = (phase + <span class="number">1</span>) % scales.<span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你现在应该熟悉这种模式，它与我们使用节拍器的模式相同。 使用 <code>onChange</code> 和 <code>onAppear</code> 推进动画，使用 <code>@State</code> 变量来跟踪动画，并设置一个动画，将我们的视图从一个时间线更新过渡到下一个。 在这种情况下，我们使用 <code>.spring</code> 动画，给它一个很好的摇晃效果。</p>
+<h2 id="关键帧动画"><a href="#关键帧动画" class="headerlink" title="关键帧动画"></a>关键帧动画</h2><p>心脏和节拍器示例在某种程度上是关键帧动画。 我们在整个动画中定义了几个关键点，在这里我们改变了我们视图的参数，并让 <code>SwiftUI</code> 动画这些点之间的过渡。 以下示例将尝试概括该想法，并使其更加明显。 认识我们的新项目朋友，跳跃的家伙：</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/603741f728ab66e0171c89ebe7ff95d0.gif" alt=""></p>
+<p>如果你仔细观察动画，你会注意到这个表情符号角色的许多参数在不同的时间点发生了变化。 这些参数是：<code>y-offset</code>、<code>rotation</code> 和 <code>y-scale</code>。 同样重要的是，动画的不同片段有不同的动画类型（线性、缓入和缓出）。 由于这些是我们更改的参数，因此最好将它们放在一个数组中。 让我们开始： </p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">KeyFrame</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> offset: <span class="type">TimeInterval</span>    </span><br><span class="line">    <span class="keyword">let</span> rotation: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> yScale: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> y: <span class="type">CGFloat</span></span><br><span class="line">    <span class="keyword">let</span> animation: <span class="type">Animation</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> keyframes = [</span><br><span class="line">    <span class="comment">// Initial state, will be used once. Its offset is useless and will be ignored</span></span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.0</span>, rotation: <span class="number">0</span>, yScale: <span class="number">1.0</span>, y: <span class="number">0</span>, animation: <span class="literal">nil</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Animation keyframes</span></span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.2</span>, rotation:   <span class="number">0</span>, yScale: <span class="number">0.5</span>, y:  <span class="number">20</span>, animation: .linear(duration: <span class="number">0.2</span>)),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.4</span>, rotation:   <span class="number">0</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">20</span>, animation: .linear(duration: <span class="number">0.4</span>)),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.5</span>, rotation: <span class="number">360</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">80</span>, animation: .easeOut(duration: <span class="number">0.5</span>)),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.4</span>, rotation: <span class="number">360</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">20</span>, animation: .easeIn(duration: <span class="number">0.4</span>)),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.2</span>, rotation: <span class="number">360</span>, yScale: <span class="number">0.5</span>, y:  <span class="number">20</span>, animation: .easeOut(duration: <span class="number">0.2</span>)),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.4</span>, rotation: <span class="number">360</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">20</span>, animation: .linear(duration: <span class="number">0.4</span>)),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.5</span>, rotation:   <span class="number">0</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">80</span>, animation: .easeOut(duration: <span class="number">0.5</span>)),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.4</span>, rotation:   <span class="number">0</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">20</span>, animation: .easeIn(duration: <span class="number">0.4</span>)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>重要的是要知道，当 <code>TimelineView</code> 出现时，它会绘制我们的视图，即使没有计划的更新，或者它们是否在将来。 当 <code>TimelineView</code> 出现时，它需要显示一些东西，以便绘制我们的视图。 我们将使用第一个关键帧作为我们的视图状态，但是当我们循环时，该帧将被忽略。 这是一个实施决策，你可能需要或想要以不同的方式进行。</p>
+<p>现在，让我们看看我们的时间线：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">JumpingEmoji</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Use all offset, minus the first</span></span><br><span class="line">    <span class="keyword">let</span> offsets = <span class="type">Array</span>(keyframes.<span class="built_in">map</span> &#123; $<span class="number">0</span>.offset &#125;.<span class="built_in">dropFirst</span>())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">TimelineView</span>(.cyclic(timeOffsets: offsets)) &#123; timeline <span class="keyword">in</span></span><br><span class="line">            <span class="type">HappyEmoji</span>(date: timeline.date)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们已经从我们在前一个示例中所做的工作中受益，并重用了 <code>CyclicTimelineScheduler</code>。 如前所述，我们不需要第一个关键帧的偏移量，因此我们将其丢弃。</p>
+<p>现在，有趣的部分：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HappyEmoji</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="comment">// current keyframe number</span></span><br><span class="line">    @<span class="type">State</span> <span class="keyword">var</span> idx: <span class="type">Int</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// timeline update</span></span><br><span class="line">    <span class="keyword">let</span> date: <span class="type">Date</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Text</span>(<span class="string">"😃"</span>)</span><br><span class="line">            .font(.largeTitle)</span><br><span class="line">            .scaleEffect(<span class="number">4.0</span>)</span><br><span class="line">            .modifier(<span class="type">Effects</span>(keyframe: keyframes[idx]))</span><br><span class="line">            .animation(keyframes[idx].animation, value: idx)</span><br><span class="line">            .onChange(of: date) &#123; <span class="number">_</span> <span class="keyword">in</span> advanceKeyFrame() &#125;</span><br><span class="line">            .onAppear &#123; advanceKeyFrame()&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">advanceKeyFrame</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// advance to next keyframe</span></span><br><span class="line">        idx = (idx + <span class="number">1</span>) % keyframes.<span class="built_in">count</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// skip first frame for animation, which we</span></span><br><span class="line">        <span class="comment">// only used as the initial state.</span></span><br><span class="line">        <span class="keyword">if</span> idx == <span class="number">0</span> &#123; idx = <span class="number">1</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Effects</span>: <span class="title">ViewModifier</span> </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> keyframe: <span class="type">KeyFrame</span></span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">body</span><span class="params">(content: Content)</span></span> -&gt; some <span class="type">View</span> &#123;</span><br><span class="line">            content</span><br><span class="line">                .scaleEffect(<span class="type">CGSize</span>(width: <span class="number">1.0</span>, height: keyframe.yScale))</span><br><span class="line">                .rotationEffect(<span class="type">Angle</span>(degrees: keyframe.rotation))</span><br><span class="line">                .offset(y: keyframe.y)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了更好的可读性，我将所有变化的参数放在一个名为 <code>Effects</code> 的修改器中。 如你所见，它还是相同的模式：使用 <code>onChange</code> 和 <code>onAppear</code> 来推进我们的动画，并为每个关键帧片段添加一个动画。 那里没有什么新鲜事。</p>
+<h2 id="不要！-这是一个陷阱！"><a href="#不要！-这是一个陷阱！" class="headerlink" title="不要！ 这是一个陷阱！"></a>不要！ 这是一个陷阱！</h2><p>在你的 <code>TimelineView</code> 发现路径中，你可能会遇到此错误：</p>
+<blockquote>
+<p>Action Tried to Update Multiple Times Per Frame</p>
+</blockquote>
+<p>让我们看一个生成此消息的示例： </p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ExampleView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> flag = <span class="literal">false</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">TimelineView</span>(.periodic(from: .now, by: <span class="number">2.0</span>)) &#123; timeline <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">            <span class="type">Text</span>(<span class="string">"Hello"</span>)</span><br><span class="line">                .foregroundStyle(flag ? .red : .blue)</span><br><span class="line">                .onChange(of: timeline.date) &#123; (date: <span class="type">Date</span>) <span class="keyword">in</span></span><br><span class="line">                    flag.toggle()</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码看起来没有问题，它应该每两秒改变一次文本颜色，在红色和蓝色之间交替。那么可能会发生什么？稍等片刻，看看你是否能找出背后的原因。</p>
+<p>我们不是在处理一个 bug。事实上，这个问题是可以预见的。<br><code>重要的是要记住，时间线的第一次更新是在它第一次出现时，然后它遵循调度程序规则来触发以下更新。因此，即使我们的调度程序没有产生更新，</code>TimelineView` 内容也至少会生成一次。</p>
+<p>在这个具体的例子中，我们监控 <code>timeline.date</code> 值的变化，当它发生变化时，我们切换 <code>flag</code> 变量，它会产生颜色变化。</p>
+<p><code>TimelineView</code> 将首先出现。两秒后，时间线将更新（例如，由于第一次调度程序更新），触发 <code>onChange</code> 关闭。这将反过来改变标志变量。现在，由于我们的 <code>TimelineView</code> 依赖于它，它需要立即刷新，触发标志变量的另一个切换，强制另一个 <code>TimelineView</code> 刷新，依此类推……你明白了：每帧多次更新。</p>
+<p>那么我们该如何解决呢？解决方案可能会有所不同。在这种情况下，我们只需封装内容并将标志变量移动到封装的视图内。现在 <code>TimelineView</code> 不再依赖它：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ExampleView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">TimelineView</span>(.periodic(from: .now, by: <span class="number">1.0</span>)) &#123; timeline <span class="keyword">in</span></span><br><span class="line">            <span class="type">SubView</span>(date: timeline.date)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SubView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> flag = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">let</span> date: <span class="type">Date</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Text</span>(<span class="string">"Hello"</span>)</span><br><span class="line">            .foregroundStyle(flag ? .red : .blue)</span><br><span class="line">            .onChange(of: date) &#123; (date: <span class="type">Date</span>) <span class="keyword">in</span></span><br><span class="line">                flag.toggle()</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="探索新点子"><a href="#探索新点子" class="headerlink" title="探索新点子"></a>探索新点子</h2><p><strong>每次时间线更新刷新一次</strong>：如前所述，这种模式使我们的视图每次更新计算它们的主体两次：第一次是在时间线更新时，然后在我们推进动画状态值时再次计算。在这种类型的动画中，我们在时间上间隔了关键点，这非常好。</p>
+<p>在这些时间点太靠近的动画中，你可能需要/想要避免这种情况。如果你需要更改存储的值，但要避免视图刷新……你可以使用一个技巧。使用 <code>@StateObject</code> 代替<code>@State</code>。确保你不要在 <code>@Published</code> 中设置这样的值。如果在某个时候，你想要/需要告诉你的视图刷新，你可以随时调用<code>objectWillChange.send()</code></p>
+<p><strong>匹配动画持续时间和偏移量</strong>：在关键帧示例中，我们为每个动画片段使用不同的动画。为此，我们将动画值存储在数组中。如果你仔细观察，你会发现在我们的具体示例中，偏移量和动画持续时间匹配！这是合理的，对吧？因此，你可以定义一个具有动画类型的枚举，而不是在数组中包含 <code>Animation</code> 值。稍后在你的视图中，你将根据动画类型创建动画值，但使用偏移值的持续时间对其进行实例化。类似这样：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">KeyFrameAnimation</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">none</span></span><br><span class="line">    <span class="keyword">case</span> linear</span><br><span class="line">    <span class="keyword">case</span> easeOut</span><br><span class="line">    <span class="keyword">case</span> easeIn</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">KeyFrame</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> offset: <span class="type">TimeInterval</span>    </span><br><span class="line">    <span class="keyword">let</span> rotation: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> yScale: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> y: <span class="type">CGFloat</span></span><br><span class="line">    <span class="keyword">let</span> animationKind: <span class="type">KeyFrameAnimation</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animation: <span class="type">Animation</span>? &#123;</span><br><span class="line">        <span class="keyword">switch</span> animationKind &#123;</span><br><span class="line">        <span class="keyword">case</span> .<span class="keyword">none</span>: <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">        <span class="keyword">case</span> .linear: <span class="keyword">return</span> .linear(duration: offset)</span><br><span class="line">        <span class="keyword">case</span> .easeIn: <span class="keyword">return</span> .easeIn(duration: offset)</span><br><span class="line">        <span class="keyword">case</span> .easeOut: <span class="keyword">return</span> .easeOut(duration: offset)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> keyframes = [</span><br><span class="line">    <span class="comment">// Initial state, will be used once. Its offset is useless and will be ignored</span></span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.0</span>, rotation: <span class="number">0</span>, yScale: <span class="number">1.0</span>, y: <span class="number">0</span>, animationKind: .<span class="keyword">none</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Animation keyframes</span></span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.2</span>, rotation:   <span class="number">0</span>, yScale: <span class="number">0.5</span>, y:  <span class="number">20</span>, animationKind: .linear),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.4</span>, rotation:   <span class="number">0</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">20</span>, animationKind: .linear),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.5</span>, rotation: <span class="number">360</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">80</span>, animationKind: .easeOut),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.4</span>, rotation: <span class="number">360</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">20</span>, animationKind: .easeIn),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.2</span>, rotation: <span class="number">360</span>, yScale: <span class="number">0.5</span>, y:  <span class="number">20</span>, animationKind: .easeOut),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.4</span>, rotation: <span class="number">360</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">20</span>, animationKind: .linear),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.5</span>, rotation:   <span class="number">0</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">80</span>, animationKind: .easeOut),</span><br><span class="line">    <span class="type">KeyFrame</span>(offset: <span class="number">0.4</span>, rotation:   <span class="number">0</span>, yScale: <span class="number">1.0</span>, y: -<span class="number">20</span>, animationKind: .easeIn),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>如果你想知道为什么我一开始不这样做，我只是想向你展示两种方式都是可能的。 第一种情况更灵活，但更冗长。 也就是说，我们被迫为每个动画指定持续时间，但是，它更灵活，因为我们可以自由使用与偏移量不匹配的持续时间。</p>
+<p>然而，当使用这种新方法时，你可以轻松地添加一个可自定义的因素，这可以让你减慢或加快动画速度，而无需触摸关键帧。</p>
+<p><strong>嵌套 TimelineViews</strong>：没有什么能阻止你将一个 <code>TimelineView</code> 嵌套在另一个 <code>TimelineView</code> 中。 现在我们有了 <code>JumpingEmoji</code>，我们可以在 <code>TimelineView</code> 中放置三个 <code>JumpingEmoji</code> 视图，使它们一次出现一个，并有延迟：</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/305e84985d4d239e6ae75c508a025062.gif" alt=""></p>
+<p>对于 Emoji 波浪的全部源码，检出这个 <a href="https://gist.github.com/swiftui-lab/f4e77af35ba15853cc1426c735cc6cdc" target="_blank" rel="noopener">gits</a>。</p>
+<h2 id="GifImage-示例"><a href="#GifImage-示例" class="headerlink" title="GifImage 示例"></a>GifImage 示例</h2><p>笔者原本还有一个示例，但是它在笔者发布文章的时候废弃了。 它没有入选的原因是并发 API 还不稳定。 幸运的是，现在可以安全地发布它。 该代码使用 <code>TimelineView</code> 来实现动画 gif 的视图。 视图从 URL（可以是本地的或远程的）异步加载 gif。 此 <a href="https://gist.github.com/swiftui-lab/aa5d73b81c8696dee4a5996954b22e5c" target="_blank" rel="noopener">gist</a> 中提供了所有代码。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>恭喜阅读到这么长的一篇文章的结尾。这是一次骑行！我们从最简单的 <code>TimelineView</code> 示例转到视图的一些创造性使用。 在第 5 部分中，笔者将探索新的 <code>Canvas</code> 视图，以及它与 <code>TimelineView</code> 的结合程度。 通过将它们放在一起，我们将扩展 <code>SwiftUI</code> 动画世界中的更多可能性。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/高级-SwiftUI-动画进阶-——-Part4：TimelineView/">高级 SwiftUI 动画进阶 —— Part4：TimelineView</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2022年04月06日 - 10:04</p>
+  <p><span>最后更新:</span>2022年04月06日 - 10:04</p>
+  <p><span>原始链接:</span><a href="/高级-SwiftUI-动画进阶-——-Part4：TimelineView/" title="高级 SwiftUI 动画进阶 —— Part4：TimelineView">https://fanbaoying.github.io/高级-SwiftUI-动画进阶-——-Part4：TimelineView/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/高级-SwiftUI-动画进阶-——-Part4：TimelineView/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SwiftUI/" rel="tag"><i class="fa fa-tag"></i> SwiftUI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/" rel="next" title="高级 SwiftUI 动画 — Part 3：AnimatableModifier">
+                <i class="fa fa-chevron-left"></i> 高级 SwiftUI 动画 — Part 3：AnimatableModifier
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/SwiftUI-动画进阶-—-Part-5：Canvas/" rel="prev" title="SwiftUI 动画进阶 — Part 5：Canvas">
+                SwiftUI 动画进阶 — Part 5：Canvas <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TimelineView-的组件"><span class="nav-number">2.</span> <span class="nav-text">TimelineView 的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解-TimelineView-如何工作"><span class="nav-number">3.</span> <span class="nav-text">理解 TimelineView 如何工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按照时间线执行"><span class="nav-number">4.</span> <span class="nav-text">按照时间线执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TimelineView-与传统动画相结合"><span class="nav-number">5.</span> <span class="nav-text">TimelineView 与传统动画相结合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TimelineScheduler"><span class="nav-number">6.</span> <span class="nav-text">TimelineScheduler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义-TimelineScheduler"><span class="nav-number">7.</span> <span class="nav-text">自定义 TimelineScheduler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键帧动画"><span class="nav-number">8.</span> <span class="nav-text">关键帧动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要！-这是一个陷阱！"><span class="nav-number">9.</span> <span class="nav-text">不要！ 这是一个陷阱！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#探索新点子"><span class="nav-number">10.</span> <span class="nav-text">探索新点子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GifImage-示例"><span class="nav-number">11.</span> <span class="nav-text">GifImage 示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">12.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共128.6k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
