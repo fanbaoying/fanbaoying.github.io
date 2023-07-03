@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言这周，我决定完成因为工作而推迟了一周的TODO事项来改进我的Git工作流程。 为了在提交的时候尽可能多的携带上下文信息，我们让提交信息包含了正在处理的JIRA编号。这样，将来如果有人回到我们现在正在提交的源代码，输入git blame，就能很容易的找出JIRA的编号。 每次提交都包含这些信息可能会有点乏味（如果你使用了类似TDD之类的方法，您会提交的更加频繁），而且，尽管像Tower这样的gi">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Swift 中编写脚本：Git Hooks">
+<meta property="og:url" content="https://fanbaoying.github.io/在-Swift-中编写脚本：Git-Hooks/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言这周，我决定完成因为工作而推迟了一周的TODO事项来改进我的Git工作流程。 为了在提交的时候尽可能多的携带上下文信息，我们让提交信息包含了正在处理的JIRA编号。这样，将来如果有人回到我们现在正在提交的源代码，输入git blame，就能很容易的找出JIRA的编号。 每次提交都包含这些信息可能会有点乏味（如果你使用了类似TDD之类的方法，您会提交的更加频繁），而且，尽管像Tower这样的gi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/2618799d263fd7748da9527351be5864.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/f068f5ba528cc69321bdd7df1b0deb8f.png">
+<meta property="og:updated_time" content="2022-08-25T03:53:23.212Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 Swift 中编写脚本：Git Hooks">
+<meta name="twitter:description" content="前言这周，我决定完成因为工作而推迟了一周的TODO事项来改进我的Git工作流程。 为了在提交的时候尽可能多的携带上下文信息，我们让提交信息包含了正在处理的JIRA编号。这样，将来如果有人回到我们现在正在提交的源代码，输入git blame，就能很容易的找出JIRA的编号。 每次提交都包含这些信息可能会有点乏味（如果你使用了类似TDD之类的方法，您会提交的更加频繁），而且，尽管像Tower这样的gi">
+<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2022/2618799d263fd7748da9527351be5864.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/在-Swift-中编写脚本：Git-Hooks/"/>
+
+
+
+
+
+  <title>在 Swift 中编写脚本：Git Hooks | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/在-Swift-中编写脚本：Git-Hooks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在 Swift 中编写脚本：Git Hooks</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-25T11:41:45+08:00">
+                2022-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift-文集/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift 文集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 1,981字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 8分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这周，我决定完成因为工作而推迟了一周的TODO事项来改进我的Git工作流程。</p>
+<p>为了在提交的时候尽可能多的携带上下文信息，我们让提交信息包含了正在处理的JIRA编号。这样，将来如果有人回到我们现在正在提交的源代码，输入<code>git blame</code>，就能很容易的找出JIRA的编号。</p>
+<p>每次提交都包含这些信息可能会有点乏味（如果你使用了类似<a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="noopener">TDD</a>之类的方法，您会提交的更加频繁），而且，尽管像<a href="https://www.git-tower.com/mac" target="_blank" rel="noopener">Tower</a>这样的git客户端会让此变得容易一些，但是您仍然需要手动将问题编号复制粘贴到提交消息中，并且记住这样做，这是我最难以解决的问题😅。</p>
+<p>出于这个原因，我开始寻求了解git hooks，试图自动化这项任务。我的想法是能够从git分支获取JIRA编号（我们有一个分支命名约定，形如：story/ISSUE-1234_branch-name），然后将提交消息更改为以JIRA编号为前缀，从而生成最终结果消息：ISSUE-1234-其他原本的提交信息。</p>
+<a id="more"></a>
+<h2 id="用git-hooks自动生成提交信息"><a href="#用git-hooks自动生成提交信息" class="headerlink" title="用git hooks自动生成提交信息"></a>用git hooks自动生成提交信息</h2><p><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">Git Hooks</a> 提供了一种在运行某些重要的git命令时触发自定义操作的方法，例如在一次commit或者push之前执行一些操作。</p>
+<p>在本例中，我使用了<strong><code>commit-msg</code></strong>钩子，它能够在当前提交信息生效前修改此信息。钩子由一个参数调用，该参数是指向包含用户输入的提交消息的文件的路径。这意味着，为了改变提交消息，我们只需要从文件中读取、修改其内容，然后写回调用挂钩的文件。</p>
+<p>要创建git钩子，我们需要在<strong><code>.git/hooks</code></strong>路经下提供一个可执行脚本。我的钩子放在了<strong><code>.git/hooks/commit-msg</code></strong>路经之下。</p>
+<h2 id="为什么我使用Swift？"><a href="#为什么我使用Swift？" class="headerlink" title="为什么我使用Swift？"></a>为什么我使用Swift？</h2><p>Git hooks可以使用任何你熟悉的，并且在主机上安装了解释器（通过<code>shebang</code>来指定）的脚本语言来编写。</p>
+<p>虽然有很多更受欢迎的选项，比如<code>bash</code>、<code>ruby</code>等等，但我还是决定使用Swift。因为我对Swift更熟悉，因为我每天都在使用它，而且我真的非常喜欢它强大的类型语法以及低内存占用。</p>
+<h3 id="让我们开始吧"><a href="#让我们开始吧" class="headerlink" title="让我们开始吧"></a>让我们开始吧</h3><p>你可以使用任何你喜欢的IDE编写Swift脚本。但是如果你想要有适当的代码补全以及调试能力，你可以为其创建一个Xcode项目。为此，在<strong><code>macOS</code></strong>下选择<strong><code>Command Line Tool</code></strong>创建一个新的项目。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/2618799d263fd7748da9527351be5864.png" alt=""></p>
+<p>在创建的文件顶部加上Swift shebang，引入<code>Foundation</code>库。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/swift</span><br><span class="line"><span class="keyword">import</span> Foundation</span><br></pre></td></tr></table></figure>
+<p>这样当git执行文件时，shebang将确保使用文件作为输入数据调用/usr/bin/swift二进制文件。</p>
+<h3 id="编写git钩子"><a href="#编写git钩子" class="headerlink" title="编写git钩子"></a>编写git钩子</h3><p>项目已经全部设置好，所以现在可以编写git挂钩了。让我们走完所有的步骤。</p>
+<h4 id="检索提交消息"><a href="#检索提交消息" class="headerlink" title="检索提交消息"></a>检索提交消息</h4><p>要做的第一件事就是从脚本传进来的参数检索临时提交文件的路径然后读取文件内容。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> commitMessageFile = <span class="type">CommandLine</span>.arguments[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> data = <span class="type">FileManager</span>.<span class="keyword">default</span>.contents(atPath: commitMessageFile),</span><br><span class="line">      <span class="keyword">let</span> commitMessage = <span class="type">String</span>(data: data, encoding: .utf8) <span class="keyword">else</span> &#123;</span><br><span class="line">    exit(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码片段中，我们首先拿到了提交文件的路径（<code>git</code>传递给脚本），然后通过<code>FileManagerAPI</code>读取了文件内容。如果因为一些原因检索失败了，我们退出（<code>exit</code>）脚本同时返回状态码<code>1</code>，这将告诉git终止此次提交。</p>
+<hr>
+<p><strong>注意:</strong></p>
+<p>根据<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">git hooks文档</a>，如果任何钩子脚本返回的状态码大于<code>0</code>，它都将终止即将要要发生的操作。这将在本文后面的部分中使用，以便在不需要做任何修改而优雅地退出。</p>
+<hr>
+<h4 id="检索问题编号"><a href="#检索问题编号" class="headerlink" title="检索问题编号"></a>检索问题编号</h4><p>既然提交信息的字符串已经可用，接下来就需要找到当前分支并从中检索到问题编号。正如本文前面提到的，这只可能是因为团队对分支命名的严格格式，在其名称中始终包含JIRA编号（例如，<strong><code>story/ISSUE-1234_some-awesome-feature-work</code></strong>）。</p>
+<p>为了实现这一点，我们必须检索当前的工作分支，然后用<a href="https://nshipster.com/swift-regular-expressions/" target="_blank" rel="noopener">正则表达式</a>从中检索问题编号。</p>
+<p>让我们从添加脚本调用<code>zsh shell</code>命令的能力开始。通过使用<code>Process</code>api，脚本可以与<code>git</code>命令行界面交互。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">shell</span><span class="params">(<span class="number">_</span> command: String)</span></span> -&gt; <span class="type">String</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> task = <span class="type">Process</span>()</span><br><span class="line">    <span class="keyword">let</span> outputPipe = <span class="type">Pipe</span>()</span><br><span class="line">    <span class="keyword">let</span> errorPipe = <span class="type">Pipe</span>()</span><br><span class="line">    </span><br><span class="line">    task.standardOutput = outputPipe</span><br><span class="line">    task.standardError = errorPipe</span><br><span class="line">    task.arguments = [<span class="string">"-c"</span>, command]</span><br><span class="line">    task.executableURL = <span class="type">URL</span>(fileURLWithPath: <span class="string">"/bin/zsh"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> task.run()</span><br><span class="line">        task.waitUntilExit()</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"There was an error running the command: <span class="subst">\(command)</span>"</span>)</span><br><span class="line">        <span class="built_in">print</span>(error.localizedDescription)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> outputData = <span class="keyword">try</span>? outputPipe.fileHandleForReading.readToEnd(),</span><br><span class="line">          <span class="keyword">let</span> outputString = <span class="type">String</span>(data: outputData, encoding: .utf8) <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Print error if needed</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> errorData = <span class="keyword">try</span>? errorPipe.fileHandleForReading.readToEnd(),</span><br><span class="line">           <span class="keyword">let</span> errorString = <span class="type">String</span>(data: errorData, encoding: .utf8) &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"Encountered the following error running the command:"</span>)</span><br><span class="line">            <span class="built_in">print</span>(errorString)</span><br><span class="line">        &#125;</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> outputString</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在实现了<code>shell</code>命令，那么就可以使用它询问<code>git</code>当前分支是什么，然后尽可能的从中提取出问题编号。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gitBranchName = shell(<span class="string">"git rev-parse --abbrev-ref HEAD"</span>)</span><br><span class="line">    .trimmingCharacters(<span class="keyword">in</span>: .newlines)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stringRange = <span class="type">NSRange</span>(location: <span class="number">0</span>, length: gitBranchName.utf16.<span class="built_in">count</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> regex = <span class="keyword">try</span>? <span class="type">NSRegularExpression</span>(pattern: #<span class="string">"(\w*-\d*)"</span>#, options: .anchorsMatchLines),</span><br><span class="line">    <span class="keyword">let</span> match = regex.firstMatch(<span class="keyword">in</span>: gitBranchName, range: stringRange) <span class="keyword">else</span> &#123;</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> range = match.range(at: <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ticketNumber = (gitBranchName <span class="keyword">as</span> <span class="type">NSString</span>)</span><br><span class="line">    .substring(with: range)</span><br><span class="line">    .trimmingCharacters(<span class="keyword">in</span>: .newlines)</span><br></pre></td></tr></table></figure>
+<p>请注意，如果没有匹配项（即分支名称中不包含JIRA问题编号），脚本将以0的状态退出，允许提交继续进行，而不进行任何更改。这是为了不破坏诸如main或其他测试/调查分支中的工作流。</p>
+<h4 id="修改提交信息"><a href="#修改提交信息" class="headerlink" title="修改提交信息"></a>修改提交信息</h4><p>为了更改提交消息，必须将脚本开头读取的文件内容（包含提交消息）写回同一路径。</p>
+<p>在这种情况下，只需要做一个更改，即在提交信息的前面加上JIRA编号和（-），以将其与提交信息的其余部分很好地分开。还必须确保检查了提交信息字符串，仅在编号不存在时才添加编号：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> !commitMessage.<span class="built_in">contains</span>(ticketNumber) &#123;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> <span class="string">"<span class="subst">\(ticketNumber)</span> - <span class="subst">\(commitMessage.trimmingCharacters(<span class="keyword">in</span>: .newlines)</span>)"</span></span><br><span class="line">            .write(toFile: commitMessageFile, atomically: <span class="literal">true</span>, encoding: .utf8)</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Could not write to file <span class="subst">\(commitMessageFile)</span>"</span>)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="设置git钩子"><a href="#设置git钩子" class="headerlink" title="设置git钩子"></a>设置git钩子</h4><p>现在脚本已经准备好了，是时候把它放在git可以找到它的位置了。Git钩子可以全局设置，也可以基于单个repo设置。</p>
+<p>我个人对这类脚本的偏好是基于单个repo设置，因为这样可以在出现问题时为您提供更多的控制和可见性，并且如果钩子开始失败，它会在它设置的repo中失败，而不是全局都失败。</p>
+<p>要设置它们，我们只需要使文件可执行，重命名并将其复制到所要设置repo的<strong><code>.git/hooks/</code></strong>路径之下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x main.swift</span><br><span class="line">mv main.swift &lt;path_to_your_repo&gt;/.git/hooks/commit-msg</span><br></pre></td></tr></table></figure>
+<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><p>现在repo已经全部设置好了，剩下的就是对部署的脚本进行测试。在下面的截屏中，创建了两个分支，一个带有问题编号，一个没有，它们有着相同的提交信息。可以看出脚本运行正常，并且只在需要时才更改提交消息！</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/f068f5ba528cc69321bdd7df1b0deb8f.png" alt=""></p>
+<h2 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h2><p>我们是由 Swift 爱好者共同维护，我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术内容，也整理收集优秀的学习资料。</p>
+<p>后续还会翻译大量资料到我们公众号，有感兴趣的朋友，可以加入我们。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/在-Swift-中编写脚本：Git-Hooks/">在 Swift 中编写脚本：Git Hooks</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2022年08月25日 - 11:08</p>
+  <p><span>最后更新:</span>2022年08月25日 - 11:08</p>
+  <p><span>原始链接:</span><a href="/在-Swift-中编写脚本：Git-Hooks/" title="在 Swift 中编写脚本：Git Hooks">https://fanbaoying.github.io/在-Swift-中编写脚本：Git-Hooks/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/在-Swift-中编写脚本：Git-Hooks/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/LeetCode-68-文本左右对齐/" rel="next" title="LeetCode - 68 文本左右对齐">
+                <i class="fa fa-chevron-left"></i> LeetCode - 68 文本左右对齐
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Swift-中的热重载/" rel="prev" title="Swift 中的热重载">
+                Swift 中的热重载 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">157</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用git-hooks自动生成提交信息"><span class="nav-number">2.</span> <span class="nav-text">用git hooks自动生成提交信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么我使用Swift？"><span class="nav-number">3.</span> <span class="nav-text">为什么我使用Swift？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#让我们开始吧"><span class="nav-number">3.1.</span> <span class="nav-text">让我们开始吧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写git钩子"><span class="nav-number">3.2.</span> <span class="nav-text">编写git钩子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#检索提交消息"><span class="nav-number">3.2.1.</span> <span class="nav-text">检索提交消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检索问题编号"><span class="nav-number">3.2.2.</span> <span class="nav-text">检索问题编号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改提交信息"><span class="nav-number">3.2.3.</span> <span class="nav-text">修改提交信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置git钩子"><span class="nav-number">3.2.4.</span> <span class="nav-text">设置git钩子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试结果"><span class="nav-number">4.</span> <span class="nav-text">测试结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我们"><span class="nav-number">5.</span> <span class="nav-text">关于我们</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共224.5k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

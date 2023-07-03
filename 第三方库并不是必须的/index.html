@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言我在Lyft的八年间，很多产品经理以及工程师经常想往我们 app 里添加第三方库。有时候集成一个特定的库（比如 PayPal）是必须的，有时候是避免去开发一些非常复杂的功能，有时候仅仅只是避免c重复造轮子。 虽然这些都是合理的考量，但使用第三方库的风险和相关成本往往被忽视或误解。在某些情况下，风险是值得的，但是在决定冒险之前，首先要能够明确的定义风险。为了使风险评估更加的透明和一致，我们制定了">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三方库并不是必须的">
+<meta property="og:url" content="https://fanbaoying.github.io/第三方库并不是必须的/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言我在Lyft的八年间，很多产品经理以及工程师经常想往我们 app 里添加第三方库。有时候集成一个特定的库（比如 PayPal）是必须的，有时候是避免去开发一些非常复杂的功能，有时候仅仅只是避免c重复造轮子。 虽然这些都是合理的考量，但使用第三方库的风险和相关成本往往被忽视或误解。在某些情况下，风险是值得的，但是在决定冒险之前，首先要能够明确的定义风险。为了使风险评估更加的透明和一致，我们制定了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-09-26T04:00:17.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三方库并不是必须的">
+<meta name="twitter:description" content="前言我在Lyft的八年间，很多产品经理以及工程师经常想往我们 app 里添加第三方库。有时候集成一个特定的库（比如 PayPal）是必须的，有时候是避免去开发一些非常复杂的功能，有时候仅仅只是避免c重复造轮子。 虽然这些都是合理的考量，但使用第三方库的风险和相关成本往往被忽视或误解。在某些情况下，风险是值得的，但是在决定冒险之前，首先要能够明确的定义风险。为了使风险评估更加的透明和一致，我们制定了">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/第三方库并不是必须的/"/>
+
+
+
+
+
+  <title>第三方库并不是必须的 | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/第三方库并不是必须的/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第三方库并不是必须的</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T11:56:17+08:00">
+                2022-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 2,560字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 9分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我在Lyft的八年间，很多产品经理以及工程师经常想往我们 app 里添加第三方库。有时候集成一个特定的库（比如 <strong>PayPal</strong>）是必须的，有时候是避免去开发一些非常复杂的功能，有时候仅仅只是避免c重复造轮子。</p>
+<p>虽然这些都是合理的考量，但使用第三方库的风险和相关成本往往被忽视或误解。在某些情况下，风险是值得的，但是在决定冒险之前，首先要能够明确的定义风险。为了使风险评估更加的透明和一致，我们制定了一个流程来衡量我们将其集成到app有多大的风险。</p>
+<a id="more"></a>
+<h2 id="风险"><a href="#风险" class="headerlink" title="风险"></a>风险</h2><p>大多数大型组织，包括我们，都有某种形式的代码审查，作为开发实践的一部分。对这些团队来说，添加一个第三方库就相当于添加了一堆由不属于团队成员开发，未经审查的代码。这破坏了团队一直坚持的代码审查原则，交付了质量未知的代码。这给app的运行方式以及长期开发带来了风险，对于大型团队而言，更是对整体业务带来了风险。</p>
+<h3 id="运行时风险"><a href="#运行时风险" class="headerlink" title="运行时风险"></a>运行时风险</h3><p>库代码通常来说，对于系统资源，和app拥有相同级别的访问权限，但它们不一定应用团队为管理这些资源而制定的最佳实践。这意味着它们可以在没有限制的情况下访问磁盘，网络，内存，CPU等等，因此，它们可以（过度）将文件写入磁盘，使用未优化的代码占用内存或CPU，导致死锁或主线程延迟，下载（和上传！）大量数据等等。更糟糕的是他们会导致崩溃，甚至崩溃循环</p>
+<p>其中许多情况直到 app 已经上架才被发现，在这种情况下，修复它需要创建一个新版本，并通过审核，这通常需要大量时间和成本。这种风险可以通过一个变量控制是否调用来进行一定程度的控制，但是这种方法也并非万无一失（看下文）。</p>
+<h3 id="开发风险"><a href="#开发风险" class="headerlink" title="开发风险"></a>开发风险</h3><p>引用一个同事的话：“每一行代码都是一种负担”，对不是你自己写的代码而言，这句话更甚。库在适配新技术或API时可能很慢，这阻碍了代码开发，或者太快，导致开发的版本过高。</p>
+<p>库在采用新技术或API时可能很慢，阻碍了代码库，或者太快，导致部署目标太高。每当 Apple 和 Google 每年发布一个新 OS 版本时，他们通常要求开发人员根据SDK的变化更新代码，库开发人员也必须这样做。这需要协调一致的努力、优先事项的一致性以及及时完成工作的能力。</p>
+<p>随着移动平台的不断变化，以及团队（成员）也不是一成不变，这将会成为一个持续不断的风险。当被集成的库不存在了，而库又需要更新时，会花很多时间来决定谁来做。事实证明一旦一个库存在，就很少也很难被移除，因此我们将其视为长期维护成本。</p>
+<h3 id="商业风险"><a href="#商业风险" class="headerlink" title="商业风险"></a>商业风险</h3><p>如同我上面所说，现代的操作系统并没有对 app 代码和库代码进行区分，因此除了系统资源之外，它们还可以访问用户信息。作为 app 的开发者，我们负责恰当的使用这部分信息，也需要为任何第三方库负责。</p>
+<p>如果用户给了 Lyft app 地理位置授权，任何第三方库也将自动得获得授权。他们可以将那些（地理位置）数据上传到自己服务器，竞对服务器，或者谁知道还有什么地方。当一个库需要我们没有的权限时，那问题就更大了。</p>
+<p>同样，一个系统的安全取决于其最薄弱的环节，但如果其中包含未经审核的代码，那么你就不知道它到底有多安全。你精心设计的安全编码实践可能会被一个行为不当的库所破坏。苹果和谷歌实施的任何政策都是如此，例如“你不得对用户追踪”。</p>
+<h2 id="减少风险"><a href="#减少风险" class="headerlink" title="减少风险"></a>减少风险</h2><p>当对一个库（是否）进行使用评估时，我们首先要问几个问题，以了解对库的需求。</p>
+<h3 id="我们内部能做么？"><a href="#我们内部能做么？" class="headerlink" title="我们内部能做么？"></a>我们内部能做么？</h3><p>有时候我们只需要简单的粘贴复制真正需要的部分。在更复杂的场景中，库与自定义后端通信，我们对该API进行了逆向，并自己构建了一个迷你SDK（同样，只构建了我们需要的部分）。在90%的情况下，这是首选，但在与非常特定的供应商或需求集成时并不总是可行。</p>
+<h3 id="有多少用户从该库中受益？"><a href="#有多少用户从该库中受益？" class="headerlink" title="有多少用户从该库中受益？"></a>有多少用户从该库中受益？</h3><p>在一种情况下，我们正在考虑添加一个风险很大的库（根据下面的标准），旨在为一小部分用户提供服务，同时将我们的所有用户都暴露在该库中。 对于我们认为会从中受益的一小部分客户，我们冒了为我们所有用户带来问题的风险。</p>
+<h3 id="这个库有什么传递依赖？"><a href="#这个库有什么传递依赖？" class="headerlink" title="这个库有什么传递依赖？"></a>这个库有什么传递依赖？</h3><p>我们还需要评估库的所有依赖项的以下标准。</p>
+<h3 id="退出标准是什么？"><a href="#退出标准是什么？" class="headerlink" title="退出标准是什么？"></a>退出标准是什么？</h3><p>如果集成成功，是否有办法将其转移到内部？ 如果不成功，是否有办法删除？</p>
+<h2 id="评价标准"><a href="#评价标准" class="headerlink" title="评价标准"></a>评价标准</h2><p>如果此时团队仍然希望集成库，我们要求他们根据一组标准对库进行“评分”。下面的列表并不全面，但应该能很好地说明我们希望看到的。</p>
+<h3 id="阻断标准"><a href="#阻断标准" class="headerlink" title="阻断标准"></a>阻断标准</h3><p>这些标准将阻止我们从技术上或者公司政策上集成此库，在进行下一步之前，我们必须解决：</p>
+<p><strong>过高的</strong> <strong>deployment target/target SDKs。</strong> 我们支持过去4年主流的操作系统（版本），所以第三方库至少也需要支持一样多。</p>
+<p><strong>许可证不正确/缺失。</strong> 我们将许可文件与应用捆绑在一起，以确保我们可以合法使用代码并将其归属于许可持有人。</p>
+<p><strong>没有冲突的传递依赖关系。</strong> 一个库不能有一个我们已经包含但版本不同的传递依赖项。</p>
+<p><strong>不显示它自己的 UI 。</strong> 我们非常小心地使我们的产品看起来尽可能统一，定制用户界面对此不利。</p>
+<p><strong>它不使用私有 API 。</strong> 我们不愿意冒 app 因使用私有 API 而被拒绝的风险。</p>
+<h3 id="主要关注点"><a href="#主要关注点" class="headerlink" title="主要关注点"></a>主要关注点</h3><p><strong>闭源。</strong> 访问源代码意味着我们可以选择我们想要包含的库的哪些部分，以及如何将该源代码与应用程序的其余部分捆绑在一起。 对于我们来说，一个封闭源代码的二进制发行版更难集成。</p>
+<p><strong>编译时有警告。</strong> 我们启用了“警告视为错误”，具有编译警告的库是库整体质量（下降）的良好指示。</p>
+<p><strong>糟糕的文档。</strong> 我们希望有高质量的内联文档，外部”如何使用“文档，以及有意义的更新日志。</p>
+<p><strong>二进制体积。</strong> 这个库有多大？一些库提供了很多功能，而我们只需要其中的一小部分。尤其是在没有访问源码权限的情况下，这通常是一个全有或全无的情况。</p>
+<p><strong>外部的网络流量。</strong> 与我们无法控制的上游服务器/端点通信的库可能会在服务器关闭、错误数据被发回等时关闭整个应用程序。这也与我上面提到的隐私问题相同。</p>
+<p><strong>技术支持。</strong> 当事情不能正常工作时，我们需要能够报告/上报问题，并在合理的时间内解决问题。开源项目通常由志愿者维护，也很难有一个时间线，但至少我们可以自己进行修改。这在闭源项目是不可能的。</p>
+<p><strong>无法禁用。</strong> 虽然大多数库特别要求我们初始化它，但有些库在实例化时更“主动”，并且在我们不调用它的情况下可以自己执行工作。这意味着当库导致问题时，我们无法通过功能变量或其他机制将其关闭。</p>
+<p>我们为所有这些（和其他一些）标准分配了点数，并要求工程师为他们想要集成的库汇总这些点数。虽然默认情况下，低分数并不难被拒绝，但我们通常会要求更多的理由来继续前进。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>虽然这个过程看起来非常严格，在许多情况下，潜在风险是假设的，但我们有我在这篇博文中描述的每个场景的实际例子。将评估记录下来并公开，也有助于将相对风险传达给不熟悉移动平台工作方式的人，并证明我们没有随意评估风险。</p>
+<p>此外，我不想声称每一个第三方库本质上都是坏的。事实上，我们在Lyft使用了很多：<code>RxSwift</code>和<code>RxJava</code>、<code>Bugsnag</code>的<code>SDK</code>、<code>Google Maps</code>、<code>Tensorflow</code>，以及一些较小的用于非常特定的用例。但所有这些要么都经过了充分审查，要么我们已经决定风险值得收益，同时对这些风险和收益的真正含义有了清晰的认识。</p>
+<p>最后，作为一个专业开发人员提示：始终在库的<code>API</code>之上创建自己的抽象，不要直接调用它们的<code>API</code>。这使得将来替换（或删除）底层库更加容易，再次减轻了与长期开发相关的一些风险。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/第三方库并不是必须的/">第三方库并不是必须的</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2022年09月26日 - 11:09</p>
+  <p><span>最后更新:</span>2022年09月26日 - 12:09</p>
+  <p><span>原始链接:</span><a href="/第三方库并不是必须的/" title="第三方库并不是必须的">https://fanbaoying.github.io/第三方库并不是必须的/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/第三方库并不是必须的/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/使用-SwiftUI-的-Eager-Grids/" rel="next" title="使用 SwiftUI 的 Eager Grids">
+                <i class="fa fa-chevron-left"></i> 使用 SwiftUI 的 Eager Grids
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/SwiftUI-之-HStack-和-VStack-的切换/" rel="prev" title="SwiftUI 之 HStack 和 VStack 的切换">
+                SwiftUI 之 HStack 和 VStack 的切换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">157</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#风险"><span class="nav-number">2.</span> <span class="nav-text">风险</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时风险"><span class="nav-number">2.1.</span> <span class="nav-text">运行时风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发风险"><span class="nav-number">2.2.</span> <span class="nav-text">开发风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#商业风险"><span class="nav-number">2.3.</span> <span class="nav-text">商业风险</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少风险"><span class="nav-number">3.</span> <span class="nav-text">减少风险</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我们内部能做么？"><span class="nav-number">3.1.</span> <span class="nav-text">我们内部能做么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有多少用户从该库中受益？"><span class="nav-number">3.2.</span> <span class="nav-text">有多少用户从该库中受益？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这个库有什么传递依赖？"><span class="nav-number">3.3.</span> <span class="nav-text">这个库有什么传递依赖？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#退出标准是什么？"><span class="nav-number">3.4.</span> <span class="nav-text">退出标准是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评价标准"><span class="nav-number">4.</span> <span class="nav-text">评价标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阻断标准"><span class="nav-number">4.1.</span> <span class="nav-text">阻断标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要关注点"><span class="nav-number">4.2.</span> <span class="nav-text">主要关注点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共224.5k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

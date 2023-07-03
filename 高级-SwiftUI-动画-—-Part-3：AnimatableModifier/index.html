@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="SwiftUI," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言之前的两篇文章animating paths 和 transform matrices 对 Animatable 协议使用做了介绍，今天这篇文章将为大家介绍 AnimatableModifier，使用它可以完成更多的动画工作。 AnimatableModifier 是一个 ViewModifier，符合 Animatable 协议，如果对这个协议不了解可以阅读之前发布的两篇文章。">
+<meta name="keywords" content="SwiftUI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高级 SwiftUI 动画 — Part 3：AnimatableModifier">
+<meta property="og:url" content="https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言之前的两篇文章animating paths 和 transform matrices 对 Animatable 协议使用做了介绍，今天这篇文章将为大家介绍 AnimatableModifier，使用它可以完成更多的动画工作。 AnimatableModifier 是一个 ViewModifier，符合 Animatable 协议，如果对这个协议不了解可以阅读之前发布的两篇文章。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/44ccd720a2cc827b4921c612d1dbf6f9.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/5758d75eef91ca96c7591467047153f4.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/eaedb1f634b7e68c3e7967cbe1ecb15c.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/2dc189297ef8f91cd26ebd11eef0c86c.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/cc47950bb3f88ec3dd90d006f27491aa.gif">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/7d75cef39eac0ff99a6549da9912d440.gif">
+<meta property="og:updated_time" content="2022-04-06T02:37:25.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高级 SwiftUI 动画 — Part 3：AnimatableModifier">
+<meta name="twitter:description" content="前言之前的两篇文章animating paths 和 transform matrices 对 Animatable 协议使用做了介绍，今天这篇文章将为大家介绍 AnimatableModifier，使用它可以完成更多的动画工作。 AnimatableModifier 是一个 ViewModifier，符合 Animatable 协议，如果对这个协议不了解可以阅读之前发布的两篇文章。">
+<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2022/44ccd720a2cc827b4921c612d1dbf6f9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/"/>
+
+
+
+
+
+  <title>高级 SwiftUI 动画 — Part 3：AnimatableModifier | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高级 SwiftUI 动画 — Part 3：AnimatableModifier</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-06T10:31:12+08:00">
+                2022-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SwiftUI-动画/" itemprop="url" rel="index">
+                    <span itemprop="name">SwiftUI 动画</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 2,373字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 11分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://images.xiaozhuanlan.com/photo/2022/44ccd720a2cc827b4921c612d1dbf6f9.png" alt=""></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前的两篇文章<a href="https://xiaozhuanlan.com/topic/9583407126" target="_blank" rel="noopener">animating paths</a> 和 <a href="https://xiaozhuanlan.com/topic/9685470312" target="_blank" rel="noopener">transform matrices</a> 对 Animatable 协议使用做了介绍，今天这篇文章将为大家介绍 AnimatableModifier，使用它可以完成更多的动画工作。</p>
+<p>AnimatableModifier 是一个 ViewModifier，符合 Animatable 协议，如果对这个协议不了解可以阅读之前发布的两篇文章。</p>
+<a id="more"></a>
+<h1 id="AnimatableModifier-无法实现动画"><a href="#AnimatableModifier-无法实现动画" class="headerlink" title="AnimatableModifier 无法实现动画"></a>AnimatableModifier 无法实现动画</h1><p>如果是第一次使用 AnimatableModifier，可能会遇到问题。写一个简单的动画，但是没有动画效果。 我又试了几次，也没有成功。因此我认为该功能不存并且放弃使用。幸运的是，后来我坚持了下来。事实证明，我的第一个 <code>modifier</code> 非常好，但是 <code>animatable modifiers</code> 在容器中不起作用。 我在第二次尝试时，动画视图不在容器内。</p>
+<p>例如，以下 modifier 可以成功实现动画：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MyView</span>().modifier(<span class="type">MyAnimatableModifier</span>(value: flag ? <span class="number">1</span> : <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<p>但是相同的代码，在 VStack 中就没有动画了：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">VStack</span> &#123;</span><br><span class="line">    <span class="type">MyView</span>().modifier(<span class="type">MyAnimatableModifier</span>(value: flag ? <span class="number">1</span> : <span class="number">0</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个问题在官方解决之前，经过尝试，可以在 VStack 中改成下面的代码，就可以实现动画：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">VStack</span> &#123;</span><br><span class="line">    <span class="type">Color</span>.clear.overlay(<span class="type">MyView</span>().modifier(<span class="type">MyAnimatableModifier</span>(value: flag ? <span class="number">1</span> : <span class="number">0</span>))).frame(width: <span class="number">100</span>, height: <span class="number">100</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样写是使用一个透明视图占据实际视图空间，动画被放在透明视图上，使用 <code>.overlay()</code>。有点不方便的是，我们需要知道实际视图有多大，所以我们可以在它后面设置透明视图的框架。在下面的示例中可以开到实现代码。</p>
+<h1 id="动画文本"><a href="#动画文本" class="headerlink" title="动画文本"></a>动画文本</h1><p>首先需要制作一些文字动画。对于这个例子，我们将创建一个进度加载指示器。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/5758d75eef91ca96c7591467047153f4.gif" alt=""></p>
+<p>可能很多人都认为应该使用动画路径实现。但是，内部标签就无法设置动画，使用 <code>AnimatableModifier</code> 可以实现。</p>
+<p>完整的代码作为 <strong>示例10</strong> 在文末链接中。关键代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PercentageIndicator</span>: <span class="title">AnimatableModifier</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pct: <span class="type">CGFloat</span> = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; pct &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; pct = newValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">body</span><span class="params">(content: Content)</span></span> -&gt; some <span class="type">View</span> &#123;</span><br><span class="line">        content</span><br><span class="line">            .overlay(<span class="type">ArcShape</span>(pct: pct).foregroundColor(.red))</span><br><span class="line">            .overlay(<span class="type">LabelView</span>(pct: pct))</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ArcShape</span>: <span class="title">Shape</span> </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> pct: <span class="type">CGFloat</span></span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">path</span><span class="params">(<span class="keyword">in</span> rect: CGRect)</span></span> -&gt; <span class="type">Path</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> p = <span class="type">Path</span>()</span><br><span class="line"></span><br><span class="line">            p.addArc(center: <span class="type">CGPoint</span>(x: rect.width / <span class="number">2.0</span>, y:rect.height / <span class="number">2.0</span>),</span><br><span class="line">                     radius: rect.height / <span class="number">2.0</span> + <span class="number">5.0</span>,</span><br><span class="line">                     startAngle: .degrees(<span class="number">0</span>),</span><br><span class="line">                     endAngle: .degrees(<span class="number">360.0</span> * <span class="type">Double</span>(pct)), clockwise: <span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> p.strokedPath(.<span class="keyword">init</span>(lineWidth: <span class="number">10</span>, dash: [<span class="number">6</span>, <span class="number">3</span>], dashPhase: <span class="number">10</span>))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">LabelView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> pct: <span class="type">CGFloat</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">"<span class="subst">\(Int(pct * <span class="number">100</span>)</span>) %"</span>)</span><br><span class="line">                .font(.largeTitle)</span><br><span class="line">                .fontWeight(.bold)</span><br><span class="line">                .foregroundColor(.white)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在示例代码中可以看到，没有使 <code>ArcShape animatable</code>。 因为 <code>modifier</code> 已经多次创建形状，具有不同的 pct 值。</p>
+<h1 id="动画渐变"><a href="#动画渐变" class="headerlink" title="动画渐变"></a>动画渐变</h1><p>在实现渐变动画时，可能会遇到一些限制。比如，可以为起点和终点设置动画，但是不能为渐变颜色设置动画。使用 <code>AnimatableModifier</code> 可以避免出现这种情况。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/eaedb1f634b7e68c3e7967cbe1ecb15c.gif" alt=""></p>
+<p>很容易就可以实现这个功能，在这个基础上可以实现更多复杂的动画。如果需要插入中间颜色，我们只需要计算 RGB 值的平均值。另外需要注意，<code>modifier</code> 假设输入颜色数组都包含相同数量的颜色。</p>
+<p>完整的代码作为 <strong>示例11</strong> 在文末链接中。关键代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">AnimatableGradient</span>: <span class="title">AnimatableModifier</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> from: [<span class="type">UIColor</span>]</span><br><span class="line">    <span class="keyword">let</span> to: [<span class="type">UIColor</span>]</span><br><span class="line">    <span class="keyword">var</span> pct: <span class="type">CGFloat</span> = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; pct &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; pct = newValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">body</span><span class="params">(content: Content)</span></span> -&gt; some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> gColors = [<span class="type">Color</span>]()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;from.<span class="built_in">count</span> &#123;</span><br><span class="line">            gColors.append(colorMixer(c1: from[i], c2: to[i], pct: pct))</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">15</span>)</span><br><span class="line">            .fill(<span class="type">LinearGradient</span>(gradient: <span class="type">Gradient</span>(colors: gColors),</span><br><span class="line">                                 startPoint: <span class="type">UnitPoint</span>(x: <span class="number">0</span>, y: <span class="number">0</span>),</span><br><span class="line">                                 endPoint: <span class="type">UnitPoint</span>(x: <span class="number">1</span>, y: <span class="number">1</span>)))</span><br><span class="line">            .frame(width: <span class="number">200</span>, height: <span class="number">200</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// This is a very basic implementation of a color interpolation</span></span><br><span class="line">    <span class="comment">// between two values.</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">colorMixer</span><span class="params">(c1: UIColor, c2: UIColor, pct: CGFloat)</span></span> -&gt; <span class="type">Color</span> &#123;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> cc1 = c1.cgColor.components <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="type">Color</span>(c1) &#125;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> cc2 = c2.cgColor.components <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="type">Color</span>(c1) &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> r = (cc1[<span class="number">0</span>] + (cc2[<span class="number">0</span>] - cc1[<span class="number">0</span>]) * pct)</span><br><span class="line">        <span class="keyword">let</span> g = (cc1[<span class="number">1</span>] + (cc2[<span class="number">1</span>] - cc1[<span class="number">1</span>]) * pct)</span><br><span class="line">        <span class="keyword">let</span> b = (cc1[<span class="number">2</span>] + (cc2[<span class="number">2</span>] - cc1[<span class="number">2</span>]) * pct)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="type">Color</span>(red: <span class="type">Double</span>(r), green: <span class="type">Double</span>(g), blue: <span class="type">Double</span>(b))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="更多文本动画"><a href="#更多文本动画" class="headerlink" title="更多文本动画"></a>更多文本动画</h1><p>这个示例中，将再次实现一个文本动画。但是是逐步进行，一次放大一个字符</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/2dc189297ef8f91cd26ebd11eef0c86c.gif" alt=""></p>
+<p>完整的代码作为 <strong>示例12</strong> 在文末链接中。关键代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">WaveTextModifier</span>: <span class="title">AnimatableModifier</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> text: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> waveWidth: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> pct: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">var</span> size: <span class="type">CGFloat</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> animatableData: <span class="type">Double</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; pct &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; pct = newValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">body</span><span class="params">(content: Content)</span></span> -&gt; some <span class="type">View</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="type">HStack</span>(spacing: <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">ForEach</span>(<span class="type">Array</span>(text.enumerated()), id: \.<span class="number">0</span>) &#123; (n, ch) <span class="keyword">in</span></span><br><span class="line">                <span class="type">Text</span>(<span class="type">String</span>(ch))</span><br><span class="line">                    .font(<span class="type">Font</span>.custom(<span class="string">"Menlo"</span>, size: <span class="keyword">self</span>.size).bold())</span><br><span class="line">                    .scaleEffect(<span class="keyword">self</span>.effect(<span class="keyword">self</span>.pct, n, <span class="keyword">self</span>.text.<span class="built_in">count</span>, <span class="type">Double</span>(<span class="keyword">self</span>.waveWidth)))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">effect</span><span class="params">(<span class="number">_</span> pct: Double, <span class="number">_</span> n: Int, <span class="number">_</span> total: Int, <span class="number">_</span> waveWidth: Double)</span></span> -&gt; <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> n = <span class="type">Double</span>(n)</span><br><span class="line">        <span class="keyword">let</span> total = <span class="type">Double</span>(total)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="type">CGFloat</span>(<span class="number">1</span> + valueInCurve(pct: pct, total: total, x: n/total, waveWidth: waveWidth))</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">valueInCurve</span><span class="params">(pct: Double, total: Double, x: Double, waveWidth: Double)</span></span> -&gt; <span class="type">Double</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> chunk = waveWidth / total</span><br><span class="line">        <span class="keyword">let</span> m = <span class="number">1</span> / chunk</span><br><span class="line">        <span class="keyword">let</span> offset = (chunk - (<span class="number">1</span> / total)) * pct</span><br><span class="line">        <span class="keyword">let</span> lowerLimit = (pct - chunk) + offset</span><br><span class="line">        <span class="keyword">let</span> upperLimit = (pct) + offset</span><br><span class="line">        <span class="keyword">guard</span> x &gt;= lowerLimit &amp;&amp; x &lt; upperLimit <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> angle = ((x - pct - offset) * m)*<span class="number">360</span>-<span class="number">90</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> (sin(angle.rad) + <span class="number">1</span>) / <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Double</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> rad: <span class="type">Double</span> &#123; <span class="keyword">return</span> <span class="keyword">self</span> * .pi / <span class="number">180</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> deg: <span class="type">Double</span> &#123; <span class="keyword">return</span> <span class="keyword">self</span> * <span class="number">180</span> / .pi &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="计数器动画"><a href="#计数器动画" class="headerlink" title="计数器动画"></a>计数器动画</h1><p>如果你没有用过或者对 AnimatableModifier 不了解，下面这个示例基本上是无法实现的。下面我们来介绍一下如何创建一个计数器动画：</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/cc47950bb3f88ec3dd90d006f27491aa.gif" alt=""></p>
+<p>这个练习的诀窍是为每个数字使用 5 个文本视图，并使用 .spring() 动画上下移动它们。 我们还需要使用 .clipShape() 修饰符来隐藏在边框之外绘制的部分。 为了更好地理解它是如何工作的，您可以评论 .clipShape() 并大大减慢动画的速度。 完整代码在本页顶部链接的 gist 文件中以 Example13 的形式提供。</p>
+<p>这个动画实现的主要内容是每个数字使用 5 个文本视图，并使用 .spring() 动画上下移动它们。然后使用  <code>.clipShape()</code> 修饰符来隐藏边框之外区域。如果想跟清晰的理解他们是如何实现的，可以通过    <code>.clipShape()</code>  让动画速度变慢。</p>
+<p>完整的代码作为 <strong>示例13</strong> 在文末链接中。关键代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MovingCounterModifier</span>: <span class="title">AnimatableModifier</span> </span>&#123;</span><br><span class="line">        @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> height: <span class="type">CGFloat</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> number: <span class="type">Double</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> animatableData: <span class="type">Double</span> &#123;</span><br><span class="line">            <span class="keyword">get</span> &#123; number &#125;</span><br><span class="line">            <span class="keyword">set</span> &#123; number = newValue &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">body</span><span class="params">(content: Content)</span></span> -&gt; some <span class="type">View</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> n = <span class="keyword">self</span>.number + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> tOffset: <span class="type">CGFloat</span> = getOffsetForTensDigit(n)</span><br><span class="line">            <span class="keyword">let</span> uOffset: <span class="type">CGFloat</span> = getOffsetForUnitDigit(n)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> u = [n - <span class="number">2</span>, n - <span class="number">1</span>, n + <span class="number">0</span>, n + <span class="number">1</span>, n + <span class="number">2</span>].<span class="built_in">map</span> &#123; getUnitDigit($<span class="number">0</span>) &#125;</span><br><span class="line">            <span class="keyword">let</span> x = getTensDigit(n)</span><br><span class="line">            <span class="keyword">var</span> t = [<span class="built_in">abs</span>(x - <span class="number">2</span>), <span class="built_in">abs</span>(x - <span class="number">1</span>), <span class="built_in">abs</span>(x + <span class="number">0</span>), <span class="built_in">abs</span>(x + <span class="number">1</span>), <span class="built_in">abs</span>(x + <span class="number">2</span>)]</span><br><span class="line">            t = t.<span class="built_in">map</span> &#123; getUnitDigit(<span class="type">Double</span>($<span class="number">0</span>)) &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> font = <span class="type">Font</span>.custom(<span class="string">"Menlo"</span>, size: <span class="number">34</span>).bold()</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> <span class="type">HStack</span>(alignment: .top, spacing: <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="type">VStack</span> &#123;</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(t[<span class="number">0</span>])</span>"</span>).font(font)</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(t[<span class="number">1</span>])</span>"</span>).font(font)</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(t[<span class="number">2</span>])</span>"</span>).font(font)</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(t[<span class="number">3</span>])</span>"</span>).font(font)</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(t[<span class="number">4</span>])</span>"</span>).font(font)</span><br><span class="line">                &#125;.foregroundColor(.green).modifier(<span class="type">ShiftEffect</span>(pct: tOffset))</span><br><span class="line">                </span><br><span class="line">                <span class="type">VStack</span> &#123;</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(u[<span class="number">0</span>])</span>"</span>).font(font)</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(u[<span class="number">1</span>])</span>"</span>).font(font)</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(u[<span class="number">2</span>])</span>"</span>).font(font)</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(u[<span class="number">3</span>])</span>"</span>).font(font)</span><br><span class="line">                    <span class="type">Text</span>(<span class="string">"<span class="subst">\(u[<span class="number">4</span>])</span>"</span>).font(font)</span><br><span class="line">                &#125;.foregroundColor(.green).modifier(<span class="type">ShiftEffect</span>(pct: uOffset))</span><br><span class="line">            &#125;</span><br><span class="line">            .clipShape(<span class="type">ClipShape</span>())</span><br><span class="line">            .overlay(<span class="type">CounterBorder</span>(height: $height))</span><br><span class="line">            .background(<span class="type">CounterBackground</span>(height: $height))</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">getUnitDigit</span><span class="params">(<span class="number">_</span> number: Double)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">abs</span>(<span class="type">Int</span>(number) - ((<span class="type">Int</span>(number) / <span class="number">10</span>) * <span class="number">10</span>))</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">getTensDigit</span><span class="params">(<span class="number">_</span> number: Double)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">abs</span>(<span class="type">Int</span>(number) / <span class="number">10</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">getOffsetForUnitDigit</span><span class="params">(<span class="number">_</span> number: Double)</span></span> -&gt; <span class="type">CGFloat</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span> - <span class="type">CGFloat</span>(number - <span class="type">Double</span>(<span class="type">Int</span>(number)))</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">getOffsetForTensDigit</span><span class="params">(<span class="number">_</span> number: Double)</span></span> -&gt; <span class="type">CGFloat</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> getUnitDigit(number) == <span class="number">0</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span> - <span class="type">CGFloat</span>(number - <span class="type">Double</span>(<span class="type">Int</span>(number)))</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="动画文本颜色"><a href="#动画文本颜色" class="headerlink" title="动画文本颜色"></a>动画文本颜色</h1><p>通常情况下是通过 <code>.foregroundColor()</code> 为动画添加颜色，但是在文本类动画中使用没有效果，不知道是缺少什么配置还是什么原因。我通过下面的方法实现给文本动画添加颜色。</p>
+<p>完整的代码作为 <strong>示例14</strong> 在文末链接中。关键代码如下：</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/7d75cef39eac0ff99a6549da9912d440.gif" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">AnimatableColorText</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> from: <span class="type">UIColor</span></span><br><span class="line">    <span class="keyword">let</span> to: <span class="type">UIColor</span></span><br><span class="line">    <span class="keyword">let</span> pct: <span class="type">CGFloat</span></span><br><span class="line">    <span class="keyword">let</span> text: () -&gt; <span class="type">Text</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> textView = text()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> textView.foregroundColor(<span class="type">Color</span>.clear)</span><br><span class="line">            .overlay(<span class="type">Color</span>.clear.modifier(<span class="type">AnimatableColorTextModifier</span>(from: from, to: to, pct: pct, text: textView)))</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">AnimatableColorTextModifier</span>: <span class="title">AnimatableModifier</span> </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> from: <span class="type">UIColor</span></span><br><span class="line">        <span class="keyword">let</span> to: <span class="type">UIColor</span></span><br><span class="line">        <span class="keyword">var</span> pct: <span class="type">CGFloat</span></span><br><span class="line">        <span class="keyword">let</span> text: <span class="type">Text</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> animatableData: <span class="type">CGFloat</span> &#123;</span><br><span class="line">            <span class="keyword">get</span> &#123; pct &#125;</span><br><span class="line">            <span class="keyword">set</span> &#123; pct = newValue &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">body</span><span class="params">(content: Content)</span></span> -&gt; some <span class="type">View</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> text.foregroundColor(colorMixer(c1: from, c2: to, pct: pct))</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// This is a very basic implementation of a color interpolation</span></span><br><span class="line">        <span class="comment">// between two values.</span></span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">colorMixer</span><span class="params">(c1: UIColor, c2: UIColor, pct: CGFloat)</span></span> -&gt; <span class="type">Color</span> &#123;</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> cc1 = c1.cgColor.components <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="type">Color</span>(c1) &#125;</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> cc2 = c2.cgColor.components <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="type">Color</span>(c1) &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> r = (cc1[<span class="number">0</span>] + (cc2[<span class="number">0</span>] - cc1[<span class="number">0</span>]) * pct)</span><br><span class="line">            <span class="keyword">let</span> g = (cc1[<span class="number">1</span>] + (cc2[<span class="number">1</span>] - cc1[<span class="number">1</span>]) * pct)</span><br><span class="line">            <span class="keyword">let</span> b = (cc1[<span class="number">2</span>] + (cc2[<span class="number">2</span>] - cc1[<span class="number">2</span>]) * pct)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="type">Color</span>(red: <span class="type">Double</span>(r), green: <span class="type">Double</span>(g), blue: <span class="type">Double</span>(b))</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="版本相关问题"><a href="#版本相关问题" class="headerlink" title="版本相关问题"></a>版本相关问题</h1><p>通过上面介绍可以看出 <code>AnimatableModifier</code> 非常强大，但是还存在一些问题。另外在 Xcode 和 iOS/macOS 某些版本中，App 在启动时会崩溃。而且是在部署时，正常开发编译中是不会发生这种情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dyld: Symbol not found: _$s7SwiftUI18AnimatableModifierPAAE13_makeViewList8modifier6inputs4bodyAA01_fG7OutputsVAA11_GraphValueVyxG_AA01_fG6InputsVAiA01_L0V_ANtctFZ</span><br><span class="line">  Referenced from: /Applications/MyApp.app/Contents/MacOS/MyApp</span><br><span class="line">  Expected in: /System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI</span><br></pre></td></tr></table></figure>
+<p>例如，如果 App 在 Xcode 11.3 上部署并在 macOS 10.15.0 上执行，就会出现 “Symbol not found” 错误。然而，在 macOS  10.15.1 上运行相同的可执行文件可以正常工作。</p>
+<blockquote>
+<p>译自 <a href="https://swiftui-lab.com/" target="_blank" rel="noopener">The SwiftUI Lab</a> 的 <a href="https://swiftui-lab.com/swiftui-animations-part3/" target="_blank" rel="noopener">Advanced SwiftUI Animations – Part 3: AnimatableModifier</a></p>
+<p>本文的完整示例代码可在以下位置找到：</p>
+<p><a href="https://gist.github.com/swiftui-lab/e5901123101ffad6d39020cc7a810798" target="_blank" rel="noopener">https://gist.github.com/swiftui-lab/e5901123101ffad6d39020cc7a810798</a></p>
+<p>示例8 需要的图片资源。从这里下载：</p>
+<p><a href="https://swiftui-lab.com/?smd_process_download=1&amp;download_id=916" target="_blank" rel="noopener">https://swiftui-lab.com/?smd_process_download=1&amp;download_id=916</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/">高级 SwiftUI 动画 — Part 3：AnimatableModifier</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2022年04月06日 - 10:04</p>
+  <p><span>最后更新:</span>2022年04月06日 - 10:04</p>
+  <p><span>原始链接:</span><a href="/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/" title="高级 SwiftUI 动画 — Part 3：AnimatableModifier">https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/高级-SwiftUI-动画-—-Part-3：AnimatableModifier/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SwiftUI/" rel="tag"><i class="fa fa-tag"></i> SwiftUI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/高级-SwiftUI-动画-—-Part-2：GeometryEffect/" rel="next" title="高级 SwiftUI 动画 — Part 2：GeometryEffect">
+                <i class="fa fa-chevron-left"></i> 高级 SwiftUI 动画 — Part 2：GeometryEffect
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/高级-SwiftUI-动画进阶-——-Part4：TimelineView/" rel="prev" title="高级 SwiftUI 动画进阶 —— Part4：TimelineView">
+                高级 SwiftUI 动画进阶 —— Part4：TimelineView <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">157</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AnimatableModifier-无法实现动画"><span class="nav-number">2.</span> <span class="nav-text">AnimatableModifier 无法实现动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画文本"><span class="nav-number">3.</span> <span class="nav-text">动画文本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画渐变"><span class="nav-number">4.</span> <span class="nav-text">动画渐变</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更多文本动画"><span class="nav-number">5.</span> <span class="nav-text">更多文本动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计数器动画"><span class="nav-number">6.</span> <span class="nav-text">计数器动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画文本颜色"><span class="nav-number">7.</span> <span class="nav-text">动画文本颜色</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#版本相关问题"><span class="nav-number">8.</span> <span class="nav-text">版本相关问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共224.5k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

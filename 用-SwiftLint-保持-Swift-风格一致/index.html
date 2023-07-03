@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="工具," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言代码风格可能是一个有争议的话题，并且在开发人员之间引发一些激烈的讨论。使用工具强制执行一套代码风格规则对于避免一些争论，以及确保在整个项目中保持代码风格的一致性非常有帮助。SwiftLint 可以很容易的整合进 Xcode 项目中，以便在编译时将代码风格冲突标记为警告或者错误。">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 SwiftLint 保持 Swift 风格一致">
+<meta property="og:url" content="https://fanbaoying.github.io/用-SwiftLint-保持-Swift-风格一致/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言代码风格可能是一个有争议的话题，并且在开发人员之间引发一些激烈的讨论。使用工具强制执行一套代码风格规则对于避免一些争论，以及确保在整个项目中保持代码风格的一致性非常有帮助。SwiftLint 可以很容易的整合进 Xcode 项目中，以便在编译时将代码风格冲突标记为警告或者错误。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/cf7f10bb27747da39b213ac1db0a0e89.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/9e8b4c098191b835c4cdd4453b043e33.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/2b071d5d50e0bbf84995cc9ffd989765.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/0e9682ea0749ab01000136134b9fa969.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/5cb95638b5ab173aa5e0433f8810b62c.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/4dc45cd25a4715f7b3009b7dfa00746b.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/6e09c021cdaeba6da6931c7948814b44.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/ae2caf754d5f288d786c77ef116c676b.png">
+<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2022/ca1845d3007fa7b6e89917e80e034115.png">
+<meta property="og:updated_time" content="2022-08-25T04:07:51.214Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 SwiftLint 保持 Swift 风格一致">
+<meta name="twitter:description" content="前言代码风格可能是一个有争议的话题，并且在开发人员之间引发一些激烈的讨论。使用工具强制执行一套代码风格规则对于避免一些争论，以及确保在整个项目中保持代码风格的一致性非常有帮助。SwiftLint 可以很容易的整合进 Xcode 项目中，以便在编译时将代码风格冲突标记为警告或者错误。">
+<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2022/cf7f10bb27747da39b213ac1db0a0e89.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/用-SwiftLint-保持-Swift-风格一致/"/>
+
+
+
+
+
+  <title>用 SwiftLint 保持 Swift 风格一致 | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/用-SwiftLint-保持-Swift-风格一致/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用 SwiftLint 保持 Swift 风格一致</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-25T11:42:06+08:00">
+                2022-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件工具库/" itemprop="url" rel="index">
+                    <span itemprop="name">软件工具库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 5,360字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 26分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>代码风格可能是一个有争议的话题，并且在开发人员之间引发一些激烈的讨论。使用工具强制执行一套代码风格规则对于避免一些争论，以及确保在整个项目中保持代码风格的一致性非常有帮助。SwiftLint 可以很容易的整合进 Xcode 项目中，以便在编译时将代码风格冲突标记为警告或者错误。</p>
+<a id="more"></a>
+<h1 id="使用-Xcode-集成-SwiftLint"><a href="#使用-Xcode-集成-SwiftLint" class="headerlink" title="使用 Xcode 集成 SwiftLint"></a>使用 Xcode 集成 SwiftLint</h1><p>你可以在 Github上 获得<a href="https://github.com/realm/SwiftLint" target="_blank" rel="noopener">SwiftLint</a>。它可以使用多种方式安装，比如，直接下载 SwiftLint.pkg 包，或者使用<a href="https://brew.sh/" target="_blank" rel="noopener">HomeBrew</a>命令行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install swiftlint</span><br></pre></td></tr></table></figure>
+<p>安装 SwiftLint 后，可以通过在主 app target 的<code>Build Phase</code>（构筑阶段）下添加一个<code>Run Phase</code>（运行阶段）的运行脚本，来集成进 Xcode 项目。点击<code>+</code>号按钮，选择”New Run Script Phase”，添加下面的脚本。在 silicon Macs （搭载M1芯片）上需要添加<code>export</code>语句，因为<code>HomeBrew</code>的二进制文件默认安装在<code>/opt/homebrew/bin</code>目录之下。</p>
+<blockquote>
+<p>译者注：并不一定在此目录下，具体可以点击<a href="https://mkyong.com/mac/where-does-homebrew-install-packages-on-mac/" target="_blank" rel="noopener">这里</a>。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:/opt/homebrew/bin"</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">which</span> swiftlint &gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">  swiftlint</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/cf7f10bb27747da39b213ac1db0a0e89.png" alt="在Xcode添加运行脚本以集成SwiftLint"></p>
+<p>在 Xcode 添加运行脚本以集成 SwiftLint</p>
+<hr>
+<h1 id="SwiftLint-的规则冲突"><a href="#SwiftLint-的规则冲突" class="headerlink" title="SwiftLint 的规则冲突"></a><strong>SwiftLint 的规则冲突</strong></h1><p>好消息是，新建的 Xcode 项目没有违反 SwiftLint 的默认规则。一旦你知道了 SwiftLint，最好从一开始就立即将其添加到每个项目中。在刚才新建的 iOS App 的<code>Text view</code>后面添加一个空格。现在，编译代码时会生成警告。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">VStack</span> &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">"Hello, world!"</span>) </span><br><span class="line"></span><br><span class="line">            <span class="type">Text</span>(<span class="string">"second line"</span>)</span><br><span class="line"></span><br><span class="line">            <span class="type">Spacer</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码违反了<code>trailing_whitespace</code>规则，它默认是开启的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+------------------------------------------+--------+-------------+------------------------+-------------+----------+---------------+</span><br><span class="line">| identifier                               | opt-in | correctable | enabled <span class="keyword">in</span> your config | kind        | analyzer | configuration |</span><br><span class="line">+------------------------------------------+--------+-------------+------------------------+-------------+----------+---------------+</span><br><span class="line">| trailing_whitespace                      | no     | yes         | yes                    | style       | no       | warning, i... |</span><br></pre></td></tr></table></figure>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/9e8b4c098191b835c4cdd4453b043e33.png" alt="Swift正在警告在一行之后有一个额外的空格"></p>
+<p>Swift 正在警告在一行之后有一个额外的空格</p>
+<hr>
+<h1 id="SwiftLint-的规则"><a href="#SwiftLint-的规则" class="headerlink" title="SwiftLint 的规则"></a>SwiftLint 的规则</h1><p>SwiftLint 包含了200多条规则，并且 Swift 社区仍在不间断的贡献更多的规则。查看 SwiftLint 规则的一种方法是在终端中运行<code>swiftlint rules</code>命令（此种方式需要安装<code>swiftlint</code>）。这将会显示规则以及规则的一系列属性，比如是否可选，是否可纠正。</p>
+<p>以下是 SwiftLint 0.46.5的默认规则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br></pre></td><td class="code"><pre><span class="line">swiftlint rules</span><br><span class="line">+------------------------------------------+--------+-------------+------------------------+-------------+----------+---------------+</span><br><span class="line">| identifier                               | opt-in | correctable | enabled <span class="keyword">in</span> your config | kind        | analyzer | configuration |</span><br><span class="line">+------------------------------------------+--------+-------------+------------------------+-------------+----------+---------------+</span><br><span class="line">| anonymous_argument_in_multiline_closure  | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| anyobject_protocol                       | yes    | yes         | no                     | lint        | no       | warning       |</span><br><span class="line">| array_init                               | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| attributes                               | yes    | no          | no                     | style       | no       | warning, a... |</span><br><span class="line">| balanced_xctest_lifecycle                | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| block_based_kvo                          | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| capture_variable                         | yes    | no          | no                     | lint        | yes      | warning       |</span><br><span class="line">| class_delegate_protocol                  | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| closing_brace                            | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| closure_body_length                      | yes    | no          | no                     | metrics     | no       | warning: 2... |</span><br><span class="line">| closure_end_indentation                  | yes    | yes         | no                     | style       | no       | warning       |</span><br><span class="line">| closure_parameter_position               | no     | no          | yes                    | style       | no       | warning       |</span><br><span class="line">| closure_spacing                          | yes    | yes         | no                     | style       | no       | warning       |</span><br><span class="line">| collection_alignment                     | yes    | no          | no                     | style       | no       | warning, a... |</span><br><span class="line">| colon                                    | no     | yes         | yes                    | style       | no       | warning, f... |</span><br><span class="line">| comma                                    | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| comment_spacing                          | no     | yes         | yes                    | lint        | no       | warning       |</span><br><span class="line">| compiler_protocol_init                   | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| computed_accessors_order                 | no     | no          | yes                    | style       | no       | warning, o... |</span><br><span class="line">| conditional_returns_on_newline           | yes    | no          | no                     | style       | no       | warning, i... |</span><br><span class="line">| contains_over_filter_count               | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| contains_over_filter_is_empty            | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| contains_over_first_not_nil              | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| contains_over_range_nil_comparison       | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| control_statement                        | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| convenience_type                         | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| custom_rules                             | no     | no          | no                     | style       | no       | user-defin... |</span><br><span class="line">| cyclomatic_complexity                    | no     | no          | yes                    | metrics     | no       | warning: 1... |</span><br><span class="line">| deployment_target                        | no     | no          | yes                    | lint        | no       | warning, i... |</span><br><span class="line">| discarded_notification_center_observer   | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| discouraged_assert                       | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| discouraged_direct_init                  | no     | no          | yes                    | lint        | no       | warning, t... |</span><br><span class="line">| discouraged_none_name                    | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| discouraged_object_literal               | yes    | no          | no                     | idiomatic   | no       | warning, i... |</span><br><span class="line">| discouraged_optional_boolean             | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| discouraged_optional_collection          | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| duplicate_enum_cases                     | no     | no          | yes                    | lint        | no       | error         |</span><br><span class="line">| duplicate_imports                        | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| duplicated_key_in_dictionary_literal     | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| dynamic_inline                           | no     | no          | yes                    | lint        | no       | error         |</span><br><span class="line">| empty_collection_literal                 | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| empty_count                              | yes    | no          | no                     | performance | no       | error, onl... |</span><br><span class="line">| empty_enum_arguments                     | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| empty_parameters                         | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| empty_parentheses_with_trailing_closure  | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| empty_string                             | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| empty_xctest_method                      | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| enum_case_associated_values_count        | yes    | no          | no                     | metrics     | no       | warning: 5... |</span><br><span class="line">| expiring_todo                            | yes    | no          | no                     | lint        | no       | (approachi... |</span><br><span class="line">| explicit_acl                             | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| explicit_enum_raw_value                  | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| explicit_init                            | yes    | yes         | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| explicit_self                            | yes    | yes         | no                     | style       | yes      | warning       |</span><br><span class="line">| explicit_top_level_acl                   | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| explicit_type_interface                  | yes    | no          | no                     | idiomatic   | no       | warning, e... |</span><br><span class="line">| extension_access_modifier                | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| fallthrough                              | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| fatal_error_message                      | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| file_header                              | yes    | no          | no                     | style       | no       | warning, r... |</span><br><span class="line">| file_length                              | no     | no          | yes                    | metrics     | no       | warning: 4... |</span><br><span class="line">| file_name                                | yes    | no          | no                     | idiomatic   | no       | (severity)... |</span><br><span class="line">| file_name_no_space                       | yes    | no          | no                     | idiomatic   | no       | (severity)... |</span><br><span class="line">| file_types_order                         | yes    | no          | no                     | style       | no       | warning, o... |</span><br><span class="line">| first_where                              | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| flatmap_over_map_reduce                  | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| for_where                                | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| force_cast                               | no     | no          | yes                    | idiomatic   | no       | error         |</span><br><span class="line">| force_try                                | no     | no          | yes                    | idiomatic   | no       | error         |</span><br><span class="line">| force_unwrapping                         | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| function_body_length                     | no     | no          | yes                    | metrics     | no       | warning: 4... |</span><br><span class="line">| function_default_parameter_at_end        | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| function_parameter_count                 | no     | no          | yes                    | metrics     | no       | warning: 5... |</span><br><span class="line">| generic_type_name                        | no     | no          | yes                    | idiomatic   | no       | (min_lengt... |</span><br><span class="line">| ibinspectable_in_extension               | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| identical_operands                       | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| identifier_name                          | no     | no          | yes                    | style       | no       | (min_lengt... |</span><br><span class="line">| implicit_getter                          | no     | no          | yes                    | style       | no       | warning       |</span><br><span class="line">| implicit_return                          | yes    | yes         | no                     | style       | no       | warning, i... |</span><br><span class="line">| implicitly_unwrapped_optional            | yes    | no          | no                     | idiomatic   | no       | warning, m... |</span><br><span class="line">| inclusive_language                       | no     | no          | yes                    | style       | no       | warning, a... |</span><br><span class="line">| indentation_width                        | yes    | no          | no                     | style       | no       | severity: ... |</span><br><span class="line">| inert_defer                              | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| is_disjoint                              | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| joined_default_parameter                 | yes    | yes         | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| large_tuple                              | no     | no          | yes                    | metrics     | no       | warning: 2... |</span><br><span class="line">| last_where                               | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| leading_whitespace                       | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| legacy_cggeometry_functions              | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| legacy_constant                          | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| legacy_constructor                       | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| legacy_hashing                           | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| legacy_multiple                          | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| legacy_nsgeometry_functions              | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| legacy_objc_type                         | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| legacy_random                            | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| let_var_whitespace                       | yes    | no          | no                     | style       | no       | warning       |</span><br><span class="line">| line_length                              | no     | no          | yes                    | metrics     | no       | warning: 1... |</span><br><span class="line">| literal_expression_end_indentation       | yes    | yes         | no                     | style       | no       | warning       |</span><br><span class="line">| lower_acl_than_parent                    | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| mark                                     | no     | yes         | yes                    | lint        | no       | warning       |</span><br><span class="line">| missing_docs                             | yes    | no          | no                     | lint        | no       | warning: o... |</span><br><span class="line">| modifier_order                           | yes    | yes         | no                     | style       | no       | warning, p... |</span><br><span class="line">| multiline_arguments                      | yes    | no          | no                     | style       | no       | warning, f... |</span><br><span class="line">| multiline_arguments_brackets             | yes    | no          | no                     | style       | no       | warning       |</span><br><span class="line">| multiline_function_chains                | yes    | no          | no                     | style       | no       | warning       |</span><br><span class="line">| multiline_literal_brackets               | yes    | no          | no                     | style       | no       | warning       |</span><br><span class="line">| multiline_parameters                     | yes    | no          | no                     | style       | no       | warning, a... |</span><br><span class="line">| multiline_parameters_brackets            | yes    | no          | no                     | style       | no       | warning       |</span><br><span class="line">| multiple_closures_with_trailing_closure  | no     | no          | yes                    | style       | no       | warning       |</span><br><span class="line">| nesting                                  | no     | no          | yes                    | metrics     | no       | (type_leve... |</span><br><span class="line">| nimble_operator                          | yes    | yes         | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| no_extension_access_modifier             | yes    | no          | no                     | idiomatic   | no       | error         |</span><br><span class="line">| no_fallthrough_only                      | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| no_grouping_extension                    | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| no_space_in_method_call                  | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| notification_center_detachment           | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| nslocalizedstring_key                    | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| nslocalizedstring_require_bundle         | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| nsobject_prefer_isequal                  | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| number_separator                         | yes    | yes         | no                     | style       | no       | warning, m... |</span><br><span class="line">| object_literal                           | yes    | no          | no                     | idiomatic   | no       | warning, i... |</span><br><span class="line">| opening_brace                            | no     | yes         | yes                    | style       | no       | warning, a... |</span><br><span class="line">| operator_usage_whitespace                | yes    | yes         | no                     | style       | no       | warning, l... |</span><br><span class="line">| operator_whitespace                      | no     | no          | yes                    | style       | no       | warning       |</span><br><span class="line">| optional_enum_case_matching              | yes    | yes         | no                     | style       | no       | warning       |</span><br><span class="line">| orphaned_doc_comment                     | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| overridden_super_call                    | yes    | no          | no                     | lint        | no       | warning, e... |</span><br><span class="line">| override_in_extension                    | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| pattern_matching_keywords                | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| prefer_nimble                            | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| prefer_self_in_static_references         | yes    | yes         | no                     | style       | no       | N/A           |</span><br><span class="line">| prefer_self_type_over_type_of_self       | yes    | yes         | no                     | style       | no       | warning       |</span><br><span class="line">| prefer_zero_over_explicit_init           | yes    | yes         | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| prefixed_toplevel_constant               | yes    | no          | no                     | style       | no       | warning, o... |</span><br><span class="line">| private_action                           | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| private_outlet                           | yes    | no          | no                     | lint        | no       | warning, a... |</span><br><span class="line">| private_over_fileprivate                 | no     | yes         | yes                    | idiomatic   | no       | warning, v... |</span><br><span class="line">| private_subject                          | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| private_unit_test                        | no     | no          | yes                    | lint        | no       | warning: X... |</span><br><span class="line">| prohibited_interface_builder             | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| prohibited_super_call                    | yes    | no          | no                     | lint        | no       | warning, e... |</span><br><span class="line">| protocol_property_accessors_order        | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| quick_discouraged_call                   | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| quick_discouraged_focused_test           | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| quick_discouraged_pending_test           | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| raw_value_for_camel_cased_codable_enum   | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| reduce_boolean                           | no     | no          | yes                    | performance | no       | warning       |</span><br><span class="line">| reduce_into                              | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| redundant_discardable_let                | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| redundant_nil_coalescing                 | yes    | yes         | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| redundant_objc_attribute                 | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| redundant_optional_initialization        | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| redundant_set_access_control             | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| redundant_string_enum_value              | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| redundant_type_annotation                | yes    | yes         | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| redundant_void_return                    | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| required_deinit                          | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| required_enum_case                       | yes    | no          | no                     | lint        | no       | No protoco... |</span><br><span class="line">| return_arrow_whitespace                  | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| self_in_property_initialization          | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| shorthand_operator                       | no     | no          | yes                    | style       | no       | error         |</span><br><span class="line">| single_test_class                        | yes    | no          | no                     | style       | no       | warning       |</span><br><span class="line">| sorted_first_last                        | yes    | no          | no                     | performance | no       | warning       |</span><br><span class="line">| sorted_imports                           | yes    | yes         | no                     | style       | no       | warning       |</span><br><span class="line">| statement_position                       | no     | yes         | yes                    | style       | no       | (statement... |</span><br><span class="line">| static_operator                          | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| strict_fileprivate                       | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| strong_iboutlet                          | yes    | yes         | no                     | lint        | no       | warning       |</span><br><span class="line">| superfluous_disable_command              | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| switch_case_alignment                    | no     | no          | yes                    | style       | no       | warning, i... |</span><br><span class="line">| switch_case_on_newline                   | yes    | no          | no                     | style       | no       | warning       |</span><br><span class="line">| syntactic_sugar                          | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| test_case_accessibility                  | yes    | yes         | no                     | lint        | no       | warning, a... |</span><br><span class="line">| todo                                     | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| toggle_bool                              | yes    | yes         | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| trailing_closure                         | yes    | no          | no                     | style       | no       | warning, o... |</span><br><span class="line">| trailing_comma                           | no     | yes         | yes                    | style       | no       | warning, m... |</span><br><span class="line">| trailing_newline                         | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| trailing_semicolon                       | no     | yes         | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| trailing_whitespace                      | no     | yes         | yes                    | style       | no       | warning, i... |</span><br><span class="line">| type_body_length                         | no     | no          | yes                    | metrics     | no       | warning: 2... |</span><br><span class="line">| type_contents_order                      | yes    | no          | no                     | style       | no       | warning, o... |</span><br><span class="line">| type_name                                | no     | no          | yes                    | idiomatic   | no       | (min_lengt... |</span><br><span class="line">| unavailable_function                     | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| unneeded_break_in_switch                 | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| unneeded_parentheses_in_closure_argument | yes    | yes         | no                     | style       | no       | warning       |</span><br><span class="line">| unowned_variable_capture                 | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">| untyped_error_in_catch                   | yes    | yes         | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| unused_capture_list                      | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| unused_closure_parameter                 | no     | yes         | yes                    | lint        | no       | warning       |</span><br><span class="line">| unused_control_flow_label                | no     | yes         | yes                    | lint        | no       | warning       |</span><br><span class="line">| unused_declaration                       | yes    | no          | no                     | lint        | yes      | severity: ... |</span><br><span class="line">| unused_enumerated                        | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| unused_import                            | yes    | yes         | no                     | lint        | yes      | severity: ... |</span><br><span class="line">| unused_optional_binding                  | no     | no          | yes                    | style       | no       | warning, i... |</span><br><span class="line">| unused_setter_value                      | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| valid_ibinspectable                      | no     | no          | yes                    | lint        | no       | warning       |</span><br><span class="line">| vertical_parameter_alignment             | no     | no          | yes                    | style       | no       | warning       |</span><br><span class="line">| vertical_parameter_alignment_on_call     | yes    | no          | no                     | style       | no       | warning       |</span><br><span class="line">| vertical_whitespace                      | no     | yes         | yes                    | style       | no       | warning, m... |</span><br><span class="line">| vertical_whitespace_between_cases        | yes    | yes         | no                     | style       | no       | warning       |</span><br><span class="line">| vertical_whitespace_closing_braces       | yes    | yes         | no                     | style       | no       | N/A           |</span><br><span class="line">| vertical_whitespace_opening_braces       | yes    | yes         | no                     | style       | no       | N/A           |</span><br><span class="line">| void_return                              | no     | yes         | yes                    | style       | no       | warning       |</span><br><span class="line">| weak_delegate                            | yes    | yes         | no                     | lint        | no       | warning       |</span><br><span class="line">| xct_specific_matcher                     | yes    | no          | no                     | idiomatic   | no       | warning       |</span><br><span class="line">| xctfail_message                          | no     | no          | yes                    | idiomatic   | no       | warning       |</span><br><span class="line">| yoda_condition                           | yes    | no          | no                     | lint        | no       | warning       |</span><br><span class="line">+------------------------------------------+--------+-------------+------------------------+-------------+----------+---------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="在终端运行-SwiftLint"><a href="#在终端运行-SwiftLint" class="headerlink" title="在终端运行 SwiftLint"></a>在终端运行 SwiftLint</h1><p>SwiftLint 可以配置为一个仓库预提交的钩子，用以保证提交代码的风格一致。它也可以在终端中作为命令运行，只需在项目目录中运行<code>swiftlint</code>即可。运行<code>swiftlint --help</code>查看更多选项。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">swiftlint --<span class="built_in">help</span></span><br><span class="line">OVERVIEW: A tool to enforce Swift style and conventions.</span><br><span class="line"></span><br><span class="line">USAGE: swiftlint &lt;subcommand&gt;</span><br><span class="line"></span><br><span class="line">OPTIONS:</span><br><span class="line">  --version               Show the version.</span><br><span class="line">  -h, --<span class="built_in">help</span>              Show <span class="built_in">help</span> information.</span><br><span class="line"></span><br><span class="line">SUBCOMMANDS:</span><br><span class="line">  analyze                 Run analysis rules</span><br><span class="line">  docs                    Open SwiftLint documentation website <span class="keyword">in</span> the default web browser</span><br><span class="line">  generate-docs           Generates markdown documentation <span class="keyword">for</span> all rules</span><br><span class="line">  lint (default)          Print lint warnings and errors</span><br><span class="line">  rules                   Display the list of rules and their identifiers</span><br><span class="line">  version                 Display the current version of SwiftLint</span><br><span class="line"></span><br><span class="line">  See <span class="string">'swiftlint help &lt;subcommand&gt;'</span> <span class="keyword">for</span> detailed <span class="built_in">help</span>.</span><br></pre></td></tr></table></figure>
+<p>在（之前新建的项目）HelloSwiftLintApp（目录下）在终端运行<code>swiftlint</code>同样会显示违反了<code>trailing_whitespace</code>规则。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">swiftlint</span><br><span class="line">Linting Swift files <span class="keyword">in</span> current working directory</span><br><span class="line">Linting <span class="string">'HelloSwiftLintApp.swift'</span> (1/2)</span><br><span class="line">Linting <span class="string">'ContentView.swift'</span> (2/2)</span><br><span class="line">...HelloSwiftLint/ContentView.swift:13:1: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)</span><br><span class="line">Done linting! Found 1 violation, 0 serious <span class="keyword">in</span> 2 files.</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="自动修复-SwiftLint-冲突"><a href="#自动修复-SwiftLint-冲突" class="headerlink" title="自动修复 SwiftLint 冲突"></a>自动修复 SwiftLint 冲突</h1><p>从上面的规则列表可以看出，有一些规则是可以自动修正的。这是直接针对间距规则的，就像上面介绍的额外空格一样。只要可以进行 SwiftLint  分析，就可以进行 SwiftLint 自动修正。</p>
+<p>在终端运行<code>swiftlint --fix</code>就会自动修正那些可以被自动修正的 SwiftLint 冲突。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">swiftlint --fix</span><br><span class="line">Correcting Swift files <span class="keyword">in</span> current working directory</span><br><span class="line">Correcting <span class="string">'HelloSwiftLintApp.swift'</span> (1/2)</span><br><span class="line">Correcting <span class="string">'ContentView.swift'</span> (2/2)</span><br><span class="line">.../HelloSwiftLint/ContentView.swift:13:1 Corrected Trailing Whitespace</span><br><span class="line">Done inspecting 2 files <span class="keyword">for</span> auto-correction!</span><br></pre></td></tr></table></figure>
+<p>或者，可以将自动修复整合到 Xcode 的<code>Build Phase</code>。编辑”<code>Run Script Phase</code>“下的 SwiftLint 脚本。现在，在 Xcode 中编译代码时，添加尾随空格会自动删除。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:/opt/homebrew/bin"</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">which</span> swiftlint &gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">  swiftlint --fix &amp;&amp; swiftlint</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/2b071d5d50e0bbf84995cc9ffd989765.png" alt=""></p>
+<hr>
+<h1 id="手动修复-SwiftLint-规则冲突"><a href="#手动修复-SwiftLint-规则冲突" class="headerlink" title="手动修复 SwiftLint 规则冲突"></a>手动修复 SwiftLint 规则冲突</h1><p>并非所有的规则冲突都可以自动修复。对于 SwiftLint 分析生成的警告以及错误，有很多种处理方式。如果只有一到两个冲突，最好的办法是修复它们，然后继续。</p>
+<h2 id="处理-SwiftLint-冲突的一些选项："><a href="#处理-SwiftLint-冲突的一些选项：" class="headerlink" title="处理 SwiftLint 冲突的一些选项："></a>处理 SwiftLint 冲突的一些选项：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 修改代码以符合 SwiftLint 规则</span><br><span class="line">2. 在代码中添加特例，以忽略特定的规则冲突</span><br><span class="line">3. 为项目定制 SwiftLint 规则</span><br><span class="line">4. 忽略这些警告 -- 这不是一个好的选项</span><br></pre></td></tr></table></figure>
+<p>修复冲突是最好的方法，当 SwiftLint 从项目的一开始就被整合时，这可以很容易的被实现。</p>
+<p>下面是我写的示例代码，它遍历了 vertices 数组，创建了一条路径。使用<a href="https://developer.apple.com/documentation/swift/array/1687832-enumerated" target="_blank" rel="noopener">enumerated</a>方法生成了索引以及数据项，使用单个字符<code>n</code>作为变量名会导致编译时错误，仅使用字符作为变量名会导致编译时警告。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (n, pt) <span class="keyword">in</span> vertices.enumerated() &#123;</span><br><span class="line">     n == <span class="number">0</span> ? path.move(to: pt) : path.addLine(to: pt)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这些“<strong>标识符名称”（<em>identifier-name</em>）</strong>冲突不能被自动修复。为此类冲突创建一些例外可能会很有诱惑力，但是从长远来看，（此类规则）将有助于代码的可读性以及可维护性。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (index, point) <span class="keyword">in</span> vertices.enumerated() &#123;</span><br><span class="line">     index == <span class="number">0</span> ? path.move(to: point) : path.addLine(to: point)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我发现关于<code>enumerated</code>苹果的示例代码存在着同样的问题！</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/0e9682ea0749ab01000136134b9fa969.png" alt="SwiftLint的标识符冲突无法被修复"></p>
+<p>SwiftLint 的标识符冲突无法被修复</p>
+<hr>
+<h1 id="一些规则的例外情况"><a href="#一些规则的例外情况" class="headerlink" title="一些规则的例外情况"></a>一些规则的例外情况</h1><p>在某些情况下，代码需要与某些外部API或数据源兼容。<a href="https://openweathermap.org/guide" target="_blank" rel="noopener">Open Weather</a> API提供了如<a href="https://swdevnotes.com/swift/2022/read-json-with-codeable-in-swift/" target="_blank" rel="noopener">Read JSON with codeable in Swift</a>中所描述的 JSON 数据。这些天气数据中<code>main</code>数据段含有一些有下划线的标识符，比如，<code>feels_like</code> 。用于 Swift 解码此 JSON 的结构体必须与 JSON 中的字段名称匹配，由于 SwiftLint 的<code>”***identifier_name***”</code>规则，Swift 代码会产生编译时错误。</p>
+<h2 id="天气数据的示例-JSON"><a href="#天气数据的示例-JSON" class="headerlink" title="天气数据的示例 JSON"></a>天气数据的示例 JSON</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"coord"</span>: &#123;</span><br><span class="line">        <span class="attr">"lon"</span>: <span class="number">-122.08</span>,</span><br><span class="line">        <span class="attr">"lat"</span>: <span class="number">37.39</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"weather"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"id"</span>: <span class="number">800</span>,</span><br><span class="line">            <span class="attr">"main"</span>: <span class="string">"Clear"</span>,</span><br><span class="line">            <span class="attr">"description"</span>: <span class="string">"clear sky"</span>,</span><br><span class="line">            <span class="attr">"icon"</span>: <span class="string">"01d"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"base"</span>: <span class="string">"stations"</span>,</span><br><span class="line">    <span class="attr">"main"</span>: &#123;</span><br><span class="line">        <span class="attr">"temp"</span>: <span class="number">9.4</span>,</span><br><span class="line">        <span class="attr">"feels_like"</span>: <span class="number">8.71</span>,</span><br><span class="line">        <span class="attr">"temp_min"</span>: <span class="number">7.22</span>,</span><br><span class="line">        <span class="attr">"temp_max"</span>: <span class="number">11.11</span>,</span><br><span class="line">        <span class="attr">"pressure"</span>: <span class="number">1023</span>,</span><br><span class="line">        <span class="attr">"humidity"</span>: <span class="number">100</span>,</span><br><span class="line">        <span class="attr">"sea_level"</span>: <span class="number">100</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"visibility"</span>: <span class="number">16093</span>,</span><br><span class="line">    <span class="attr">"wind"</span>: &#123;</span><br><span class="line">        <span class="attr">"speed"</span>: <span class="number">1.5</span>,</span><br><span class="line">        <span class="attr">"deg"</span>: <span class="number">350</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"clouds"</span>: &#123;</span><br><span class="line">        <span class="attr">"all"</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"dt"</span>: <span class="number">1560350645</span>,</span><br><span class="line">    <span class="attr">"sys"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">5122</span>,</span><br><span class="line">        <span class="attr">"message"</span>: <span class="number">0.0139</span>,</span><br><span class="line">        <span class="attr">"country"</span>: <span class="string">"US"</span>,</span><br><span class="line">        <span class="attr">"sunrise"</span>: <span class="number">1560343627</span>,</span><br><span class="line">        <span class="attr">"sunset"</span>: <span class="number">1560396563</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"timezone"</span>: <span class="number">-25200</span>,</span><br><span class="line">    <span class="attr">"id"</span>: <span class="number">420006353</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Mountain View"</span>,</span><br><span class="line">    <span class="attr">"cod"</span>: <span class="number">200</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">WeatherRawData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> timezone: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">var</span> weather: [<span class="type">WeatherData</span>]</span><br><span class="line">    <span class="keyword">var</span> main: <span class="type">MainData</span></span><br><span class="line">    <span class="keyword">var</span> wind: <span class="type">WindData</span></span><br><span class="line">    <span class="keyword">var</span> clouds: <span class="type">CloudsData</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">WeatherData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> id: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> main: <span class="type">String</span></span><br><span class="line">        <span class="keyword">var</span> description: <span class="type">String</span></span><br><span class="line">        <span class="keyword">var</span> icon: <span class="type">String</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">MainData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> temp: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> feels_like: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> temp_min: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> temp_max: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> pressure: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> humidity: <span class="type">Double</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">WindData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> speed: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> deg: <span class="type">Double</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CloudsData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> all: <span class="type">Double</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/5cb95638b5ab173aa5e0433f8810b62c.png" alt=""></p>
+<p>不是每个（冲突）都需要被抛出。在这种情况下，可以在出现问题的代码之前简单地禁用 SwiftLint 规则，然后重新启用该规则。显然，如果这些启用/禁用代码片段在代码中到处都是，那就不太好了。这种技术应该谨慎地被使用。如果发现需要在多个位置禁用同一规则，请考虑为整个项目禁用该规则。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">WeatherRawData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> timezone: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">var</span> weather: [<span class="type">WeatherData</span>]</span><br><span class="line">    <span class="keyword">var</span> main: <span class="type">MainData</span></span><br><span class="line">    <span class="keyword">var</span> wind: <span class="type">WindData</span></span><br><span class="line">    <span class="keyword">var</span> clouds: <span class="type">CloudsData</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">WeatherData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> id: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> main: <span class="type">String</span></span><br><span class="line">        <span class="keyword">var</span> description: <span class="type">String</span></span><br><span class="line">        <span class="keyword">var</span> icon: <span class="type">String</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// swiftlint:disable identifier_name</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">MainData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> temp: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> feels_like: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> temp_min: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> temp_max: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> pressure: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> humidity: <span class="type">Double</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// swiftlint:enable identifier_name</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">WindData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> speed: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> deg: <span class="type">Double</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CloudsData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> all: <span class="type">Double</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/4dc45cd25a4715f7b3009b7dfa00746b.png" alt=""></p>
+<hr>
+<h1 id="不要急于禁用规则"><a href="#不要急于禁用规则" class="headerlink" title="不要急于禁用规则"></a>不要急于禁用规则</h1><p>偶尔会有一些 SwiftLint 规则的特例，但是不要急于禁用规则。在上面的例子中，有一种更好的方法，可以使用<code>CodingKeys</code>将 Swift 变量名映射到 JSON 内容。与其注释 SwiftLint 规则，不如使用属性名<code>feelsLike</code>并指定<code>feels_like</code>的可选值来匹配JSON数据。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// swiftlint:disable identifier_name</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">MainData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> temp: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> feels_like: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> temp_min: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> temp_max: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> pressure: <span class="type">Double</span></span><br><span class="line">        <span class="keyword">var</span> humidity: <span class="type">Double</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// swiftlint:enable identifier_name</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MainData</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temp: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> feelsLike: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> tempMin: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> tempMax: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> pressure: <span class="type">Double</span></span><br><span class="line">    <span class="keyword">let</span> humidity: <span class="type">Double</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">CodingKeys</span>: <span class="title">String</span>, <span class="title">CodingKey</span> </span>&#123;</span><br><span class="line">        <span class="keyword">case</span> temp</span><br><span class="line">        <span class="keyword">case</span> feelsLike = <span class="string">"feels_like"</span></span><br><span class="line">        <span class="keyword">case</span> tempMin = <span class="string">"temp_min"</span></span><br><span class="line">        <span class="keyword">case</span> tempMax = <span class="string">"temp_max"</span></span><br><span class="line">        <span class="keyword">case</span> pressure</span><br><span class="line">        <span class="keyword">case</span> humidity</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/6e09c021cdaeba6da6931c7948814b44.png" alt="使用CodingKeys来映射JSON变量好于禁用SwiftLint规则"></p>
+<p>使用 CodingKeys 来映射 JSON 变量好于禁用 SwiftLint 规则</p>
+<hr>
+<h1 id="自定义-SwiftLint-规则"><a href="#自定义-SwiftLint-规则" class="headerlink" title="自定义 SwiftLint 规则"></a>自定义 SwiftLint 规则</h1><p>如果将 SwiftLint 添加到显示数百个问题的现有项目中，“修复所有冲突”的方法可能非常困难。在这种情况下，将 SwiftLint 配置添加到项目中可能更合适。这是一个<a href="https://yaml.org/" target="_blank" rel="noopener">YAML</a>文件，在该文件中可以禁用规则，列出选择开启的规则，或者将规则仅限于此文件中的规则。这样， SwiftLint 就可以无限定制。有关更多详细信息，请参阅<a href="https://github.com/realm/SwiftLint#configuration" target="_blank" rel="noopener">SwiftLint配置</a>部分。</p>
+<p>警告的一个例子是代码中存在 TODO 注释。SwiftLint 将这些 TODO 标记为警告，以表示这些地方还有未完成的工作。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/ae2caf754d5f288d786c77ef116c676b.png" alt="TODO注释被SwiftLint默认编译成一个警告"></p>
+<p>TODO 注释被 SwiftLint 默认编译成一个警告</p>
+<p>很多时候你既想合并代码时保留这些 TODO，也希望在编译时没有这些警告。可以在每个单独的<code>TODO</code>注释前面加<code>disable/enable</code>，也可以在<code>.swiftlint.yml</code>文件中来禁用整个整个项目的此规则。将下方的<code>.swiftlint.yml</code>文件添加到项目中，会允许项目编译而不生成 TODO 注释警告，其他规则不受影响。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">disabled_rules:</span> <span class="comment"># rule identifiers to exclude from running</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">todo</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">VStack</span> &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">"Hello, world!"</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">// <span class="doctag">TODO:</span> Remove this function when done</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> a = <span class="number">24</span></span><br><span class="line">            <span class="type">Text</span>(<span class="string">"second line <span class="subst">\(a)</span>"</span>)</span><br><span class="line"></span><br><span class="line">            <span class="type">Spacer</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://images.xiaozhuanlan.com/photo/2022/ca1845d3007fa7b6e89917e80e034115.png" alt="TODO注释没有造成警告，其他规则不受影响"></p>
+<p>TODO 注释没有造成警告，其他规则不受影响</p>
+<p>在已有的规则上使用 SwiftLint 最简单的方法是：</p>
+<ol>
+<li>安装 SwiftLint</li>
+<li>通过编译阶段脚本，将 SwiftLint 整合进 Xcode 项目中</li>
+<li>编译以评估所有警告和错误</li>
+<li>添加<code>.swiftlint.yml</code>文件，并禁用冲突数最多的规则</li>
+<li>一次启用一条规则并修复代码中的问题</li>
+</ol>
+<hr>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>对于任何 Swift 开发者来说，使用 SwiftLint 都是必要的。它有助于避免团队中关于代码样式的争论，以及建立代码风格的统一性。就我而言，它帮我摆脱了诸如创建单字符标识符等坏习惯。</p>
+<p>将 SwiftLint 添加到已有的代码库可能比添加到新项目要复杂得多，因为它可能会显示数百个警告和错误。通过配置规则，并逐渐开启更多的规则，可以在现有项目中采用 SwiftLint。</p>
+<p>SwiftLint 的自动修复冲突的能力非常强大，通过自动修复冲突可以显著解决数百个冲突的初始情况。只需要确保代码在进行大范围的自动更改之前已经纳入了版本控制，这样在出问题时就能很容易撤销。</p>
+<hr>
+<h1 id="译者的一些补充"><a href="#译者的一些补充" class="headerlink" title="译者的一些补充"></a>译者的一些补充</h1><h2 id="关于-SwiftLint-的安装"><a href="#关于-SwiftLint-的安装" class="headerlink" title="关于 SwiftLint 的安装"></a>关于 SwiftLint 的安装</h2><p>安装的方式有几种，原文介绍的是使用 homebrew 安装。译者比较推荐直接使用<strong><a href="https://cocoapods.org/" target="_blank" rel="noopener">CocoaPods</a>:</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod '<span class="type">SwiftLint'</span>, '<span class="number">0.46</span>.<span class="number">5</span>'</span><br></pre></td></tr></table></figure>
+<p>能清晰明了的指明项目使用了 SwiftLint ，同时也方便指定版本。</p>
+<h2 id="SwiftLint-不仅仅能帮助解决格式问题"><a href="#SwiftLint-不仅仅能帮助解决格式问题" class="headerlink" title="SwiftLint 不仅仅能帮助解决格式问题"></a>SwiftLint 不仅仅能帮助解决格式问题</h2><p>SwiftLint 不仅仅能解决很多格式问题，它的功能还有很多。比如限制一个函数参数的个数，函数、文件最长多少行，使用更精简，更<strong>Swift</strong> 的函数等等。这能在很大程度上帮助我们写出高质量的代码。</p>
+<p>很多团队伙伴在写代码时，一开始的函数，文件可能没那么臃肿。但是随着功能的增加，不断地往一个函数添加参数，不断修改函数的功能，不断往一个文件增加新的函数等等，各个地方开始变得臃肿。当 SwiftLint 告诉你函数参数个数超过了指定的个数，函数行数超过了最大值，文件超过了最大行数等等时，就应该认真考虑是不是该重构了。</p>
+<h2 id="在已有项目中添加-SwiftLint"><a href="#在已有项目中添加-SwiftLint" class="headerlink" title="在已有项目中添加 SwiftLint"></a>在已有项目中添加 SwiftLint</h2><p>在添加 SwiftLint 之前，最重要的是全体应该开一个简短的会。用来同步以及确定规则。让所有人充分表达意见，而不是一个人制定，有些人不赞同。将一些模棱两可的规则确定清楚之后，写入到 SwiftLint 配置当中，所有人都应该遵守。</p>
+<p>译者的项目非常的庞大，刚添加 SwiftLint 的时候，警告加错误高达5000多了，根本改不过来。我采用的方法是分路径配置 SwiftLint。那些比较老的，不怎么会动的目录采用较为宽松的配置。新起一个目录，之后的新代码原则上都应该在此目录之下。此目录的配置会较为严格。</p>
+<p>Hook <code>git pre-commit</code>在提交之前做规则检查，如有问题，直接报错，无法提交代码。这样就不会产生新的警告和错误，慢慢的再修改之前的代码，经过1年多，整个项目基本就覆盖全了。</p>
+<p>另外，关于项目的警告也需要管理，很多时候有些成员写代码的时候无视警告，导致项目警告几百个，而且越来越多。这就导致警告失去了它原有的作用，译者项目的警告是0，能够很轻松的定位哪个地方发出了新的警告。同时代码 Review 也非常重要，有些成员为了避免麻烦，各个地方都直接 disable 了 SwiftLint 的规则，这是不应该的。</p>
+<p>最后，永远记得你只是在使用的只是一个工具，而不是目的。请充分衡量成本和收益。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/用-SwiftLint-保持-Swift-风格一致/">用 SwiftLint 保持 Swift 风格一致</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2022年08月25日 - 11:08</p>
+  <p><span>最后更新:</span>2022年08月25日 - 12:08</p>
+  <p><span>原始链接:</span><a href="/用-SwiftLint-保持-Swift-风格一致/" title="用 SwiftLint 保持 Swift 风格一致">https://fanbaoying.github.io/用-SwiftLint-保持-Swift-风格一致/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/用-SwiftLint-保持-Swift-风格一致/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Swift-中的热重载/" rel="next" title="Swift 中的热重载">
+                <i class="fa fa-chevron-left"></i> Swift 中的热重载
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/现今-Swift-包中的二进制目标/" rel="prev" title="现今 Swift 包中的二进制目标">
+                现今 Swift 包中的二进制目标 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">157</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Xcode-集成-SwiftLint"><span class="nav-number">2.</span> <span class="nav-text">使用 Xcode 集成 SwiftLint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SwiftLint-的规则冲突"><span class="nav-number">3.</span> <span class="nav-text">SwiftLint 的规则冲突</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SwiftLint-的规则"><span class="nav-number">4.</span> <span class="nav-text">SwiftLint 的规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在终端运行-SwiftLint"><span class="nav-number">5.</span> <span class="nav-text">在终端运行 SwiftLint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动修复-SwiftLint-冲突"><span class="nav-number">6.</span> <span class="nav-text">自动修复 SwiftLint 冲突</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#手动修复-SwiftLint-规则冲突"><span class="nav-number">7.</span> <span class="nav-text">手动修复 SwiftLint 规则冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理-SwiftLint-冲突的一些选项："><span class="nav-number">7.1.</span> <span class="nav-text">处理 SwiftLint 冲突的一些选项：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些规则的例外情况"><span class="nav-number">8.</span> <span class="nav-text">一些规则的例外情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#天气数据的示例-JSON"><span class="nav-number">8.1.</span> <span class="nav-text">天气数据的示例 JSON</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不要急于禁用规则"><span class="nav-number">9.</span> <span class="nav-text">不要急于禁用规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义-SwiftLint-规则"><span class="nav-number">10.</span> <span class="nav-text">自定义 SwiftLint 规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">11.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译者的一些补充"><span class="nav-number">12.</span> <span class="nav-text">译者的一些补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-SwiftLint-的安装"><span class="nav-number">12.1.</span> <span class="nav-text">关于 SwiftLint 的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SwiftLint-不仅仅能帮助解决格式问题"><span class="nav-number">12.2.</span> <span class="nav-text">SwiftLint 不仅仅能帮助解决格式问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在已有项目中添加-SwiftLint"><span class="nav-number">12.3.</span> <span class="nav-text">在已有项目中添加 SwiftLint</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共224.5k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

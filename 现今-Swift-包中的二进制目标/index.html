@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="文章目录 理解二进制在 Swift 中的演变 命令行工具相关 结论  在 iOS 和 macOS 开发中， Swift 包现在变得越来越重要。Apple 已经努力推动桥接那些缝隙，并且修复那些阻碍开发者的问题，例如阻碍开发者将他们的库和依赖由其他诸如 Carthage 或 CocoaPods 依赖管理工具迁移到 Swift 包依赖管理工具的问题，例如没有能力添加构建步骤的问题。这对任何依赖一些代码">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现今 Swift 包中的二进制目标">
+<meta property="og:url" content="https://fanbaoying.github.io/现今-Swift-包中的二进制目标/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="文章目录 理解二进制在 Swift 中的演变 命令行工具相关 结论  在 iOS 和 macOS 开发中， Swift 包现在变得越来越重要。Apple 已经努力推动桥接那些缝隙，并且修复那些阻碍开发者的问题，例如阻碍开发者将他们的库和依赖由其他诸如 Carthage 或 CocoaPods 依赖管理工具迁移到 Swift 包依赖管理工具的问题，例如没有能力添加构建步骤的问题。这对任何依赖一些代码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-08-25T04:09:18.418Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="现今 Swift 包中的二进制目标">
+<meta name="twitter:description" content="文章目录 理解二进制在 Swift 中的演变 命令行工具相关 结论  在 iOS 和 macOS 开发中， Swift 包现在变得越来越重要。Apple 已经努力推动桥接那些缝隙，并且修复那些阻碍开发者的问题，例如阻碍开发者将他们的库和依赖由其他诸如 Carthage 或 CocoaPods 依赖管理工具迁移到 Swift 包依赖管理工具的问题，例如没有能力添加构建步骤的问题。这对任何依赖一些代码">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/现今-Swift-包中的二进制目标/"/>
+
+
+
+
+
+  <title>现今 Swift 包中的二进制目标 | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/现今-Swift-包中的二进制目标/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">现今 Swift 包中的二进制目标</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-25T11:42:16+08:00">
+                2022-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift-文集/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift 文集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 2,598字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 10分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><ol>
+<li>理解二进制在 Swift 中的演变</li>
+<li>命令行工具相关</li>
+<li>结论</li>
+</ol>
+<p>在 <strong>iOS</strong> 和 <strong>macOS</strong> 开发中， Swift 包现在变得越来越重要。Apple 已经努力推动桥接那些缝隙，并且修复那些阻碍开发者的问题，例如阻碍开发者将他们的库和依赖由其他诸如 <strong><a href="https://github.com/Carthage/Carthage" title="Carthage" target="_blank" rel="noopener">Carthage</a></strong> 或 <strong><a href="https://github.com/CocoaPods/CocoaPods" title="CocoaPods" target="_blank" rel="noopener">CocoaPods</a></strong> 依赖管理工具迁移到 Swift 包依赖管理工具的问题，例如没有能力添加构建步骤的问题。这对任何依赖一些代码生成的库来说都是破坏者，比如，协议和 Swift 生成。</p>
+<a id="more"></a>
+<h2 id="理解二进制在-Swift-中的演变"><a href="#理解二进制在-Swift-中的演变" class="headerlink" title="理解二进制在 Swift 中的演变"></a>理解二进制在 Swift 中的演变</h2><p>为了充分理解 Apple 的 Swift 团队在二进制目标和他们引入的一些新 API 方面采取的一些步骤，我们需要理解它们从何而来。在后续的部分中，我们将调研 Apple 架构的演变，以及为什么二进制目标的 API 在过去几年中逐渐形成的，特别是自 Apple 发布了自己的硅芯片之后。</p>
+<h3 id="胖二进制和-Frameworks-框架"><a href="#胖二进制和-Frameworks-框架" class="headerlink" title="胖二进制和 Frameworks 框架"></a>胖二进制和 Frameworks 框架</h3><p>如果你曾必须处理二进制依赖，或者你曾创建一个属于你自己的可执行文件，你将会对 <strong>胖二进制</strong> 这个术语感到熟悉。这些被扩展（或增大）的可执行文件，是包含了为多个不同架构原生构建的切片。这允许库的所有者分发一个运行在所有预期的目标架构上的单独的二进制。</p>
+<p>当源码不能被暴露或当处理非常庞大的代码仓库时，预编译库成为可执行文件非常有意义，因为预编译源码以及以二进制文件分发他们，将节省构建程序在他们的应用上的构建时间。</p>
+<p><a href="https://cocoapods.org/" title="Pods" target="_blank" rel="noopener">Pods</a> 是一个非常好的例子，当开发者发现他们自己没必要构建那些非常少改动的依赖。这是一个很共通的问题，它激发了诸如 <a href="https://github.com/leavez/cocoapods-binary" title="cocoapods-binary" target="_blank" rel="noopener">cocoapods-binary</a> 之类的项目，该项目预编译了 pod 依赖项以减少客户端的构建时间。</p>
+<h4 id="Frameworks-框架"><a href="#Frameworks-框架" class="headerlink" title="Frameworks 框架"></a>Frameworks 框架</h4><p>嵌入静态二进制文件可能对应用程序来说已经足够了，但如果需要某些资源（如 assets 或头文件），则需要将这些资源与包含所有切片的 <strong>胖二进制文件</strong> 捆绑在一起，形成所谓的 <code>frameworks</code> 文件。</p>
+<p>这就是诸如 <a href="https://developers.google.com/cast/docs/ios_sender#manual_setup" title="Google" target="_blank" rel="noopener">Google Cast</a> 之类的预编译库在过渡到使用 <code>xcframework</code> 进行分发之前所做的事情 —— 下一节将详细介绍这种过渡的原因。</p>
+<p>到目前为止，一切都很好。 如果我们要为分发预编译一个库，那么胖二进制文件听起来很理想，对吧？并且，如果我们需要捆绑一些其他资源，我们可以只使用一个 <code>frameworks</code>。 一个二进制来统治他们所有！</p>
+<h4 id="XCFrameworks-框架"><a href="#XCFrameworks-框架" class="headerlink" title="XCFrameworks 框架"></a>XCFrameworks 框架</h4><p>好吧，不完全是。胖二进制文件有一个大问题，那就是你不能有两个架构相同但命令/指令不同的切片。 这曾经很好，因为设备和模拟器的架构总是不同的，但是随着 Apple Silicon 计算机 (M1) 的推出，模拟器和设备共享相同的架构 (arm64)，但具有不同的加载器命令。 这与面向未来的二进制目标相结合，正是 Apple 引入 <a href="https://developer.apple.com/videos/play/wwdc2019/416/" title="XCFrameworks" target="_blank" rel="noopener">XCFrameworks</a> 的原因。</p>
+<blockquote>
+<p>你可以在 <a href="https://twitter.com/giertler" target="_blank" rel="noopener">Bogo Giertler 撰写的这篇精彩文章</a> 中详细了解为 iOS 设备构建的 arm64 切片和为 M1 mac 的 iOS 模拟器构建的 arm64 切片之间的区别。</p>
+</blockquote>
+<p><a href="https://help.apple.com/xcode/mac/11.4/#/dev6f6ac218b" title="XCFrameworks" target="_blank" rel="noopener">XCFrameworks</a> 现在允许将多个二进制文件捆绑在一起，解决了 M1 Mac 引入的设备和模拟器冲突架构问题，因为我们现在可以为每个用例提供包含相关切片的二进制文件。 事实上，如果我们需要，我们可以走得更远，例如，在同一个 xcframework 中捆绑一个包含 iOS 目标的 <code>UIKit</code> 接口的二进制文件和一个包含 macOS 的 <code>AppKit</code> 接口的二进制文件，然后让 Xcode 基于期望的目标架构决定使用哪一个。</p>
+<p>在 Swift 包中，那先能够以 <a href="https://developer.apple.com/documentation/swift_packages/distributing_binary_frameworks_as_swift_packages" title="binaryTarget" target="_blank" rel="noopener">binaryTarget</a> 被包含进项目的，能够在包中被引入任意其他目标。这相同的操作同样适用于 <code>frameworks</code>。</p>
+<h2 id="命令行工具相关"><a href="#命令行工具相关" class="headerlink" title="命令行工具相关"></a>命令行工具相关</h2><p>由于 Swift 5.6 版本中引入了用于 Swift 包管理器的 <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0303-swiftpm-extensible-build-tools.md" title="Extensible Build Tools" target="_blank" rel="noopener">可扩展构建工具</a> ，因此可以在构建过程中的不同时间执行命令。</p>
+<p>这是 iOS 社区长期以来一直强烈要求的事情，例如格式化源代码、代码生成甚至收集公制代码库的指标。 Swift 5.6 中所有这些所谓的 <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0303-swiftpm-exte&quot;&quot;nsible-build-tools.md#plugin-api" title="Plugins" target="_blank" rel="noopener">插件</a> 最终都需要调用可执行文件来执行特定任务。 这是二进制文件再次在 Swift 包中参与的地方。</p>
+<p>在大多数情况下，对于我们 iOS 开发人员来说，这些工具将来自同时支持 macOS 的不同架构切片 —— Apple Silicon 的 arm64 架构和 Intel Mac 的 x86_64 架构。开发者工具如， <a href="https://github.com/realm/SwiftLint" title="SwiftLint" target="_blank" rel="noopener">SwiftLint</a> 或 <a href="https://github.com/SwiftGen/SwiftGen" title="SwiftGen" target="_blank" rel="noopener">SwiftGen</a> 正是这种案例。 在这种情况下，可以使用包含可执行文件（本地或远程）的 <strong>.zip</strong> 文件的路径创建新的二进制目标。</p>
+<blockquote>
+<p>注意可执行文件必须在.zip文件的根目录下，否则找不到。</p>
+</blockquote>
+<h3 id="Artifact-Bundles"><a href="#Artifact-Bundles" class="headerlink" title="Artifact Bundles"></a>Artifact Bundles</h3><p>到目前为止，命令行工具所采用的方法仅适用于 macOS 架构。但我们不能忘记，Linux 机器也支持 Swift 包。 这意味着如果要同时支持 M1 macs (<code>arm64</code>) 和 Linux <code>arm64</code> 机器，上面的胖二进制方法将不起作用 —— 请记住，二进制不能包含具有相同架构的多个切片。 在这个阶段可能有人会想，我们可以不只使用 <code>xcframeworks</code> 吗？ 不，因为它们在 Linux 操作系统上不受支持！</p>
+<p>Apple 已经考虑到这一点，除了引入 <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0303-swiftpm-extensible-build-tools.md" title="Extensible Build Tools" target="_blank" rel="noopener">可扩展构建工具</a> 之外，<a href="https://github.com/apple/swift-evolution/blob/main/proposals/0305-swiftpm-binary-target-improvements.md" title="Artifact Bundles" target="_blank" rel="noopener">Artifact Bundles</a> 和对二进制目标的其他改进也作为 Swift 5.6 的一部分发布。</p>
+<p>工件包(Artifact Bundles) 是包含 <em>工件</em> 的目录。 这些工件需要包含支持架构的所有不同二进制文件。 二进制文件和支持的架构的路径是使用清单文件 (<code>info.json</code>) 指定的，该文件位于 Artifact Bundle 目录的根目录中。 你可以将此清单文件视为一个地图或指南，以帮助 Swift 确定哪些可执行文件可用于哪种架构以及可以在哪里找到它们。</p>
+<h4 id="以-SwiftLint-为例"><a href="#以-SwiftLint-为例" class="headerlink" title="以 SwiftLint 为例"></a>以 SwiftLint 为例</h4><p><a href="https://github.com/realm/SwiftLint" title="SwiftLint" target="_blank" rel="noopener">SwiftLint</a> 在整个社区中被广泛用作 Swift 代码的静态代码分析工具。 由于很多人都非常渴望让这个插件在他们的 SwiftPM 项目中运行，我认为这将是一个很好的例子来展示我们如何将分发的可执行文件从他们的发布页面变成一个与 macOS 架构和 Linux arm64 兼容的工件包。</p>
+<p>让我们从下载两个可执行文件（<a href="https://github.com/realm/SwiftLint/releases/download/0.47.0/portable_swiftlint.zip" title="macOS" target="_blank" rel="noopener">macOS</a> 和 <a href="https://github.com/realm/SwiftLint/releases/download/0.47.0/swiftlint_linux.zip" title="Linux" target="_blank" rel="noopener">Linux</a>）开始。</p>
+<p>至此，bundle的结构就可以创建好了。 为此，创建一个名为 <code>swiftlint.artifactbundle</code> 的目录并在其根目录添加一个空的 <code>info.json</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir swiftlint.artifactbundle</span><br><span class="line">touch swiftlint.artifactbundle/info.json</span><br></pre></td></tr></table></figure>
+<p>现在可以使用 <code>schemaVersion</code> 填充清单文件，这可能会在未来版本的工件包和具有两个变体的工件中发生变化，这将很快定义：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"schemaVersion"</span>: <span class="string">"1.0"</span>,</span><br><span class="line">    <span class="attr">"artifacts"</span>: &#123;</span><br><span class="line">        <span class="attr">"swiftlint"</span>: &#123;</span><br><span class="line">            "version": "0.47.0", # The version of SwiftLint being used</span><br><span class="line">            "type": "executable",</span><br><span class="line">            "variants": [</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要做的最后一件事是将二进制文件添加到包中，然后将它们作为变体添加到 <code>info.json</code> 文件中。 让我们首先创建目录并将二进制文件放入其中（macOS 的一个在 <code>swiftlint-macos/swiftlint</code>，Linux 的一个在 <code>swiftlint-linux/swiftlint</code>）。</p>
+<p>添加这些之后，可以在清单文件中变量：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"schemaVersion"</span>: <span class="string">"1.0"</span>,</span><br><span class="line">    <span class="attr">"artifacts"</span>: &#123;</span><br><span class="line">        <span class="attr">"swiftlint"</span>: &#123;</span><br><span class="line">            "version": "0.47.0", # The version of SwiftLint being used</span><br><span class="line">            "type": "executable",</span><br><span class="line">            "variants": [</span><br><span class="line">			          &#123;</span><br><span class="line">                    <span class="attr">"path"</span>: <span class="string">"swiftlint-macos/swiftlint"</span>,</span><br><span class="line">                    <span class="attr">"supportedTriples"</span>: [<span class="string">"x86_64-apple-macosx"</span>, <span class="string">"arm64-apple-macosx"</span>]</span><br><span class="line">                &#125;,</span><br><span class="line">	              &#123;</span><br><span class="line">                    <span class="attr">"path"</span>: <span class="string">"swiftlint-linux/swiftlint"</span>,</span><br><span class="line">                    <span class="attr">"supportedTriples"</span>: [<span class="string">"x86_64-unknown-linux-gnu"</span>]</span><br><span class="line">                &#125;,</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为此，需要为每个变量指定二进制文件的相对路径（从工件包目录的根目录）和支持的三元组。 如果您不熟悉 <a href="https://clang.llvm.org/docs/CrossCompilation.html#target-triples" title="target-triples" target="_blank" rel="noopener">目标三元组</a>，它们是一种选择构建二进制文件的架构的方法。 请注意，这不是 <strong>主机</strong>（构建可执行文件的机器）的体系结构，而是 <strong>目标</strong> 机器（应该运行所述可执行文件的机器）。</p>
+<p>这些三元组具有以下格式： <code>----</code> 并非所有字段都是必需的，如果其中一个字段未知并且要使用默认值，则可以省略或替换为 <code>unknown</code> 关键字。</p>
+<p>可执行文件的架构切片可以通过运行 <code>file</code> 找到，这将打印捆绑的任何切片的供应商、系统和架构。 在这种情况下，为这两个命令运行它会显示：</p>
+<p><strong>swiftlint-macos/swiftlint</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">swiftlint: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64]</span><br><span class="line">swiftlint (for architecture x86_64):	Mach-O 64-bit executable x86_64</span><br><span class="line">swiftlint (for architecture arm64):	Mach-O 64-bit executable arm64</span><br></pre></td></tr></table></figure>
+<p><strong>swiftlint-linux/swiftlint</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-&gt; file swiftlint</span><br><span class="line">swiftlint: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, with debug_info, not stripped</span><br></pre></td></tr></table></figure>
+<p>这带来了上面显示的 macOS 支持的两个三元组（<code>x86_64-apple-macosx</code>、<code>arm64-apple-macosx</code>）和 Linux 支持的一个三元组（<code>x86_64-unknown-linux-gnu</code>）。</p>
+<p>与 <code>XCFrameworks</code> 类似，工件包也可以通过使用 <a href="https://developer.apple.com/documentation/swift_packages/distributing_binary_frameworks_as_swift_packages" target="_blank" rel="noopener">binaryTarget</a> 包含在 Swift 包中。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>简而言之，我们可以总结 2022 年如何在 Swift 包中使用二进制文件的最佳实践，如下所示：</p>
+<ol>
+<li>如果你需要为你的 iOS/macOS 项目添加预编译库或可执行文件，您应该使用 <code>XCFramework</code>，并为每个用例（iOS 设备、macOS 设备和 iOS 模拟器）包含单独的二进制文件。</li>
+<li>如果你需要创建一个插件并运行一个可执行文件，你应该将其嵌入为一个工件包，其中包含适用于不同支持架构的二进制文件。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/现今-Swift-包中的二进制目标/">现今 Swift 包中的二进制目标</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2022年08月25日 - 11:08</p>
+  <p><span>最后更新:</span>2022年08月25日 - 12:08</p>
+  <p><span>原始链接:</span><a href="/现今-Swift-包中的二进制目标/" title="现今 Swift 包中的二进制目标">https://fanbaoying.github.io/现今-Swift-包中的二进制目标/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/现今-Swift-包中的二进制目标/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/用-SwiftLint-保持-Swift-风格一致/" rel="next" title="用 SwiftLint 保持 Swift 风格一致">
+                <i class="fa fa-chevron-left"></i> 用 SwiftLint 保持 Swift 风格一致
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/使用-Swift-的并发系统并行运行多个任务/" rel="prev" title="使用 Swift 的并发系统并行运行多个任务">
+                使用 Swift 的并发系统并行运行多个任务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">157</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文章目录"><span class="nav-number">1.</span> <span class="nav-text">文章目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解二进制在-Swift-中的演变"><span class="nav-number">2.</span> <span class="nav-text">理解二进制在 Swift 中的演变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#胖二进制和-Frameworks-框架"><span class="nav-number">2.1.</span> <span class="nav-text">胖二进制和 Frameworks 框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Frameworks-框架"><span class="nav-number">2.1.1.</span> <span class="nav-text">Frameworks 框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XCFrameworks-框架"><span class="nav-number">2.1.2.</span> <span class="nav-text">XCFrameworks 框架</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行工具相关"><span class="nav-number">3.</span> <span class="nav-text">命令行工具相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Artifact-Bundles"><span class="nav-number">3.1.</span> <span class="nav-text">Artifact Bundles</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以-SwiftLint-为例"><span class="nav-number">3.1.1.</span> <span class="nav-text">以 SwiftLint 为例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共224.5k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
