@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言本期是 Swift 编辑组自主整理周报的第二十二期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 若目标远大，就要有大动作。若追求卓越，便须有大改变。Swift社区已整装待发，你要不要一起呢？👊👊👊  周报精选 新闻和社区：Apple">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 周报 第三十一期">
+<meta property="og:url" content="https://fanbaoying.github.io/Swift-周报-第三十一期/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言本期是 Swift 编辑组自主整理周报的第二十二期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 若目标远大，就要有大动作。若追求卓越，便须有大改变。Swift社区已整装待发，你要不要一起呢？👊👊👊  周报精选 新闻和社区：Apple">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/273d30d8-22a4-4ef9-9e4b-b6a692f6aac3.png">
+<meta property="og:image" content="https://devimages-cdn.apple.com/wwdc-services/articles/images/1AC9D4F4-43B5-4913-B149-B0486FFE64FE/2048.jpeg">
+<meta property="og:image" content="https://devimages-cdn.apple.com/wwdc-services/articles/images/213FE0A2-813D-404D-B093-D766AC8D7AF3/2048.jpeg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png">
+<meta property="og:updated_time" content="2023-07-04T07:31:54.465Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 周报 第三十一期">
+<meta name="twitter:description" content="前言本期是 Swift 编辑组自主整理周报的第二十二期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 若目标远大，就要有大动作。若追求卓越，便须有大改变。Swift社区已整装待发，你要不要一起呢？👊👊👊  周报精选 新闻和社区：Apple">
+<meta name="twitter:image" content="https://files.mdnice.com/user/17787/273d30d8-22a4-4ef9-9e4b-b6a692f6aac3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/Swift-周报-第三十一期/"/>
+
+
+
+
+
+  <title>Swift 周报 第三十一期 | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/Swift-周报-第三十一期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift 周报 第三十一期</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-04T15:20:20+08:00">
+                2023-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift-周报/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift 周报</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 4,773字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 18分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>本期是 Swift 编辑组自主整理周报的第二十二期</strong>，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。</p>
+<p>Swift 周报在 <a href="https://github.com/SwiftCommunityRes/SwiftWeekly" title="SwiftWeekly" target="_blank" rel="noopener">GitHub 开源</a>，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。</p>
+<p>若目标远大，就要有大动作。若追求卓越，便须有大改变。<strong>Swift社区</strong>已整装待发，你要不要一起呢？👊👊👊</p>
+<blockquote>
+<p><strong>周报精选</strong></p>
+<p>新闻和社区：Apple Vision Pro 和 visionOS 撼世登场</p>
+<p>提案：移除由属性包装器引起的 Actor 隔离推断</p>
+<p>Swift 论坛：为什么只能将结构附加到数组一次</p>
+<p>推荐博文：Swift OpenAPI Generator 的介绍</p>
+<p><strong>话题讨论：</strong> </p>
+<p>你认为企业实行薪资保密有哪些利弊</p>
+</blockquote>
+<p><strong>上期话题结果</strong></p>
+<a id="more"></a>
+<p><img src="https://files.mdnice.com/user/17787/273d30d8-22a4-4ef9-9e4b-b6a692f6aac3.png" alt=""></p>
+<p>上期话题投票结果表明，在 2023 年工作更难找的情况下，大家面临着更大的工作压力，裁员消息的传出也增加了担忧。大量的媒体报道可能强调了经济衰退的迹象，这也会加强大家对经济危机的看法。</p>
+<h2 id="新闻和社区"><a href="#新闻和社区" class="headerlink" title="新闻和社区"></a>新闻和社区</h2><h3 id="注册-WWDC23-实验室和活动"><a href="#注册-WWDC23-实验室和活动" class="headerlink" title="注册 WWDC23 实验室和活动"></a>注册 WWDC23 实验室和活动</h3><p><img src="https://devimages-cdn.apple.com/wwdc-services/articles/images/1AC9D4F4-43B5-4913-B149-B0486FFE64FE/2048.jpeg" alt=""></p>
+<p>通过在线实验室和活动这种绝佳方式，你可以在一整周内与 Apple 工程师、设计师和专家进行交流沟通。</p>
+<p>一对一实验室<br>从开发的基础知识到复杂概念，你都可以在这里获得个性化指导。了解如何运用全新 Apple 技术、探索 UI 设计原则、优化产品在 App Store 上的形象，以及更多主题。</p>
+<p>活动<br>每日都有许多精彩的活动在 Slack 中展开。</p>
+<p>在 Q&amp;A 中就工程和设计主题提问。<br>在大家一起观看讲座视频期间加入或关注实时对话，并与演讲者进行 Q&amp;A。<br>在社区暖场活动中了解其他开发者和 Apple 团队。<br>体验最新的框架，尝试各种设计理念，并在学习区分享你的创作。<br>在 6 月 6 日，与业内的佼佼者比试一下专业知识问答。<br>实验室和活动对 Apple Developer Program 和 Apple Developer Enterprise Program 的所有成员，以及 2023 Swift Student Challenge 参赛者开放。</p>
+<h3 id="Apple-Vision-Pro-和-visionOS-撼世登场"><a href="#Apple-Vision-Pro-和-visionOS-撼世登场" class="headerlink" title="Apple Vision Pro 和 visionOS 撼世登场"></a>Apple Vision Pro 和 visionOS 撼世登场</h3><p><img src="https://devimages-cdn.apple.com/wwdc-services/articles/images/213FE0A2-813D-404D-B093-D766AC8D7AF3/2048.jpeg" alt=""></p>
+<p>Apple Vision Pro 是一款革命性的空间计算设备，可实现数字化内容与真实世界的无缝融合，让用户在沉浸于当下的同时还能与他人沟通交流。在 Apple Vision Pro 中，各种 App 将突破传统显示器的束缚限制，拥有一幅无边的画布。此外，Apple Vision Pro 还推出了一个全三维用户界面，而控制这个界面，仅需要用户的眼睛、双手和语音 — 最自然、最直观的输入工具。Apple Vision Pro 搭载了全球首个空间操作系统 visionOS，让用户能够以一种绝妙的方式与数字化内容互动，如同它们真的存在于现实世界之中。Apple Vision Pro 采用了突破性设计：在显示方面，采用超高分辨率显示屏系统，两块显示屏的总像素为 2,300 万；在性能方面，采用独特的双芯片设计并搭载定制的 Apple 芯片，确保每一刻的体验都真实无比，让人沉浸当下。</p>
+<p>探索丰富实用的资源，助你通过一种全新而又熟悉的方式将空间计算方面的创意变为现实，打造出能够重新定义沟通、效率和娱乐的 App。</p>
+<h3 id="App-Store-中新增的隐私功能"><a href="#App-Store-中新增的隐私功能" class="headerlink" title="App Store 中新增的隐私功能"></a>App Store 中新增的隐私功能</h3><p>在 Apple，我们将隐私视作每个人的基本权利。因此，我们构建了许多功能来帮助用户了解开发者在隐私以及数据收集和共享方面的做法，让用户能够自主掌控他们的数据。通过 App 跟踪透明度 (ATT)，用户可以选择 App 是否有权跟踪用户在其他公司的 App 和网站内的活动，以便投放广告或者与数据代理商共享。借助隐私标签和 App 隐私报告，用户可以查看 App 收集哪些数据以及如何使用这些数据。</p>
+<p>许多 App 会利用第三方软件开发工具包 (SDK)，这些工具包可以提供出色的功能，但可能会对 App 处理用户数据的方式产生影响。为了让开发者可以更轻松地打造出色的 App，同时告知用户数据使用情况并尊重他们在这方面做出的选择，我们推出了两项新功能。</p>
+<p>首先，为了帮助开发者了解第三方 SDK 如何使用数据，我们推出了新的隐私清单。隐私清单是一份文件，会以单一标准格式概述 App 中第三方代码的隐私做法。当开发者准备分发他们的 App 时，Xcode 会将开发者使用的所有第三方 SDK 中的隐私清单合并为一个简单易用的报告。这个报告内容全面，总结了 App 中的所有第三方 SDK，使开发者能够更轻松地创建更准确的隐私标签。</p>
+<p>此外，为了向用户提供额外的隐私保护，如果 App 引用的 API 可能会被用于指纹识别（在 App Store 中被禁止的一种做法），现在需要选择合理的原因来解释为什么使用此 API 并在隐私清单中声明已使用此 App。在这个过程中，App 必须准确描述其对于这些 API 的使用情况，并且只能出于隐私清单中所述的原因而使用这些 API。</p>
+<p>第二，我们希望帮助开发者改善软件供应链的完整性。使用第三方 SDK 时，开发者可能很难知道他们下载的代码是不是由期望的开发者编写的。为了解决这个问题，我们推出了适用于 SDK 的签名功能，这样一来，当开发者在 App 中采用新版本的第三方 SDK 时，Xcode 将验证它是否由同一开发者签名。这个功能将对开发者和用户都十分有帮助。</p>
+<p>我们将在今年晚些时候发布更多信息，包括：</p>
+<p>影响隐私的 SDK 列表 (对用户隐私产生重大影响的第三方 SDK)<br>“需要指明原因”的 API 列表，使用它们时必须给出合理的原因<br>开发者反馈表，用于就调用涉及的 API 提出新的原因<br>其他文档，详细介绍签名和隐私清单、他们的优势以及何时需要使用它们</p>
+<h2 id="提案"><a href="#提案" class="headerlink" title="提案"></a>提案</h2><h3 id="正在审查的提案"><a href="#正在审查的提案" class="headerlink" title="正在审查的提案"></a>正在审查的提案</h3><p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0400-init-accessors.md" title="SE-0400" target="_blank" rel="noopener">SE-0400</a> <strong>Init 访问器</strong> 提案正在审查。</p>
+<p>该提案的目的是，Init 访问器将属性包装器的离线初始化特性泛化，使得类型中的任何计算属性都可以选择参与确定性初始化分析，并且可以替代使用自定义初始化代码对一组存储属性进行初始化。</p>
+<p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0401-remove-property-wrapper-isolation.md" title="SE-0401" target="_blank" rel="noopener">SE-0401</a> <strong>移除由属性包装器引起的 Actor 隔离推断</strong> 提案正在审查。</p>
+<p>SE-0316：全局 Actors 引入了像 <code>@MainActor</code> 这样的注释，将类型、函数或属性隔离到特定的全局 Actor。还引入了各种规则，用于推断全局 Actor 隔离。如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@propertyWrapper</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UIUpdating</span>&lt;<span class="title">Wrapped</span>&gt; </span>&#123;</span><br><span class="line">  @<span class="type">MainActor</span> <span class="keyword">var</span> wrappedValue: <span class="type">Wrapped</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CounterView</span> </span>&#123; <span class="comment">// infers @MainActor from use of @UIUpdating</span></span><br><span class="line">  @<span class="type">UIUpdating</span> <span class="keyword">var</span> intValue: <span class="type">Int</span> = <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该提案主张在使用 Swift 6 语言模式编译时移除此推断规则。根据上面的示例，<code>CounterView</code> 在 Swift 6 中将不再推断 <code>@MainActor</code> 隔离。</p>
+<h2 id="Swift论坛"><a href="#Swift论坛" class="headerlink" title="Swift论坛"></a>Swift论坛</h2><p>1) 提议<a href="https://forums.swift.org/t/se-0400-init-accessors/65583" title="SE-0400: Init Accessors" target="_blank" rel="noopener">SE-0400: Init Accessors</a></p>
+<p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0400-init-accessors.md" target="_blank" rel="noopener">SE-0400</a>：Init Accessors 314 的审查从现在开始，一直持续到 2023 年 6 月 26 日。</p>
+<p>2) 提议<a href="https://forums.swift.org/t/pitch-improve-the-proposal-template-for-better-feature-experimentation/65604" title="改进提案模板以获得更好的功能实践" target="_blank" rel="noopener">改进提案模板以获得更好的功能实践</a></p>
+<p><strong>介绍</strong></p>
+<p>强制性工具链和示例项目以及 Experiment It 部分将允许开发人员在提案审查期间更轻松地进行实验并参与讨论。</p>
+<p><strong>动机</strong></p>
+<p>试验正在审查的功能这是评估提案的重要方式，即使是写得很好和详细的提案也可以从让开发人员试验它中受益。 提案模板可以改进，使任何人在审查期间更容易试用提议的功能。</p>
+<p><strong>建议的解决方案</strong></p>
+<p>将以下标题字段添加到提案模板：工具链和示例项目以及新的 Experiment It 部分。</p>
+<p><strong>工具链</strong></p>
+<p>该字段应指向一个链接，从中可以下载一个 swift 工具链，其中该功能是在实验性标志下实现的。</p>
+<p>目前大多数提案只提到主分支中有一个功能可用，尽管大多数时候该功能都在 Swift.org 上可用的开发快照中 - 下载 Swift 对于新手来说了解这一点并不是那么微不足道，有时还有一个提案审查期 甚至在没有工作快照的情况下启动。</p>
+<p>该链接应该从第一天起就可用，并在审核期间尽可能更新。</p>
+<p>一种可能性是在网站下载页面上添加一个额外的部分，其中包含专用于正在审查的提案的工具链，这可以允许工具链可用，即使由于某种原因它不能出现在主快照中也是如此。</p>
+<p>3) 提问<a href="https://forums.swift.org/t/why-can-i-only-append-a-struct-to-an-array-once/65601" title="为什么只能将结构附加到数组一次？" target="_blank" rel="noopener">为什么只能将结构附加到数组一次？</a></p>
+<p>我的应用程序的目标是提醒用户与他们亲近的人互动。 因此，我的应用程序主要使用两个结构体，称为 Relation（代表一个人）和 Interaction（代表与人的一次交互）。</p>
+<p>我构建了一个名为 “NewInteractionSheet” 的工作表，其目标是向关系的交互数组之一添加一个新的交互。</p>
+<p>在添加交互时，此工作表非常有效。 但是，由于某种原因，它只能工作一次。 为什么要这样做？ 这就是我想要弄清楚的。</p>
+<p>这是 “NewInteractionSheet.swift” 代码的一部分：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PhotosUI</span><br><span class="line"><span class="keyword">import</span> CoreLocation</span><br><span class="line"><span class="keyword">import</span> MapKit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NewInteractionSheet</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    @<span class="type">Binding</span> <span class="keyword">var</span> isPresentingNewInteractionView: <span class="type">Bool</span></span><br><span class="line">    @<span class="type">Binding</span> <span class="keyword">var</span> relations: [<span class="type">Relation</span>]</span><br><span class="line">    </span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> newInteraction = <span class="type">Interaction</span>.emptyInteraction</span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> relation: <span class="type">Relation</span> = <span class="type">Relation</span>.emptyRelation</span><br><span class="line">    @<span class="type">State</span> <span class="keyword">private</span> <span class="keyword">var</span> isPresentingLocationPicker: <span class="type">Bool</span> = <span class="literal">false</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">var</span> body: some <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">NavigationView</span> &#123;</span><br><span class="line">            <span class="type">Form</span> &#123;</span><br><span class="line">                </span><br><span class="line">                <span class="type">Section</span>(<span class="string">"You interacted with..."</span>) &#123;</span><br><span class="line">                    <span class="type">RelationPicker</span>(relations: $relations, relation: $relation)</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="type">Section</span>(<span class="string">"Interaction details"</span>) &#123;</span><br><span class="line">                    <span class="type">InteractionDatePicker</span>(dateToSet: $newInteraction.date)</span><br><span class="line">                    </span><br><span class="line">                    <span class="type">TypePicker</span>(typeToSet: $newInteraction.type)</span><br><span class="line">                    </span><br><span class="line">                    <span class="type">DurationPicker</span>(shouldShow: newInteraction.type.hasDuration,</span><br><span class="line">                                   hoursToSet: $newInteraction.durationHours,</span><br><span class="line">                                   minutesToSet: $newInteraction.durationMinutes)</span><br><span class="line">                    </span><br><span class="line">                    <span class="type">SummaryTextField</span>(summaryToSet: $newInteraction.summary)</span><br><span class="line">                    </span><br><span class="line">                    <span class="type">LocationPicker</span>(shouldShow: newInteraction.type.hasLocation,</span><br><span class="line">                                   coordinatesToSet: $newInteraction.location.coordinates,</span><br><span class="line">                                   locationNameToSet: $newInteraction.location.name,</span><br><span class="line">                                   isPresentingLocationPicker: $isPresentingLocationPicker)</span><br><span class="line">                    </span><br><span class="line">                    <span class="type">InteractionPhotosPicker</span>(images: $newInteraction.pictures)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            .toolbar &#123;</span><br><span class="line">                <span class="type">ToolbarItem</span>(placement: .cancellationAction) &#123;</span><br><span class="line">                    <span class="type">Button</span>(<span class="string">"Dismiss"</span>) &#123;</span><br><span class="line">                        isPresentingNewInteractionView = <span class="literal">false</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">ToolbarItem</span>(placement: .confirmationAction) &#123;</span><br><span class="line">                    <span class="type">Button</span>(<span class="string">"Add"</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> <span class="keyword">let</span> index = relations.firstIndex(<span class="keyword">where</span>: &#123; $<span class="number">0</span>.id == relation.id &#125;) &#123;</span><br><span class="line">                            <span class="built_in">print</span>(<span class="string">"\nBefore appending to relations"</span>)</span><br><span class="line">                            <span class="built_in">print</span>(relations[index])</span><br><span class="line">                            <span class="built_in">print</span>(newInteraction)</span><br><span class="line">                            relations[index].interactions.append(newInteraction)</span><br><span class="line">                            <span class="built_in">print</span>(<span class="string">"\nAfter having appended to relations"</span>)</span><br><span class="line">                            <span class="built_in">print</span>(relations[index])</span><br><span class="line">                            <span class="built_in">print</span>(newInteraction)</span><br><span class="line">                        &#125;</span><br><span class="line">                        isPresentingNewInteractionView = <span class="literal">false</span></span><br><span class="line">                        </span><br><span class="line">                        <span class="comment">//AJOUTER LA PLANIFICATION D'UNE NOTIFICATION</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            .navigationTitle(<span class="string">"New interaction"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正如在代码中看到的，我包含了三个“打印”指令来帮助我调试它。 当我尝试添加两个交互时，以下是控制台中打印的内容：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Before</span> appending to relations</span><br><span class="line"><span class="type">Relation</span>(id: <span class="type">EA18AAD4</span>-<span class="type">E576</span>-49A9-90BF-<span class="type">CC58C5000ECE</span>, firstName: <span class="string">"Johanna"</span>, lastName: <span class="string">"Duby"</span>, photo: <span class="literal">nil</span>, interactions: [], contactFrequency: <span class="number">1814400.0</span>, birthday: <span class="type">Optional</span>(<span class="number">2023</span>-<span class="number">06</span>-<span class="number">15</span> <span class="number">14</span>:<span class="number">34</span>:<span class="number">40</span> +<span class="number">0000</span>), notes: <span class="string">""</span>, theme: <span class="type">Relations</span>.<span class="type">Theme</span>.blue, reminders: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">Interaction</span>(id: 106CD832-<span class="number">1949</span>-<span class="number">4800</span>-<span class="type">AC75</span>-<span class="type">E21B8890E580</span>, date: <span class="number">2023</span>-<span class="number">06</span>-<span class="number">15</span> <span class="number">14</span>:<span class="number">34</span>:<span class="number">43</span> +<span class="number">0000</span>, type: <span class="type">Relations</span>.<span class="type">InteractionType</span>.audioCall, durationHours: <span class="number">0</span>, durationMinutes: <span class="number">0</span>, summary: <span class="string">""</span>, location: <span class="type">Relations</span>.<span class="type">Location</span>(name: <span class="string">""</span>, coordinates: <span class="literal">nil</span>), pictures: [])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">After</span> having appended to relations</span><br><span class="line"><span class="type">Relation</span>(id: <span class="type">EA18AAD4</span>-<span class="type">E576</span>-49A9-90BF-<span class="type">CC58C5000ECE</span>, firstName: <span class="string">"Johanna"</span>, lastName: <span class="string">"Duby"</span>, photo: <span class="literal">nil</span>, interactions: [<span class="type">Relations</span>.<span class="type">Interaction</span>(id: 106CD832-<span class="number">1949</span>-<span class="number">4800</span>-<span class="type">AC75</span>-<span class="type">E21B8890E580</span>, date: <span class="number">2023</span>-<span class="number">06</span>-<span class="number">15</span> <span class="number">14</span>:<span class="number">34</span>:<span class="number">43</span> +<span class="number">0000</span>, type: <span class="type">Relations</span>.<span class="type">InteractionType</span>.audioCall, durationHours: <span class="number">0</span>, durationMinutes: <span class="number">0</span>, summary: <span class="string">""</span>, location: <span class="type">Relations</span>.<span class="type">Location</span>(name: <span class="string">""</span>, coordinates: <span class="literal">nil</span>), pictures: [])], contactFrequency: <span class="number">1814400.0</span>, birthday: <span class="type">Optional</span>(<span class="number">2023</span>-<span class="number">06</span>-<span class="number">15</span> <span class="number">14</span>:<span class="number">34</span>:<span class="number">40</span> +<span class="number">0000</span>), notes: <span class="string">""</span>, theme: <span class="type">Relations</span>.<span class="type">Theme</span>.blue, reminders: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">Interaction</span>(id: 106CD832-<span class="number">1949</span>-<span class="number">4800</span>-<span class="type">AC75</span>-<span class="type">E21B8890E580</span>, date: <span class="number">2023</span>-<span class="number">06</span>-<span class="number">15</span> <span class="number">14</span>:<span class="number">34</span>:<span class="number">43</span> +<span class="number">0000</span>, type: <span class="type">Relations</span>.<span class="type">InteractionType</span>.audioCall, durationHours: <span class="number">0</span>, durationMinutes: <span class="number">0</span>, summary: <span class="string">""</span>, location: <span class="type">Relations</span>.<span class="type">Location</span>(name: <span class="string">""</span>, coordinates: <span class="literal">nil</span>), pictures: [])</span><br><span class="line"></span><br><span class="line"><span class="type">Before</span> appending to relations</span><br><span class="line"><span class="type">Relation</span>(id: 8D3D2012-<span class="type">D8A2</span>-<span class="number">4092</span>-<span class="type">B1A9</span>-<span class="type">D476F7E05B9A</span>, firstName: <span class="string">"Nastassja"</span>, lastName: <span class="string">"Ferrari"</span>, photo: <span class="literal">nil</span>, interactions: [], contactFrequency: <span class="number">1209600.0</span>, birthday: <span class="literal">nil</span>, notes: <span class="string">""</span>, theme: <span class="type">Relations</span>.<span class="type">Theme</span>.green, reminders: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">Interaction</span>(id: 5C4EE2E1-7D2D-4E32-<span class="type">BC00</span>-<span class="type">FCA781EC8C20</span>, date: <span class="number">2023</span>-<span class="number">06</span>-<span class="number">15</span> <span class="number">14</span>:<span class="number">34</span>:<span class="number">49</span> +<span class="number">0000</span>, type: <span class="type">Relations</span>.<span class="type">InteractionType</span>.audioCall, durationHours: <span class="number">0</span>, durationMinutes: <span class="number">0</span>, summary: <span class="string">""</span>, location: <span class="type">Relations</span>.<span class="type">Location</span>(name: <span class="string">""</span>, coordinates: <span class="literal">nil</span>), pictures: [])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">After</span> having appended to relations</span><br><span class="line"><span class="type">Relation</span>(id: 8D3D2012-<span class="type">D8A2</span>-<span class="number">4092</span>-<span class="type">B1A9</span>-<span class="type">D476F7E05B9A</span>, firstName: <span class="string">"Nastassja"</span>, lastName: <span class="string">"Ferrari"</span>, photo: <span class="literal">nil</span>, interactions: [], contactFrequency: <span class="number">1209600.0</span>, birthday: <span class="literal">nil</span>, notes: <span class="string">""</span>, theme: <span class="type">Relations</span>.<span class="type">Theme</span>.green, reminders: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">Interaction</span>(id: 5C4EE2E1-7D2D-4E32-<span class="type">BC00</span>-<span class="type">FCA781EC8C20</span>, date: <span class="number">2023</span>-<span class="number">06</span>-<span class="number">15</span> <span class="number">14</span>:<span class="number">34</span>:<span class="number">49</span> +<span class="number">0000</span>, type: <span class="type">Relations</span>.<span class="type">InteractionType</span>.audioCall, durationHours: <span class="number">0</span>, durationMinutes: <span class="number">0</span>, summary: <span class="string">""</span>, location: <span class="type">Relations</span>.<span class="type">Location</span>(name: <span class="string">""</span>, coordinates: <span class="literal">nil</span>), pictures: [])</span><br></pre></td></tr></table></figure>
+<p>4) 提问<a href="https://forums.swift.org/t/are-nested-recursive-macros-supported-in-swift-5-9/65569" title="Swift 5.9 是否支持嵌套/递归宏？" target="_blank" rel="noopener">Swift 5.9 是否支持嵌套/递归宏？</a></p>
+<p>5) 提问<a href="https://forums.swift.org/t/how-to-reference-an-article-in-a-different-module/65581" title="如何引用不同模块中的文章？" target="_blank" rel="noopener">如何引用不同模块中的文章？</a></p>
+<p>查看 DocC 代码链接的语法，似乎我们有办法引用同一模块中的文章：</p>
+<doc:gettingstarted>
+
+<p>但是我们不能使用前导斜杠语法来指定模块相对路径，因为它已经被 tutorials 命名空间占用：</p>
+<p><a href="doc:/tutorials/SlothCreator" target="_blank" rel="noopener">doc:/tutorials/SlothCreator</a></p>
+<p>如何引用来自不同模块的文章？</p>
+<p>回答：</p>
+<p>库存 DocC 尚不支持外部 - 或者更具体地说，尚未提供公共解决方案。 早期的 DocC 代码中有一些关于允许某些过程的外部引用解析器的位，@ronnqvist 一直在研究更新的解决方案（“分层解析器”）——但我只关注了一些 PR（最近的一个 提取了很多旧代码：通过 d-ronnqvist 添加成功解析的外部引用到参考索引, <a href="https://github.com/apple/swift-docc/pull/582" target="_blank" rel="noopener">Pull Request #582</a>）</p>
+<p>6) 提问<a href="https://forums.swift.org/t/se-0400-init-accessors/65583" title="Macros包会嵌入到App中吗？" target="_blank" rel="noopener">Macros包会嵌入到App中吗？</a></p>
+<p>例如，当我使用 #stringify Swift 宏在我的应用程序中生成代码时，它会在编译期间用新代码替换我的一些源代码。 那么这个宏包会随我的应用程序一起提供吗？ 或者它只是在编译期间发生</p>
+<p>回答：替换发生在编译时。 宏目标不应链接到应用该目标中包含的宏的代码。</p>
+<p>7) 提问<a href="https://forums.swift.org/t/se-0400-init-accessors/65583" title="哪个 Apple Networking Api 用于 UDP 多播和单播？" target="_blank" rel="noopener">哪个 Apple Networking Api 用于 UDP 多播和单播？</a></p>
+<p>一般而言，iOS 开发和网络的新手。 开发一个游戏节目类型的应用程序，其中“主机”设备需要多播到“参赛者”设备。 参赛者设备也需要能够响应。 实际上传递的信息很少，但速度很重要，因此使用 UDP。 </p>
+<p>我一直在研究苹果设备的一些常用网络 api：network.framework、CocoaAsyncSocket、Multipeer-Connectivity、BSD 套接字等。总的来说，我倾向于只使用高级 network.framework 但缺乏 示例和资源使决策变得困难。 任何意见，将不胜感激。</p>
+<p>回答：<a href="https://developer.apple.com/documentation/technotes/tn3151-choosing-the-right-networking-api" target="_blank" rel="noopener">TN3151: Choosing the right networking API</a></p>
+<h2 id="推荐博文"><a href="#推荐博文" class="headerlink" title="推荐博文"></a>推荐博文</h2><p><a href="https://www.swift.org/blog/introducing-swift-openapi-generator/" title=" Swift OpenAPI Generator 的介绍" target="_blank" rel="noopener">Swift OpenAPI Generator 的介绍</a></p>
+<p><strong>摘要：</strong> Swift OpenAPI Generator是一个 SwiftPM 插件，它可以生成客户端代码或服务器端代码，以便处理 HTTP 调用。 OpenAPI 是一种用于记录HTTP服务的规范，可以使用YAML或JSON编写，并可被工具读取，以帮助自动化工作流程，例如生成必要的代码以发送和接收HTTP请求。Swift OpenAPI Generator 可以帮助我们通过 OpenAPI 文档描述HTTP请求和响应的结构，包括 HTTP 方法、 URL 路径和查询参数、HTTP状态码和内容类型，使用 JSON Schema 描述响应体的结构，使得我们能够在开发应用程序时生成网络代码，而不需要手动编写和维护网络代码，专注于核心业务逻辑。要使用 Swift OpenAPI Generator 插件，需要添加 SwiftPM 依赖项以及运行时库和传输实现，然后使用生成的API客户端或服务器端存根。 Swift OpenAPI Generator 支持大多数常用特性，但仍有一些特性需要实现，项目跟踪进展情况可以使用 GitHub issues </p>
+<p><a href="https://www.avanderlee.com/swift/macros/" title=" Swift 宏：使用新的表达方式扩展 Swift" target="_blank" rel="noopener"> Swift 宏：使用新的表达方式扩展 Swift</a></p>
+<p><strong>摘要：</strong>  Swift 宏是在 Swift 5.9发布的一项新功能，它允许你通过自定义编译时检查和生成新的代码，在编译时将它们写入到你的文件中，从而消除冗余的样板代码。本文讲解了宏的工作原理、如何编写自定义宏以及如何进行测试，以验证一个允许在编译时验证 URL 并在 URL 有效时返回解包值的宏的例子。本文还讨论了宏的不同角色，包括独立和附加宏，并解释了为什么你可能考虑在代码中使用宏。</p>
+<p><a href="https://www.avanderlee.com/swift/share-swift-code-swift-on-server-vapor/" title="在 Swift 服务器端 Vapor 和客户端应用之间共享 Swift 代码" target="_blank" rel="noopener">在 Swift 服务器端 Vapor 和客户端应用之间共享 Swift 代码</a></p>
+<p><strong>摘要：</strong> 这篇博客讨论了在客户端应用和后端服务器之间共享 Swift 代码的好处以及如何通过 Swift 包和 Vapor 实现这一目标。通过共享模型和端点定义，您可以确保两个侧面都使用相同的层，避免出现意料之外的请求失败。博客提供了定义软件包结构、暴露模型、共享端点定义和在后端软件包中配置端点的代码示例。此外，它提供了一个通用方法，用于请求端点并在客户端应用中使用它们。作者还提到了优化适用于所有支持的 HTTP 方法的代码的重要性。</p>
+<h2 id="话题讨论"><a href="#话题讨论" class="headerlink" title="话题讨论"></a>话题讨论</h2><p>薪酬保密作为人力资源管理中一项颇具争议的举措，近年来学界对其研究越来越多。有人提出，实行薪酬保密，能让企业根据员工绩效的高低提供差异较大的薪酬，提升薪酬激励作用，同时也能避免因为收入差距产生内部冲突。也有人提出公开的薪酬制度能使内部沟通更为有效，减少误传，增强信任感，作为一种制度，薪酬的等级体系、岗位差距以及操作程序还应以公开为准则。<strong>你认为企业实行薪资保密有哪些利弊？</strong></p>
+<p>1.保护员工个人隐私。</p>
+<p>2.避免员工之间的比较和嫉妒心理，减少内部矛盾。</p>
+<p>3.难以查看薪资公正性，更少的保密性意味着更多的平等。</p>
+<p>4.易产生员工对公司不信任，让员工产生长期处于被剥削的感觉。</p>
+<h2 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h2><p><strong>Swift社区</strong>是由 Swift 爱好者共同维护的公益组织，我们在国内以微信公众号的运营为主，我们会分享以 <strong>Swift实战</strong>、<strong>SwiftUl</strong>、<strong>Swift基础</strong>为核心的技术内容，也整理收集优秀的学习资料。</p>
+<p>欢迎关注公众号:Swift社区，后台点击进群，可以进入我们社区的交流讨论群。希望我们Swift社区是大家在网络空间中的另一份共同的归属。</p>
+<p><img width="500" alt="Swift社区" src="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png"></p>
+<p>特别感谢 Swift社区 编辑部的每一位编辑，感谢大家的辛苦付出，为 Swift社区 提供优质内容，为 Swift 语言的发展贡献自己的力量。</p>
+</doc:gettingstarted>
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Swift-周报-第三十一期/">Swift 周报 第三十一期</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2023年07月04日 - 15:07</p>
+  <p><span>最后更新:</span>2023年07月04日 - 15:07</p>
+  <p><span>原始链接:</span><a href="/Swift-周报-第三十一期/" title="Swift 周报 第三十一期">https://fanbaoying.github.io/Swift-周报-第三十一期/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/Swift-周报-第三十一期/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Swift-周报-第三十期/" rel="next" title="Swift 周报 第三十期">
+                <i class="fa fa-chevron-left"></i> Swift 周报 第三十期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Swift-周报-第三十二期/" rel="prev" title="Swift 周报 第三十二期">
+                Swift 周报 第三十二期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">171</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新闻和社区"><span class="nav-number">2.</span> <span class="nav-text">新闻和社区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册-WWDC23-实验室和活动"><span class="nav-number">2.1.</span> <span class="nav-text">注册 WWDC23 实验室和活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apple-Vision-Pro-和-visionOS-撼世登场"><span class="nav-number">2.2.</span> <span class="nav-text">Apple Vision Pro 和 visionOS 撼世登场</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App-Store-中新增的隐私功能"><span class="nav-number">2.3.</span> <span class="nav-text">App Store 中新增的隐私功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提案"><span class="nav-number">3.</span> <span class="nav-text">提案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正在审查的提案"><span class="nav-number">3.1.</span> <span class="nav-text">正在审查的提案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift论坛"><span class="nav-number">4.</span> <span class="nav-text">Swift论坛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐博文"><span class="nav-number">5.</span> <span class="nav-text">推荐博文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#话题讨论"><span class="nav-number">6.</span> <span class="nav-text">话题讨论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我们"><span class="nav-number">7.</span> <span class="nav-text">关于我们</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共276.8k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

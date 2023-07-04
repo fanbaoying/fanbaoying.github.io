@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言本期是 Swift 编辑组自主整理周报的第十二期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 烟花，如此短暂，却如此的奔放热烈。Swift社区，积聚无数力量，却只为给你展现一刹那辉煌！👊👊👊  周报精选 新闻和社区：苹果市值两年来首">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 周报 第二十一期">
+<meta property="og:url" content="https://fanbaoying.github.io/Swift-周报-第二十一期/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言本期是 Swift 编辑组自主整理周报的第十二期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 烟花，如此短暂，却如此的奔放热烈。Swift社区，积聚无数力量，却只为给你展现一刹那辉煌！👊👊👊  周报精选 新闻和社区：苹果市值两年来首">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/2f40682e-f405-4394-9578-ce298cae2821.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png">
+<meta property="og:updated_time" content="2023-07-04T07:24:11.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 周报 第二十一期">
+<meta name="twitter:description" content="前言本期是 Swift 编辑组自主整理周报的第十二期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 烟花，如此短暂，却如此的奔放热烈。Swift社区，积聚无数力量，却只为给你展现一刹那辉煌！👊👊👊  周报精选 新闻和社区：苹果市值两年来首">
+<meta name="twitter:image" content="https://files.mdnice.com/user/17787/2f40682e-f405-4394-9578-ce298cae2821.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/Swift-周报-第二十一期/"/>
+
+
+
+
+
+  <title>Swift 周报 第二十一期 | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/Swift-周报-第二十一期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift 周报 第二十一期</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-04T15:19:17+08:00">
+                2023-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift-周报/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift 周报</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 3,714字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 13分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>本期是 Swift 编辑组自主整理周报的第十二期</strong>，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。</p>
+<p>Swift 周报在 <a href="https://github.com/SwiftCommunityRes/SwiftWeekly" title="SwiftWeekly" target="_blank" rel="noopener">GitHub 开源</a>，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。</p>
+<p>烟花，如此短暂，却如此的奔放热烈。<strong>Swift社区</strong>，积聚无数力量，却只为给你展现一刹那辉煌！👊👊👊</p>
+<blockquote>
+<p><strong>周报精选</strong></p>
+<p>新闻和社区：苹果市值两年来首次跌破2万亿美元</p>
+<p>提案：弃用 <code>@UIApplicationMain</code> 和 <code>@NSApplicationMain</code></p>
+<p>Swift 论坛：改变一个属性包装器</p>
+<p>推荐博文：iOS 应用卡顿监控与治理</p>
+<p><strong>话题讨论：</strong> </p>
+<p>您觉得烟花应该被禁止吗？</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="新闻和社区"><a href="#新闻和社区" class="headerlink" title="新闻和社区"></a>新闻和社区</h2><h3 id="苹果市值两年来首次跌破2万亿美元"><a href="#苹果市值两年来首次跌破2万亿美元" class="headerlink" title="苹果市值两年来首次跌破2万亿美元"></a>苹果市值两年来首次跌破2万亿美元</h3><p>鞭牛士 1 月 4 日消息，据报道，当地时间 1 月 3 日，苹果（AAPL）收报 125.07 美元，跌幅 3.74% ，市值 1.99 万亿美元。市值一夜蒸发 773 亿美元（约 5345 亿元人民币）。</p>
+<p><img src="https://files.mdnice.com/user/17787/2f40682e-f405-4394-9578-ce298cae2821.png" alt=""></p>
+<p>Tech 星球 1 月 4 日消息，据凤凰网科技，在遭遇了去年的大幅下跌后，苹果公司市值本周二继续大幅缩水，自 2021 年 3 月以来首次跌破 2 万亿美元，面临被微软公司超越的风险。而就在一年前，苹果曾成为首家市值触及 3 万亿美元的公司。</p>
+<p>截至周二收盘，苹果股价下跌 3.7% ，至 125.07 美元。此前，法国巴黎银行分析师杰罗姆·拉梅尔(Jerome Ramel)将苹果股票评级从“跑赢大盘”下调至“中性”，并将其目标价从 180 美元下调至 140 美元。拉梅尔还将 iPhone 2023 财年的出货量预期从 2.45 亿部下调至 2.24 亿部，以反映代工商富士康的供应链问题以及消费者削减在高端手机上的支出。</p>
+<p>与此同时，投资者还担心，全球经济放缓和高通胀可能会损害消费者对苹果设备的需求。日本媒体报道称，苹果已经要求供应商减少为其耳机、手表和笔记本电脑生产零部件。</p>
+<p>在经历了周二的下跌后，苹果目前的市值为 1.99 万亿美元，稍稍领先微软，后者的市值约为 1.8 万亿美元。苹果、微软、亚马逊、谷歌母公司 Alphabet 、脸书母公司 Meta 目前在标普 500 指数中的市值占比约为 18% ， 低于 2020 年一度达到的 24% 。</p>
+<h3 id="TrendForce-集邦咨询：疫情影响，2022-年-iPhone-14-系列出货量滑至-7-810-万支"><a href="#TrendForce-集邦咨询：疫情影响，2022-年-iPhone-14-系列出货量滑至-7-810-万支" class="headerlink" title="TrendForce 集邦咨询：疫情影响，2022 年 iPhone 14 系列出货量滑至 7,810 万支"></a>TrendForce 集邦咨询：疫情影响，2022 年 iPhone 14 系列出货量滑至 7,810 万支</h3><p>富士康（Foxconn）郑州厂自 10 月起至今持续受疫情影响，稼动率仍难突破七成，而 10 月底正值苹果（Apple）新机销售的冲刺期，其中 Pro 系列因受市场青睐而持续调升生产比重，使得作为 Apple Pro 系列主力组装厂的富士康备感压力，即便有富士康深圳厂支持生产，但仍缓不济急，故 TrendForce 集邦咨询下调 2022 年 iPhone 14 系列出货量至 7,810 万支。</p>
+<h3 id="富士康独供地位不再，立讯确定将加入-iPhone-15-Pro-Max-生产行列"><a href="#富士康独供地位不再，立讯确定将加入-iPhone-15-Pro-Max-生产行列" class="headerlink" title="富士康独供地位不再，立讯确定将加入 iPhone 15 Pro Max 生产行列"></a>富士康独供地位不再，立讯确定将加入 iPhone 15 Pro Max 生产行列</h3><p>富士康长年稳站 Pro 系列的独家组装，但苹果基于风险控管，原本即有意找寻其他业者加入生产组装行列，并且在 iPhone 14 Pro 系列上试行，富士康由于疫情影响稼动率，这也让立讯精密（Luxshare）成为 iPhone 15 Pro Max 组装供应链行列之一，目前其 iPhone 代工厂仍坐落中国，越南厂则是以苹果周边为主，目前尚无 iPhone 产线规划。</p>
+<h2 id="提案"><a href="#提案" class="headerlink" title="提案"></a>提案</h2><h3 id="正在审查的提案"><a href="#正在审查的提案" class="headerlink" title="正在审查的提案"></a>正在审查的提案</h3><p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0383-deprecate-uiapplicationmain-and-nsapplicationmain.md" title="SE-0383" target="_blank" rel="noopener">SE-0383</a> <strong>弃用 @UIApplicationMain 和 @NSApplicationMain</strong> 提案正在审查。</p>
+<p><code>@UIApplicationMain</code> 和 <code>@NSApplicationMain</code> 曾经是 iOS 和 macOS 应用程序分别为应用程序声明合成平台特定入口点的标准方式。 这些函数已经被 SE-0281 引入的 <code>@main</code> 属性淘汰了。 这个提议试图在 Swift 6 之前弃用这些可选的入口点属性，从而支持 @main。</p>
+<p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0384-importing-forward-declared-objc-interfaces-and-protocols.md" title="SE-0384" target="_blank" rel="noopener">SE-0384</a> <strong>导入已声明的 Objective-C 接口和协议</strong> 提案正在审查。</p>
+<p>该提案主要目的是通过减少对已声明的 Swift API 可见性的负面影响，来提高 Swift 中现有 Objective-C 库的可用性。希望可以用合成占位符类型来表示 Swift 中已声明的 Objective-C 接口和协议。</p>
+<h2 id="Swift论坛"><a href="#Swift论坛" class="headerlink" title="Swift论坛"></a>Swift论坛</h2><p>1) 讨论 <a href="https://forums.swift.org/t/se-0384-importing-forward-declared-objective-c-interfaces-and-protocols/62392" title="SE-0384：导入前向声明的 Objective-C 接口和协议" target="_blank" rel="noopener">SE-0384：导入前向声明的 Objective-C 接口和协议</a></p>
+<p>2) 讨论 <a href="https://forums.swift.org/t/design-priorities-for-the-swift-6-language-mode/62408" title="Swift 6 语言模式的设计优先级" target="_blank" rel="noopener">Swift 6 语言模式的设计优先级</a></p>
+<p>Swift 6 重点领域</p>
+<p>Swift 语言工作组确定了三个重点领域，Swift 的系统改进将取决于源代码不兼容的更改。 涉及 Swift 6 源代码不兼容更改的提案应解决以下多个领域之一：</p>
+<p>默认情况下的数据竞争安全性：默认情况下的数据竞争安全性是对只能在新语言版本中上演的模型的重大转变，但它有很大的回报，因为它使并发程序更容易正确编写。 Swift 6 将需要加强围绕 Sendable 和 actor-isolation 检查的语义，但可能还需要额外的更改或功能来使在该安全模型中工作更容易。</p>
+<p>性能可预测性：Swift 提供了一种富有表现力的相当高级的编程模型，可以抽象掉不必要的细节。 然而，Swift 开发可能会遇到性能“悬崖”，其中一个小的变化可能会导致程序运行时性能意外下降（例如，由于写时复制数据类型的过度复制）或 Swift 工具的性能（ 例如，“表达式太复杂”错误）。Swift 6 可以考虑更改默认语言语义以提高性能可预测性，例如通过调整有关变量生命周期的规则，使某些带有运行时成本的功能选择加入而不是选择退出，或调整类型推断规则以启用 一个性能更好的类型检查器实现。</p>
+<p>包生态系统的可扩展性：Swift 语言和社区的长期健康取决于拥有一个强大的包生态系统。 Swift 语言和包管理器可能需要进行调整，以便更轻松地扩展包生态系统。 例如，Swift 的模块系统可能会得到改进，以限制模块的实现依赖性对其客户端模块的影响，从而使模块和包更能适应变化。</p>
+<p>3) 讨论 <a href="https://forums.swift.org/t/vapor-how-to-get-response-url-using-async-http-vapor-client/62418" title="Vapor：如何使用 async-http / Vapor 客户端获取响应 URL" target="_blank" rel="noopener">Vapor：如何使用 async-http / Vapor 客户端获取响应 URL</a></p>
+<p>4) 讨论 <a href="https://forums.swift.org/t/how-can-i-use-return-values-from-functions-instead-of-using-binding-to-pass-data-between-views/62413" title="如何使用函数的返回值而不是使用@Binding 在视图之间传递数据？" target="_blank" rel="noopener">如何使用函数的返回值而不是使用@Binding 在视图之间传递数据？</a></p>
+<p>5) 提议 <a href="https://forums.swift.org/t/implicit-guarding-self-in-closures/62386" title="在闭包中隐式使用guard self" target="_blank" rel="noopener">在闭包中隐式使用guard self</a></p>
+<p>受 SE-0365 的启发：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [guarded <span class="keyword">self</span>] <span class="keyword">in</span></span><br><span class="line">    dismiss()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里 guard self 以确保 self（否则返回），这通常在这种情况下使用：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    dismiss()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>6) 讨论 <a href="https://forums.swift.org/t/mutating-a-property-wrapper/62403" title="改变一个属性包装器" target="_blank" rel="noopener">改变一个属性包装器</a></p>
+<p>Property wrapper 一个栗子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@propertyWrapper</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">PropertyWrapper</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> projectedValue: <span class="type">Self</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">self</span> &#125;</span><br><span class="line">        _modify &#123; yield &amp;<span class="keyword">self</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> wrappedValue: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; box.value &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; box.value = newValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> box: <span class="type">Box</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(wrappedValue: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.box = <span class="type">Box</span>(value: wrappedValue)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">needsCopyOnWrite</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        !isKnownUniquelyReferenced(&amp;box)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value: <span class="type">Int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(value: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.value = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如何使用：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Struct</span> </span>&#123;</span><br><span class="line">    @<span class="type">PropertyWrapper</span></span><br><span class="line">    <span class="keyword">var</span> property: <span class="type">Int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> propertyWrapper: <span class="type">PropertyWrapper</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; _property.projectedValue &#125;</span><br><span class="line">        _modify &#123; yield &amp;_property.projectedValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s = <span class="type">Struct</span>(property: <span class="number">123</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(s.$property.needsCopyOnWrite()) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">print</span>(s.propertyWrapper.needsCopyOnWrite()) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>7) 讨论 <a href="https://forums.swift.org/t/caveats-of-keeping-task-instance-beyond-its-bodys-execution/62400" title="保持任务实例超出其主体执行的警告？" target="_blank" rel="noopener">保持任务实例超出其主体执行的警告？</a></p>
+<p>8) 讨论 <a href="https://forums.swift.org/t/returned-for-revision-se-0379-opt-in-reflection-metadata/62390" title="SE-0379: Opt-in Reflection Metadata" target="_blank" rel="noopener">SE-0379: Opt-in Reflection Metadata</a></p>
+<p>更改反射生成的默认行为:</p>
+<p>该提案规定，在 Swift 6 语言模式下，反射的默认行为应该成为选择加入。 社区对提案的这一方面反应不一，许多开发人员担心这会对现有代码中普遍使用打印、镜像和其他基于反射的 API 产生影响。 关于支持“按使用量付费”模型和提供丰富的运行时设施之间的紧张关系，有很好的哲学讨论。 该提案建议通过使依赖反射的 API 在其参数中添加 Reflectable 约束来解决这种紧张关系。 然而，对于许多 API 来说，这是一个问题，特别是标准库设施，如打印和相关的字符串化功能，旨在尽最大努力处理任何值。 要求通过潜在的许多 API 层线程化通用约束只是为了添加一些日志记录或 printf 调试将是一个严重的强加。 但是，消除对这些约束的需求会使编译器没有面包屑来帮助开发人员制作所有需要的类型 Reflectable 或 Custom * StringConvertible；开发人员必须通过大量专门测试来发现和修复运行时影响。</p>
+<p>Language Workgroup 还注意到 Swift 项目先前尝试追溯更改运行时行为，特别是 SE-0083，它通过从运行时中删除 Foundation 类型桥接来简化动态转换行为。 当时的核心团队最终拒绝了该提议，因为考虑到该提议的动态性质，他们无法想出一种方法来评估对 Swift 生态系统的影响，并有足够的把握认为该变化不会造成过度破坏。 语言工作组对更改默认反射行为也有类似的担忧； 即使默认更改受语言版本限制，我们希望开发人员采用 Swift 6 以获得静态并发安全和其他更改的好处，并期望他们也审计项目的动态行为以防止意外的反射依赖项将是一个障碍 更新他们的语言版本模式。 如果没有评估更改默认设置对现实世界影响的计划，我们就不会接受这种更改。</p>
+<p>Reflectable 的本质和动态投射支持:</p>
+<p>提案规定 Reflectable 和 Sendable 一样是一个标记协议； 然而，与真正的标记协议不同，约束的存在对运行程序可用的元数据类型具有真正的运行时影响。 此外，与遵循协议不同，反射元数据不能通过其定义模块之外的扩展追溯添加到类型中。 因此，尽管将其作为通用约束是一种很好的语言设计，但将其称为标记协议或协议似乎不太正确。</p>
+<p>该提案还规定，程序员可以通过动态转换查询一个类型是否携带全反射元数据？ 可反射。 如果 Reflectable 是一个标记协议，那么它如何在完全通用的情况下工作还不清楚，因为尽管我们可能静态地将表达式 x 识别为？ 可反射的，不可能将 x 处理为？ T 表示在运行时绑定到 Reflectable 存在类型的泛型类型参数 T。 但是，语言工作组还认为，在新的 Reflection 库中将此功能表达为独立的查询功能可能会更好，这样可以降低它必须与整个动态转换基础结构进行交互的复杂性。</p>
+<p>现在的语言中存在一个非协议泛型约束——AnyObject 约束，只有类和没有见证表的类存在性才能满足。 编译器在内部将其归类为“布局约束”，因为它不需要明确的一致性，但其布局本质上满足约束要求的类型会隐式满足它。 目前还有一些其他布局约束只为优化器实现以允许部分专门化，但其中一些，特别是按位可复制类型的约束，在 C++ 行话中称为“平凡”或“POD”，也可以浮出水面 在语言中。 Reflectable 可能也适合这个系列，因为当编译器设置为发出所有反射元数据时，它不需要明确的“一致性”； 虽然它不是专门针对类型值的布局的约束，但它确实对该类型的元数据布局施加了约束。</p>
+<p>调试器支持:</p>
+<p>需要进一步考虑的实现的一个方面是它与调试器的交互。 LLDB 的 Swift 支持目前严重依赖全反射元数据来提供完整的功能，语言工作组希望看到一个计划来确保调试支持可用</p>
+<h2 id="推荐博文"><a href="#推荐博文" class="headerlink" title="推荐博文"></a>推荐博文</h2><p><a href="https://juejin.cn/post/7176823567059779639" title="出行iOS用户端卡顿治理实践" target="_blank" rel="noopener">出行iOS用户端卡顿治理实践</a></p>
+<p><strong>摘要：</strong> 这篇文章主要讲解该如何去做好卡顿治理。我们使用APP有时会遇到点击响应迟钝、页面跳转缓慢、滑动列表不流畅、卡死无响应，这些就是卡顿问题，它会影响用户体验，严重时会导致用户的流失，因此卡顿治理是非常重要的。</p>
+<p><a href="https://juejin.cn/post/7176441132447399993" title="58同城iOS包大小治理工具解密" target="_blank" rel="noopener">58同城iOS包大小治理工具解密</a></p>
+<p><strong>摘要：</strong> 本文通过58同城包大小治理的实践经验，来讲解如何解决混编环境下OC/Swift无用类、无用资源、重复资源等检测问题，同时结合业内常见的段迁移、链接时优化(LTO)等多种技术手段，来辅助App进行瘦身。</p>
+<p><a href="https://juejin.cn/post/7181352292673650746" title="iOS卡顿监控探索与实践" target="_blank" rel="noopener">iOS卡顿监控探索与实践</a></p>
+<p><strong>摘要：</strong> 这篇文章主要讲解如何监控卡顿，帮助开发者进一步解决卡顿问题。与用户交互的事件都是在主线程里处理的，但如果主线程无法响应用户的交互就会造成卡顿，卡顿时间比较长是非常影响App的功能和用户体验的，所以这也是一个非常值得重视的问题。</p>
+<h2 id="话题讨论"><a href="#话题讨论" class="headerlink" title="话题讨论"></a>话题讨论</h2><p><strong>您觉得烟花应该被禁止吗？</strong></p>
+<p>欢迎在文末留言参与讨论。</p>
+<h2 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h2><p><strong>Swift社区</strong>是由 Swift 爱好者共同维护的公益组织，我们在国内以微信公众号的运营为主，我们会分享以 <strong>Swift实战</strong>、<strong>SwiftUl</strong>、<strong>Swift基础</strong>为核心的技术内容，也整理收集优秀的学习资料。</p>
+<p>欢迎关注公众号:Swift社区，后台点击进群，可以进入我们社区的交流讨论群。希望我们Swift社区是大家在网络空间中的另一份共同的归属。</p>
+<p><img width="500" alt="Swift社区" src="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png"></p>
+<p>特别感谢 Swift社区 编辑部的每一位编辑，感谢大家的辛苦付出，为 Swift社区 提供优质内容，为 Swift 语言的发展贡献自己的力量。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Swift-周报-第二十一期/">Swift 周报 第二十一期</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2023年07月04日 - 15:07</p>
+  <p><span>最后更新:</span>2023年07月04日 - 15:07</p>
+  <p><span>原始链接:</span><a href="/Swift-周报-第二十一期/" title="Swift 周报 第二十一期">https://fanbaoying.github.io/Swift-周报-第二十一期/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/Swift-周报-第二十一期/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Swift-周报-第二十期/" rel="next" title="Swift 周报 第二十期">
+                <i class="fa fa-chevron-left"></i> Swift 周报 第二十期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Swift-周报-第二十二期/" rel="prev" title="Swift 周报 第二十二期">
+                Swift 周报 第二十二期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">171</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新闻和社区"><span class="nav-number">2.</span> <span class="nav-text">新闻和社区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#苹果市值两年来首次跌破2万亿美元"><span class="nav-number">2.1.</span> <span class="nav-text">苹果市值两年来首次跌破2万亿美元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TrendForce-集邦咨询：疫情影响，2022-年-iPhone-14-系列出货量滑至-7-810-万支"><span class="nav-number">2.2.</span> <span class="nav-text">TrendForce 集邦咨询：疫情影响，2022 年 iPhone 14 系列出货量滑至 7,810 万支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#富士康独供地位不再，立讯确定将加入-iPhone-15-Pro-Max-生产行列"><span class="nav-number">2.3.</span> <span class="nav-text">富士康独供地位不再，立讯确定将加入 iPhone 15 Pro Max 生产行列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提案"><span class="nav-number">3.</span> <span class="nav-text">提案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正在审查的提案"><span class="nav-number">3.1.</span> <span class="nav-text">正在审查的提案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift论坛"><span class="nav-number">4.</span> <span class="nav-text">Swift论坛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐博文"><span class="nav-number">5.</span> <span class="nav-text">推荐博文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#话题讨论"><span class="nav-number">6.</span> <span class="nav-text">话题讨论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我们"><span class="nav-number">7.</span> <span class="nav-text">关于我们</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共276.8k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
