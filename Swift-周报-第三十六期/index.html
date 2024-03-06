@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言本期是 Swift 编辑组整理周报的第三十六期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 一米阳光下阴雨绵绵，一米阳光上晴空万里，这就是生活。Swift社区伴你一起，走过风雨，沐浴暖阳！👊👊👊  周报精选 新闻和社区：iPhone">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-周报-第三十六期">
+<meta property="og:url" content="https://fanbaoying.github.io/Swift-周报-第三十六期/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言本期是 Swift 编辑组整理周报的第三十六期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 一米阳光下阴雨绵绵，一米阳光上晴空万里，这就是生活。Swift社区伴你一起，走过风雨，沐浴暖阳！👊👊👊  周报精选 新闻和社区：iPhone">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/85a89025-a0a8-48f0-bffe-bd7f7a5acde8.jpeg">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/1e3e2489-9b4e-4202-8189-a234f10d0559.png">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/3eab2868-eefd-4141-92c3-a3e1835847c5.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png">
+<meta property="og:updated_time" content="2024-03-06T08:03:05.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-周报-第三十六期">
+<meta name="twitter:description" content="前言本期是 Swift 编辑组整理周报的第三十六期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 一米阳光下阴雨绵绵，一米阳光上晴空万里，这就是生活。Swift社区伴你一起，走过风雨，沐浴暖阳！👊👊👊  周报精选 新闻和社区：iPhone">
+<meta name="twitter:image" content="https://files.mdnice.com/user/17787/85a89025-a0a8-48f0-bffe-bd7f7a5acde8.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/Swift-周报-第三十六期/"/>
+
+
+
+
+
+  <title>Swift-周报-第三十六期 | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/Swift-周报-第三十六期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift-周报-第三十六期</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-06T15:56:38+08:00">
+                2024-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift-周报/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift 周报</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 5,495字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 21分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>本期是 Swift 编辑组整理周报的第三十六期</strong>，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。</p>
+<p>Swift 周报在 <a href="https://github.com/SwiftCommunityRes/SwiftWeekly" title="SwiftWeekly" target="_blank" rel="noopener">GitHub 开源</a>，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。</p>
+<p>一米阳光下阴雨绵绵，一米阳光上晴空万里，这就是生活。<strong>Swift社区</strong>伴你一起，走过风雨，沐浴暖阳！👊👊👊</p>
+<blockquote>
+<p><strong>周报精选</strong></p>
+<p>新闻和社区：iPhone 15 全系配 USB-C 苹果拒绝接口和安卓互通</p>
+<p>提案：对 AsyncStream 的 Backpressure 支持</p>
+<p>Swift 论坛：提议全局变量的严格并发</p>
+<p>推荐博文：WWDC23 10105 - 打造响应更快的相机体验</p>
+<p><strong>话题讨论：</strong> </p>
+<p>日本核污水排海，你还会吃海鲜吗？</p>
+</blockquote>
+<p><strong>上期话题结果</strong></p>
+<a id="more"></a>
+<p><img src="https://files.mdnice.com/user/17787/85a89025-a0a8-48f0-bffe-bd7f7a5acde8.jpeg" alt=""></p>
+<p>根据投票结果可以看出，大家有不同的想法。小编认为家长应该根据孩子的个性特点和兴趣爱好灵活调整，注重培养他们的创新精神和独立思考能力。</p>
+<h2 id="新闻和社区"><a href="#新闻和社区" class="headerlink" title="新闻和社区"></a>新闻和社区</h2><h3 id="消息称苹果公司和印度财政部官员磋商，扩大在印度的制造产能"><a href="#消息称苹果公司和印度财政部官员磋商，扩大在印度的制造产能" class="headerlink" title="消息称苹果公司和印度财政部官员磋商，扩大在印度的制造产能"></a>消息称苹果公司和印度财政部官员磋商，扩大在印度的制造产能</h3><p>8 月 25 日消息，根据印度当地媒体 Business Today 报道，苹果印度地区的高管已经和当地财政部会面，探讨扩大 iPhone 在印度产能相关事宜。</p>
+<p>消息称本次探讨涉及面很广，印度政府希望以苹果公司带头下，进一步推动本土智能手机制造业，并磋商相关的扶持政策。</p>
+<p>而苹果公司在交流中也表示，印度是非常重要的生产地和消费市场，乐于扩大在印度市场的产能，但希望能获得更多的补贴，以及政策福利。</p>
+<p>IT之家此前报道，根据市场调查机构 Counterpoint Research 公布的统计数据，2023 年第 2 季度印度市场营收表现首次超过法国和德国，成为苹果第五大 iPhone 市场。</p>
+<p>苹果 iPhone 零售业在印度市场的快速增长的同时，苹果也加快了 iPhone 在印度制造的脚步。苹果加大了在印度市场的投资力度，希望供应链实现多元化发展。（来源：IT之家）</p>
+<h3 id="iPhone-15-Pro-机型新增泰坦灰"><a href="#iPhone-15-Pro-机型新增泰坦灰" class="headerlink" title="iPhone 15 Pro 机型新增泰坦灰"></a>iPhone 15 Pro 机型新增泰坦灰</h3><p>新渲染图曝光，消息称苹果 iPhone 15 Pro 机型泰坦灰将替代金色 iPhone15Pro新增灰色。8 月 25 日消息，根据国外科技媒体 9to5Mac 报道，苹果今年将调整 iPhone 15 Pro 和 iPhone 15 Pro Max 两款机型的颜色选项，取消金色，新增灰色。<br>在最新报道称这种全新灰色官方名称为“泰坦灰”（Titan Gray），并分享了这种颜色的概念渲染图，可以看到“泰坦灰”颜色要比现有的银色 / 白色更深一些，但比深空黑要更淡一些。<br>该媒体还透露苹果今年推出的 iPhone 15 Pro 机型将会取消暗紫色，并由深蓝色替代。<br>注： iPhone 14 Pro 机型共有暗紫色、金色、银色和深空黑四种颜色。<br>苹果预估将于 9 月 12 日发布 iPhone 15 系列，其中 iPhone 15 系列标准版将有黑色，绿色，蓝色，黄色和粉红色。（来源：IT之家）</p>
+<p><img src="https://files.mdnice.com/user/17787/1e3e2489-9b4e-4202-8189-a234f10d0559.png" alt=""></p>
+<h3 id="iPhone-15-全系配-USB-C-苹果拒绝接口和安卓互通"><a href="#iPhone-15-全系配-USB-C-苹果拒绝接口和安卓互通" class="headerlink" title="iPhone 15 全系配 USB-C 苹果拒绝接口和安卓互通"></a>iPhone 15 全系配 USB-C 苹果拒绝接口和安卓互通</h3><p>8月19日消息，据供应链最新消息称，iPhone 15 全系将会配备 USB-C 接口，不过不同型号会被差异对待。</p>
+<p>按照供应链说法，iPhone 15 标准版只是配备普通版本的 USB-C 接口，而 iPhone 15 Pro 系列则在速度上有明显的提升，同时这个功能只能在 MFi 认证的 USB 数据线下发挥功效。</p>
+<p>具体来说就是，iPhone 15 标准版提供 USB 2.0 版本，传输速度最高 480 Mbps，与之前的 Lightning 接口差不多。而 iPhone 15 Pro 系列用的是 USB 3.2，传输速度能达到 20 Gbps，比标准版快 20 倍以上。</p>
+<p>对于消费者来说，这将是多年来 iPhone 系列手机最大的改进之一。配备该端口后，iPhone 用户在旅行时不再需要为手机和其他移动设备携带两根不同的充电线，不过想法是好的，但苹果却不会这么干。</p>
+<p>按照供应链配件商的说法，苹果不会让 iPhone 15 的 USB-C 接口与安卓通用，即便是有违法的行为，但依然会如此做，毕竟 MFi 认证背后一年是几十亿美元的盈利。</p>
+<p>此外，从苹果的备货来看，Pro 系列占比超过 60%，他们也是想从这些细节的地方卡位用户，让大家主动去买高价版本。</p>
+<p><img src="https://files.mdnice.com/user/17787/3eab2868-eefd-4141-92c3-a3e1835847c5.png" alt=""></p>
+<h2 id="提案"><a href="#提案" class="headerlink" title="提案"></a>提案</h2><h3 id="正在审查的提案"><a href="#正在审查的提案" class="headerlink" title="正在审查的提案"></a>正在审查的提案</h3><p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0407-member-macro-conformances.md" title="SE-0407" target="_blank" rel="noopener">SE-0407</a> <strong>成员 Macro 一致性</strong> 提案正在审查。</p>
+<p>SE-0402中从一致性宏到扩展宏的转变包括扩展宏能够了解类型已经遵循了哪些协议(例如，因为遵循了超类或在某处声明了显式一致性)，这样宏就可以避免添加不需要的声明和一致性。这也意味着添加的任何新声明都是扩展的一部分——而不是原始类型定义的一部分——这通常是有益的，因为这意味着(例如)新的初始化器不会抑制成员初始化器。将协议一致性拆分为各自的扩展通常也被认为是一种很好的形式。</p>
+<p>然而，有时用于一致性的成员确实需要成为原始类型定义的一部分。例如:</p>
+<ul>
+<li>非 final 类中的初始化项必须是必需的初始化项，以满足协议要求。</li>
+<li>非 final 类的可重写成员。</li>
+<li>存储的属性或大小写只能在主类型定义中。</li>
+</ul>
+<p>对于这些情况，成员宏可以生成声明。然而，成员宏并没有提供任何关于应该为哪种协议一致性提供成员的信息，因此宏可能会错误地尝试将一致性成员添加到已经符合协议的类型中(例如，通过超类)。这可能使某些宏(例如实现 <code>Encodable</code> 或 <code>Decodable</code> 协议的宏)无法实现。</p>
+<p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0406-async-stream-backpressure.md" title="SE-0406" target="_blank" rel="noopener">SE-0406</a> <strong>对 AsyncStream 的 Backpressure 支持</strong> 提案正在审查。</p>
+<p>SE-0314引入了新的 <code>Async[Throwing]Stream</code> 类型，作为根异步序列。这两种类型允许从同步回调（如委托）桥接到异步序列。该提案增加了一种构建异步流的新方法，目的是将 Backpressure 系统桥接成异步序列。此外，该提案旨在澄清消费任务取消和生产方表示终止时的取消行为。</p>
+<h2 id="Swift论坛"><a href="#Swift论坛" class="headerlink" title="Swift论坛"></a>Swift论坛</h2><p>1) 提议<a href="https://forums.swift.org/t/pitch-macro-literal-protocols/66915" title="宏文字协议" target="_blank" rel="noopener">宏文字协议</a></p>
+<p>目前仅允许在顶层使用宏。 然而，在某些情况下，嵌套宏会很有好处。</p>
+<p>例如，我们可以添加具有宏要求的新文字协议：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">protocol</span> <span class="title">ExpressibleByMacroIntegerLiteral</span> </span>&#123;</span><br><span class="line">  associatedtype <span class="type">IntegerLiteralType</span>: _ExpressibleByBuiltinIntegerLiteral</span><br><span class="line"></span><br><span class="line">  @freestanding(expression)</span><br><span class="line">  macro <span class="type">Init</span>(integerLiteral: <span class="type">IntegerLiteralType</span>) -&gt; <span class="type">Self</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后用编译器的魔法，酱子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x: <span class="type">Decimal</span> = <span class="number">5.3</span></span><br></pre></td></tr></table></figure>
+<p>可以变成酱子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = #<span class="type">Decimal</span>.<span class="type">Init</span>(integerLiteral: <span class="number">5.3</span>)</span><br></pre></td></tr></table></figure>
+<p>然后将扩大</p>
+<p>我知道宏的设计目标之一是避免这种不可见的宏使用，但是已经有很多编译器魔法可以通过 _ 文字协议来表达，这将使它们更加通用。</p>
+<p>例如，当前如果类型是 <code>ExpressibleByStringLiteral</code> 但只有某些字符串文字有效，则唯一的选择是在运行时遇到无效字符串文字时捕获。 这违背了文字的编译时性质，而文字应该允许检查文字。 在基金会提出将 URL 改为 ExpressibleByStringLiteral 时，这个问题在某种程度上被掩盖了，但已经完全解决了。</p>
+<p>这个语句：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">downloadFile(at: <span class="string">"https://apple.com"</span>)</span><br></pre></td></tr></table></figure>
+<p>看起来比这个好很多:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">downloadFile(at: #<span class="type">URL</span>(<span class="string">"https://apple.com"</span>))</span><br></pre></td></tr></table></figure>
+<p>2) 提议<a href="https://forums.swift.org/t/pitch-nested-if-let-and-guard-let/66927" title="嵌套 if let 和 guard let" target="_blank" rel="noopener">嵌套 if let 和 guard let</a></p>
+<p><strong>介绍</strong></p>
+<p>在 Swift 中，if let 语句通常用于可选的解包。 它通过处理可选值帮助开发人员编写更干净、更安全的代码。</p>
+<p>目前，if let 语句解包单个可选值。 然而，在某些情况下，我们希望以更简洁的方式解开嵌套对象的可选属性。</p>
+<p>该提案建议扩展 if let 和 Guard let 语句以支持嵌套可选展开。</p>
+<p><strong>1. if let 嵌套</strong></p>
+<p>嵌套 if let 的拟议语法将允许开发人员有条件地解包嵌套对象的可选属性。 如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> myOptionalObject?.optionalValue &#123;</span><br><span class="line">    <span class="comment">// 'optionalValue' is now safely unwrapped and ready to use // *1</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Handle the case where 'optionalValue' is nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2. 嵌套的 guard let</strong></p>
+<p>类似地，所提议的嵌套 Guard Let 语法将允许开发人员有条件地解开嵌套对象的可选属性。 如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> myOptionalObject?.optionalValue <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Handle the case where 'myOptionalObject' or 'optionalValue' is nil</span></span><br><span class="line">    <span class="comment">// This could include returning from the current function, loop, or throwing an error</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 'optionalValue' is now safely unwrapped and ready to use // *1</span></span><br></pre></td></tr></table></figure>
+<p>3) 提议<a href="https://forums.swift.org/t/pitch-strict-concurrency-for-global-variables/66908" title="全局变量的严格并发" target="_blank" rel="noopener">全局变量的严格并发</a></p>
+<p><strong>介绍</strong></p>
+<p>该提案定义了无数据竞争的全局变量的使用选项。 在此提案中，全局变量包含静态持续时间的任何存储：在全局范围内声明或作为静态成员变量声明的 let 和存储变量。</p>
+<p><strong>动机</strong></p>
+<p>全局状态在并发性中提出了挑战，因为它是可以从任何程序上下文访问的内存。 全局变量在数据隔离检查中受到特别关注，因为它们违背了其他强制隔离的尝试。 </p>
+<p>本地且未捕获的变量只能从本地上下文访问，这隐式地隔离了它们。 值类型的存储属性已经通过排他性规则隔离。 </p>
+<p>可以通过使用可发送性强制或使用参与者限制来隔离引用类型的包含对象，从而隔离引用类型的存储属性。 但全局变量可以从任何地方访问，所以这些工具不起作用。</p>
+<p><strong>建议的解决方案</strong></p>
+<p>在严格的并发检查下，要求每个全局变量要么与全局参与者隔离，要么两者都隔离：</p>
+<ul>
+<li>不可变的（immutable）</li>
+<li>可发送类型（Sendable）</li>
+</ul>
+<p>immutable 并且 Sendable 的全局变量可以从任何上下文安全地访问，否则需要隔离。</p>
+<p><strong>详细设计</strong></p>
+<p>这些要求可以在声明时在类型检查器中强制执行。</p>
+<p><strong>源兼容性</strong></p>
+<p>由于增加了限制，因此在使用严格的并发检查时可能需要更改某些类型声明。 然而，此类源代码更改仍然向后兼容任何具有并发功能的 Swift 版本。</p>
+<p><strong>ABI兼容性</strong></p>
+<p>该提案本身不会添加或影响 ABI(Application Binary Interface)，但是它可能对采用的项目引发的类型声明更改可能会影响该项目的 ABI。</p>
+<p><strong>对采用的影响</strong></p>
+<p>在采用严格并发检查的项目中，可能需要修改某些全局变量类型。</p>
+<p><strong>考虑的替代方案</strong></p>
+<p>为了隔离，我们可以隐式锁定变量的访问，而不需要全局参与者。 在提供内存安全的同时，这可能会给线程安全带来问题，因为开发人员可以轻松编写 non-atomic 的模式：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// value of global may concurrently change between</span></span><br><span class="line"><span class="comment">// the read for the multiplication expression</span></span><br><span class="line"><span class="comment">// and the write for the assignment</span></span><br><span class="line">global = global * <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>虽然如果我们需要在旧语言模式中做一些源兼容的事情，我们可以考虑隐式锁定，但通常我们的方法只是说旧语言模式是并发不安全的。 </p>
+<p>它也不适用于非可发送类型，除非我们强制该值在访问它时保持隔离。我们可能可以通过提议的<a href="https://forums.swift.org/t/pitch-safely-sending-non-sendable-values-across-isolation-domains/66566" title="跨隔离域安全发送不可发送值" target="_blank" rel="noopener">跨隔离域安全发送不可发送值</a>功能来实现这一目标，但这可能是一个过于先进的功能，无法作为此类基本问题的解决方案来推动。</p>
+<p>我们可以将所有需要隔离的全局变量默认为 <code>@MainActor</code>。 可以说，让开发人员考虑选择会更好（例如，也许它应该只是一个 let 常量）。</p>
+<p>访问控制在理论上是有用的：例如，我们可以知道全局变量是并发安全的，因为它是文件私有的，并且该文件中的所有访问都来自单个全局参与者上下文，或者因为它永远不会 变异了。 </p>
+<p>不过，这比我们通常希望在编译器中进行的分析更加全局化； 我们必须检查上下文中的所有内容，然后开发人员可能很难理解它为什么起作用。</p>
+<p><strong>未来发展方向</strong></p>
+<p>我们不一定需要明确地要求隔离全球参与者； 有空间推断正确的全球行动者。 全局角色约束类型的全局可变变量可以被推断为约束到该全局角色（尽管如果变量是不可变的，则没有必要，因为全局角色约束类类型是可发送的）。</p>
+<p>4) 讨论<a href="https://forums.swift.org/t/method-marked-with-globalactor-modifying-property-in-class/66898" title="用 globalActor 标记的方法修改类中的属性" target="_blank" rel="noopener">用 globalActor 标记的方法修改类中的属性</a></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Po</span> </span>&#123;</span><br><span class="line">    @<span class="type">MainActor</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>: <span class="title">Po</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> str = <span class="string">""</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        str = <span class="string">"w"</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"foo: <span class="subst">\(Thread.isMainThread)</span>"</span>) <span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> #available(macOS <span class="number">10.15</span>, *) &#123;</span><br><span class="line">    <span class="type">Task</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> b = <span class="type">Base</span>()</span><br><span class="line">        await b.foo()</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="type">RunLoop</span>.main.run()</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>我不明白为什么我可以直接在标有MainActor的方法中修改属性？</p>
+<p>因为这对我来说似乎是错误的。<br>我相信 Base 及其属性不在 MainActor 上运行。</p>
+<p><strong>回答</strong></p>
+<p>您在顶层创建 Task，这隐式地使其在 main actor 上运行。 由于 Base 只是一个类（而不是 actor），因此它的方法在其调用者所在的任何上下文中运行，在本例中这是 main actor。<br>属性和方法可以单独与特定参与者相关联，包括作为协议要求的一部分。 在这种情况下 foo 隐式是 @MainActor，因为 Po 协议如此声明它。</p>
+<p>这可能有点太神奇了 - foo 也是隐式异步的，尽管它从未真正被标记为异步，即使在原始协议声明中也是如此。</p>
+<p>为了进一步测试这一点，如果您添加到 Base 例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    foo()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将收到编译器错误 <code>Call to main actor-isolated instance method &#39;foo()&#39; in a synchronous nonisolated context</code>，表明编译器将 foo 视为 @MainActor（但 Base 的其余部分不是）。</p>
+<p>5) 讨论<a href="https://forums.swift.org/t/self-used-before-super-init-call-conflicts-with-property-not-initialized-at-super-init-call/66896" title="在 &quot;super.init&quot; 调用之前使用的 &quot;self&quot; 与 &quot;在 super.init 调用时未初始化属性&quot; 冲突" target="_blank" rel="noopener">在 “super.init” 调用之前使用的 “self” 与 “在 super.init 调用时未初始化属性” 冲突</a></p>
+<p>我需要在 init 中创建一个捕获 self 的闭包来初始化属性，但我无法使用 self，因为 super.init 尚未被调用。 但是，我无法调用 super.init，因为该属性尚未初始化！</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span>: <span class="title">Base</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer: <span class="type">Timer</span></span><br><span class="line">    <span class="keyword">var</span> value = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// option 1 - try to initialize the property</span></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="comment">// ERROR: 'self' used before 'super.init' call</span></span><br><span class="line">        timer = .scheduledTimer(withTimeInterval: <span class="number">1</span>, repeats: <span class="literal">true</span>) &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="number">_</span> <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">self</span>!.value += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// option 2 - try to initialize super first</span></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()  <span class="comment">// ERROR: Property 'self.timer' not initialized at super.init call</span></span><br><span class="line">        timer = .scheduledTimer(withTimeInterval: <span class="number">1</span>, repeats: <span class="literal">true</span>) &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="number">_</span> <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">self</span>!.value += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了使属性既可选又可变（在 super.init 期间初始化为 nil，然后在之后更改它）之外，还有什么办法可以解决这个问题吗？</p>
+<p>我有点明白为什么编译器不能接受这种情况，但是必须使属性可选且可变，这很烦人，而一旦类完全初始化，它实际上既不应该为零，也不应该变。</p>
+<p><strong>回答</strong></p>
+<p>需要在函数内有一个本地变量：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">init</span>() &#123;</span><br><span class="line">    <span class="keyword">var</span> futureSelf: <span class="type">Sub</span>? = <span class="literal">nil</span></span><br><span class="line">    timer = .scheduledTimer(withTimeInterval: <span class="number">1</span>, repeats: <span class="literal">true</span>) &#123; [<span class="keyword">weak</span> futureSelf] <span class="number">_</span> <span class="keyword">in</span></span><br><span class="line">            futureSelf?.value += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">    futureSelf = <span class="keyword">self</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>值得注意的是，编译器无法知道采用闭包捕获 self 的对象是否不会立即被调用，并且它试图避免使用半初始化的 self 实例调用闭包。</p>
+<p>6) 讨论<a href="https://forums.swift.org/t/should-deinit-be-called-after-explicit-consume-of-reference-type/66920" title="显式使用引用类型后是否应该调用 deinit？" target="_blank" rel="noopener">显式使用引用类型后是否应该调用 deinit？</a></p>
+<p>我想通过使用 <code>_ = Consumer</code> 对象显式结束演员/类的生命周期，以避免引入具有单独作用域的另一级嵌套。 但是，在显式消费之后不会调用该对象的 deinit。 相反，它是在作用域末尾调用的。 这是预期行为还是编译器错误？ 对于不可复制的结构，它可以按预期工作。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Object</span> </span>&#123;</span><br><span class="line">    <span class="keyword">deinit</span> &#123; <span class="built_in">print</span>(<span class="string">"deinit object"</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Noncopyable</span>: ~<span class="title">Copyable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">deinit</span> &#123; <span class="built_in">print</span>(<span class="string">"deinit noncopyable"</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testDeinitAfterConsume</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> object = <span class="type">Object</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"before consume"</span>)</span><br><span class="line">        <span class="number">_</span> = consume object</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"after consume"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> noncopyable = <span class="type">Noncopyable</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"before consume"</span>)</span><br><span class="line">        <span class="number">_</span> = consume noncopyable</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"after consume"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">before consume</span><br><span class="line">after consume</span><br><span class="line"><span class="keyword">deinit</span> object</span><br><span class="line"></span><br><span class="line">before consume</span><br><span class="line"><span class="keyword">deinit</span> noncopyable</span><br><span class="line">after consume</span><br></pre></td></tr></table></figure>
+<p><strong>回答</strong></p>
+<p>这是可以理解的。 一般来说，每当对象丢失最后一个引用时，类析构器就会运行，而不考虑变量范围。</p>
+<p>在某种程度上不鼓励在类去初始化中依赖共享可变状态，并且强烈不鼓励依赖与常规代码中的副作用相关的顺序。 即使没有优化，它通常也会很棘手并且容易出错。</p>
+<p>对对象生命周期的显式控制是 Swift 中依赖类取消初始化顺序的官方方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">withExtendedLifetime</span>(object) &#123;</span><br><span class="line">    <span class="comment">// Modify shared mutable state without accessing object.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于局部变量（包括参数），编译器（5.7 后）遵循一些保守的生命周期规则，以便大多数“看起来正常”的编程模式无需显式生命周期管理即可工作。 事实上，如果我们按照字面意思理解这个示例，则 deinit 将不会发生，并且我们永远不会看到以下输出：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">deinit</span> object</span><br><span class="line">before consume</span><br><span class="line">after consume</span><br></pre></td></tr></table></figure>
+<p>额外的安全规则是：</p>
+<p>如果不安全指针或弱引用可能依赖于局部变量的生命周期，则编译器会自动扩展该变量持有的任何引用。</p>
+<p>如果常规代码在 Swift 外部调用（包括所有 I/O）或跨任务同步（调用异步函数），则类析构器将不会跨这些边界重新排序。 这也意味着程序员可以通过添加同步代码来控制对象的生命周期，而无需 withExtendedLifetime。 在此示例中，调用 “print” 被视为同步点，从而阻止优化。</p>
+<p>这里有更详细的描述：<a href="https://gist.github.com/atrick/cc03c4d07fb0a7bee92c223ae5e5695b#lexical-variable-scope-can-affect-object-lifetime" target="_blank" rel="noopener">https://gist.github.com/atrick/cc03c4d07fb0a7bee92c223ae5e5695b#lexical-variable-scope-can-affect-object-lifetime</a><br>在这方面，消耗参数与 “let”、“var” 和非 “消耗” 参数不同，因为它们的生命周期可以在隐式消耗时提前结束：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">bar</span><span class="params">(<span class="number">_</span> object: consuming Object)</span></span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">(object: consuming Object)</span></span> &#123;</span><br><span class="line">    bar(object)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"after consume"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总是得到结果：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">deinit</span> object</span><br><span class="line">after consume</span><br></pre></td></tr></table></figure>
+<p>这为那些关心 ARC 开销和 CoW 行为的人提供了理想的编程模型。 很快，我希望所有局部变量都具有“消耗”的效果。</p>
+<h2 id="推荐博文"><a href="#推荐博文" class="headerlink" title="推荐博文"></a>推荐博文</h2><p><a href="https://swiftwithmajid.com/2023/08/01/mastering-storekit2" title="掌握 StoreKit2" target="_blank" rel="noopener">掌握 StoreKit2</a></p>
+<p><strong>摘要：</strong> 本文介绍了 Swift 中的 StoreKit2，这是一个用于构建应用内购买和订阅的框架。文章从配置项目和创建 StoreKit 配置文件开始，介绍了如何使用 Store 类型处理应用内购买逻辑。通过示例代码和说明，文章展示了如何使用 Store 类型来获取和显示应用内购买产品列表，并启动购买流程。还介绍了产品类型和其 purchase 函数，在成功购买时处理交易和验证过程。文章还涉及了处理挂起状态和监视交易更新的方法。此外，提到了 StoreKit2 提供的 currentEntitlements 属性，用于获取活动订阅和已购买产品列表。最后，文章给出了一个基本的 App 结构示例，其中包含了 Store 对象，并在应用程序启动时获取活动交易。 </p>
+<p><a href="https://juejin.cn/post/7251501966592917563" title=" iOS 防 dump 可行性调研报告" target="_blank" rel="noopener"> iOS 防 dump 可行性调研报告</a></p>
+<p><strong>摘要：</strong>  文章介绍了如何防止 iOS App 被 dump ，包括代码混淆、加密、完整性检查等多层防御策略，以及服务器端验证、动态加载、API 安全性和多因素认证等方案。此外，监控与告警、定期安全审计和安全培训等后置方案也可以提高 App 的安全性。最后，还介绍了禁止越狱设备的实施方案，以及 DeviceCheck 和 App Attest API 等新技术方案。</p>
+<p><a href="https://juejin.cn/post/7268119060055031865" title=" WWDC23 10105 - 打造响应更快的相机体验" target="_blank" rel="noopener"> WWDC23 10105 - 打造响应更快的相机体验</a></p>
+<p><strong>摘要：</strong> 文章介绍了 iOS17 提供了一些新的特性，通过延迟图片处理、快门零延迟、响应捕获等新特性，以及状态监听等措施，能大幅提高相机响应速度，创造更流畅的拍摄体验。</p>
+<h2 id="话题讨论"><a href="#话题讨论" class="headerlink" title="话题讨论"></a>话题讨论</h2><p><strong>日本核污水排海，你还会吃海鲜吗？</strong></p>
+<ol>
+<li>会</li>
+<li>不会</li>
+</ol>
+<p>欢迎在文末留言参与讨论。</p>
+<h2 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h2><p><strong>Swift社区</strong>是由 Swift 爱好者共同维护的公益组织，我们在国内以微信公众号的运营为主，我们会分享以 <strong>Swift实战</strong>、<strong>SwiftUl</strong>、<strong>Swift基础</strong>为核心的技术内容，也整理收集优秀的学习资料。</p>
+<p>欢迎关注公众号:Swift社区，后台点击进群，可以进入我们社区的交流讨论群。希望我们Swift社区是大家在网络空间中的另一份共同的归属。</p>
+<p><img width="500" alt="Swift社区" src="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png"></p>
+<p>特别感谢 Swift社区 编辑部的每一位编辑，感谢大家的辛苦付出，为 Swift社区 提供优质内容，为 Swift 语言的发展贡献自己的力量。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Swift-周报-第三十六期/">Swift-周报-第三十六期</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2024年03月06日 - 15:03</p>
+  <p><span>最后更新:</span>2024年03月06日 - 16:03</p>
+  <p><span>原始链接:</span><a href="/Swift-周报-第三十六期/" title="Swift-周报-第三十六期">https://fanbaoying.github.io/Swift-周报-第三十六期/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/Swift-周报-第三十六期/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Swift-周报-第三十五期/" rel="next" title="Swift-周报-第三十五期">
+                <i class="fa fa-chevron-left"></i> Swift-周报-第三十五期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Swift-周报-第三十七期/" rel="prev" title="Swift-周报-第三十七期">
+                Swift-周报-第三十七期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">178</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/dc8a3c504870" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://niyaoyao.github.io" title="Niyao" target="_blank">Niyao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://knightsj.github.io/" title="J_Knight_" target="_blank">J_Knight_</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xietao3.com/" title="xietao3" target="_blank">xietao3</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新闻和社区"><span class="nav-number">2.</span> <span class="nav-text">新闻和社区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消息称苹果公司和印度财政部官员磋商，扩大在印度的制造产能"><span class="nav-number">2.1.</span> <span class="nav-text">消息称苹果公司和印度财政部官员磋商，扩大在印度的制造产能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iPhone-15-Pro-机型新增泰坦灰"><span class="nav-number">2.2.</span> <span class="nav-text">iPhone 15 Pro 机型新增泰坦灰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iPhone-15-全系配-USB-C-苹果拒绝接口和安卓互通"><span class="nav-number">2.3.</span> <span class="nav-text">iPhone 15 全系配 USB-C 苹果拒绝接口和安卓互通</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提案"><span class="nav-number">3.</span> <span class="nav-text">提案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正在审查的提案"><span class="nav-number">3.1.</span> <span class="nav-text">正在审查的提案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift论坛"><span class="nav-number">4.</span> <span class="nav-text">Swift论坛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐博文"><span class="nav-number">5.</span> <span class="nav-text">推荐博文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#话题讨论"><span class="nav-number">6.</span> <span class="nav-text">话题讨论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我们"><span class="nav-number">7.</span> <span class="nav-text">关于我们</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共315.7k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
