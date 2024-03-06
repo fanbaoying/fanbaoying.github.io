@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Swift社区" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言本期是 Swift 编辑组整理周报的第四十期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 世间万般兵刃，唯有过往伤人最深。Swift社区邀你走出低谷，迈向山巅！👊👊👊  周报精选 新闻和社区：53.5亿美元！传苹果今明两年或将采购2">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-周报-第四十期">
+<meta property="og:url" content="https://fanbaoying.github.io/Swift-周报-第四十期/index.html">
+<meta property="og:site_name" content="Swift社区">
+<meta property="og:description" content="前言本期是 Swift 编辑组整理周报的第四十期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 世间万般兵刃，唯有过往伤人最深。Swift社区邀你走出低谷，迈向山巅！👊👊👊  周报精选 新闻和社区：53.5亿美元！传苹果今明两年或将采购2">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/b4e1d72d-e137-40ba-8792-7ee684a256a7.jpg">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/74aa9817-a2f6-4eb7-a2d3-5e7080d3596c.png">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/a743075b-d7aa-48f5-a206-ac5461e7ad81.png">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/345f138a-5923-41ec-9c9b-613a06ffb979.png">
+<meta property="og:image" content="https://files.mdnice.com/user/17787/469efa54-6995-47ae-8117-c793957ef8e7.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png">
+<meta property="og:updated_time" content="2024-03-06T09:13:41.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-周报-第四十期">
+<meta name="twitter:description" content="前言本期是 Swift 编辑组整理周报的第四十期，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。 Swift 周报在 GitHub 开源，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。 世间万般兵刃，唯有过往伤人最深。Swift社区邀你走出低谷，迈向山巅！👊👊👊  周报精选 新闻和社区：53.5亿美元！传苹果今明两年或将采购2">
+<meta name="twitter:image" content="https://files.mdnice.com/user/17787/b4e1d72d-e137-40ba-8792-7ee684a256a7.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fanbaoying.github.io/Swift-周报-第四十期/"/>
+
+
+
+
+
+  <title>Swift-周报-第四十期 | Swift社区</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/SwiftCommunityRes" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Swift社区</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做最好的 Swift 社区</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fanbaoying.github.io/Swift-周报-第四十期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Swift社区">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/84354365?v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Swift社区">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift-周报-第四十期</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-06T17:10:23+08:00">
+                2024-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift-周报/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift 周报</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                -->
+                <span title="字数统计">
+                  数字统计 4,751字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+
+                <!-- 
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                --> 
+
+                <span title="阅读时长">
+                  阅读时长 18分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>本期是 Swift 编辑组整理周报的第四十期</strong>，每个模块已初步成型。各位读者如果有好的提议，欢迎在文末留言。</p>
+<p>Swift 周报在 <a href="https://github.com/SwiftCommunityRes/SwiftWeekly" title="SwiftWeekly" target="_blank" rel="noopener">GitHub 开源</a>，欢迎提交 issue，投稿或推荐内容。目前计划每两周周一发布，欢迎志同道合的朋友一起加入周报整理。</p>
+<p>世间万般兵刃，唯有过往伤人最深。<strong>Swift社区</strong>邀你走出低谷，迈向山巅！👊👊👊</p>
+<blockquote>
+<p><strong>周报精选</strong></p>
+<p>新闻和社区：53.5亿美元！传苹果今明两年或将采购2.3万台AI服务器！</p>
+<p>提案：隔离的默认值表达式</p>
+<p>Swift 论坛：讨论为什么 CaseIterable 比 Set 更快</p>
+<p>推荐博文：掌握 swift 中  Preview macro 的用法</p>
+<p><strong>话题讨论：</strong> </p>
+<p>在诸多物流行业，你最看好哪一家？</p>
+</blockquote>
+<p><strong>上期话题结果</strong></p>
+<a id="more"></a>
+<p><img src="https://files.mdnice.com/user/17787/b4e1d72d-e137-40ba-8792-7ee684a256a7.jpg" alt=""></p>
+<p>投票结果显示大多数人更倾向于保持薪资不变或者期望薪资增加，而只有少数人愿意接受较小幅度的薪资降低。小编认为公司在决定远程办公政策时需要综合考虑员工的期望和需求。</p>
+<h2 id="新闻和社区"><a href="#新闻和社区" class="headerlink" title="新闻和社区"></a>新闻和社区</h2><h3 id="53-5亿美元！传苹果今明两年或将采购-2-3-万台-AI-服务器！"><a href="#53-5亿美元！传苹果今明两年或将采购-2-3-万台-AI-服务器！" class="headerlink" title="53.5亿美元！传苹果今明两年或将采购 2.3 万台 AI 服务器！"></a>53.5亿美元！传苹果今明两年或将采购 2.3 万台 AI 服务器！</h3><p><img src="https://files.mdnice.com/user/17787/74aa9817-a2f6-4eb7-a2d3-5e7080d3596c.png" alt=""></p>
+<p>10 月 25 日消息，根据最新的研究显示，苹果公司计划在 2023 年采购约 2000 - 3000 台 AI 服务器，2024 年或将增长至 1.8 万 - 2 万台，采购的主要目标是满足苹果对AI算力的需求，尤其是在训练和推理生成式 AI 方面。</p>
+<p>报告称，苹果主要采购的是英伟达的 HGX H100 8-GPU 系统，由 8 个 H100 SXM5 模块加上 4 个 NVSwitch Chip 在同一个 System board 上。这款 AI 服务器以其强大的性能和稳定的表现成为业界热门选择，单台价格高达 25 万美元（约合人民币 183 万元）。</p>
+<p>据天风国际分析师郭明錤预测，在 2023 年和 2024 年期间，苹果将分别采购约 6.2 亿美元（约合人民币 45.38 亿元）和 47.5 亿美元（约合人民币 347.7 亿元）的 AI 服务器，总投额资达 53.3 亿美元。虽然投资额巨大，但考虑到苹果的品牌影响力和技术需求，这一投入无疑是值得的。</p>
+<p>目前各行各业对 AI 技术应用持续渗透，对于 AI 算力的需求暴增，全球 AI 服务器市场将迎来更大规模的增长。郭明錤也指出，在未来几年中，全球 AI 服务器市场将继续保持强劲增长，并为相关企业带来更多机会。因此，对于那些想要在这个领域取得成功的企业来说，关注并积极参与 AI 服务器市场的扩张至关重要。（来源：芯智讯）</p>
+<h3 id="TestFlight-让管理测试员变得更加简单"><a href="#TestFlight-让管理测试员变得更加简单" class="headerlink" title="TestFlight 让管理测试员变得更加简单"></a>TestFlight 让管理测试员变得更加简单</h3><p><img src="https://files.mdnice.com/user/17787/a743075b-d7aa-48f5-a206-ac5461e7ad81.png" alt=""></p>
+<p>2023 年 10 月 24 日</p>
+<p>借助 TestFlight，你可轻松获取有关 App Beta 版的反馈，以便放心地在 App Store 上进行发布。现在，使用 App Store Connect 中经改进的控件，你可更有效地评估测试员的参与度并管理参与情况，以充分利用 Beta 测试。你可按状态和参与度指标 (例如会话、崩溃和反馈) 对测试员进行排序，并删除参与度较低的非活跃测试员。你还可以按设备和操作系统进行筛选，甚至选择相关测试员，以将其添加到新的群组中。</p>
+<h3 id="推送通知控制面板现已推出新交付指标"><a href="#推送通知控制面板现已推出新交付指标" class="headerlink" title="推送通知控制面板现已推出新交付指标"></a>推送通知控制面板现已推出新交付指标</h3><p><img src="https://files.mdnice.com/user/17787/345f138a-5923-41ec-9c9b-613a06ffb979.png" alt=""></p>
+<p>2023 年 10 月 19 日</p>
+<p>推送通知控制面板现在包含在生产环境中通过 Apple 推送通知服务 (APNs) 发送的通知的指标。借助控制面板的直观界面，你可以查看交付状态的聚合视图，深入了解通知的各种统计数据 (包括基于推送类型和优先级的详细细分)。</p>
+<p>我们在 WWDC23 (简体中文字幕) 公布的推送通知控制面板，将能帮助你轻松地通过 APNs 向 Apple 设备发送测试通知。</p>
+<h3 id="Apple-Vision-Pro-开发者实验室现已扩展到纽约市和悉尼"><a href="#Apple-Vision-Pro-开发者实验室现已扩展到纽约市和悉尼" class="headerlink" title="Apple Vision Pro 开发者实验室现已扩展到纽约市和悉尼"></a>Apple Vision Pro 开发者实验室现已扩展到纽约市和悉尼</h3><p><img src="https://files.mdnice.com/user/17787/469efa54-6995-47ae-8117-c793957ef8e7.png" alt=""></p>
+<p>2023 年 10 月 17 日</p>
+<p>我们非常兴奋能看到世界各地的开发者对 Apple Vision Pro 开发者实验室的期待和热情。很高兴能在此宣布，我们已在纽约市和悉尼设立新的实验室。欢迎参加我们的开发者实验室活动，直接在设备上进行测试，与 Apple 专家沟通交流以获得帮助，一起探索如何让你的 visionOS、iPadOS 和 iOS App 在这个激动人心的新平台上更进一步。我们还分别在库比蒂诺、伦敦、慕尼黑、上海、新加坡和东京设立了实验室。</p>
+<h2 id="提案"><a href="#提案" class="headerlink" title="提案"></a>提案</h2><h3 id="正在审查的提案"><a href="#正在审查的提案" class="headerlink" title="正在审查的提案"></a>正在审查的提案</h3><p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0410-atomics.md" title="SE-0410" target="_blank" rel="noopener">SE-0410</a> <strong>Low-Level Atomic Operations </strong> 提案正在审查。</p>
+<p>该提案为标准库添加了一组有限的低级原子操作，包括 C++ 风格的内存排序的原生拼写。我们的目标是使编写系统级代码的勇敢的图书馆作者和开发人员能够直接在 Swift 中构建同步结构。</p>
+<p><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0411-isolated-default-values.md" title="SE-0411" target="_blank" rel="noopener">SE-0411</a> <strong>隔离的默认值表达式</strong> 提案正在审查。</p>
+<p>默认值表达式允许用于默认参数和默认存储属性值。当前默认值表达式的 actor 隔离规则存在一些问题：<strong>存储属性的规则容许数据竞争，默认参数值的规则过于限制，而在不同的默认值表达式使用位置之间的规则相互矛盾，导致 actor 隔离模型更难理解</strong>。</p>
+<p>该提案统一了默认值表达式的 actor 隔离规则，消除了数据竞争，通过安全地允许默认值的隔离来提高表现力。</p>
+<h2 id="Swift论坛"><a href="#Swift论坛" class="headerlink" title="Swift论坛"></a>Swift论坛</h2><p>1) 讨论<a href="https://forums.swift.org/t/find-how-a-symbol-was-imported/68052" title="查找符号是如何导入的？" target="_blank" rel="noopener">查找符号是如何导入的？</a></p>
+<p>我有一个使用特定 API 的源文件，但没有导入定义它的包。据我所知，在该文件的导入中，即使是传递性的，也不会导入该包。 </p>
+<p>然而，该文件在构建时“正确”编译（尽管 Xcode 15 的实时编译同意我的观点，即 API 不应该可见并生成实时错误）。</p>
+<p>我正在使用 Xcode，该文件是一个测试，如果其中任何一个对答案有任何影响。</p>
+<p>有没有办法可以调试此 API 的导入方式？ 除了 import 之外，是否还有其他机制可以让 swift API 可供 swift 源文件使用？</p>
+<p><strong>回答</strong></p>
+<p>从技术上讲，只有当你想要使用类型的名称时，才需要将其导入到该文件中。 你可以使用该类型的实例，无需：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.swift</span></span><br><span class="line"><span class="keyword">let</span> calendar = myCalendar()</span><br><span class="line"><span class="keyword">let</span> currentYear = calendar.component(.year, from: now())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"It's <span class="subst">\(currentYear)</span>"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// This all works fine with no errors.</span></span><br><span class="line"><span class="comment">// The type of `calendar` is NSCalendar, but if we had written</span></span><br><span class="line"><span class="comment">//   let calendar: NSCalendar = myCalendar()</span></span><br><span class="line"><span class="comment">// that would be an error.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// file2.swift</span></span><br><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">myCalendar</span><span class="params">()</span></span> -&gt; <span class="type">NSCalendar</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">NSCalendar</span>(calendarIdentifier: .gregorian)!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">now</span><span class="params">()</span></span> -&gt; <span class="type">Date</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">Date</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2) 讨论 <a href="https://forums.swift.org/t/backdeployed-is-operating-as-an-override-instead-of-only-for-use-in-unsupported-platforms-versions/68071" title="@backDeployed 作为 override 运行，而不是仅用于不受支持的平台版本" target="_blank" rel="noopener">@backDeployed 作为 override 运行，而不是仅用于不受支持的平台版本</a></p>
+<p>自 Xcode 15 和 iOS 17 发布以来，我们最近一直面临很多令人头痛的问题，因为我们 <code>@backDeployed</code> 的 API 的意外行为。 </p>
+<p>长话短说，我发现我们 @backDeployed 的任何 API 不仅在平台部署版本“之前”的操作系统上被调用，而且也在平台部署版本“之后”的操作系统上被调用。</p>
+<p>这可以通过单元测试或 playground 来重现：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">extension</span> <span class="title">Locale</span>.<span class="title">LanguageCode</span> </span>&#123;</span><br><span class="line">  @backDeployed(before: macOS <span class="number">14.0</span>, iOS <span class="number">17.0</span>, watchOS <span class="number">10.0</span>, tvOS <span class="number">17.0</span>)</span><br><span class="line">  <span class="keyword">var</span> debugDescription: <span class="type">String</span> &#123; <span class="comment">// &lt;-- introduced in iOS 17</span></span><br><span class="line">    <span class="keyword">get</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> #available(iOS <span class="number">17</span>, macOS <span class="number">14.0</span>, *) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"17"</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span>.identifier</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">let</span> locale = <span class="type">Locale</span>(identifier: <span class="string">"en_US"</span>)</span><br><span class="line">  <span class="keyword">let</span> languageCode = locale.language.languageCode!</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> desc = languageCode.debugDescription</span><br><span class="line">  <span class="comment">// ^ This print should yield "en" on iOS 16 &amp; 17</span></span><br><span class="line">  <span class="comment">// but it yields "17" on iOS 17 (proving the @backDeployed API is actually being treated as an override instead thunking to the platform deployed version).</span></span><br><span class="line">  <span class="comment">// You can comment out the @backDeployed `debugDescription` above to see it go back to correct behavior</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+<p>实际上，我们使用 @backDeployed 来 override 任何我们喜欢的 API，而不仅仅是向后部署。</p>
+<p>这是否可以在 Swift 的错误修复修订版中解决（最好在退出 beta 之前部署到 Xcode 15.1）？</p>
+<p><strong>回答</strong></p>
+<p>我认为你误解了 @backDeployed 属性的作用以及它的用途。@backDeployed 设计用于实现操作系统附带的框架。</p>
+<p>该属性的设计目的不是为你提供一种为 SDK 中的任意函数提供你自己的 polyfill 的方法，因此，如果我正确解释了你想要完成的任务，我认为它不会达到你想要的效果 。</p>
+<p>在你的示例中，你已为 <code>Locale.LanguageCode</code> 声明了自己的计算属性 <code>debugDescription</code>。 你的声明不会“覆盖”基金会中的声明；它只是作为可以调用的不同函数同时存在于你的模块中。是否在任何给定的调用站点调用你的实现取决于编译器将 debugDescription 静态解析为哪个声明。</p>
+<p>如果编译器解析对你的声明的调用，而不是来自 SDK 的调用，那么你的实现上的 @backDeployed 属性将导致编译器发出对中间 thunk 的调用，该中间 thunk 调用你的原始函数或函数的副本，它不会完成任何有用的事情，因为它是同一模块中的函数，并且原始副本和后备副本将始终具有相同的实现。</p>
+<p>3) 讨论<a href="https://forums.swift.org/t/new-swiftnio-async-apis/68056" title="新的 SwiftNIO 异步 API" target="_blank" rel="noopener">新的 SwiftNIO 异步 API</a></p>
+<p>我很高兴与大家分享，我们刚刚发布了一些软件包的新版本，其中包括全新的异步 API。</p>
+<ul>
+<li>swift-nio : <a href="https://github.com/apple/swift-nio/releases/tag/2.60.0" target="_blank" rel="noopener">2.60.0</a></li>
+<li>swift-nio-transport-services : <a href="https://github.com/apple/swift-nio-transport-services/releases/tag/1.20.0" target="_blank" rel="noopener">1.20.0</a></li>
+<li>swift-nio-http2 : <a href="https://github.com/apple/swift-nio-http2/releases/tag/1.29.0" target="_blank" rel="noopener">1.29.0</a></li>
+</ul>
+<p>一段时间以来，我们一直致力于新 API 的开发，让它们在 AsyncChannel SPI 后面进行烘焙。 在最新版本中，我们将 SPI 升级为稳定的 API。</p>
+<p>新异步 API 的目标是让开发人员能够轻松、安全地在 NIO Channels 和 Swift Concurrency 之间建立桥梁。 新 API 的一个重要部分是它们携带有关 ChannelPipeline 的类型信息，同时保持灵活性，这是通过利用泛型的强大功能实现的。 </p>
+<p>你可以在我们全新的 <a href="https://swiftpackageindex.com/apple/swift-nio/2.60.0/documentation/niocore/swift-concurrency" title="NIO 和 Swift Concurrency 文章" target="_blank" rel="noopener">NIO 和 Swift Concurrency 文章</a>中找到有关新 API 的更多文档。如果你有兴趣阅读更多有关新 API 背后的想法并查看跨包的 API 添加的概述，请随时查看 我们的<a href="https://github.com/apple/swift-nio/blob/main/docs/public-async-nio-apis.md" target="_blank" rel="noopener">开发者文档</a>.</p>
+<p>我想指出的一件重要的事情是，新的 API 在业务逻辑和网络之间提供了明确的关注点分离。</p>
+<p>网络协议存在于通道管道中，业务逻辑应直接在通道管道之外的 Swift Concurrency 中实现。 许多现有应用程序都驻留在通道管道内，我们强烈建议将业务逻辑移出。</p>
+<p>我们迫不及待地想看看社区使用新 API 构建了什么，并期待你的反馈！</p>
+<p>4) 讨论<a href="https://forums.swift.org/t/what-s-the-right-way-to-create-a-command-line-tool-using-argumentparser-swift-package-or-xcode-create-mac-command-line-tool-project/68050" title="使用 ArgumentParser 创建命令行工具的正确方法是什么？ swift package 或 Xcode 创建 Mac 命令行工具项目？" target="_blank" rel="noopener">使用 ArgumentParser 创建命令行工具的正确方法是什么？ swift package 或 Xcode 创建 Mac 命令行工具项目？</a></p>
+<p>我相信创建 ArgumentParser 命令行工具的正确方法是：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swift package <span class="keyword">init</span> --type tool --name <span class="type">MyTool</span></span><br></pre></td></tr></table></figure>
+<p>然后在 Xcode 中打开 Package.swift。 但是我无法添加这个包：<a href="https://github.com/dominicegginton/spinner" target="_blank" rel="noopener">https://github.com/dominicegginton/spinner</a></p>
+<p>添加依赖项后，“My Mac” target 消失了。</p>
+<p>当我从 Xcode 内部创建 macOS 命令行工具项目时，我可以找到 spinner 包并使用它。 如果我添加 ArgumentParser，运行崩溃。</p>
+<p>我应该怎么办？</p>
+<p><strong>回答</strong></p>
+<p>你可以尝试分叉 Spinner，更新其软件包清单以使用 Rainbow 4+ ，取决于你的 fork，而不是原始 fork，然后看看有什么问题……</p>
+<p>如果没有任何问题，你可以将该更改作为 PR 提交到 Spinner 项目。</p>
+<p>5) 讨论<a href="https://forums.swift.org/t/performselector-retaincount/68055" title="performSelector(&quot;retainCount" target="_blank" rel="noopener">performSelector(“retainCount”)</a>“)</p>
+<p>另一个线程提示我一个调用禁止的保留计数的问题——可能对调试目的有用。 我知道一些获取对象的保留计数的技术（例如，通过驻留在非 ARC obj-c 文件中的 C 帮助程序进行调用，因此能够调用保留计数，即引用线程中显示的技术）或阅读 通过 “withUnsafeBytes” 直接从 Swift 中保留 Swift 对象的原始位。 那么这个基于 performSelector 的其他方法呢？</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = <span class="type">NSObject</span>()</span><br><span class="line"><span class="keyword">let</span> x = obj.perform(<span class="string">"retainCount"</span>)!</span><br><span class="line"><span class="comment">// p x</span></span><br><span class="line"><span class="comment">// (Unmanaged&lt;AnyObject&gt;) &#123;</span></span><br><span class="line"><span class="comment">//  _value = (object = 0x0000000000000002)</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="built_in">print</span>(x) <span class="comment">// crash</span></span><br><span class="line"><span class="keyword">let</span> y = x.toOpaque() <span class="comment">// crash</span></span><br><span class="line"><span class="built_in">print</span>(y)</span><br><span class="line"><span class="keyword">let</span> z = x.takeUnretainedValue() <span class="comment">// crash</span></span><br><span class="line"><span class="built_in">print</span>(z)</span><br><span class="line"><span class="built_in">print</span>(obj)</span><br></pre></td></tr></table></figure>
+<p>可以对其进行调整以使其工作吗？ 它似乎工作正常，返回正确的 UnmanagedObject，我可以通过 “print” 命令在调试器中看到它，但如何从应用程序中获取它？ 我是否需要使用一些 unsafeBitCast 来读取该值？</p>
+<p><strong>回答</strong></p>
+<p><code>PerformSelector:</code> 返回一个对象； 它名义上仅用于返回对象的方法，而不是基元。</p>
+<p>在 Objective-C 中，你可能可以通过将结果转换为原始类型来滥用它，但如果它不是指针大小或平台的调用约定使用不同的寄存器来返回指针与整数，你将得到垃圾（或更糟）。</p>
+<p>我不确定你是否可以在 Swift 中执行此转换，因为 Unmanaged 假设它确实包含有效的对象引用，并且会尝试适当地保留和释放它。</p>
+<p>6) 讨论<a href="https://forums.swift.org/t/find-how-a-symbol-was-imported/68052" title="为什么 CaseIterable 比 Set 更快" target="_blank" rel="noopener">为什么 CaseIterable 比 Set 更快</a></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// V1</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">VaccineCodeSet</span>: <span class="title">String</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> covidModerna = <span class="string">"207"</span></span><br><span class="line">    <span class="keyword">case</span> covidBioNTech = <span class="string">"208"</span></span><br><span class="line">    <span class="keyword">case</span> covidAstraZeneca = <span class="string">"210"</span></span><br><span class="line">    <span class="keyword">case</span> covidNovax = <span class="string">"211"</span></span><br><span class="line">    <span class="keyword">case</span> covidJohnson = <span class="string">"212"</span></span><br><span class="line">    <span class="keyword">case</span> covidValneva = <span class="string">"213"</span></span><br><span class="line">    <span class="keyword">case</span> hepatitesB = <span class="string">"45"</span></span><br><span class="line">    <span class="keyword">case</span> whoopingCough = <span class="string">"11"</span></span><br><span class="line">    <span class="keyword">case</span> measles = <span class="string">"05"</span></span><br><span class="line">    <span class="keyword">case</span> mumps = <span class="string">"07"</span></span><br><span class="line">    <span class="keyword">case</span> rubella = <span class="string">"06"</span></span><br><span class="line">    <span class="keyword">case</span> chickenpox = <span class="string">"21"</span></span><br><span class="line">    <span class="keyword">case</span> tbe = <span class="string">"77"</span></span><br><span class="line">    <span class="keyword">case</span> hepatitesA = <span class="string">"85"</span></span><br><span class="line">    <span class="keyword">case</span> yellowFever = <span class="string">"184"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> allCases: <span class="type">Set</span>&lt;<span class="type">String</span>&gt; = [</span><br><span class="line">        <span class="type">Self</span>.covidModerna.rawValue,</span><br><span class="line">        <span class="type">Self</span>.covidBioNTech.rawValue,</span><br><span class="line">        <span class="type">Self</span>.covidAstraZeneca.rawValue,</span><br><span class="line">        <span class="type">Self</span>.covidNovax.rawValue,</span><br><span class="line">        <span class="type">Self</span>.covidJohnson.rawValue,</span><br><span class="line">        <span class="type">Self</span>.covidValneva.rawValue,</span><br><span class="line">        <span class="type">Self</span>.hepatitesB.rawValue,</span><br><span class="line">        <span class="type">Self</span>.whoopingCough.rawValue,</span><br><span class="line">        <span class="type">Self</span>.measles.rawValue,</span><br><span class="line">        <span class="type">Self</span>.mumps.rawValue,</span><br><span class="line">        <span class="type">Self</span>.rubella.rawValue,</span><br><span class="line">        <span class="type">Self</span>.chickenpox.rawValue,</span><br><span class="line">        <span class="type">Self</span>.tbe.rawValue,</span><br><span class="line">        <span class="type">Self</span>.hepatitesA.rawValue,</span><br><span class="line">        <span class="type">Self</span>.yellowFever.rawValue</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">printTimeElapsedWhenRunningCode(title: <span class="string">"VaccineCodeSet"</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="type">VaccineCodeSet</span>.allCases.<span class="built_in">contains</span>(<span class="string">"184"</span>) &#123;</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Time elapsed to check: 0.006421875 s.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// V2</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">VaccineCodeCaseIterable</span>: <span class="title">String</span>, <span class="title">CaseIterable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> covidModerna = <span class="string">"207"</span></span><br><span class="line">    <span class="keyword">case</span> covidBioNTech = <span class="string">"208"</span></span><br><span class="line">    <span class="keyword">case</span> covidAstraZeneca = <span class="string">"210"</span></span><br><span class="line">    <span class="keyword">case</span> covidNovax = <span class="string">"211"</span></span><br><span class="line">    <span class="keyword">case</span> covidJohnson = <span class="string">"212"</span></span><br><span class="line">    <span class="keyword">case</span> covidValneva = <span class="string">"213"</span></span><br><span class="line">    <span class="keyword">case</span> hepatitesB = <span class="string">"45"</span></span><br><span class="line">    <span class="keyword">case</span> whoopingCough = <span class="string">"11"</span></span><br><span class="line">    <span class="keyword">case</span> measles = <span class="string">"05"</span></span><br><span class="line">    <span class="keyword">case</span> mumps = <span class="string">"07"</span></span><br><span class="line">    <span class="keyword">case</span> rubella = <span class="string">"06"</span></span><br><span class="line">    <span class="keyword">case</span> chickenpox = <span class="string">"21"</span></span><br><span class="line">    <span class="keyword">case</span> tbe = <span class="string">"77"</span></span><br><span class="line">    <span class="keyword">case</span> hepatitesA = <span class="string">"85"</span></span><br><span class="line">    <span class="keyword">case</span> yellowFever = <span class="string">"184"</span></span><br><span class="line">&#125;</span><br><span class="line">printTimeElapsedWhenRunningCode(title: <span class="string">"Array"</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> code = <span class="type">VaccineCodeCaseIterable</span>(rawValue: <span class="string">"184"</span>),</span><br><span class="line">       <span class="type">IllnessCodeCaseIterable</span>.allCases.<span class="built_in">contains</span>(code) &#123;</span><br><span class="line">       <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Time elapsed to check:: 0.005916875 s.</span></span><br></pre></td></tr></table></figure>
+<p>为什么 V1 比 V2 慢？</p>
+<p><strong>回答</strong></p>
+<p>V2 确实还有一项工作要做：从 String 到 enum case。 但这可以优化（在 <code>init(rawValue:)</code> 实现中），因为编译器知道可能的有效字符串的完整集合，因此它最终比哈希查找更快。</p>
+<p>事实上，由于所有字符串都很短，它甚至可以作为整数开关来完成，在检查长度后将字符串内容视为多字节整数。</p>
+<h2 id="推荐博文"><a href="#推荐博文" class="headerlink" title="推荐博文"></a>推荐博文</h2><p><a href="https://swiftwithmajid.com/2023/10/17/mastering-preview-macro-in-swift//" title="掌握 swift 中  Preview macro 的用法" target="_blank" rel="noopener">掌握 swift 中  Preview macro 的用法</a></p>
+<p><strong>摘要：</strong>  本篇博客介绍了 Swift 中的新功能——预览宏（Preview macro），以及它对开发体验的改进。预览宏可以轻松地将 SwiftUI 视图、UIViewController 或 UIView 实例嵌入到预览中。文章还讨论了如何创建展示不同视图状态的多个预览，并通过传递标题参数来区分它们。此外，它还介绍了预览宏的 traits 参数，可以在预览中显示横向视图或指定尺寸。文章最后提到了如何将预览宏与 widget 结合使用来展示交互式的 widget 时间线。作者建议开发者可以利用预览宏来改善开发体验，并指出可以创建专门用于设计系统包的预览文件或示例用法的文件。</p>
+<p><a href="https://onevcat.com/2022/10/spm-in-xcode/" title="Xcode 中使用 SPM 和 Build Configuration 的一些坑" target="_blank" rel="noopener">Xcode 中使用 SPM 和 Build Configuration 的一些坑</a></p>
+<p><strong>摘要：</strong>  本文介绍了 Swift 中的值和类型参数包，并结合示例进行了详细解释。类型参数包和值参数包允许你编写一个接受任意数量具有不同类型参数的通用函数。在 Swift 5.9 中，由于 SE-393、SE-398 和SE-399 的提案，这一新特性得以实现。采用参数包的最显著影响之一是在 SwiftUI 中的10个视图限制已经不存在，这是由于在这些提案之后可实现了可变参数泛型。本文还解释了参数包的解决方案，它们帮助我们编写可重用的代码，避免编写大量的函数重载。从 Swift 5.9 开始，我们可以使用参数包重写类似的函数。</p>
+<p><a href="https://www.avanderlee.com/swift/user-defaults-preferences/" title="Swift 中 User Defaults 的读取和写入" target="_blank" rel="noopener">Swift 中 User Defaults 的读取和写入</a></p>
+<p><strong>摘要：</strong> 这篇文章讨论了在 Swift 中使用 User Defaults进行读取和写入的方法。User Defaults 是 Swift 应用程序中用于存储在应用程序启动期间保持不变的偏好设置的首选解决方案。它是一个基于属性列表（plist）文件的键值存储。文章介绍了一些与 User Defaults 工作时的最佳实践，并提供了一些特定的解决方案和建议。其中包括使用应用程序组与其他应用程序和扩展共享 User Defaults，以及类型支持和数据转换的注意事项。此外，文章还介绍了监听 User Defaults 更改的方法，并探讨了一些替代方案，如 Keychain 和 CloudKit。在文章的结尾，作者总结了使用 User Defaults 存储偏好设置的好处，并提醒读者在需要跨设备访问数据或存储敏感数据时考虑其他解决方案。。</p>
+<h2 id="话题讨论"><a href="#话题讨论" class="headerlink" title="话题讨论"></a>话题讨论</h2><p><strong>10月27日，起家于东南亚的极兔速递正式登陆港交所。此次IPO，发行价12港元/股,市值约1000亿港元，成为港交所2023年迄今开盘市值最高的IPO。在诸多物流行业，你最看好哪一家？</strong></p>
+<ol>
+<li>菜鸟</li>
+<li>顺丰</li>
+<li>京东物流</li>
+<li>极兔</li>
+</ol>
+<p>欢迎在文末留言参与讨论。</p>
+<h2 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h2><p><strong>Swift社区</strong>是由 Swift 爱好者共同维护的公益组织，我们在国内以微信公众号的运营为主，我们会分享以 <strong>Swift实战</strong>、<strong>SwiftUl</strong>、<strong>Swift基础</strong>为核心的技术内容，也整理收集优秀的学习资料。</p>
+<p>欢迎关注公众号:Swift社区，后台点击进群，可以进入我们社区的交流讨论群。希望我们Swift社区是大家在网络空间中的另一份共同的归属。</p>
+<p><img width="500" alt="Swift社区" src="https://user-images.githubusercontent.com/24238160/132703149-34121c6c-fd18-491c-a697-58a0fabf3060.png"></p>
+<p>特别感谢 Swift社区 编辑部的每一位编辑，感谢大家的辛苦付出，为 Swift社区 提供优质内容，为 Swift 语言的发展贡献自己的力量。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      </div>
+    
+
+
+    
+      <div>
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Swift-周报-第四十期/">Swift-周报-第四十期</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Swift社区 的个人博客">Swift社区</a></p>
+  <p><span>发布时间:</span>2024年03月06日 - 17:03</p>
+  <p><span>最后更新:</span>2024年03月06日 - 17:03</p>
+  <p><span>原始链接:</span><a href="/Swift-周报-第四十期/" title="Swift-周报-第四十期">https://fanbaoying.github.io/Swift-周报-第四十期/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://fanbaoying.github.io/Swift-周报-第四十期/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      </div>
+    
+
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.png" alt="Swift社区 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Swift社区 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Swift-周报-第三十九期/" rel="next" title="Swift-周报-第三十九期">
+                <i class="fa fa-chevron-left"></i> Swift-周报-第三十九期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Swift-周报-第四十一期/" rel="prev" title="Swift-周报-第四十一期">
+                Swift-周报-第四十一期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars.githubusercontent.com/u/84354365?v=4"
+                alt="Swift社区" />
+            
+              <p class="site-author-name" itemprop="name">Swift社区</p>
+              <p class="site-description motion-element" itemprop="description">我们的使命是做一个最专业最权威的 Swift 中文社区，我们的愿景是希望更多的人学习和使用Swift。我们会分享以 Swift 实战、SwiftUI、Swift 基础为核心的技术干货，不忘初心，牢记使命。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">187</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36478920" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a30d987f265da430d580126" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fanbaoying" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/7711465033" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/swift-community" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-zhihu"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/SwiftCommunityRes/SwiftWeekly" title="SwiftWeekly" target="_blank">SwiftWeekly</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/SwiftCommunityRes/article-ios" title="Article-ios" target="_blank">Article-ios</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/SwiftCommunityRes/SwiftUI-Book" title="SwiftUI-Book" target="_blank">SwiftUI-Book</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新闻和社区"><span class="nav-number">2.</span> <span class="nav-text">新闻和社区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#53-5亿美元！传苹果今明两年或将采购-2-3-万台-AI-服务器！"><span class="nav-number">2.1.</span> <span class="nav-text">53.5亿美元！传苹果今明两年或将采购 2.3 万台 AI 服务器！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TestFlight-让管理测试员变得更加简单"><span class="nav-number">2.2.</span> <span class="nav-text">TestFlight 让管理测试员变得更加简单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推送通知控制面板现已推出新交付指标"><span class="nav-number">2.3.</span> <span class="nav-text">推送通知控制面板现已推出新交付指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apple-Vision-Pro-开发者实验室现已扩展到纽约市和悉尼"><span class="nav-number">2.4.</span> <span class="nav-text">Apple Vision Pro 开发者实验室现已扩展到纽约市和悉尼</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提案"><span class="nav-number">3.</span> <span class="nav-text">提案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正在审查的提案"><span class="nav-number">3.1.</span> <span class="nav-text">正在审查的提案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift论坛"><span class="nav-number">4.</span> <span class="nav-text">Swift论坛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐博文"><span class="nav-number">5.</span> <span class="nav-text">推荐博文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#话题讨论"><span class="nav-number">6.</span> <span class="nav-text">话题讨论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我们"><span class="nav-number">7.</span> <span class="nav-text">关于我们</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Swift社区</span>
+
+  
+</div>
+
+<!-- 
+<div class="powered-by">
+  <i class="fa fa-user-md">
+  </i>
+  <span id="busuanzi_container_site_uv">
+    已有<span id="busuanzi_value_site_uv"></span>人来访
+  </span>
+
+</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+  <i class="fa fa-eye"></i>
+  <span id="busuanzi_container_site_pv">
+      访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+-->
+
+<div class="theme-info">
+  <i class="fa fa-pencil"></i>
+  <span class="post-count">博客全站共361.6k字</span>
+</div>
+
+
+<!-- 
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+-->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
